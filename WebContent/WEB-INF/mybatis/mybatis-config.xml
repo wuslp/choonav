@@ -14,13 +14,13 @@
   
   <!-- typaAliases -->
   	<typeAliases>
-  		
+  		<typeAlias type="cnav.attend.dto.AttendDTO" alias="attendDTO"/>
   	</typeAliases>
   
   
   <!-- 매퍼들의 위치를 설정 -->
   <mappers>
-  	<mapper resource="/sql/memberSQL.xml"/>
+  	<mapper resource="/sql/attendSQL.xml"/>
   </mappers>
   
   

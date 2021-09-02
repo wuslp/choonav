@@ -28,17 +28,18 @@
      <!-- 서블릿 매핑 :서블릿 MVC가 웹요청을 처리하려면, DispatcherServlet 을통해서 웹요청을 받아야 하며,
   	아래와 같이 반드시 작성해야 한다 -->
   <servlet>
-  	<servlet-name>cnav</servlet-name>
+  	<servlet-name>spring</servlet-name>
   	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
   	<init-param>
   		<param-name>contextConfigLocation</param-name>
   		<param-value>
-  		
+  		/WEB-INF/cnav/cnav-context.xml
+  		/WEB-INF/cnav/attend-context.xml
  		</param-value>
   	</init-param>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>cnav</servlet-name>
+  	<servlet-name>spring</servlet-name>
   	<url-pattern>*.cnav</url-pattern>
   </servlet-mapping>
   

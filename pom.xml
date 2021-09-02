@@ -82,7 +82,7 @@
 	
 	
   
-	  <!-- 0804 mybatis : https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+	  <!-- mybatis : https://mvnrepository.com/artifact/org.mybatis/mybatis -->
 	<dependency>
 	    <groupId>org.mybatis</groupId>
 	    <artifactId>mybatis</artifactId>
