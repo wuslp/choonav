@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  <configuration>
+  
+ 	<!-- not null 이 아닌 nullable 컬럼에 null 이 넘어왔을때 jdbcType 을 명시해주지 않으면
+ 	TypeException이 발생한다
+ 	#{속성명, jdbcType=INTEGER} 각각 sql문에 따로 처리하거나 아래와 같이 한번에 처리 가능하다
+ 	 -->
+  	<settings>
+  		<setting name="jdbcTypeForNull" value="NULL" />
+  	</settings>
+  
+  <!-- typaAliases -->
+  	<typeAliases>
+  		
+  	</typeAliases>
+  
+  
+  <!-- 매퍼들의 위치를 설정 -->
+  <mappers>
+  	<mapper resource="/sql/memberSQL.xml"/>
+  </mappers>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </configuration>

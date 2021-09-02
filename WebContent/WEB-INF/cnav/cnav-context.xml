@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-4.3.xsd"
+	>	
+	<!-- dao, dataSource(db), service...셋팅 여기에 -->
+	
+	<!-- Mybatis 활용한 DB정보 설정. 추가 시작 -->
+	<!-- DB 데이터 소스 
+		DB커넥션 정보 BasicDataSource 타입 
+		destroy-method: bean 객체위에 스코프가 끝났을 경우, close() 메서드를 호출하겠다 -->
+	<bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close"
+		p:driverClassName="oracle.jdbc.driver.OracleDriver"
+		p:url="jdbc:oracle:thin:@nullmaster.iptime.org:1521:ORCL"
+		p:username="final04"
+		p:password="final04"
+	/><!-- DB접속할때 필요한 접속정보를 BasicDataSource타입의 객체로 만들어 놓은것 -->
+	<!-- 0805추가 -->
+	<bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+		<constructor-arg ref="dataSourceSpied" />
+		<property name="logFormatter">
+			<bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+				<property name="loggingType" value="MULTI_LINE"></property>
+				<property name="sqlPrefix" value="SQL : "></property>
+			</bean>
+		</property>
+	</bean>
+	<!-- 0805추가 끝-->
+	
+	
+	
+	<!-- 커넥션 풀의 역할을하는 sql 을 만들어 주기
+		필요한것 : 디비 연결정보, 매페위치와 type alias 에 대한 정보 (마이바티스 설정정보 : mybatis-config.xml)
+		->mybatis에서 커넥션 풀, 커넥션 생성
+		
+	
+	 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"><!-- db접속정보를 줄테니까 커넥션 만들어내 --><!-- mybatis의 session=sql커넥션 -->
+		<property name="dataSource" ref="dataSource"></property><!-- 객체던져줄것임으로 ref -->
+		<property name="configLocation" value="/WEB-INF/mybatis/mybatis-config.xml"></property><!-- 경로에있는파일을 읽어서 mybatis 설정을 해줌 -->
+	</bean>
+	
+	<!-- sqlSession : sql 실행하기 위해 필요한 커넥션 같은 아이
+		destroy-method="clearCache" : 커넥션을 한번 사용하면 (필요한)접속정보가 캐쉬로저장되어 다시사용시빠르게 실행되는 mybatis의 장점 용량은 무거워짐.
+									마이바티스의 장점중 하나인 캐시(최초접속시 사용자 정보 저장해놓고 다음 접속시 빠르게 처리) 지우겠다는 명령
+	-->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
+	
+	</bean>
+	
+	
+	<!--  Mybatis 활용한 DB정보 설정. 추가 끝 -->
+	
+	
+
+</beans>
