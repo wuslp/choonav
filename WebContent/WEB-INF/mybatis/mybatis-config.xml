@@ -15,6 +15,7 @@
   <!-- typaAliases -->
   	<typeAliases>
   		<typeAlias type="cnav.attend.dto.AttendDTO" alias="attendDTO"/>
+	<!-- <typeAlias type="cnav.attend.dto.TestDTO" alias="testDTO"/> -->
   	</typeAliases>
   
   

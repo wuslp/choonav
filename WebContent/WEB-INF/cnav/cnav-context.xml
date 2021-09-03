@@ -21,7 +21,7 @@
 		p:username="final04"
 		p:password="final04"
 	/><!-- DB접속할때 필요한 접속정보를 BasicDataSource타입의 객체로 만들어 놓은것 -->
-	<!-- 0805추가 -->
+	<!-- 추가 -->
 	<bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
 		<constructor-arg ref="dataSourceSpied" />
 		<property name="logFormatter">
@@ -31,7 +31,7 @@
 			</bean>
 		</property>
 	</bean>
-	<!-- 0805추가 끝-->
+	<!--추가 끝-->
 	
 	
 	
@@ -39,7 +39,6 @@
 		필요한것 : 디비 연결정보, 매페위치와 type alias 에 대한 정보 (마이바티스 설정정보 : mybatis-config.xml)
 		->mybatis에서 커넥션 풀, 커넥션 생성
 		
-	
 	 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"><!-- db접속정보를 줄테니까 커넥션 만들어내 --><!-- mybatis의 session=sql커넥션 -->
 		<property name="dataSource" ref="dataSource"></property><!-- 객체던져줄것임으로 ref -->

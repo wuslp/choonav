@@ -52,7 +52,7 @@
 	    <groupId>org.springframework</groupId>
 	    <artifactId>spring-test</artifactId>
 	    <version>4.3.25.RELEASE</version>
-	    <scope>test</scope>
+	 
 	</dependency>
 	  <!-- spring-orm :DB 커넥션 관리 , DB와 객체 데이터를 자동으로 매핑 https://mvnrepository.com/artifact/org.springframework/spring-orm -->
 	<dependency>
