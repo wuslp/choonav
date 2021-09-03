@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cnav.attend.dao.AttendDAOImpl;
-import cnav.attend.dto.TestDTO;
 
 @Service
 public class AttendServiceImpl implements AttendService{

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import cnav.attend.dto.TestDTO;
 import cnav.attend.service.AttendServiceImpl;
 
 @Controller
