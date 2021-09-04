@@ -3,8 +3,14 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="attend">
-  
-
-  
+ 
+ 	<select id="countAll" resultType="int" parameterType="string">
+  	select count(*) from attend where userId=#{value}
+	</select>
+	<select id="getList" parameterType="hashmap" resultType="attendDTO">
+	<![CDATA[
+		select b.*, r from (select a.*, rownum r from (select * from attend where userId=#{userId} order by attDate desc)a order by attDate desc)b where r>=#{startRow} and r<=#{endRow}
+  	]]>
+	</select>
   
 </mapper>
