@@ -48,8 +48,7 @@ public class AttendController {
 		model.addAttribute("endRow", result.get("endRow"));
 		model.addAttribute("userAttendList", result.get("userAttendList"));
 		model.addAttribute("count", result.get("count"));
-
-				
+		model.addAttribute("category", result.get("category"));
 		return "attend/attend";
 		}
 		

@@ -11,6 +11,9 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript">
  	$(document).ready(function(){
+
+ 		
+ 		//여기서부터 원래있던것
  		
  		  $("#button1").on("click", function() {
 				//#button1'값 가져오기
@@ -25,7 +28,6 @@
 	 				$.ajax({
 	 					url : "/cnav/attend/insertTime.cnav",
 	 					type : "post",
-	 					//data :{"attcategory" :attcategory,"search1":search1,"search2":search2},
 	 					async: false,
 	 					success:function(){
 	 						console.log("success!!!");
@@ -71,18 +73,20 @@
  			var search2 = $("#search2").val();//input값 가져오기
  			var pageNum = $(pageNum).val();//page값 가져오기
  			if(attcategory == ""){
- 				
-			 }else if(attcategory == "정상출근"){
- 				 alert(attcategory);
+ 				window.location.replace("/cnav/attend/attend.cnav");
+			 }else{
+ 				 alert(attcategory+"리스트 필터링");
  				 
  				//ajax요청 
  				$.ajax({
  					url : "/cnav/attend/attend.cnav",
- 					type : "post",
- 					data :{"attcategory" :attcategory,"search1":search1,"search2":search2},
+ 					type : "get",
+ 					data :{"attcategory" :attcategory},
  						//"attcategory=" + selectCate+"&search1="+search1+"&search2="+search2+"&pageNum="+pageNum,
  					async: false,
  					success:function(data){//data매개변수 = Controller에서 리턴해준 결과가 들어온다(대입)
+ 						window.location.replace("/cnav/attend/attend.cnav?attcategory="+attcategory+"&pageNum"+pageNum);
+ 						//$(location).attr('href', 'http://localhost:8080/cnav/attend/attend.cnav?attcategory='attcategory)
  						console.log("success!!!");
  						//console.log("data : " + data);
  						//결과를 idCheckRes 태그에 적용 코드
@@ -93,12 +97,11 @@
  						console.log(e);
  					}
  				});//ajax
- 				 
- 			 }else if(attcategory == "late"){
- 				 alert(attcategory);
- 			 }else{
- 				 alert(attcategory);
- 			 } 
+ 				//location.reload();
+ 				//load("/cnav/attend/attend.cnav?attcategory"+attcategory);
+ 				//$("#test99").load(window.location.href + "#test99");
+ 				//$("#test99").load("/cnav/attend/attend.cnav?attcategory"+attcategory);
+ 			 }
  		 })
  		 /* $("#search1").change(function(){
  			var selectCate = $("#search1").val();//확인용
@@ -155,16 +158,17 @@
 		
 		<div id="" class="">
 			<form action="/cnav/attend/attend.cnav" >
-			<select id="attcategory" name="attcategory">
-				<option value="" selected>-- 선택 --</option>
-				<option value="정상출근">정상출근</option>
-				<option value="지각">지각</option>
-				<option value='휴가'>휴가</option>
-			</select>
-			<input type="date" min="2000-01-01" max=<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" /> id="search1" name="search1"/>
-			<strong>~</strong>
-			<input type="date" min="" max=<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" /> id="search2" name="search2"/>
-			<input id="datesearch" type="submit" value="검색" />
+				<select id="attcategory" name="attcategory">
+					<option selected>-- 선택 --</option>
+					<option value="">전체</option>
+					<option value="정상출근">정상출근</option>
+					<option value="지각">지각</option>
+					<option value='휴가'>휴가</option>
+				</select>
+				<input type="date" min="2000-01-01" max=<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" /> id="search1" name="search1"/>
+				<strong>~</strong>
+				<input type="date" min="" max=<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" /> id="search2" name="search2"/>
+				<input id="datesearch" type="submit" value="검색" />
 			</form>
 		</div><br/><br/>
 						
@@ -178,9 +182,10 @@
 					<td>퇴근</td>
 					<td>사유</td>
 				</tr>
+				
 				<c:if test="${userAttendList != null}">
 					<c:forEach var="List" items="${userAttendList }">
-					<tr>
+					<tr id="">
 						<td><fmt:formatDate value="${List.attDate }" type="date"/></td>
 						<td>${List.attendance }</td>
 						<td><fmt:formatDate value="${List.workTime }" pattern="HH:mm" /></td>
@@ -198,6 +203,7 @@
 			</table>
 		</div><br /> <br /> 
 		<div id="" class=""><%-- 페이지 번호 --%>
+		
 			<div align="center">
 			<c:if test="${count > 0}">
 				<c:set var="pageBlock" value="3" />
@@ -209,22 +215,8 @@
 				<c:if test="${endPage > pageCount}">
 					<c:set var="endPage" value="${pageCount}" /> 
 				</c:if>
-				
-				<%-- 검색했을때 페이지번호들 --%>
-				<c:if test="${sel != null && search != null}">
-					<c:if test="${startPage > pageBlock}">
-						<a href="/cnav/attend/attend.cnav?pageNum=${startPage-pageBlock}&sel=${sel}&search=${search}" class="pageNums"> &lt; &nbsp;</a>
-					</c:if>
-					<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
-						<a href="/cnav/attend/attend.cnav?pageNum=${i}&sel=${sel}&search=${search}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
-					</c:forEach>
-					<c:if test="${endPage < pageCount}">
-						&nbsp; <a href="/cnav/attend/attend.cnav?pageNum=${startPage+pageBlock}&sel=${sel}&search=${search}" class="pageNums"> &gt; </a>
-					</c:if>
-				</c:if>
-				
 				<%-- 검색 안했을때 페이지번호들   --%> 
-				<c:if test="${sel == null || search == null}">
+				<c:if test="${category == null}">
 					<c:if test="${startPage > pageBlock}">
 						<a href="/cnav/attend/attend.cnav?pageNum=${startPage-pageBlock}" class="pageNums"> &lt; &nbsp;</a>
 					</c:if>
@@ -235,6 +227,31 @@
 						&nbsp; <a href="/cnav/attend/attend.cnav?pageNum=${startPage+pageBlock}" class="pageNums"> &gt; </a>
 					</c:if>
 				</c:if>	
+				
+				<%-- 카테고리 검색했을때 페이지번호들 --%>
+				<c:if test="${category != null}">
+					<c:if test="${startPage > pageBlock}">
+						<a href="/cnav/attend/attend.cnav?pageNum=${startPage-pageBlock}&attcategory=${category}" class="pageNums"> &lt; &nbsp;</a>
+					</c:if>
+					<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
+						<a href="/cnav/attend/attend.cnav?pageNum=${i}&attcategory=${category}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
+					</c:forEach>
+					<c:if test="${endPage < pageCount}">
+						&nbsp; <a href="/cnav/attend/attend.cnav?pageNum=${startPage+pageBlock}&attcategory=${category}" class="pageNums"> &gt; </a>
+					</c:if>
+				</c:if>
+				<%-- 카테고리 검색했을때 페이지번호들 
+				<c:if test="${sel != null && search != null}">
+					<c:if test="${startPage > pageBlock}">
+						<a href="/cnav/attend/attend.cnav?pageNum=${startPage-pageBlock}&sel=${sel}&search=${search}" class="pageNums"> &lt; &nbsp;</a>
+					</c:if>
+					<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
+						<a href="/cnav/attend/attend.cnav?pageNum=${i}&sel=${sel}&search=${search}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
+					</c:forEach>
+					<c:if test="${endPage < pageCount}">
+						&nbsp; <a href="/cnav/attend/attend.cnav?pageNum=${startPage+pageBlock}&sel=${sel}&search=${search}" class="pageNums"> &gt; </a>
+					</c:if>
+				</c:if>--%>
 			</c:if> <%-- end:count > 0 --%>
 			<h3 style="color:black"> current page : ${pageNum} </h3>
 			</div>

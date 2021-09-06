@@ -60,13 +60,13 @@ public class AttendDAOImpl implements AttendDAO{
 	@Override
 	public void workInsert(String userId) throws SQLException {
 		sqlSession.insert("attend.worktime",userId);
-		
+		sqlSession.update("attend.workAttendance",userId);
 	}
 
 	@Override
 	public void workInsert2(String userId) throws SQLException {
 		sqlSession.update("attend.worktime2",userId);
-		
+		sqlSession.update("attend.leaveAttendance",userId);
 	}
 
 
