@@ -34,6 +34,40 @@ public class AttendDAOImpl implements AttendDAO{
 		List<AttendDTO> attList= sqlSession.selectList("attend.getList",map);
 		return attList;
 	}
+	//category 선택
+	@Override
+	public int getAttendCount2(String id, String category) throws SQLException {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("id",id);
+		map.put("category", category);
+		System.out.println("95번 카테고리 선택"+category);
+		int result = sqlSession.selectOne("attend.countCat",map);
+		System.out.println("93번"+result);
+		return result;
+	}
+
+	@Override
+	public List<AttendDTO> AttendList2(int startRow, int endRow, String userId, String category) throws SQLException {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		map.put("userId", userId);
+		map.put("category", category);
+		List<AttendDTO> catList = sqlSession.selectList("attend.getAttList",map);
+		return catList;
+	}
+
+	@Override
+	public void workInsert(String userId) throws SQLException {
+		sqlSession.insert("attend.worktime",userId);
+		
+	}
+
+	@Override
+	public void workInsert2(String userId) throws SQLException {
+		sqlSession.update("attend.worktime2",userId);
+		
+	}
 
 
 

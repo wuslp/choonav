@@ -12,5 +12,27 @@
 		select b.*, r from (select a.*, rownum r from (select * from attend where userId=#{userId} order by attDate desc)a order by attDate desc)b where r>=#{startRow} and r<=#{endRow}
   	]]>
 	</select>
+  	
+  	<select id="countCat" parameterType="hashmap" resultType="int">
+  		select count(*) from attend where userId=#{id} and attendance like '%'||#{category}||'%'
+  	</select>
+  	<select id="getAttList" parameterType="hashmap" resultType="attendDTO">
+	<![CDATA[
+		select b.*, r from (select a.*, rownum r from (select * from attend where userId=#{userId} and attendance=#{category} order by attDate desc)a order by attDate desc)b where r>=#{startRow} and r<=#{endRow}
+  	]]>
+	</select>
+  
+	<insert id="worktime" parameterType="string">
+		insert into attend(attdate, worktime, userId) values(sysdate, sysdate, #{userId})
+	</insert>  
+  	<update id="worktime2" parameterType="string">
+  	
+  		update attend set leavetime = sysdate where to_char(attdate, 'yyyymmdd') = to_char(sysdate, 'yyyymmdd') and userId=#{userId}
+  		<![CDATA[
+  		update attend set attendance="정상출근" where (to_char(worktime, 'HH24MI') < 900) and userId=#{userId}
+  		update attend set attendance="지각" where (to_char(worktime, 'HH24MI') > 900) and userId=#{userId}
+  		]]>
+  	</update>
+  
   
 </mapper>

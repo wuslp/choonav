@@ -6,7 +6,10 @@ import java.util.Map;
 
 public interface AttendService {
 
+	//리스트불러오기
 	public Map<String, Object> attendList(String pageNum) throws SQLException;
-	
-	
+	public Map<String, Object> attendList2(String pageNum,String category) throws SQLException;
+	//출퇴근입력
+	public void workInsert() throws SQLException;
+	public void workInsert2() throws SQLException;
 }

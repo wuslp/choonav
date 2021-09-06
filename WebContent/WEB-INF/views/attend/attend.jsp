@@ -1,3 +1,4 @@
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -7,18 +8,135 @@
 <head>
 	<meta charset="UTF-8">
 	<title>attend page</title>
-	<script src="install https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript">
-	$(documnet).ready(function(){
-		$("#worktime").onclick(function(){//worktime
-			var idVal =$("#id").val();//입력란에 사용자가 작성한 값을 가져오기
-			console.log("id : "+id);
-		})
-		
-		
-	})//ready	
+ 	$(document).ready(function(){
+ 		
+ 		  $("#button1").on("click", function() {
+				//#button1'값 가져오기
+ 		    	/* alert($('#button1').val()); */
+				if($("#button1").val()=="출근"){
+					//출근버튼클릭시
+					//input 값에 현재시간 들어가도록 처리
+					$("#worktime").val(new Date());
+					$("#button1").val("출근완료");
+					//DB에 인서트 처리
+					//ajax요청 
+	 				$.ajax({
+	 					url : "/cnav/attend/insertTime.cnav",
+	 					type : "post",
+	 					//data :{"attcategory" :attcategory,"search1":search1,"search2":search2},
+	 					async: false,
+	 					success:function(){
+	 						console.log("success!!!");
+	 					},
+	 					error:function(e){
+	 						console.log("error~!");
+	 						console.log(e);
+	 					}
+	 				});
+					
+					alert("출근");
+					//location.reload();
+				}
+ 		    })
+ 		    //else로 바꿔서 함수하나로도 가능함 
+ 		    $("#button2").on("click", function() {
+				if($("#button2").val()=="퇴근"){
+					$("#leavetime").val(new Date());
+					$("#button2").val("퇴근완료");
+					//DB에 인서트 처리
+					//ajax요청 
+	 				$.ajax({
+	 					url : "/cnav/attend/insertTime2.cnav",
+	 					type : "post",
+	 					async: false,
+	 					success:function(){
+	 						console.log("success!!!");
+	 					},
+	 					error:function(e){
+	 						console.log("error~!");
+	 						console.log(e);
+	 					}
+					})
+					alert("퇴근")
+					//location.reload();
+				}
+ 		    })
+ 		    
+ 		 //필터링
+ 		 $("#attcategory").change(function(){
+ 			var attcategory = $("#attcategory").val();//select된값 가져오기
+ 			var search1 = $("#search1").val();//input값 가져오기
+ 			var search2 = $("#search2").val();//input값 가져오기
+ 			var pageNum = $(pageNum).val();//page값 가져오기
+ 			if(attcategory == ""){
+ 				
+			 }else if(attcategory == "정상출근"){
+ 				 alert(attcategory);
+ 				 
+ 				//ajax요청 
+ 				$.ajax({
+ 					url : "/cnav/attend/attend.cnav",
+ 					type : "post",
+ 					data :{"attcategory" :attcategory,"search1":search1,"search2":search2},
+ 						//"attcategory=" + selectCate+"&search1="+search1+"&search2="+search2+"&pageNum="+pageNum,
+ 					async: false,
+ 					success:function(data){//data매개변수 = Controller에서 리턴해준 결과가 들어온다(대입)
+ 						console.log("success!!!");
+ 						//console.log("data : " + data);
+ 						//결과를 idCheckRes 태그에 적용 코드
+ 						//$("#idCheckRes").val(data);
+ 					},
+ 					error:function(e){
+ 						console.log("error~!");
+ 						console.log(e);
+ 					}
+ 				});//ajax
+ 				 
+ 			 }else if(attcategory == "late"){
+ 				 alert(attcategory);
+ 			 }else{
+ 				 alert(attcategory);
+ 			 } 
+ 		 })
+ 		 /* $("#search1").change(function(){
+ 			var selectCate = $("#search1").val();//확인용
+ 			alert(selectCate);
+ 		 }) */
+ 		 
+
+ 	})
+ <%-- 		$("#button1").click(){
+			var worktime = document.getElementById("worktime");
+			var btn1Val =$("#button1").val();
+			console.log(btn1Val);
+ 			myFunction1();
+ 		}
+ 		$("#button2").click(){
+			var leavetime = document.getElementById("leavetime");
+			var btn2 = document.getElementById("button2");
+ 			myFunction2();
+ 		}
+ 	})
+
+	function myFunction1() {
+		  if (btn1.value == "출근") {
+			btn1.value = "출근 완료";
+		    worktime.value =new Date();
+		  }
+	}
+	function myFunction2() {
+		if (btn2.value == "퇴근") {
+			btn2.value = "퇴근 완료";
+			leavetime.value ="<%=new java.util.Date()%>";
+		}
+	} --%>
 	
+
 	</script>
+
+
 </head>
 
 <body>
@@ -28,27 +146,31 @@
 			<h1>근태관리</h1>
 			<h5><fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" />
 			
-			<button onclick="" id="worktime">출근</button>
-			<input type="time" name="worktime">
-			<button onclick="" id="leavetime">퇴근</button>
-			<input type="time" name="leavetime">
+			<input type="button" value="출근" id="button1">
+			<input type="datetime" id="worktime" value="" disabled>
+			<input type="button" value="퇴근" id="button2" >
+			<input type="datetime" id="leavetime" value="" disabled>
 			</h5>
 		</div><br/><br/><br/><br/><br/>
 		
 		<div id="" class="">
-			<select id="attcategory" name="attcategory" onchange="attcategoryChange()">
-				<option value="nosel" selected>-- 선택 --</option>
-				<option value="attend">정상출근</option>
-				<option value="late">지각</option>
-				<option value='off'>휴가</option>
+			<form action="/cnav/attend/attend.cnav" >
+			<select id="attcategory" name="attcategory">
+				<option value="" selected>-- 선택 --</option>
+				<option value="정상출근">정상출근</option>
+				<option value="지각">지각</option>
+				<option value='휴가'>휴가</option>
 			</select>
-			<input type="date" value="xxx" min="yyy" max="zzz"/>
+			<input type="date" min="2000-01-01" max=<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" /> id="search1" name="search1"/>
 			<strong>~</strong>
-			<input type="date" value="xxx" min="yyy" max="zzz"/>
+			<input type="date" min="" max=<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" /> id="search2" name="search2"/>
+			<input id="datesearch" type="submit" value="검색" />
+			</form>
 		</div><br/><br/>
+						
 				
 		<div id="" class="">	
-			<table>
+			<table border="1">
 				<tr>
 					<td>날짜</td>
 					<td>근태</td>
@@ -114,10 +236,11 @@
 					</c:if>
 				</c:if>	
 			</c:if> <%-- end:count > 0 --%>
-			<h3 style="color:black"> page : ${pageNum} </h3>
+			<h3 style="color:black"> current page : ${pageNum} </h3>
 			</div>
 		</div>
 	</div>
 
 </body>
+
 </html>
