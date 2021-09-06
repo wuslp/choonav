@@ -157,9 +157,10 @@
 		</div><br/><br/><br/><br/><br/>
 		
 		<div id="" class="">
-			<form action="/cnav/attend/attend.cnav" >
+			
+				<form action="/cnav/attend/attend.cnav" method="get">
 				<select id="attcategory" name="attcategory">
-					<option selected>-- 선택 --</option>
+					<option value="">-- 선택 --</option>
 					<option value="">전체</option>
 					<option value="정상출근">정상출근</option>
 					<option value="지각">지각</option>
@@ -169,7 +170,7 @@
 				<strong>~</strong>
 				<input type="date" min="" max=<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" /> id="search2" name="search2"/>
 				<input id="datesearch" type="submit" value="검색" />
-			</form>
+				</form>
 		</div><br/><br/>
 						
 				
@@ -217,41 +218,53 @@
 				</c:if>
 				<%-- 검색 안했을때 페이지번호들   --%> 
 				<c:if test="${category == null}">
-					<c:if test="${startPage > pageBlock}">
-						<a href="/cnav/attend/attend.cnav?pageNum=${startPage-pageBlock}" class="pageNums"> &lt; &nbsp;</a>
-					</c:if>
-					<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
-						<a href="/cnav/attend/attend.cnav?pageNum=${i}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
-					</c:forEach>
-					<c:if test="${endPage < pageCount}">
-						&nbsp; <a href="/cnav/attend/attend.cnav?pageNum=${startPage+pageBlock}" class="pageNums"> &gt; </a>
+					<c:if test="${search1 == null }">
+						<c:if test="${search2 == null }">
+							<c:if test="${startPage > pageBlock}">
+								<a href="/cnav/attend/attend.cnav?pageNum=${startPage-pageBlock}" class="pageNums"> &lt; &nbsp;</a>
+							</c:if>
+							<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
+								<a href="/cnav/attend/attend.cnav?pageNum=${i}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
+							</c:forEach>
+							<c:if test="${endPage < pageCount}">
+								&nbsp; <a href="/cnav/attend/attend.cnav?pageNum=${startPage+pageBlock}" class="pageNums"> &gt; </a>
+							</c:if>
+						</c:if>
 					</c:if>
 				</c:if>	
 				
 				<%-- 카테고리 검색했을때 페이지번호들 --%>
 				<c:if test="${category != null}">
-					<c:if test="${startPage > pageBlock}">
-						<a href="/cnav/attend/attend.cnav?pageNum=${startPage-pageBlock}&attcategory=${category}" class="pageNums"> &lt; &nbsp;</a>
-					</c:if>
-					<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
-						<a href="/cnav/attend/attend.cnav?pageNum=${i}&attcategory=${category}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
-					</c:forEach>
-					<c:if test="${endPage < pageCount}">
-						&nbsp; <a href="/cnav/attend/attend.cnav?pageNum=${startPage+pageBlock}&attcategory=${category}" class="pageNums"> &gt; </a>
+					<c:if test="${search1 == null }">
+						<c:if test="${search2 == null }">
+							<c:if test="${startPage > pageBlock}">
+								<a href="/cnav/attend/attend.cnav?pageNum=${startPage-pageBlock}&attcategory=${category}" class="pageNums"> &lt; &nbsp;</a>
+							</c:if>
+							<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
+								<a href="/cnav/attend/attend.cnav?pageNum=${i}&attcategory=${category}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
+							</c:forEach>
+							<c:if test="${endPage < pageCount}">
+								&nbsp; <a href="/cnav/attend/attend.cnav?pageNum=${startPage+pageBlock}&attcategory=${category}" class="pageNums"> &gt; </a>
+							</c:if>
+						</c:if>
 					</c:if>
 				</c:if>
-				<%-- 카테고리 검색했을때 페이지번호들 
-				<c:if test="${sel != null && search != null}">
-					<c:if test="${startPage > pageBlock}">
-						<a href="/cnav/attend/attend.cnav?pageNum=${startPage-pageBlock}&sel=${sel}&search=${search}" class="pageNums"> &lt; &nbsp;</a>
+				<%--날짜 검색했을때 페이지번호들 --%>
+				<c:if test="${category == null}">
+				<c:if test="${search1 != null}">
+					<c:if test="${search2 != null}">
+						<c:if test="${startPage > pageBlock}">
+							<a href="/cnav/attend/attend.cnav?pageNum=${startPage-pageBlock}&search1=${search1}&search2=${search2}" class="pageNums"> &lt; &nbsp;</a>
+						</c:if>
+						<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
+							<a href="/cnav/attend/attend.cnav?pageNum=${i}&search1=${search1}&search2=${search2}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
+						</c:forEach>
+						<c:if test="${endPage < pageCount}">
+							&nbsp; <a href="/cnav/attend/attend.cnav?pageNum=${startPage+pageBlock}&search1=${search1}&search2=${search2}" class="pageNums"> &gt; </a>
+						</c:if>
 					</c:if>
-					<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
-						<a href="/cnav/attend/attend.cnav?pageNum=${i}&sel=${sel}&search=${search}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
-					</c:forEach>
-					<c:if test="${endPage < pageCount}">
-						&nbsp; <a href="/cnav/attend/attend.cnav?pageNum=${startPage+pageBlock}&sel=${sel}&search=${search}" class="pageNums"> &gt; </a>
-					</c:if>
-				</c:if>--%>
+				</c:if>
+				</c:if>
 			</c:if> <%-- end:count > 0 --%>
 			<h3 style="color:black"> current page : ${pageNum} </h3>
 			</div>

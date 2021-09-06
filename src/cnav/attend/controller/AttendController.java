@@ -1,6 +1,7 @@
 package cnav.attend.controller;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -29,16 +30,27 @@ public class AttendController {
 		// -> 결과 받아올것이 있으면 서비스로부터 리턴받은것 view로 전달 
 		//세션 id값->service처리 
 		System.out.println("attend 근태리스트 출력");
-		System.out.println("97번"+attcategory+search1+search2);
 		Map<String, Object> result = null;
 		//String id = (String)session.getAttribute("sid");
 		//String id ="genie0921";	
 		//serviceImpl에서 호출할 메서드
-		String category = attcategory;
-		if(category == null) {
-			result=attendService.attendList(pageNum);
+		String pageNum1 = null;
+		pageNum1=pageNum;
+		String category = null;
+		category =attcategory;
+		String search11 = null;
+		search11=search1;
+		String search22 =null;
+		search22 =search2;
+		System.out.println("97번"+attcategory+search11+search22);
+		if(category == null & search11 == null & search22 ==null) {
+			result = attendService.attendList(pageNum1);
+		}else if(category != null & search11 == null & search22 ==null){
+			result = attendService.attendList2(pageNum1,category);
 		}else {
-			result =attendService.attendList2(pageNum,category);
+			System.out.println("search1"+search11);
+			System.out.println("search2"+search22);
+			result = attendService.attendList3(pageNum1,category,search11,search22);
 		}
 		//view로 전달할 데이터들
 		model.addAttribute("pageSize", result.get("pageSize"));
@@ -49,6 +61,8 @@ public class AttendController {
 		model.addAttribute("userAttendList", result.get("userAttendList"));
 		model.addAttribute("count", result.get("count"));
 		model.addAttribute("category", result.get("category"));
+		model.addAttribute("search1", result.get("search1"));
+		model.addAttribute("search2", result.get("search2"));
 		return "attend/attend";
 		}
 		

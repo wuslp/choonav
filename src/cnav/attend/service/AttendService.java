@@ -9,6 +9,7 @@ public interface AttendService {
 	//리스트불러오기
 	public Map<String, Object> attendList(String pageNum) throws SQLException;//전체
 	public Map<String, Object> attendList2(String pageNum,String category) throws SQLException;//카테고리
+	public Map<String, Object> attendList3(String pageNum,String category,String search1,String search2) throws SQLException;//카테고리,날짜
 	//출퇴근입력
 	public void workInsert() throws SQLException;
 	public void workInsert2() throws SQLException;

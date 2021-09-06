@@ -16,6 +16,7 @@ public class AttendDAOImpl implements AttendDAO{
 	@Autowired
 	private SqlSessionTemplate sqlSession = null;
 
+	//리스트 시작
 	@Override
 	public int getAttendCount(String id) throws SQLException {
 		int result = sqlSession.selectOne("attend.countAll",id); 
@@ -56,7 +57,35 @@ public class AttendDAOImpl implements AttendDAO{
 		List<AttendDTO> catList = sqlSession.selectList("attend.getAttList",map);
 		return catList;
 	}
+	//category 날짜 선택
+	@Override
+	public int getAttendCount3(String id, String search1, String search2) throws SQLException {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("id",id);
+		//map.put("category", category);
+		map.put("search1", search1);
+		map.put("search2", search2);
+		System.out.println("91번 날짜 선택"+search1+"날짜"+search2);
+		int result = sqlSession.selectOne("attend.countDate",map);
+		System.out.println("90번"+result);
+		return result;
+	}
 
+	@Override
+	public List<AttendDTO> AttendList3(int startRow, int endRow, String userId, String search1,String search2) throws SQLException {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		map.put("userId", userId);
+		//map.put("category", category);
+		map.put("search1", search1);
+		map.put("search2", search2);
+		List<AttendDTO> catDateList = sqlSession.selectList("attend.getDateList",map);
+		
+		return catDateList;
+	}
+	//리스트 끝
+	
 	@Override
 	public void workInsert(String userId) throws SQLException {
 		sqlSession.insert("attend.worktime",userId);
@@ -68,6 +97,8 @@ public class AttendDAOImpl implements AttendDAO{
 		sqlSession.update("attend.worktime2",userId);
 		sqlSession.update("attend.leaveAttendance",userId);
 	}
+
+	
 
 
 
