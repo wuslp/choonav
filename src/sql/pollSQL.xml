@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="poll">
+
+	<!-- 저장시켜주기  -->
+	<insert id="insertArticle" parameterType="pollDTO">
+		<selectKey keyProperty="pollNum" order="BEFORE" resultType="int"><!-- 시퀀스 뽑아서 num에 바인딩 -->
+		 	select poll_seq.nextval from dual
+		</selectKey>
+		insert into poll(pollNum, userId, stDate, endDate, target, pollTitle, pollCon, ans1, ans2, ans3, ans4, pollStatus)
+		values(#{pollNum}, #{userId}, #{stDate}, #{endDate}, #{target}, #{pollTitle}, #{pollCon}, #{ans1}, #{ans2}, #{ans3}, #{ans4},'진행중')
+	</insert>
+	<!-- 리스트 가져오기 -->
+	<select id="getArticleCount" resultType="int">
+		select count(*) from poll
+	</select>
+	<select id="getArticles" parameterType="hashmap" resultType="pollDTO">
+		<![CDATA[
+		  select B.*, r
+		   from (select A.*, rownum r from (select * from poll order by stDate asc) A order by stDate asc) B
+		   where r >= #{startRow} and r <= #{endRow}
+		  ]]>
+	</select>
+	<!-- 진행중 , 완료 상태 업데이트-->
+	<!-- 완료 -->
+	<update id="updatest">
+		<![CDATA[
+		update poll set pollStatus='완료' where (to_char(endDate, 'yyyymmdd') < to_char(sysdate, 'yyyymmdd'))
+		]]>
+	</update>
+	<!-- 검색 리스트 가져오기 -->
+	<select id="getArticleCount2" parameterType="hashmap" resultType="int">
+		select count(*) from poll where ${sel} like '%'||#{search}||'%'
+	</select>
+	<select id="getArticles2" parameterType="hashmap" resultType="pollDTO">
+		<![CDATA[
+	  	select B.*, r
+	   from (select A.*, rownum r from (select * from poll where ${sel} like '%'||#{search}||'%' order by stDate asc) A order by stDate asc) B
+	   where r >= #{startRow} and r <= #{endRow}
+		]]>
+	</select>
+	<!-- 글 하나 가져오기 -->
+	<select id="getPoll" resultType="pollDTO" parameterType="int">
+		select * from poll where pollNum = #{value}
+	</select>
+	
+	<!-- 투표수 추가 -->
+	<update id="plusPoll1" parameterType="hashmap">
+	<choose>
+		<when test='obj_value.equals("1")'>
+		update poll set res1 = res1 +1 , total = total +1 where pollNum = #{pollNum}
+		</when>
+		<when test='obj_value.equals("2")'>
+		update poll set res2 = res2 +1 , total = total +1 where pollNum = #{pollNum}
+		</when>
+		<when test='obj_value.equals("3")'>
+		update poll set res3 = res3 +1 , total = total +1 where pollNum = #{pollNum}
+		</when>
+		<when test='obj_value.equals("4")'>
+		update poll set res4 = res4 +1 , total = total +1 where pollNum = #{pollNum}
+		</when>
+	</choose>
+	</update>
+	
+</mapper>

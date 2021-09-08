@@ -15,13 +15,14 @@
   <!-- typaAliases -->
   	<typeAliases>
   		<typeAlias type="cnav.attend.dto.AttendDTO" alias="attendDTO"/>
-	<!-- <typeAlias type="cnav.attend.dto.TestDTO" alias="testDTO"/> -->
+  		<typeAlias type="cnav.poll.dto.PollDTO" alias="pollDTO"/>
   	</typeAliases>
   
   
   <!-- 매퍼들의 위치를 설정 -->
   <mappers>
   	<mapper resource="/sql/attendSQL.xml"/>
+  	<mapper resource="/sql/pollSQL.xml"/>
   </mappers>
   
   
