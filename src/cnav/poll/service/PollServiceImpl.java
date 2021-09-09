@@ -114,18 +114,44 @@ public class PollServiceImpl implements PollService{
 
 		return result;
 	}
+	//투표글
 	@Override
 	public PollDTO getPollArticle(int pollNum) throws SQLException {
 		PollDTO article = pollDAO.getPollArticle(pollNum);
 		return article;
 	}
-	
+	//투표 기록 유무
+	@Override
+	public int recordPoll(int pollNum, String userId) throws SQLException {
+		int result=0;
+		result = pollDAO.recordPoll(pollNum, userId);
+		return result;
+	}
 	//투표시 
 	@Override
 	public void plusPoll(String pollNum, String obj_value) throws SQLException {
 		pollDAO.plusPoll(pollNum,obj_value);
 		
 	}
+	//기록 업뎃
+	@Override
+	public void plusPollUser(String pollNum, String userId) throws SQLException {
+		pollDAO.plusPollUser(pollNum,userId);
+		
+	}
+	//결과 가져오려고
+	@Override
+	public PollDTO getPollArticleRes(String pollNum) throws SQLException {
+		PollDTO article = pollDAO.getPollArticleRes(pollNum);
+		return article;
+	}
+	//투표글 삭제
+	@Override
+	public void pollDelete(String pollNum) throws SQLException {
+		pollDAO.pollDelete(pollNum);
+		
+	}
+	
 	
 	
 	

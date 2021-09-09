@@ -15,7 +15,10 @@
 		</div>
 		<div>
 			<form action="/cnav/poll/pollList.cnav">
-				진행중 완료 &nbsp;
+			<c:set var="sort1" value="1" />
+			<c:set var="sort2" value="2" />
+				<a href="/cnav/poll/pollList.cnav?sort=${sort1 }">진행중</a> 
+				<a href="/cnav/poll/pollList.cnav?sort=${sort2 }">완료</a> &nbsp;
 				<select id="" name="sel">
 					<option value="pollTitle">제목</option>
 					<option value="pollCon">내용</option>

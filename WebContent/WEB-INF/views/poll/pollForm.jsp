@@ -97,7 +97,8 @@
 				제목(필수) <input type="text" id="pollTitle" name="pollTitle"/><br/>
 				대상(필수) &nbsp;
 					<select id="target" name="target">
-						<option value="마케팅팀" selected>마케팅팀</option>
+						<option value="마케팅팀" selected>전체</option>
+						<option value="영업팀">마케팅팀</option>
 						<option value="영업팀">영업팀</option>
 						<option value="인사팀">인사팀</option>
 						<option value="총무팀">총무팀</option>

@@ -12,9 +12,7 @@
 	<script type="text/javascript">
  	$(document).ready(function(){
 
- 		
- 		//여기서부터 원래있던것
- 		
+ 		//여기서부터		
  		  $("#button1").on("click", function() {
 				//#button1'값 가져오기
  		    	/* alert($('#button1').val()); */

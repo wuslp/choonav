@@ -26,7 +26,8 @@ public class PollDAOImpl implements PollDAO{
 	//전체 개수 가져오기
 	@Override
 	public int getArticleCount() throws SQLException {
-		sqlSession.update("poll.updatest");//날짜 지난것 완료로 업데이트	
+		sqlSession.update("poll.updatest1");//날짜 지난것 완료로 업데이트
+		sqlSession.update("poll.updatest2");//진행중
 		int count = sqlSession.selectOne("poll.getArticleCount");
 		return count;
 	}
@@ -41,7 +42,8 @@ public class PollDAOImpl implements PollDAO{
 	//검색한글 개수
 	@Override
 	public int getArticleCount2(String sel, String search) throws SQLException {
-		sqlSession.update("poll.updatest");	//날짜 지난것 완료로 업데이트
+		sqlSession.update("poll.updatest1");	//날짜 지난것 완료로 업데이트
+		sqlSession.update("poll.updatest2");
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("sel", sel);
 		map.put("search", search);
@@ -64,6 +66,17 @@ public class PollDAOImpl implements PollDAO{
 		PollDTO article = sqlSession.selectOne("poll.getPoll",pollNum);
 		return article;
 	}
+	//투표 기록 유무
+	@Override
+	public int recordPoll(int pollNum, String userId) throws SQLException {
+		int result=0;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pollNum", pollNum);
+		map.put("userId", userId);
+		result = sqlSession.selectOne("poll.recordPoll",map);
+		return result;
+	}
+	
 	//투표시 숫자추가
 	@Override
 	public void plusPoll(String pollNum, String obj_value) throws SQLException {
@@ -77,5 +90,25 @@ public class PollDAOImpl implements PollDAO{
 		//sqlSession.update("poll.plusPoll4",map);
 		
 	}
-
+	//투표시 기록 남기기
+	@Override
+	public void plusPollUser(String pollNum, String userId) throws SQLException {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("pollNum", pollNum);
+		map.put("userId", userId);
+		sqlSession.insert("poll.plusPollUser",map);
+		
+	}
+	@Override
+	public PollDTO getPollArticleRes(String pollNum) throws SQLException {
+		PollDTO article = sqlSession.selectOne("poll.getPollRes",pollNum);
+		return article;
+	}
+	//글삭제
+	@Override
+	public void pollDelete(String pollNum) throws SQLException {
+		sqlSession.delete("poll.pollDelete",pollNum);
+		
+	}
+	
 }

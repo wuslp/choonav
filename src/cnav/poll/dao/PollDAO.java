@@ -19,7 +19,16 @@ public interface PollDAO {
 	public List<PollDTO> getArticles2(int startRow, int endRow, String sel, String search) throws SQLException; 
 	//투표글 하나 불러오기
 	public PollDTO getPollArticle(int pollNum) throws SQLException;
+	//투표 기록 유무
+	public int recordPoll(int pollNum,String userId) throws SQLException;
 	//투표시
 	public void plusPoll(String pollNum,String obj_value) throws SQLException;
+	//투표시 기록남기기
+	public void plusPollUser(String pollNum,String userId)throws SQLException;
+	//투표후에 결과 컬럼
+	public PollDTO getPollArticleRes(String pollNum) throws SQLException;
+	
+	//투표글 삭제
+	public void pollDelete(String pollNum) throws SQLException;
 	
 }
