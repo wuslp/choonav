@@ -41,12 +41,13 @@ public class PollController {
 		//serviceImpl에서 호출할 메서드
 		System.out.println("87번 : "+search);
 		
-		if(sel == null || search == null && sort == null) {
-			result = pollService.getArticleList(pageNum);
-		}else if(sort != null) {
-			
+		if(sel == null && search == null && sort == null) {
+			result = pollService.getArticleList(pageNum);//전체리스트
+		}else if(sel == null && search == null && sort != null) {
+			result = pollService.getSortArticle(pageNum,sort);//완료 진행중
+			System.out.println("sort 는 "+sort);
 		}else{
-			result = pollService.getSearchArticleList(pageNum,sel,search);
+			result = pollService.getSearchArticleList(pageNum,sel,search);//검색
 		}
 		//view로 전달할 데이터들
 		model.addAttribute("pageSize", result.get("pageSize"));
@@ -59,6 +60,7 @@ public class PollController {
 		model.addAttribute("number", result.get("number"));
 		model.addAttribute("sel", result.get("sel"));
 		model.addAttribute("search", result.get("search"));
+		model.addAttribute("sort", result.get("sort"));
 		
 		return "poll/pollList";
 	}
@@ -88,11 +90,13 @@ public class PollController {
 		PollDTO article = pollService.getPollArticle(pollNum);
 //			세션에서 id가져와서 중복투표방지
 //			String userId = (String)session.getAttribute("sid");
-//			int result = 0;
-//			result = pollService.recordPoll(pollNum,userId);
+			String userId = "pikapika4";
+			int result = 0;
+			result = pollService.recordPoll(pollNum,userId);
 		//++세션에서 id 뽑아와서 그 id에 해당하는 대상 부서와 일치할때만 투표버튼 보이게...
-//			model.addAttribute("result",result);//기록있으면 1 없으면 0 
-		model.addAttribute("article",article);
+			System.out.println("79번 result 값"+result);
+			model.addAttribute("result",result);//기록있으면 1 없으면 0 
+			model.addAttribute("article",article);
 		
 		return "poll/pollPage";
 	}
@@ -103,7 +107,8 @@ public class PollController {
 		System.out.println("넘어오는파라미터 pollNum : "+pollNum);//pollNum값
 		PollDTO article = null;
 		String rePage;
-		String userId=(String)session.getAttribute("sid");
+		String userId="pikapika4";
+//		String userId=(String)session.getAttribute("sid");
 		if(pollNum != null && obj_value != null) {//투표할떄
 			pollService.plusPoll(pollNum,obj_value);//숫자 증가시켜주기
 			pollService.plusPollUser(pollNum,userId);//투표한리스트에 등록하기
@@ -120,6 +125,12 @@ public class PollController {
 		//return "poll/pollPage";
 		return rePage;
 	}
+	//중복투표 방지
+	//@RequestMapping("pollRec.cnav")
+	//public String pollRec(HttpSession session, String pollNum) throws SQLException{
+		
+	//	return "";
+	//}
 	
 	
 	//test페이지

@@ -10,40 +10,45 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript">
 	function check(){
-		var result = $(result).val();
-		if(result =="1"){//기록있으면
-			window.history.back();
-		}else{
+		var result = $("#result").val();
+		var pollNum = $("#pollN").val();
+		console.log("result값"+result)
+		if(result=="0"){//기록없으면
+			console.log("2번탐");
+				var pollNum = $("#pollN").val();
+		        var obj_value = $("input:radio[name='ans1']:checked").val();
+		        alert(obj_value);
+		        //에이작스로 숫자보내고 그 숫자에 해당하면 res 각각 +1씩 시켜주기
+		        $.ajax({
+	 					url : "/cnav/poll/pollRes.cnav",
+	 					type : "get",
+	 					data :{"obj_value" :obj_value,"pollNum" :pollNum},
+	 					async: false,
+	 					success:function(data){//data매개변수 = Controller에서 리턴해준 결과가 들어온다(대입)
+	 						console.log("success!!!");
+	 						window.location.replace("/cnav/poll/pollRes.cnav?pollNum="+pollNum);
+	 						//console.log("data : " + data);
+	 						//결과를 idCheckRes 태그에 적용 코드
+	 						//$("#idCheckRes").val(data);
+	 					},
+	 					error:function(e){
+	 						console.log("error~!");
+	 						console.log(e);
+	 					}
+	 				});//ajax
 			
+		
+		}else{//기록 있으면
+			console.log("1번탐");
+			alert("이미 투표한 글입니다 !")
+			//window.history.back();
+			window.location.replace("/cnav/poll/pollRes.cnav?pollNum="+pollNum);
 		}
 	}
 	
 	
 	
-	function test(){
-			var pollNum = $("#pollN").val();
-	        var obj_value = $("input:radio[name='ans1']:checked").val();
-	        alert(obj_value);
-	        //에이작스로 숫자보내고 그 숫자에 해당하면 res 각각 +1씩 시켜주기
-	        $.ajax({
- 					url : "/cnav/poll/pollRes.cnav",
- 					type : "get",
- 					data :{"obj_value" :obj_value,"pollNum" :pollNum},
- 					async: false,
- 					success:function(data){//data매개변수 = Controller에서 리턴해준 결과가 들어온다(대입)
- 						console.log("success!!!");
- 						window.location.replace("/cnav/poll/pollRes.cnav?pollNum="+pollNum);
- 						//console.log("data : " + data);
- 						//결과를 idCheckRes 태그에 적용 코드
- 						//$("#idCheckRes").val(data);
- 					},
- 					error:function(e){
- 						console.log("error~!");
- 						console.log(e);
- 					}
- 				});//ajax
-	    
-	}
+
 	//투표삭제
 	function DelPoll(){
 		var pollNum=$("#pollN").val();
@@ -81,6 +86,7 @@
 		<div id="">
 			<!--  -->
 				<input type="hidden" value="${article.pollNum}" id="pollN"/>
+				<input type="hidden" value="${result}" id="result"/>
 				<div id="">
 					투표기간	<fmt:formatDate value="${article.stDate}" pattern="yyyy-MM-dd"/><strong>~</strong><fmt:formatDate value="${article.endDate}" pattern="yyyy-MM-dd"/><br/>
 					제목		 : ${article.pollTitle}<br/>
@@ -104,14 +110,13 @@
 					</c:if>-->
 					<c:set value="${result }" var="result"/>
 					<c:if test="${article.pollStatus eq '진행중' }">
-						<!-- <input type="button" value="투표" id="" onclick="check(); test();"> -->
-						<input type="button" value="투표" id="" onclick="test()">
+						 <input type="button" value="투표" id="" onclick="check()"> 
+						<!-- <input type="button" value="투표" id="" onclick="test()"> -->
 					</c:if>
 					<c:if test="${article.pollStatus eq '완료' }">
 						<input type="button" value="마감된 투표" id="" disabled>
 					</c:if>
 					<input type="button" value="취소" id="" onClick="window.location='/cnav/poll/pollList.cnav'">
-				
 				</div>
 			
 		</div>

@@ -48,6 +48,17 @@
 	   where r >= #{startRow} and r <= #{endRow}
 		]]>
 	</select>
+	<!-- 진행중 완료 리스트 가져오기 -->
+	<select id="getArticleCount3" resultType="int" parameterType="string">
+		select count(*) from poll where pollStatus like '%'||#{sort}||'%'
+	</select>
+	<select id="getArticles3" parameterType="hashmap" resultType="pollDTO">
+		<![CDATA[
+	  	select B.*, r
+	   from (select A.*, rownum r from (select * from poll where pollStatus=#{sort} order by stDate asc) A order by stDate asc) B
+	   where r >= #{startRow} and r <= #{endRow}
+		]]>
+	</select>
 	<!-- 글 하나 가져오기 -->
 	<select id="getPoll" resultType="pollDTO" parameterType="int">
 		select * from poll where pollNum = #{value}
@@ -79,7 +90,7 @@
 	</choose>
 	</update>
 	<insert id="plusPollUser" parameterType="hashmap">
-		insert into pollUser(pollNum, userId) values(#{pollNum},#{userId});
+		insert into pollUser(pollNum, userId) values(#{pollNum},#{userId})
 	</insert>
 	
 	

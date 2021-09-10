@@ -60,6 +60,27 @@ public class PollDAOImpl implements PollDAO{
 		List<PollDTO> pollList = sqlSession.selectList("poll.getArticles2",map);
 		return pollList;
 	}
+	//진행중 완료만
+	@Override
+	public int getArticleCount3(String sort) throws SQLException {
+		sqlSession.update("poll.updatest1");	//날짜 지난것 완료로 업데이트
+		sqlSession.update("poll.updatest2");
+
+		int count = sqlSession.selectOne("poll.getArticleCount3",sort);
+
+		return count;
+	}
+	//진행중 완료 구분해서가져오기
+	@Override
+	public List<PollDTO> getArticles3(int startRow, int endRow, String sort) throws SQLException {
+		Map<String,	Object> map = new HashMap<String, Object>();
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		map.put("sort", sort);
+		
+		List<PollDTO> pollList = sqlSession.selectList("poll.getArticles3",map);
+		return pollList;
+	}
 	//선택한 글 하나 가져오기
 	@Override
 	public PollDTO getPollArticle(int pollNum) throws SQLException {
@@ -110,5 +131,7 @@ public class PollDAOImpl implements PollDAO{
 		sqlSession.delete("poll.pollDelete",pollNum);
 		
 	}
+	
+	
 	
 }

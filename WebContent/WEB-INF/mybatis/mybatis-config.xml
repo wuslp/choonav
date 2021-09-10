@@ -16,6 +16,7 @@
   	<typeAliases>
   		<typeAlias type="cnav.attend.dto.AttendDTO" alias="attendDTO"/>
   		<typeAlias type="cnav.poll.dto.PollDTO" alias="pollDTO"/>
+  		<typeAlias type="cnav.poll.dto.PollUserDTO" alias="pollUserDTO"/>
   	</typeAliases>
   
   

@@ -14,6 +14,8 @@ public interface PollService {
 	public Map<String, Object> getArticleList(String pageNum) throws SQLException;
 	//서치 리스트 가져오기
 	public Map<String, Object> getSearchArticleList(String pageNum, String sel, String search) throws SQLException;
+	//진행중 완료 리스트
+	public Map<String, Object> getSortArticle(String pageNum,String sort) throws SQLException; 
 	//투표글 하나 가져오기
 	public PollDTO getPollArticle(int pollNum) throws SQLException;
 	//투표유무 기록 가져오기

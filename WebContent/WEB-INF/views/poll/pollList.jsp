@@ -15,16 +15,14 @@
 		</div>
 		<div>
 			<form action="/cnav/poll/pollList.cnav">
-			<c:set var="sort1" value="1" />
-			<c:set var="sort2" value="2" />
-				<a href="/cnav/poll/pollList.cnav?sort=${sort1 }">진행중</a> 
-				<a href="/cnav/poll/pollList.cnav?sort=${sort2 }">완료</a> &nbsp;
+				<a href="/cnav/poll/pollList.cnav?sort=진행중">진행중</a> 
+				<a href="/cnav/poll/pollList.cnav?sort=완료">완료</a> &nbsp;
 				<select id="" name="sel">
-					<option value="pollTitle">제목</option>
-					<option value="pollCon">내용</option>
+					<option value="pollTitle" >제목</option>
+					<option value="pollCon" >내용</option>
 				</select>
 				<input type="text" id="" name="search"/>
-				<input type="submit" value="검색" name="search">
+				<input type="submit" value="검색">
 				<input type="button" value="만들기" onClick="window.location='/cnav/poll/pollForm.cnav'">
 			</form>
 		</div><br/><br/><br/><!-- 상단 버튼들 -->
@@ -75,7 +73,7 @@
 				</c:if>
 				
 				<%-- 검색했을때 페이지번호들 --%>
-				<c:if test="${sel != null && search != null}">
+				<c:if test="${sel != null && search != null && sort == null}">
 					<c:if test="${startPage > pageBlock}">
 						<a href="/cnav/poll/pollList.cnav?pageNum=${startPage-pageBlock}&sel=${sel}&search=${search}" class="pageNums"> &lt; &nbsp;</a>
 					</c:if>
@@ -88,7 +86,7 @@
 				</c:if>
 				
 				<%-- 검색 안했을때 페이지번호들   --%> 
-				<c:if test="${sel == null || search == null}">
+				<c:if test="${sel == null && search == null && sort == null}">
 					<c:if test="${startPage > pageBlock}">
 						<a href="/cnav/poll/pollList.cnav?pageNum=${startPage-pageBlock}" class="pageNums"> &lt; &nbsp;</a>
 					</c:if>
@@ -97,6 +95,18 @@
 					</c:forEach>
 					<c:if test="${endPage < pageCount}">
 						&nbsp; <a href="/cnav/poll/pollList.cnav?pageNum=${startPage+pageBlock}" class="pageNums"> &gt; </a>
+					</c:if>
+				</c:if>
+				<%-- 진행중 완료로 했을때  --%> 
+				<c:if test="${sort != null}">
+					<c:if test="${startPage > pageBlock}">
+						<a href="/cnav/poll/pollList.cnav?pageNum=${startPage-pageBlock}&sort=${sort}" class="pageNums"> &lt; &nbsp;</a>
+					</c:if>
+					<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
+						<a href="/cnav/poll/pollList.cnav?pageNum=${i}&sort=${sort}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
+					</c:forEach>
+					<c:if test="${endPage < pageCount}">
+						&nbsp; <a href="/cnav/poll/pollList.cnav?pageNum=${startPage+pageBlock}&sort=${sort}" class="pageNums"> &gt; </a>
 					</c:if>
 				</c:if>
 			</c:if> <%-- end:count > 0 --%>

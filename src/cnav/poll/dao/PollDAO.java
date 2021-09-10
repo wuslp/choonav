@@ -17,6 +17,11 @@ public interface PollDAO {
 	public int getArticleCount2(String sel, String search) throws SQLException;
 	//내용 검색 투표글 불러오기
 	public List<PollDTO> getArticles2(int startRow, int endRow, String sel, String search) throws SQLException; 
+	//진행중 완료 투표글
+	public int getArticleCount3(String sort) throws SQLException;
+	//진행중 완료 투표글
+	public List<PollDTO> getArticles3(int startRow, int endRow, String sort) throws SQLException; 
+	
 	//투표글 하나 불러오기
 	public PollDTO getPollArticle(int pollNum) throws SQLException;
 	//투표 기록 유무
