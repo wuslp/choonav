@@ -71,8 +71,8 @@
 	<!-- main -->
 	<context:component-scan base-package="cnav.main.dao"></context:component-scan>
 	<context:component-scan base-package="cnav.main.service"></context:component-scan>
+	<!-- approval -->
+	<context:component-scan base-package="cnav.approval.dao"/>
+	<context:component-scan base-package="cnav.approval.service"/>
 	
-	
-	
-
 </beans>

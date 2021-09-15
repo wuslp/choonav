@@ -17,9 +17,11 @@
   		<typeAlias type="cnav.attend.dto.AttendDTO" alias="attendDTO"/>
   		<typeAlias type="cnav.poll.dto.PollDTO" alias="pollDTO"/>
   		<typeAlias type="cnav.poll.dto.PollUserDTO" alias="pollUserDTO"/>
-  		<typeAlias type="cnav.poll.dto.BusinessDTO" alias="busDTO"/>
-  		<typeAlias type="cnav.poll.dto.CategoryDTO" alias="catDTO"/>
-  		<typeAlias type="cnav.poll.dto.UserDTO" alias="userDTO"/>
+  		<typeAlias type="cnav.main.dto.BusinessDTO" alias="busDTO"/>
+  		<typeAlias type="cnav.main.dto.CategoryDTO" alias="catDTO"/>
+  		<typeAlias type="cnav.main.dto.UserDTO" alias="userDTO"/>
+		<typeAlias type="cnav.approval.dto.ApprovalDTO" alias="approvalDTO"/>
+
   	</typeAliases>
   
   
@@ -28,6 +30,8 @@
   	<mapper resource="/sql/attendSQL.xml"/>
   	<mapper resource="/sql/pollSQL.xml"/>
   	<mapper resource="/sql/mainSQL.xml"/>
+  	<mapper resource="/sql/ApprovalSQL.xml" />
+
   </mappers>
   
   

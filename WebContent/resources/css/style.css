@@ -18,3 +18,11 @@ div {
   height: 100%;
   background: #fc3232;
 }
+
+/* 결재 상세 (sendAppContent) */
+.appContentTitle{text-align: center; font-size: xx-large; font-weight: bold;}
+.appContentLeft {float: left; }
+.appContentRight{float: right;}
+.appConBtn {text-align-last: center;}
+table.appContentRight {border: solid 1px black; border-collapse: collapse; text-align: center;}
+table.appContentRight td {border: solid thin;}
