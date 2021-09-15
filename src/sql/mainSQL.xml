@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="main">
+  
+  	<insert id="addUser" parameterType="userDTO">
+		insert into users(code, userId, pw, name, email, tel, dept, position) values(#{code}, #{userId}, #{pw}, #{name}, #{email}, #{tel}, #{dept}, #{position})		
+  	</insert>
+  	
+  	<insert id="addBiz" parameterType="busDTO">
+  		insert into business values(#{code},#{bizName},#{bizCEO},#{bizNumber},#{bizTel},#{bizEmail})
+  	</insert>
+  	
+  	<insert id="addCat" parameterType="cateDTO">
+  		insert into category values(##{code}, {approval},#{mail},#{attend},#{project},#{calendar},#{reservation},#{board}#{poll})
+  	</insert>
+  	
+  	
+  	
+  </mapper>
