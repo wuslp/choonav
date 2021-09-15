@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="approval">
+
+	<!-- 4번 -->
+	<!-- appForm 새 결재 DB 저장하자. -->
+	<insert id="insertApp" parameterType="approvalDTO">
+		<selectKey keyProperty="appNum" order="BEFORE" resultType="int">
+			select approval_seq.nextval from dual 
+		</selectKey>
+		insert into approval values(approval_seq.nextval,#{appType},'홍길동',#{dept},#{name1},#{name2},#{name3},#{appStart},#{appFinish},#{appTitle},#{appContent},#{appRequest},sysdate,0,0,0,#{reject})
+	</insert>
+	
+	
+	<!-- 보낸 결재함 전체 글 -->
+	<select id="countAll" resultType="int">
+		select count(*) from approval
+	</select>
+	<!-- 페이징 -->
+	<select id="getApprovals" parameterType="hashmap" resultType="approvalDTO">
+		<![CDATA[
+		select * from (select rownum rnum, approval.* from 
+		(select * from approval order by appNum desc) approval) 
+				where rnum >= #{start} and rnum <=#{end}
+		]]>		
+	</select>
+	
+	<!-- 글 상세 페이지 -->
+	<select id="getOneApproval" parameterType="int" resultType="approvalDTO">
+		select * from approval where appNum = #{value}
+	</select>
+	
+	<!-- 결재 페이지 수정  -->
+	<update id="updateApp" parameterType="approvalDTO">
+		update approval set appTitle=#{appTitle}, appContent=#{appContent}, appRequest=#{appRequest} where appNum=#{appNum}
+	</update>
+	
+	<!-- 결재 페이지 삭제  -->
+	<delete id="deleteApp" parameterType="int">
+		delete from approval where appNum=#{appNum}
+	</delete>
+	
+	
+	<!-- 받은 결재함 전체 글 -->
+	<select id="takeCountAll" resultType="int">
+		select count(*) from approval
+	</select>
+	<!-- 페이징 -->
+	<select id="takeApprovals" parameterType="hashmap" resultType="approvalDTO">
+		<![CDATA[
+		select * from (select rownum rnum, approval.* from 
+		(select * from approval where name1=#{id} or name2=#{id} or name3=#{id} order by appNum desc) approval) 
+				where rnum >= #{start} and rnum <=#{end}
+		]]>		
+	</select>
+	
+	
+	<!--검색 -->
+	<select id="countSearch" parameterType="hashmap" resultType="int">
+		select count(*) from approval where ${sel} like '%'||#{search}||'%'
+	</select>
+
+	<select id="sendSearchApprovals" parameterType="hashmap" resultType="approvalDTO">
+		<![CDATA[
+		select * from (select rownum rnum, approval.* from 
+		(select * from approval where ${sel} like '%'||#{search}||'%' order by appNum desc) approval) 
+				where rnum >= #{start} and rnum <=#{end}
+		]]>
+	</select>
+	
+	
+	<!-- 글 상세 페이지 -->
+	<select id="takeOneApproval" parameterType="int" resultType="approvalDTO">
+		select * from approval where appNum = #{value}
+	</select>
+	<!-- 반려 사유 삽입 -->
+	<update id="insertReject" parameterType="approvalDTO">
+		update approval set reject=#{reject} where appNum=#{appNum}
+	</update>
+	
+	<!--검색 -->
+	<select id="takeCountSearch" parameterType="hashmap" resultType="int">
+		select count(*) from approval where ${sel} like '%'||#{search}||'%'
+	</select>
+
+	<select id="takeSearchApprovals" parameterType="hashmap" resultType="approvalDTO">
+		<![CDATA[
+		select * from (select rownum rnum, approval.* from 
+		(select * from approval where ${sel} like '%'||#{search}||'%' order by appNum desc) approval) 
+				where rnum >= #{start} and rnum <=#{end}
+		]]>
+	</select>
+	
+	<!-- 승인 -->
+	<update id="updateState1"  parameterType="hashmap">
+		update approval set state1 = #{sign} where appNum=#{appNum}
+	</update>
+	<update id="updateState2"  parameterType="hashmap">
+		update approval set state2 = #{sign} where appNum=#{appNum}
+	</update>
+	<update id="updateState3"  parameterType="hashmap">
+		update approval set state3 = #{sign} where appNum=#{appNum}
+	</update>
+	
+	<!-- 승인시 다음 사람 지목 -->
+	<update id="insertAddTake1"  parameterType="approvalDTO">
+		update approval set name1 = #{name1} where appNum=#{appNum}
+	</update>
+	
+</mapper>

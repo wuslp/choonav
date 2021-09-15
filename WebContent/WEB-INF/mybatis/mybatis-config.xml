@@ -17,6 +17,7 @@
   		<typeAlias type="cnav.attend.dto.AttendDTO" alias="attendDTO"/>
   		<typeAlias type="cnav.poll.dto.PollDTO" alias="pollDTO"/>
   		<typeAlias type="cnav.poll.dto.PollUserDTO" alias="pollUserDTO"/>
+		<typeAlias type="cnav.approval.dto.ApprovalDTO" alias="approvalDTO"/>
   	</typeAliases>
   
   
@@ -24,6 +25,7 @@
   <mappers>
   	<mapper resource="/sql/attendSQL.xml"/>
   	<mapper resource="/sql/pollSQL.xml"/>
+  	<mapper resource="/sql/ApprovalSQL.xml" />
   </mappers>
   
   
