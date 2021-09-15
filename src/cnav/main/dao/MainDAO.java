@@ -12,5 +12,8 @@ public interface MainDAO {
 	public void addUser(UserDTO dto) throws SQLException;
 	//회사정보 등록 처리
 	public void addBiz(BusinessDTO bdto,CategoryDTO cdto) throws SQLException;
-	
+	//로그인체크(아이디, 비번, 확인)
+	public int idPwCheck(UserDTO dto) throws SQLException;
+	//회사코드 체크
+	public int codeCheck(BusinessDTO dto) throws SQLException;
 }

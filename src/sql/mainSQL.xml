@@ -12,10 +12,16 @@
   		insert into business values(#{code},#{bizName},#{bizCEO},#{bizNumber},#{bizTel},#{bizEmail})
   	</insert>
   	
-  	<insert id="addCat" parameterType="cateDTO">
-  		insert into category values(##{code}, {approval},#{mail},#{attend},#{project},#{calendar},#{reservation},#{board}#{poll})
+  	<insert id="addCat" parameterType="catDTO">
+  		insert into category values(#{code}, #{approval}, #{mail}, #{attend}, #{project}, #{calendar}, #{reservation}, #{board}, #{poll})
   	</insert>
-  	
+  	<select id="idPwCheck" parameterType="userDTO" resultType="int">
+  		select count(*) from users where userId=#{userId}
+  		<if test="pw != null">and pw=#{pw}</if>
+  	</select>
+  	<select id="codeCheck" parameterType="busDTO" resultType="int">
+  		select count(*) from business where code=#{code}
+  	</select>
   	
   	
   </mapper>

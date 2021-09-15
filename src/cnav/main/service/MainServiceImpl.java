@@ -29,4 +29,24 @@ public class MainServiceImpl implements MainService{
 		
 	}
 
+	//id 중복여부 확인 처리
+	@Override
+	public int idCheck(UserDTO dto) throws SQLException {
+		//id 주고 존재여부 확인
+		int result = mainDAO.idPwCheck(dto);//있으면1 없으면0 리턴.컨트롤러까지 리턴해줌
+		
+		return result;
+	}
+
+	//회사코드 중복체크
+	@Override
+	public int codeCheck(BusinessDTO dto) throws SQLException {
+		//id 주고 존재여부 확인
+		int result = mainDAO.codeCheck(dto);//있으면1 없으면0 리턴.컨트롤러까지 리턴해줌
+				
+		return result;
+	}
+	
+	
+	
 }

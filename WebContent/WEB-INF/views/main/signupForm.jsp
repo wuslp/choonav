@@ -8,23 +8,42 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript">
 	
-		$(document).ready(function(){
-			
-			$("#userId").change(function(){//id입력란에 변화가오면
-				if($("#userId").val()==""){
-					$("#idCh").val("아이디 값");
+	$(document).ready(function(){
+		$("#userId").change(function(){	//id입력란에 변화가 있을떄 동작해라~~
+		var idVal =$("#userId").val();//id입력란에 사용자가 작성한 값을 가져오기
+		console.log("userId : "+idVal);
+		//ajax요청 
+			$.ajax({
+				url : "/cnav/main/ajaxIdAvail.cnav",
+				type : "post",
+				data : {userId: idVal},
+				success:function(data){//data매개변수 = Controller에서 리턴해준 결과가 들어온다(대입)
+					console.log("success!!!");
+					console.log("data : " + data);
+					//결과를 idCheckRes 태그에 적용 코드
+					$('#idCheckRes').text(data);
+					$('#idCheckRes').css('color', 'red');
+				},
+				error:function(e){
+					console.log("error~!");
+					console.log(e);
 				}
-				
-				
-			})
-			
-		})
+			});//ajax
+		});//change
+	});//ready//id 중복검사
 		
 		function check(){
 			var userId = $("#userId").val();
 			//id입력란 필수 
 			if(userId==""){
 				alert("id 는 필수 입니다");
+				$("#userId").focus();
+				return false;
+			}
+			var checkId = $("#idCheckRes").text();
+			//id중복안되게
+			if(checkId=="사용중인 아이디 입니다"){
+				alert("id 중복을 확인해 주세요");
 				$("#userId").focus();
 				return false;
 			}
@@ -46,7 +65,7 @@
 				$("#name").focus();
 				return false;
 			}	
-		}
+		}//check
 	
 	</script>
 </head>
@@ -57,7 +76,7 @@
 		<form action="/cnav/main/signupPro.cnav" method="post" onsubmit="return check()">
 			회사코드 : <input type="text" name="code" /><br/>
 			id(필수) : <input type="text" name="userId" id="userId"/><br/>
-			<div id="idCh"></div><br/>
+			<div id="idCheckRes"></div><br/>
 			비밀번호(필수) : <input type="password" name="pw" id="pw"/><br/>
 			비밀번호 확인 : <input type="password" name="pwch" id="pwch"/><br/>
 			이름(필수) : <input type="text" name="name" id="name"/><br/>	

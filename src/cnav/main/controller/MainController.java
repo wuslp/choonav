@@ -3,6 +3,9 @@ package cnav.main.controller;
 import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -30,6 +33,12 @@ public class MainController {
 		
 		return "main/signupForm";
 	}
+	//회사정보등록 이동
+	@RequestMapping("bizSignupForm.cnav")
+	public String bizSignupForm() {
+		
+		return "main/bizSignupForm";
+	}
 	//회원가입처리
 	@RequestMapping("signupPro.cnav")
 	public String signupPro(UserDTO dto) throws SQLException {
@@ -53,7 +62,7 @@ public class MainController {
 		System.out.println("66번 :"+cdto.getApproval());//확인용
 		mainService.addBiz(bdto,cdto);
 		  
-		return "main/main";
+		return "main/startPage";
 	}
 	
 	//로그인으로 이동
@@ -62,6 +71,37 @@ public class MainController {
 		
 		return "main/loginForm";
 	}
-	
+	//회원가입시 id 중복체크
+	@RequestMapping("ajaxIdAvail.cnav")
+	public ResponseEntity<String> ajaxIdAvail(UserDTO dto) throws SQLException{//responsebody 어노테이션 필요없다.헤더정보까지 다 보내준다
+		System.out.println("controller id : "+dto.getUserId());
+		int result = mainService.idCheck(dto);//있으면 1, 없으면0
+		String data ="";//결과를 문자열로 돌려줄때 담아놓을 변수 미리 선언
+		if(result ==1) {//db에 id있으니까 
+			data="사용중인 아이디 입니다";//이 문자열 저장해서 리턴해주고
+		}else {//db에 없는 아이디일경우
+			data="사용가능 :)";//이 문자열 저장해서 리턴=>한글깨짐발생
+		}
+		HttpHeaders respHeaders = new HttpHeaders();//헤더 객체 만들어
+		respHeaders.add("Content-Type", "text/html;charset=utf-8");//헤더 정보 추가 (charset=utf-8 로 한글깨짐 방지하여 결과물 응답해주기)
+		
+		//return data; 한글깨짐
+		return new ResponseEntity<String>(data, respHeaders	, HttpStatus.OK);
+	}
+	//회사정보 등록시 회사코드 중복체크
+	@RequestMapping("ajaxCodeAvail.cnav")
+	public ResponseEntity<String> ajaxCodeAvail(BusinessDTO dto) throws SQLException{//responsebody 어노테이션 필요없다.헤더정보까지 다 보내준다
+		System.out.println("controller id : "+dto.getCode());
+		int result = mainService.codeCheck(dto);//있으면 1, 없으면0
+		String data ="";
+		if(result ==1) {//중복되는 회사코드 db에 있을경우
+			data="사용중인 회사코드입니다";
+		}else {//db에 없는 회사코드일 경우
+			data="사용가능 :)";
+		}
+		HttpHeaders respHeaders = new HttpHeaders();
+		respHeaders.add("Content-Type", "text/html;charset=utf-8");
+		return new ResponseEntity<String>(data, respHeaders	, HttpStatus.OK);
+	}
 	
 }
