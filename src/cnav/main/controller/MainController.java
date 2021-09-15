@@ -52,7 +52,7 @@ public class MainController {
 		System.out.println("67번 :"+bdto.getBizCEO());//확인용
 		System.out.println("66번 :"+cdto.getApproval());//확인용
 		mainService.addBiz(bdto,cdto);
-		
+		  
 		return "main/main";
 	}
 	

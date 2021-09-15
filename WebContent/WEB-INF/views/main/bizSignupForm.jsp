@@ -44,6 +44,8 @@
 		<!-- 유효성 중복체크 추가 -->
 		<!-- 회사코드 입력 안된경우에 비즈니스계정 만들기페이지로 자동이동-->
 			<h1>비즈니스 계정으로 신청</h1>
+			
+			
 			<form action="/cnav/main/bizSignupPro.cnav">
 				회사코드(필수) : <input type="text" name="code" id="code"/><br/>
 				회사명(필수) : <input type="text" name="bizName" id="bizName"/><br/>
