@@ -36,6 +36,7 @@
   		/WEB-INF/cnav/cnav-context.xml
   		/WEB-INF/cnav/attend-context.xml
   		/WEB-INF/cnav/poll-context.xml 		
+  		/WEB-INF/cnav/main-context.xml 		
  		</param-value>
   	</init-param>
   </servlet>
