@@ -68,7 +68,9 @@
 	<!-- poll -->
 	<context:component-scan base-package="cnav.poll.dao"></context:component-scan>
 	<context:component-scan base-package="cnav.poll.service"></context:component-scan>
-	
+	<!-- approval -->
+	<context:component-scan base-package="cnav.approval.dao"/>
+	<context:component-scan base-package="cnav.approval.service"/>
 	
 	
 
