@@ -80,5 +80,14 @@
 	<!-- mypage -->
 	<context:component-scan base-package="cnav.mypage.dao"></context:component-scan>
 	<context:component-scan base-package="cnav.mypage.service"></context:component-scan>
+	<!-- 예약 -->
+	<context:component-scan base-package="cnav.reservation.dao" />
+	<context:component-scan base-package="cnav.reservation.service" />
+	<!-- 일정 -->
+	<context:component-scan base-package="cnav.calendar.service" />
+	<context:component-scan base-package="cnav.calendar.dao" />
+	<!-- mypage -->
+	<context:component-scan base-package="cnav.mypage.service" />
+	<context:component-scan base-package="cnav.mypage.dao" />
 	
 </beans>
