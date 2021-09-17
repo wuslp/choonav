@@ -9,7 +9,7 @@
 	<script type="text/javascript">
 	
 	$(document).ready(function(){
-		$("#userId").change(function(){	//id입력란에 변화가 있을떄 동작해라~~
+		$("#userId").change(function(){	//id입력란에 변화가 있을떄 동작
 		var idVal =$("#userId").val();//id입력란에 사용자가 작성한 값을 가져오기
 		console.log("userId : "+idVal);
 		//ajax요청 
@@ -21,8 +21,8 @@
 					console.log("success!!!");
 					console.log("data : " + data);
 					//결과를 idCheckRes 태그에 적용 코드
-					$('#idCheckRes').text(data);
-					$('#idCheckRes').css('color', 'red');
+					$('#idCheckRes').text(data);//텍스트
+					$('#idCheckRes').css('color', 'red');//강조
 				},
 				error:function(e){
 					console.log("error~!");
@@ -57,12 +57,6 @@
 			if($("#pw").val() !=$("#pwch").val()){
 				alert("비밀번호와 비밀번호 확인값이 다릅니다");
 				$("#pw").focus();
-				return false;
-			}	
-			//이름 필수
-			if($("#name").val()==""){
-				alert("이름 은 필수 입니다");
-				$("#name").focus();
 				return false;
 			}	
 		}//check

@@ -1,12 +1,17 @@
 package cnav.main.controller;
 
 import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import cnav.main.dto.BusinessDTO;
@@ -21,10 +26,10 @@ public class MainController {
 	@Autowired
 	private MainServiceImpl mainService = null;
 	
-	//메인
+	//시작페이지
 	@RequestMapping("startPage.cnav")
-	public String main() {
-		//System.out.println("69번 확인용 출력");
+	public String startPage() {
+		
 		return "main/startPage";
 	}
 	//회원가입으로 이동
@@ -91,17 +96,84 @@ public class MainController {
 	//회사정보 등록시 회사코드 중복체크
 	@RequestMapping("ajaxCodeAvail.cnav")
 	public ResponseEntity<String> ajaxCodeAvail(BusinessDTO dto) throws SQLException{//responsebody 어노테이션 필요없다.헤더정보까지 다 보내준다
-		System.out.println("controller id : "+dto.getCode());
+		System.out.println("controller code : "+dto.getCode());
 		int result = mainService.codeCheck(dto);//있으면 1, 없으면0
 		String data ="";
 		if(result ==1) {//중복되는 회사코드 db에 있을경우
 			data="사용중인 회사코드입니다";
 		}else {//db에 없는 회사코드일 경우
-			data="사용가능 :)";
+			//숫자 유효성 검사
+			String pattern = "^[0-9]*$";
+			boolean regax = Pattern.matches(pattern, dto.getCode());
+			if(regax != true) {
+				data="숫자만 입력해 주세요";
+			}else {
+				data="사용할 수 있는 회사코드 입니다 :)";
+			}
 		}
 		HttpHeaders respHeaders = new HttpHeaders();
 		respHeaders.add("Content-Type", "text/html;charset=utf-8");
 		return new ResponseEntity<String>(data, respHeaders	, HttpStatus.OK);
 	}
+	//로그인 처리
+	@RequestMapping("loginPro.cnav")
+	public String loginPro(UserDTO dto,HttpSession session, Model model) throws SQLException{
+		//기존의 세션 삭제
+		mainService.removeSessionAttr("sid");
+		mainService.removeSessionAttr("scode");
+		mainService.removeSessionAttr("sauth");
+		
+		int result = 0;
+		if(session.getAttribute("sid") != null) {
+			result = 2;
+		}else {
+			result = mainService.idPwCheck(dto);
+		}
+		model.addAttribute("result",result);
+		System.out.println("session 아이디:"+session.getAttribute("sid"));
+		System.out.println("session 권한 :"+session.getAttribute("sauth"));
+		System.out.println("session 코드 :"+session.getAttribute("scode"));
+		return "main/loginPro";
+	}
 	
+	//main
+	@RequestMapping("main.cnav")
+	public String main(HttpSession session,Model model) throws SQLException{
+		//회사코드 꺼내와서 해당하는 카테고리만 보여주기
+		String scode =(String)session.getAttribute("scode");
+		//회사코드에 해당하는 카테고리 dto 전체 넘겨주기
+		CategoryDTO cdto = mainService.takeCategory(scode);
+		model.addAttribute("cdto",cdto);
+		return "main/main";
+	}
+	//아이디 찾기 폼
+	@RequestMapping("findId.cnav")
+	public String findId() {
+		return "main/findId";
+	}
+	
+	//아이디 찾기
+	@RequestMapping("findIdRes.cnav")
+	public String findIdRes(Model model,UserDTO dto) throws SQLException {
+		System.out.println("63번 이름 확인 :"+dto.getName());
+		System.out.println("62번 이메일 확인 :"+dto.getEmail());
+		UserDTO udto = mainService.findUser(dto);
+		System.out.println("찾은 아이디 값 확인 출력 :"+udto.getUserId());
+		model.addAttribute("udto", udto);
+		return "main/findIdRes";
+	}
+	//비밀번호 찾기
+	@RequestMapping("findPw.cnav")
+	public String findPw(Model model,UserDTO dto) {
+		return "main/findPw";
+	}
+	//비밀번호 찾기 결과
+	@RequestMapping("findPwRes.cnav")
+	public String findPwRes(Model model,UserDTO dto) throws SQLException {
+		System.out.println("58번 아이디 확인 :"+dto.getUserId());
+		UserDTO udto = mainService.findUser(dto);
+		model.addAttribute("udto",udto);		
+		return "main/findPwRes";
+	}
+
 }

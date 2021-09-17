@@ -48,4 +48,42 @@ public class MainDAOImpl implements MainDAO{
 		return result;
 	}
 
+	//회원 정보 가져오기
+	@Override
+	public UserDTO getUserInfo(UserDTO dto) throws SQLException {
+		UserDTO udto =sqlSession.selectOne("main.getUserInfo",dto); 
+		return udto;
+	}
+
+	//회사코드로 카테고리 가져오기
+	@Override
+	public CategoryDTO takeCategory(String scode) throws SQLException {
+		CategoryDTO cdto = sqlSession.selectOne("main.takeCat",scode);
+		return cdto;
+	}
+
+	//회원정보있는지 확인
+	@Override
+	public int countUser(UserDTO dto) throws SQLException {
+		int result =0;
+		if(dto.getUserId()==null) {
+			result = sqlSession.selectOne("main.checkUser",dto);	
+		}else {
+			result = sqlSession.selectOne("main.checkPw",dto);
+		}
+		return result;
+	}
+
+	//회원정보 가져오기
+	@Override
+	public UserDTO getUserIdPw(UserDTO dto) throws SQLException {
+		UserDTO	udto;
+		if(dto.getUserId()==null) {
+			udto =sqlSession.selectOne("main.getUserId",dto);
+		}else {
+			udto = sqlSession.selectOne("main.getPw",dto);
+		}
+		return udto;
+	}
+
 }

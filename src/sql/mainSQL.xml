@@ -22,6 +22,29 @@
   	<select id="codeCheck" parameterType="busDTO" resultType="int">
   		select count(*) from business where code=#{code}
   	</select>
+  	<select id="getUserInfo" parameterType="userDTO" resultType="userDTO">
+  		select * from users where userId=#{userId}
+  	</select>
   	
-  	
+  	<select id="takeCat" parameterType="string" resultType="catDTO">
+  		select * from category where code=#{value}
+  	</select>
+  	<select id="checkUser" parameterType="userDTO" resultType="int">
+  		select count(*) from users where name=#{name}
+  		<if test="email!=null">
+  		and email=#{email}
+  		</if>
+  	</select>
+  	<select id="checkPw" parameterType="userDTO" resultType="int">
+  		select count(*) from users where userId=#{userId} and name=#{name} 
+  	</select>
+  	<select id="getUserId" parameterType="userDTO" resultType="userDTO">
+  		select userId from users where name=#{name} 
+		<if test="email!=null">
+  		and email=#{email}
+  		</if>
+  	</select>
+  	<select id="getPw" parameterType="userDTO" resultType="userDTO">
+  		select pw from users where name=#{name} and userId=#{userId}
+  	</select>
   </mapper>
