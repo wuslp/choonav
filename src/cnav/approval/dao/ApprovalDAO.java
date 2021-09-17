@@ -47,19 +47,19 @@ public interface ApprovalDAO {
 	// 반려 사유 
 	public void insertReject(ApprovalDTO dto) throws SQLException;
 
-	// 승인 상태 변경 
+	// 첫번째 승인 상태 변경 
 	public void updateAppState(Integer appNum, int sign, int newState) throws SQLException;
 	
 	// 2번째 승인자 추가 
 	public void insertAddTake(ApprovalDTO dto) throws SQLException;
 	
-	// 승인 상태 변경 
+	// 2번째 승인자 승인 상태 변경 
 	public void updateAppState2(Integer appNum, int sign, int newState) throws SQLException;
 	
-	// 2번째 승인자 추가 
+	// 3번째 승인자 추가 
 	public void insertAddTake2(ApprovalDTO dto) throws SQLException;
 	
-	// 승인 상태 변경 
-		public void updateAppState3(Integer appNum, int sign, int newState) throws SQLException;
+	// 3번째 승인자 승인 상태 변경 
+	public void updateAppState3(Integer appNum, int sign, int newState) throws SQLException;
 
 }
