@@ -22,7 +22,7 @@
 	<c:if test="${count == 0}">
 	<div align="center">
 		<div>
-			<td align="center"> 회사 내 등록된 사원이 없습니다. </td>
+			<td align="center"> 회사 내 등록된 사원이  없습니다. </td>
 		</div>
 	</div>
 	</c:if>
