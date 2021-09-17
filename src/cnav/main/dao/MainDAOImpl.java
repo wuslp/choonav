@@ -32,4 +32,58 @@ public class MainDAOImpl implements MainDAO{
 		
 	}
 
+	//id, pw 체크 해 줄것
+	@Override
+	public int idPwCheck(UserDTO dto) throws SQLException {
+		//dto 주면서 db에 두개 같은애가 있는지 체크, 결과는 int 로 리턴
+		int result = sqlSession.selectOne("main.idPwCheck", dto);
+		
+		return result;//결과 돌려주기.일치 1 불일치0
+	}
+
+	//회사코드 체크
+	@Override
+	public int codeCheck(BusinessDTO dto) throws SQLException {
+		int result = sqlSession.selectOne("main.codeCheck", dto);
+		return result;
+	}
+
+	//회원 정보 가져오기
+	@Override
+	public UserDTO getUserInfo(UserDTO dto) throws SQLException {
+		UserDTO udto =sqlSession.selectOne("main.getUserInfo",dto); 
+		return udto;
+	}
+
+	//회사코드로 카테고리 가져오기
+	@Override
+	public CategoryDTO takeCategory(String scode) throws SQLException {
+		CategoryDTO cdto = sqlSession.selectOne("main.takeCat",scode);
+		return cdto;
+	}
+
+	//회원정보있는지 확인
+	@Override
+	public int countUser(UserDTO dto) throws SQLException {
+		int result =0;
+		if(dto.getUserId()==null) {
+			result = sqlSession.selectOne("main.checkUser",dto);	
+		}else {
+			result = sqlSession.selectOne("main.checkPw",dto);
+		}
+		return result;
+	}
+
+	//회원정보 가져오기
+	@Override
+	public UserDTO getUserIdPw(UserDTO dto) throws SQLException {
+		UserDTO	udto;
+		if(dto.getUserId()==null) {
+			udto =sqlSession.selectOne("main.getUserId",dto);
+		}else {
+			udto = sqlSession.selectOne("main.getPw",dto);
+		}
+		return udto;
+	}
+
 }

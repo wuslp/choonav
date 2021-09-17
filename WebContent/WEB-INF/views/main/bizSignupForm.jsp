@@ -7,13 +7,46 @@
 	<title>bizSignupForm</title>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript">
+	$(document).ready(function(){
+		//회사코드 숫자유효성 , 중복 검사
+		$("#code").change(function(){//회사코드 입력란에 변화가 있을떄 동작
+		var idVal =$("#code").val();//회사코드 입력란에 사용자가 작성한 값을 받는다
+		console.log("code : "+idVal);
+		//ajax요청 
+			$.ajax({
+				url : "/cnav/main/ajaxCodeAvail.cnav",
+				type : "post",
+				data : {code: idVal},
+				success:function(data){
+					console.log("success!!!");
+					console.log("data : " + data);
+					//결과 div 영역에 적용
+					$('#codeCheckRes').text(data);
+					$('#codeCheckRes').css('color', 'red');
+				},
+				error:function(e){
+					console.log("error~!");
+					console.log(e);
+				}
+			});//ajax
+		});//change//회사코드 중복검사
+		
+	});//ready
 		function check(){
-				
+			//회사 코드 미작성시 가입불가	
 			if($("#code").val()==""){
 				alert("회사코드는 필수 입니다");
 				$("#code").focus();
 				return false;
+			}		
+			
+			//회사 코드 중복시 가입불가
+			if($("#codeCheckRes").text()!="사용할 수 있는 회사코드 입니다 :)"){
+				alert("회사코드 입력을 확인해 주세요");
+				$("#code").focus();
+				return false;
 			}
+			//유효성 검사
 			if($("#bizName").val()==""){
 				alert("회사명은 필수 입니다");
 				$("#bizName").focus();
@@ -35,23 +68,42 @@
 				return false;
 			}
 			
+			//이름 필수
+			if($("#name").val()==""){
+				alert("이름 은 필수 입니다");
+				$("#name").focus();
+				return false;
+			}	
+			
 		}
+		/* 
+		제이쿼리로 하려면
+		function check_input(){
+			var codeCheck=document.biz.code.value;
+			var num_check=/^[0-9]*$/;
+			if(!num_check.test(codeCheck)){
+				alert ( "숫자만 입력할 수 있습니다." );
+				document.biz.code.value="";
+				$("#code").focus();
+			}
+			
+		} */
+	
 	</script>
 </head>
 <body>
-	<div>
-		<div>
+	<div id="">
+		<div id="">
 		<!-- 유효성 중복체크 추가 -->
 		<!-- 회사코드 입력 안된경우에 비즈니스계정 만들기페이지로 자동이동-->
 			<h1>비즈니스 계정으로 신청</h1>
-			
-			
-			<form action="/cnav/main/bizSignupPro.cnav">
-				회사코드(필수) : <input type="text" name="code" id="code"/><br/>
+			<form action="/cnav/main/bizSignupPro.cnav" onsubmit="return check()" name="biz">
+				회사코드(숫자만가능)(필수) : <input type="text" name="code" id="code" onblur="check_input()"/><br/>
+				<div id="codeCheckRes"></div><br/>
 				회사명(필수) : <input type="text" name="bizName" id="bizName"/><br/>
 				대표자명(필수) : <input type="text" name="bizCEO" id="bizCEO"/><br/>
 				사업자 번호(필수) : <input type="text" name="bizNumber" id="bizNumber"/><br/>
-				전화번호(필수) : <input type="text" name="bizTel" id="bizTel"/><br/>
+				전화번호(필수) : <input type="text" name="bizTel" id="bizTel" placeholder="027865678"/><br/>
 				이메일 : <input type="text" name="bizEmail" id="bizEmail"/><br/>
 				체크박스 : 
 				<fieldset>
