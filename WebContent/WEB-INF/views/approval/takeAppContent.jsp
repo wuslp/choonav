@@ -87,17 +87,21 @@
 </table>
 
 <div class="appConBtn">
-	<c:if test='${!(approval.state1 == "1" || approval.state2 == "1" || approval.state3 == "1" || approval.state1 == "2" || approval.state2 == "2" || approval.state3 == "2")}'> 
+	<%-- <c:if test='${!(approval.state1 == "1" && approval.state2 == "1" && approval.state3 == "1" && approval.state1 == "2" && approval.state2 == "2" && approval.state3 == "2" && approval.state2 != "0")}'> --%> 
+	<c:if test='${(approval.name2 ==null && approval.name3 == null)}'> 
 	<button onclick="window.location='/cnav/approval/takeOk.cnav?appNum=${approval.appNum}&sign=${sign}'">승인1</button>
 	<button onclick="showReject();">반려</button>
 	</c:if>
 	
-	
+	<c:if test='${(approval.state1 != "0" && approval.state1 == "2" && approval.name3 == null && approval.state1 !="1")}'>
 	<button onclick="window.location='/cnav/approval/takeOk2.cnav?appNum=${approval.appNum}&sign=${sign}'">승인2</button> 
 	<button onclick="showReject();">반려</button>
+	</c:if>
 	
+	<c:if test='${(approval.state2 !="1" && approval.state2=="2")}'>
 	<button onclick="window.location='/cnav/approval/takeOk3.cnav?appNum=${approval.appNum}&sign=${sign}'">승인3</button> 
 	<button onclick="showReject();">반려</button>
+	</c:if>
 	
 	<button onclick="window.location='/cnav/approval/takeAppList.cnav'">취소</button> 
 </div>
