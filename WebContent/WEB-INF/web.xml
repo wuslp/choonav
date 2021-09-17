@@ -38,7 +38,6 @@
   		/WEB-INF/cnav/poll-context.xml 		
   		/WEB-INF/cnav/main-context.xml 		
   		/WEB-INF/cnav/approval-context.xml
-		/WEB-INF/cnav/calendar-context.xml
 		/WEB-INF/cnav/mail-context.xml
 		/WEB-INF/cnav/mypage-context.xml
 

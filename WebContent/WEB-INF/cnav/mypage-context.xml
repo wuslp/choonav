@@ -26,6 +26,9 @@
 	</bean>
 
 	<context:component-scan base-package="cnav.mypage.controller" />
+	<context:component-scan base-package="cnav.reservation.controller" />
+	<context:component-scan base-package="cnav.calendar.controller" />
+	<context:component-scan base-package="cnav.mypage.controller" />
 
 
 </beans>
