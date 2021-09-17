@@ -26,8 +26,8 @@ public class MainServiceImpl implements MainService{
 
 	//회사정보 등록 처리
 	@Override
-	public void addBiz(BusinessDTO bdto, CategoryDTO cdto) throws SQLException {
-		mainDAO.addBiz(bdto,cdto);
+	public void addBiz(BusinessDTO bdto, CategoryDTO cdto, UserDTO udto) throws SQLException {
+		mainDAO.addBiz(bdto,cdto,udto);
 		
 	}
 

@@ -15,6 +15,9 @@
   	<insert id="addCat" parameterType="catDTO">
   		insert into category values(#{code}, #{approval}, #{mail}, #{attend}, #{project}, #{calendar}, #{reservation}, #{board}, #{poll})
   	</insert>
+  	<update id="addUserBiz" parameterType="hashmap">
+  		update users set code=#{code} where userId=#{userId}
+  	</update>
   	<select id="idPwCheck" parameterType="userDTO" resultType="int">
   		select count(*) from users where userId=#{userId}
   		<if test="pw != null">and pw=#{pw}</if>

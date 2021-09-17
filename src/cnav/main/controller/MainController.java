@@ -46,10 +46,11 @@ public class MainController {
 	}
 	//회원가입처리
 	@RequestMapping("signupPro.cnav")
-	public String signupPro(UserDTO dto) throws SQLException {
+	public String signupPro(UserDTO dto, Model model) throws SQLException {
 		System.out.println("68번 확인용 출력"+dto.getUserId());//확인용
 		mainService.addUser(dto);
 		String page;//code입력값이 있을경우 ->일반회원가입,없을경우 -> 바로 비즈니스계정 등록 페이지로 이동시키기
+		model.addAttribute("signupId",dto.getUserId());//가입시 입력한 아이디 넘겨주기
 		System.out.println(dto.getCode() == null); 
 		System.out.println(dto.getCode().equals(""));
 		if(dto.getCode().equals("")) {
@@ -62,10 +63,11 @@ public class MainController {
 	}
 	//비즈니스계정 등록처리
 	@RequestMapping("bizSignupPro.cnav")
-	public String bizSignupPro(BusinessDTO bdto,CategoryDTO cdto) throws SQLException {
+	public String bizSignupPro(BusinessDTO bdto,CategoryDTO cdto,UserDTO udto) throws SQLException {
+		System.out.println("signupId 확인용 :"+udto.getUserId());
 		System.out.println("67번 :"+bdto.getBizCEO());//확인용
 		System.out.println("66번 :"+cdto.getApproval());//확인용
-		mainService.addBiz(bdto,cdto);
+		mainService.addBiz(bdto,cdto,udto);
 		  
 		return "main/startPage";
 	}
