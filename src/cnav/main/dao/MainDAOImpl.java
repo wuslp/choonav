@@ -1,6 +1,8 @@
 package cnav.main.dao;
 
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +28,13 @@ public class MainDAOImpl implements MainDAO{
 
 	//회사정보 등록처리
 	@Override
-	public void addBiz(BusinessDTO bdto, CategoryDTO cdto) throws SQLException {
+	public void addBiz(BusinessDTO bdto, CategoryDTO cdto, UserDTO udto) throws SQLException {
+		Map<String, Object> map = new HashMap<String, Object>(); 
+		map.put("userId", udto.getUserId());
+		map.put("code",bdto.getCode());		
 		sqlSession.insert("main.addBiz",bdto);
 		sqlSession.insert("main.addCat",cdto);
-		
+		sqlSession.update("main.addUserBiz",map);
 	}
 
 	//id, pw 체크 해 줄것

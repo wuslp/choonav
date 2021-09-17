@@ -11,7 +11,7 @@ public interface MainService {
 	//회원가입처리
 	public void addUser(UserDTO dto) throws SQLException;
 	//회사정보 등록 처리
-	public void addBiz(BusinessDTO bdto,CategoryDTO cdto) throws SQLException;
+	public void addBiz(BusinessDTO bdto,CategoryDTO cdto,UserDTO udto) throws SQLException;
 	//아이디 id 중복여부 체크
 	public int idCheck(UserDTO dto) throws SQLException;
 	//회사코드중복여부 체크

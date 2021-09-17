@@ -38,7 +38,6 @@
 					<a href="/cnav/poll/pollList.cnav">투표</a><br/><br/>
 				</c:if>
 			</div>
-			
 		</div>
 	</div>
 </body>
