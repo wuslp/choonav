@@ -105,8 +105,13 @@
 	</update>
 	
 	<!-- 승인시 다음 사람 지목 -->
-	<update id="insertAddTake1"  parameterType="approvalDTO">
-		update approval set name1 = #{name1} where appNum=#{appNum}
+	<update id="insertAddTake2"  parameterType="approvalDTO">
+		update approval set name2 = #{name2} where appNum=#{appNum}
 	</update>
+	
+	<update id="insertAddTake3"  parameterType="approvalDTO">
+		update approval set name3 = #{name3} where appNum=#{appNum}
+	</update>
+	
 	
 </mapper>

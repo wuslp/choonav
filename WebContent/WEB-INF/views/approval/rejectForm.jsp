@@ -14,7 +14,6 @@
 	</script>
 <body align="center">
 	<form action="/cnav/approval/rejectPro.cnav?pageNum=${pageNum}" method="post">
-	appNum = ${appNum} / sign = ${sign}
 	<input type="hidden" name="appNum" value="${appNum}" />
 	<input type="hidden" name="sign" value="${sign}" />
 		<h2> 반려 사유 </h2><br/>

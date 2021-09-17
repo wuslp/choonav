@@ -12,9 +12,9 @@
 </head>
 <script type="text/javascript">
 	function showReject(){
-		window.open("rejectForm.cnav?appNum=${approval.appNum}&sign=${sign}", "width=500, height=600, left=100, top=50");
-	}
-
+		window.open("rejectForm.cnav?appNum=${approval.appNum}&sign=${sign}", "width=400, height=300, left=100, top=50");
+	}	
+	
 </script>
 
 <body>
@@ -87,10 +87,18 @@
 </table>
 
 <div class="appConBtn">
-	<c:if test='${!(approval.state1 == "1" || approval.state2 == "1" || approval.state3 == "1" || approval.state1 == "2" || approval.state2 == "2" || approval.state3 == "2")}'>
-	<button onclick="window.location='/cnav/approval/takeOk.cnav?appNum=${approval.appNum}&sign=${sign}'">승인</button> 
+	<c:if test='${!(approval.state1 == "1" || approval.state2 == "1" || approval.state3 == "1" || approval.state1 == "2" || approval.state2 == "2" || approval.state3 == "2")}'> 
+	<button onclick="window.location='/cnav/approval/takeOk.cnav?appNum=${approval.appNum}&sign=${sign}'">승인1</button>
 	<button onclick="showReject();">반려</button>
 	</c:if>
+	
+	
+	<button onclick="window.location='/cnav/approval/takeOk2.cnav?appNum=${approval.appNum}&sign=${sign}'">승인2</button> 
+	<button onclick="showReject();">반려</button>
+	
+	<button onclick="window.location='/cnav/approval/takeOk3.cnav?appNum=${approval.appNum}&sign=${sign}'">승인3</button> 
+	<button onclick="showReject();">반려</button>
+	
 	<button onclick="window.location='/cnav/approval/takeAppList.cnav'">취소</button> 
 </div>
 </body>

@@ -49,8 +49,8 @@
 	</tr>
 	<tr> <!-- 도장 -->
 		<td>${approval.name1} </td> 
-		<td>결재자2 </td>
-		<td>결재자3 </td>
+		<td>${approval.name2} </td>
+		<td>${approval.name3} </td>
 	</tr>
 
 </table>

@@ -246,8 +246,25 @@ public class ApprovalServiceImpl implements ApprovalService{
 	
 	@Override
 	public void addTake(ApprovalDTO dto) throws SQLException{
-		//	품의서번호, 사인자번호, 승인상태값 
+
 		approvalDAO.insertAddTake(dto);
 	}
 	
+	@Override
+	public void takeOk2(Integer appNum, int sign, int newState) throws SQLException{
+		//	품의서번호, 사인자번호, 승인상태값 
+		approvalDAO.updateAppState2(appNum,sign,newState);
+	}
+	
+	@Override
+	public void addTake2(ApprovalDTO dto) throws SQLException{
+
+		approvalDAO.insertAddTake2(dto);
+	}
+	
+	@Override
+	public void takeOk3(Integer appNum, int sign, int newState) throws SQLException{
+		//	품의서번호, 사인자번호, 승인상태값 
+		approvalDAO.updateAppState3(appNum,sign,newState);
+	}
 }
