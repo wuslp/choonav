@@ -13,7 +13,6 @@
 			<div>
 			<h1> </h1><br/><br/><br/>
 				<h2>선택한 카테고리만 보이게</h2>
-				<h2>추가함2</h2>
 				<c:if test="${cdto.approval==1}">
 					<a href="#">결재</a><br/><br/>
 				</c:if>
