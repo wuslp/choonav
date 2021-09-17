@@ -157,15 +157,51 @@ public class ApprovalController {
 	public String takeOk1(Integer appNum, int sign, @ModelAttribute("pageNum") String pageNum, Model model) throws SQLException {
 		//ApprovalDTO dto = approvalService.takeAppCont(appNum);
 		approvalService.takeOk(appNum, sign, 2);	
+		model.addAttribute("appNum", appNum); 
 		//model.addAttribute("approval", dto);
 		return "approval/takeOk";
 	}
 	
-	// 승인시 승인자 추가 
-	@RequestMapping("addTake.cnav")
-	public String addTake(Integer appNum, ApprovalDTO dto, @ModelAttribute("pageNum") String pageNum, Model model) throws SQLException {
-		approvalService.addTake(dto);
-		return "approval/addTake";
-	}
 	
+	// 승인시 승인자 추가 
+		@RequestMapping("addTake.cnav")
+		public String addTake(ApprovalDTO dto) throws Exception {
+			approvalService.addTake(dto);	
+			return "approval/addTake";
+		}
+		
+		
+		@RequestMapping("takeOk2.cnav")
+		public String takeOk2(Integer appNum, int sign, @ModelAttribute("pageNum") String pageNum, Model model) throws SQLException {
+			//ApprovalDTO dto = approvalService.takeAppCont(appNum);
+			approvalService.takeOk2(appNum, sign, 2);	
+			model.addAttribute("appNum", appNum); 
+			//model.addAttribute("approval", dto);
+			return "approval/takeOk2";
+		}
+		
+		
+		// 승인시 승인자 추가 
+			@RequestMapping("addTake2.cnav")
+			public String addTake2(ApprovalDTO dto) throws Exception {
+				approvalService.addTake2(dto);	
+				return "approval/addTake2";
+			}
+	
+			@RequestMapping("takeOk3.cnav")
+			public String takeOk3(Integer appNum, int sign, @ModelAttribute("pageNum") String pageNum, Model model) throws SQLException {
+				//ApprovalDTO dto = approvalService.takeAppCont(appNum);
+				approvalService.takeOk3(appNum, sign, 2);	
+				model.addAttribute("appNum", appNum); 
+				//model.addAttribute("approval", dto);
+				return "approval/takeOk3";
+			}	
+			
+			
+			
+			
+			@RequestMapping("index.cnav")
+			public String index()throws Exception {
+				return "approval/index";
+			}
 }

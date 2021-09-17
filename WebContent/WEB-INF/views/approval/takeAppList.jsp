@@ -76,7 +76,9 @@
 								진행중
 						</c:if>
 					</td>
+					
 					<td>${approval.name2}</td>
+						<c:if test='${approval.name2 != null}'> 
 					<td>
 						<c:if test="${approval.state2 == 1}">
 								반려
@@ -88,7 +90,14 @@
 								진행중
 						</c:if>
 					</td>
+					</c:if>
+					<c:if test='${approval.name2 == null}'>
+					<td>
+					</td>
+					</c:if>
+					
 					<td>${approval.name3}</td>
+					<c:if test='${approval.name3 != null}'>
 					<td>
 						<c:if test="${approval.state3 == 1}">
 								반려
@@ -100,6 +109,11 @@
 								진행중
 						</c:if>
 					</td>
+					</c:if>
+					<c:if test='${approval.name3 == null}'>
+						<td>
+						</td>
+					</c:if>
 					<td><fmt:formatDate value="${approval.appDate}" pattern="yyyy.MM.dd"/></td>
 					<td>${approval.reject}</td>
 				</tr>

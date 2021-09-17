@@ -4,19 +4,20 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
 	<title>결재 문서 작성</title>
 	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
+	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 	</head>
-	<!-- check == 0 : 비로그인 check == 1 : 로그인 -->
-<%-- <c:if test="${check ==0}">
-	<script>
-		alert("로그인 후 이용해주세요.");
-		window.location = "";
-	</script>
-</c:if> --%>
-	
 	
 <body>
+
 	<h2> 결재 문서 작성 </h2>
 	<form action="/cnav/approval/appPro.cnav" method="post">
 		<input type="hidden" name="appNum" value="${appNum}"/>
@@ -38,16 +39,6 @@
 		</select><br/>
 		결재자
 		<select name="name1">
-			<option value="java01" >java01</option> 
-			<option value="java02" >java02</option> 
-			<option value="java03" >java03</option> 
-		</select>
-		<select name="name2">
-			<option value="java01" >java01</option> 
-			<option value="java02" >java02</option> 
-			<option value="java03" >java03</option>  
-		</select>
-		<select name="name3">
 			<option value="java01" >java01</option> 
 			<option value="java02" >java02</option> 
 			<option value="java03" >java03</option> 

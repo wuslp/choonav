@@ -176,13 +176,50 @@ public class ApprovalDAOImpl implements ApprovalDAO {
 		}
 	}
 	
-		@Override
-		public void insertAddTake(ApprovalDTO dto) throws SQLException {
-			sqlSession.update("approval.insertAddTake1", dto);
+	// 2번째 승인자 추가
+	@Override
+	public void insertAddTake(ApprovalDTO dto) throws SQLException {
+		sqlSession.update("approval.insertAddTake2", dto);
 		
 	}
 	
 	
 	
+	// 결재 상태 
+	@Override
+	public void updateAppState2(Integer appNum, int sign, int newState) throws SQLException {
+		HashMap map = new HashMap();
+		map.put("appNum", appNum);
+		map.put("sign", newState);
+		if(sign == 1) { // 승인자1번일경우 쿼리 호출 
+			sqlSession.selectOne("approval.updateState1", map); 
+		}else if(sign == 2) {
+			sqlSession.selectOne("approval.updateState2", map); 
+		}else if(sign == 3) {
+			sqlSession.selectOne("approval.updateState3", map); 
+		}
+	}
+	
+	// 2번째 승인자 추가
+	@Override
+	public void insertAddTake2(ApprovalDTO dto) throws SQLException {
+		sqlSession.update("approval.insertAddTake3", dto);
+		
+	}
+	
+	// 결재 상태 
+		@Override
+		public void updateAppState3(Integer appNum, int sign, int newState) throws SQLException {
+			HashMap map = new HashMap();
+			map.put("appNum", appNum);
+			map.put("sign", newState);
+			if(sign == 1) { // 승인자1번일경우 쿼리 호출 
+				sqlSession.selectOne("approval.updateState1", map); 
+			}else if(sign == 2) {
+				sqlSession.selectOne("approval.updateState2", map); 
+			}else if(sign == 3) {
+				sqlSession.selectOne("approval.updateState3", map); 
+			}
+		}
 
 }

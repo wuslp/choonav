@@ -44,5 +44,15 @@ public interface ApprovalService {
 	
 	// 승인 누르면 state1 칼럼 수정 
 	public void takeOk(Integer appNum, int sign, int newState) throws SQLException;
+	
+	// 2번째 승인자 추가 
 	public void addTake(ApprovalDTO dto) throws SQLException;
+	
+	// 승인 누르면 state1 칼럼 수정 
+	public void takeOk2(Integer appNum, int sign, int newState) throws SQLException;
+	
+	// 2번째 승인자 추가 
+	public void addTake2(ApprovalDTO dto) throws SQLException;
+	
+	public void takeOk3(Integer appNum, int sign, int newState) throws SQLException;
 }
