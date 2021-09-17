@@ -58,6 +58,4 @@ public class ProjectDTO {
 	public void setProState(String proState) {
 		this.proState = proState;
 	}
-	
-	
 }
