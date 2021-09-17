@@ -21,7 +21,11 @@
   		<typeAlias type="cnav.main.dto.CategoryDTO" alias="catDTO"/>
   		<typeAlias type="cnav.main.dto.UserDTO" alias="userDTO"/>
 		<typeAlias type="cnav.approval.dto.ApprovalDTO" alias="approvalDTO"/>
-
+		<typeAlias type="cnav.mail.dto.MailDTO" alias="mailDTO"/>
+		<typeAlias type="cnav.reservation.dto.ReservationDTO" alias="rezDTO"/>
+		<typeAlias type="cnav.calendar.dto.CalendarDTO" alias="calDTO"/>
+		<typeAlias type="cnav.project.dto.ProjectDTO" alias="projectDTO"/>
+		<typeAlias type="cnav.topic.dto.TopicDTO" alias="topicDTO"/>
   	</typeAliases>
   
   
@@ -31,6 +35,11 @@
   	<mapper resource="/sql/pollSQL.xml"/>
   	<mapper resource="/sql/mainSQL.xml"/>
   	<mapper resource="/sql/ApprovalSQL.xml" />
+  	<mapper resource="/sql/mailSQL.xml" />
+  	<mapper resource="/sql/bizMypageSQL.xml" />
+  	<mapper resource="/sql/calSQL.xml" />
+  	<mapper resource="/sql/mySQL.xml" />
+  	<mapper resource="/sql/rezSQL.xml" />
 
   </mappers>
   
