@@ -2,7 +2,7 @@ package cnav.project.dto;
 
 public class ProjectDTO {
 	
-	private Integer proNum; 	// 프로젝트 번호
+	private Integer proNum; 	// 프로젝트 번호a
 	private String proName;		// 제목
 	private String proContent;	// 내용
 	private String userId; 		// 작성자(담당자)
