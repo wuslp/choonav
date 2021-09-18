@@ -52,7 +52,7 @@
 		결재자
 		<select name="name1">
 			<option value="">선택</option>
-				<c:forEach var="users" items="${users.getUserId()}">
+				<c:forEach var="users" items="${cnavUsers}">
 					<option value="${users.userId}">${users.userId}</option>
 				</c:forEach> 	
 		</select><br/>
