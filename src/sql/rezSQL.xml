@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="rez">
+
+	<select id="countAll" parameterType="String" resultType="int">
+		select count(*) from reservation where code = #{value}
+	</select>
+	
+	<select id="countMy" parameterType="rezDTO" resultType="int">
+		select count(*) from reservation where code = #{code} and userId=#{userId}
+	</select>
+	
+	<select id="getRezList" parameterType="String" resultType="rezDTO">
+		select * from reservation where code = #{value}
+	</select>
+	
+	<insert id="insertRez" parameterType="rezDTO">
+		insert into reservation values (reservation_seq.nextval,#{userId},TO_DATE(#{sDate},'yyyy/mm/dd hh24:mi'),TO_DATE(#{eDate},'yyyy/mm/dd hh24:mi'),#{sTime},#{eTime},#{category},#{content},#{code},default)
+	</insert>
+
+	<select id="getRezContent" parameterType="rezDTO" resultType="rezDTO">
+		select * from reservation where rezNum = #{rezNum} and code = #{code}
+	</select>
+	
+	<delete id="deleteRez" parameterType="int">
+		delete from reservation where rezNum = #{value}
+	</delete>
+	
+	<select id="selectMylist" parameterType="hashmap" resultType="rezDTO">
+		<![CDATA[
+		select B.* from 
+			(select A.*, rownum r from 
+				(select * from reservation where userId=#{userId} and code=#{code} order by rezNum desc) A 
+			order by rezNum desc) B
+		where r >= #{start} and r <= #{end}
+		]]>
+	</select>
+</mapper> 

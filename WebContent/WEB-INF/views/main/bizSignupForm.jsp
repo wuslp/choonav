@@ -5,6 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>bizSignupForm</title>
+	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function(){
@@ -92,8 +93,11 @@
 	</script>
 </head>
 <body>
-	<div id="">
-		<div id="">
+<div class="main-container">
+		<div class="header">
+				<h1><a href="/cnav/main/startPage.cnav">Choonav</a></h1>
+		</div>
+	<div class="signup">	
 		<!-- 유효성 중복체크 추가 -->
 		<!-- 회사코드 입력 안된경우에 비즈니스계정 만들기페이지로 자동이동-->
 			<h1>비즈니스 계정으로 신청</h1>
