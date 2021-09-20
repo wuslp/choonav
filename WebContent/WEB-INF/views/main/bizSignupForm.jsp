@@ -102,6 +102,7 @@
 		<!-- 회사코드 입력 안된경우에 비즈니스계정 만들기페이지로 자동이동-->
 			<h1>비즈니스 계정으로 신청</h1>
 			<form action="/cnav/main/bizSignupPro.cnav" onsubmit="return check()" name="biz">
+			<!-- userId를 signupForm에서 넘겨줌 -->
 			<input type="hidden" name="userId" value="${signupId }"/>
 				회사코드(숫자만가능)(필수) : <input type="text" name="code" id="code" onblur="check_input()"/><br/>
 				<div id="codeCheckRes"></div><br/>
@@ -118,7 +119,7 @@
 					<label><input type="checkbox" name="project" value="1" />프로젝트</label>
 					<label><input type="checkbox" name="calendar" value="1" />스케쥴</label>
 					<label><input type="checkbox" name="reservation" value="1" />예약</label>
-					<label><input type="checkbox" name="board" value="1" />게시판</label>
+					<label><input type="checkbox" name="board" value="1" />자유게시판</label>
 					<label><input type="checkbox" name="poll" value="1" />투표</label>
 				</fieldset><br/><br/>
 				<input type="submit" value="신청"/>
