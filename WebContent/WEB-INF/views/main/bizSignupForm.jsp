@@ -105,7 +105,7 @@
 			<form action="/cnav/main/bizSignupPro.cnav" onsubmit="return check()" name="biz">
 			<!-- userId를 signupForm에서 넘겨줌 -->
 			<input type="hidden" name="userId" value="${signupId }"/>
-				회사코드(숫자만가능)(필수) : <input type="text" name="code" id="code" onblur="check_input()"/><br/>
+				회사코드(숫자만가능)(필수) : <input type="text" name="code" id="code" onblur="check_input()" autofocus/><br/>
 				<div id="codeCheckRes"></div><br/>
 				회사명(필수) : <input type="text" name="bizName" id="bizName"/><br/>
 				대표자명(필수) : <input type="text" name="bizCEO" id="bizCEO"/><br/>

@@ -1,6 +1,9 @@
 package cnav.main.service;
 
+import java.io.PrintWriter;
 import java.sql.SQLException;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -89,13 +92,22 @@ public class MainServiceImpl implements MainService{
 
 	//조건주고 회원정보 가져오기
 	@Override
-	public UserDTO findUser(UserDTO dto) throws SQLException {
+	public UserDTO findUser(HttpServletResponse response, UserDTO dto) throws Exception {
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
 		//있는지 확인하고
 		int result =0;
 			result = mainDAO.countUser(dto);
 		UserDTO udto=null;
-		if(result!=0) {//회원정보가 존재하면
+		if(result !=0) {//회원정보가 존재하면
 			udto = mainDAO.getUserIdPw(dto);//그정보 불러와주기
+		}else {//입력값으로 회원가입한 계정이 존재하지않거나 입력값 오류일때 
+			//메세지 띄워주기
+			out.println("<script>");
+			out.println("alert('가입된 계정이 없습니다.\\n입력값을 다시 확인해 주세요');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			out.close();
 		}
 		return udto;
 	}

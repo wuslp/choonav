@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.client.HttpServerErrorException;
 
 import cnav.main.dto.BusinessDTO;
 import cnav.main.dto.CategoryDTO;
@@ -175,11 +177,11 @@ public class MainController {
 	
 	//아이디 찾기
 	@RequestMapping("findIdRes.cnav")
-	public String findIdRes(Model model,UserDTO dto) throws SQLException {
+	public String findIdRes(HttpServletResponse response ,Model model,UserDTO dto) throws Exception {
 		System.out.println("63번 이름 확인 :"+dto.getName());
 		System.out.println("62번 이메일 확인 :"+dto.getEmail());
-		UserDTO udto = mainService.findUser(dto);
-
+		UserDTO udto = mainService.findUser(response, dto);
+		
 		model.addAttribute("udto", udto);
 		return "main/findIdRes";
 	}
@@ -190,9 +192,9 @@ public class MainController {
 	}
 	//비밀번호 찾기 결과
 	@RequestMapping("findPwRes.cnav")
-	public String findPwRes(Model model,UserDTO dto) throws SQLException {
+	public String findPwRes(HttpServletResponse response, Model model,UserDTO dto) throws Exception {
 		System.out.println("58번 아이디 확인 :"+dto.getUserId());
-		UserDTO udto = mainService.findUser(dto);
+		UserDTO udto = mainService.findUser(response, dto);
 		model.addAttribute("udto",udto);		
 		return "main/findPwRes";
 	}
