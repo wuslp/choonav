@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="my">
+
+	<select id="countMypj" parameterType="projectDTO" resultType="int">
+		select count(*) from project where code = #{code} and userId=#{userId}
+	</select>
+
+	<select id="countMytopic" parameterType="topicDTO" resultType="int">
+		select count(*) from topic where code = #{code} and userId=#{userId}
+	</select>
+	
+	<select id="selectMypjlist" parameterType="hashmap" resultType="projectDTO">
+		<![CDATA[
+		select B.* from 
+			(select A.*, rownum r from 
+				(select * from project where userId=#{userId} and code=#{code} order by proNum desc) A 
+			order by proNum desc) B
+		where r >= #{start} and r <= #{end}
+		]]>
+	</select>
+	
+	<select id="selectMytopiclist" parameterType="hashmap" resultType="topicDTO">
+		<![CDATA[
+		select B.* from 
+			(select A.*, rownum r from 
+				(select * from topic where userId=#{userId} and code=#{code} order by topNum desc) A 
+			order by topNum desc) B
+		where r >= #{start} and r <= #{end}
+		]]>
+	</select>
+</mapper> 
