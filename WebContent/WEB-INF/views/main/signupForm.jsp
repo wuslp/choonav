@@ -128,7 +128,7 @@
 					아이디(*)
 				</td>
 				<td>
-					<input type="text" name="userId" id="userId"/>
+					<input type="text" name="userId" id="userId" autofocus/>
 					<div id="idCheckRes"></div>
 				</td>
 			</tr>
@@ -166,7 +166,7 @@
 			</tr>
 			<tr>
 				<td>
-					이메일
+					이메일(필수)
 				</td>
 				<td>
 				<input type="text" name="email" />
