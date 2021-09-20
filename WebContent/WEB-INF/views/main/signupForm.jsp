@@ -64,6 +64,14 @@
 				$("#code").focus();
 				return false;
 			}
+			var codeVal = $("#code").val();
+			//id입력란 필수 
+			if(codeVal=="0000"){
+				alert("해당 회사코드는 가입할수 없습니다");
+				$("#code").focus();
+				return false;
+			}
+			
 			var userId = $("#userId").val();
 			//id입력란 필수 
 			if(userId==""){
