@@ -13,6 +13,7 @@
 		$("#code").change(function(){//회사코드 입력란에 변화가 있을떄 동작
 		var idVal =$("#code").val();//회사코드 입력란에 사용자가 작성한 값을 받는다
 		console.log("code : "+idVal);
+		
 		//ajax요청 
 			$.ajax({
 				url : "/cnav/main/ajaxCodeAvail.cnav",

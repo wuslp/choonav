@@ -85,7 +85,7 @@ public class MainController {
 		int result = mainService.codeCheck(dto);//business계정을 등록된 회사코드가 있으면 1, 없으면0
 		String data ="";//결과를 문자열로 돌려줄때 담아놓을 변수 미리 선언
 		if(result ==1) {//db에 등록된 회사코드가 있다는 것이니까 
-			data="그룹웨어가 개설된 회사코드입니다 :) 가입 가능";//이 문자열 저장해서 리턴해주고
+			data="그룹웨어가 개설된 회사코드입니다 :)";//이 문자열 저장해서 리턴해주고
 		}else {//db에 등록되지 않은 회사코드일 경우
 			data="관리자가 회사계정을 먼저 개설해 주세요";//이 문자열 저장해서 리턴=>한글깨짐발생
 		}
