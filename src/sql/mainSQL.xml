@@ -9,7 +9,7 @@
   	</insert>
   	
   	<insert id="addBiz" parameterType="busDTO">
-  		insert into business values(#{code},#{bizName},#{bizCEO},#{bizNumber},#{bizTel},#{bizEmail})
+  		insert into business values(#{code},#{bizName},#{bizCEO},#{bizNumber},#{bizTel},#{bizEmail},#{userId})
   	</insert>
   	
   	<insert id="addCat" parameterType="catDTO">
