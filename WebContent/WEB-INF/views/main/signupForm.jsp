@@ -31,9 +31,39 @@
 				}
 			});//ajax
 		});//change
-	});//ready//id 중복검사
+		//관리자가 회사코드로된 계정을 계설했을때만 일반회원이 회사코드로 가입가능하도록
+		$("#code").change(function(){	//code입력란에 변화가 있을떄 동작
+		var codeVal =$("#code").val();
+		console.log("code : "+codeVal);
+		//ajax요청 
+			$.ajax({
+				url : "/cnav/main/ajaxCodeCheck.cnav",
+				type : "post",
+				data : {code: codeVal},
+				success:function(data){//data매개변수 = Controller에서 리턴해준 결과가 들어온다(대입)
+					console.log("success!!!");
+					console.log("data : " + data);
+					//결과를 idCheckRes 태그에 적용 코드
+					$('#codeCheckRes').text(data);//텍스트
+					$('#codeCheckRes').css('color', 'red');//강조
+				},
+				error:function(e){
+					console.log("error~!");
+					console.log(e);
+				}
+			});//ajax
+		});//change
+		
+	});//ready //id 중복검사 and 회사코드 가입가능검사
 		
 		function check(){
+			var checkCode = $("#codeCheckRes").text();
+			//관리자가 회사코드로 개설한 코드의 회사직원만 가입할 수 있도록
+			if(checkCode=="관리자가 회사계정을 먼저 개설해 주세요"){
+				alert("회사계정을 개설해 주세요. 회사코드 공백 필요 !!");
+				$("#code").focus();
+				return false;
+			}
 			var userId = $("#userId").val();
 			//id입력란 필수 
 			if(userId==""){
@@ -81,7 +111,8 @@
 					회사코드
 				</td>
 				<td>
-					<input type="text" name="code" />
+					<input type="text" name="code" id="code"/>
+					<div id="codeCheckRes"></div>
 				</td>
 			</tr>
 			<tr>

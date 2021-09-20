@@ -78,16 +78,33 @@ public class MainController {
 		
 		return "main/loginForm";
 	}
+	//ajaxCodeAvail 회원가입시 회사코드 체크
+	@RequestMapping("ajaxCodeCheck.cnav")
+	public ResponseEntity<String> ajaxCodeCheck(BusinessDTO dto) throws SQLException{//responsebody 어노테이션 필요없다.헤더정보까지 다 보내준다
+		System.out.println("controller id : "+dto.getUserId());
+		int result = mainService.codeCheck(dto);//business계정을 등록된 회사코드가 있으면 1, 없으면0
+		String data ="";//결과를 문자열로 돌려줄때 담아놓을 변수 미리 선언
+		if(result ==1) {//db에 등록된 회사코드가 있다는 것이니까 
+			data="그룹웨어가 개설된 회사코드입니다 :) 가입 가능";//이 문자열 저장해서 리턴해주고
+		}else {//db에 등록되지 않은 회사코드일 경우
+			data="관리자가 회사계정을 먼저 개설해 주세요";//이 문자열 저장해서 리턴=>한글깨짐발생
+		}
+		HttpHeaders respHeaders = new HttpHeaders();//헤더 객체 만들어
+		respHeaders.add("Content-Type", "text/html;charset=utf-8");//헤더 정보 추가 (charset=utf-8 로 한글깨짐 방지하여 결과물 응답해주기)
+		
+		//return data; 한글깨짐
+		return new ResponseEntity<String>(data, respHeaders	, HttpStatus.OK);
+	}
 	//회원가입시 id 중복체크
 	@RequestMapping("ajaxIdAvail.cnav")
-	public ResponseEntity<String> ajaxIdAvail(UserDTO dto) throws SQLException{//responsebody 어노테이션 필요없다.헤더정보까지 다 보내준다
+	public ResponseEntity<String> ajaxIdAvail(UserDTO dto) throws SQLException{
 		System.out.println("controller id : "+dto.getUserId());
 		int result = mainService.idCheck(dto);//있으면 1, 없으면0
 		String data ="";//결과를 문자열로 돌려줄때 담아놓을 변수 미리 선언
 		if(result ==1) {//db에 id있으니까 
 			data="사용중인 아이디 입니다";//이 문자열 저장해서 리턴해주고
 		}else {//db에 없는 아이디일경우
-			data="사용가능 :)";//이 문자열 저장해서 리턴=>한글깨짐발생
+			data="사용가능 :)";//이 문자열 저장해서 리턴
 		}
 		HttpHeaders respHeaders = new HttpHeaders();//헤더 객체 만들어
 		respHeaders.add("Content-Type", "text/html;charset=utf-8");//헤더 정보 추가 (charset=utf-8 로 한글깨짐 방지하여 결과물 응답해주기)
@@ -160,7 +177,7 @@ public class MainController {
 		System.out.println("63번 이름 확인 :"+dto.getName());
 		System.out.println("62번 이메일 확인 :"+dto.getEmail());
 		UserDTO udto = mainService.findUser(dto);
-		System.out.println("찾은 아이디 값 확인 출력 :"+udto.getUserId());
+
 		model.addAttribute("udto", udto);
 		return "main/findIdRes";
 	}
