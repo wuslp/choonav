@@ -6,58 +6,66 @@
  
  	<!-- 해당 id리스트 불러오기 -->
  	<!-- 개수 -->
- 	<select id="countAll" resultType="int" parameterType="string">
-  	select count(*) from attend where userId=#{value}
+ 	<select id="countAll" resultType="int" parameterType="hashmap">
+  	select count(*) from attend where userId=#{userId} and code=#{code}
 	</select>
 	<!-- 레코드 -->
 	<select id="getList" parameterType="hashmap" resultType="attendDTO">
 	<![CDATA[
-		select b.*, r from (select a.*, rownum r from (select * from attend where userId=#{userId} order by attDate desc)a order by attDate desc)b where r>=#{startRow} and r<=#{endRow}
+		select b.*, r from (select a.*, rownum r from (select * from attend where userId=#{userId} and code=#{code} order by attDate desc)a order by attDate desc)b where r>=#{startRow} and r<=#{endRow}
   	]]>
 	</select>
   	
   	<!-- 필터링 -->
   	<select id="countCat" parameterType="hashmap" resultType="int">
-  		select count(*) from attend where userId=#{id} and attendance like '%'||#{category}||'%'
+  		select count(*) from attend where userId=#{userId} and code=#{code} and attendance like '%'||#{category}||'%'
   	</select>
   	<select id="getAttList" parameterType="hashmap" resultType="attendDTO">
 	<![CDATA[
-		select b.*, r from (select a.*, rownum r from (select * from attend where userId=#{userId} and attendance=#{category} order by attDate desc)a order by attDate desc)b where r>=#{startRow} and r<=#{endRow}
+		select b.*, r from (select a.*, rownum r from (select * from attend where userId=#{userId} and code=#{code} and attendance=#{category} order by attDate desc)a order by attDate desc)b where r>=#{startRow} and r<=#{endRow}
   	]]>
 	</select>
 	<!-- 필터링 -->
 	<select id="countDate" parameterType="hashmap" resultType="int">
 		<![CDATA[
-		select count(*) from attend where ((userId=#{id}) and (attdate >= #{search1}) and (attdate <= #{search2}))
+		select count(*) from attend where ((userId=#{id}) and (code=#{code}) and (attdate >= #{search1}) and (attdate <= #{search2}))
 		]]>
 	</select>
 	<select id="getDateList" parameterType="hashmap" resultType="attendDTO">
 	<![CDATA[
-		select b.*, r from (select a.*, rownum r from (select * from attend where userId=#{userId} and (attdate >= #{search1}) and (attdate <= #{search2}) order by attDate desc)a order by attDate desc)b where r>=#{startRow} and r<=#{endRow}
+		select b.*, r from (select a.*, rownum r from (select * from attend where (userId=#{userId}) and (code=#{code}) and (attdate >= #{search1}) and (attdate <= #{search2}) order by attDate desc)a order by attDate desc)b where r>=#{startRow} and r<=#{endRow}
   	]]>
 	</select>
   
   <!-- 출근 -->
-	<insert id="worktime" parameterType="string">
-		insert into attend(attdate, worktime, userId) values(sysdate, sysdate, #{userId})
+	<insert id="worktime" parameterType="hashmap">
+		insert into attend(attdate, worktime, userId, code) values(sysdate, sysdate, #{userId}, #{code})
 	</insert>  
-	<update id="workAttendance" parameterType="string">
+	<update id="workAttendance" parameterType="hashmap">
 		<![CDATA[
-  		update attend set attendance='지각' where ((to_char(attdate, 'HH24MI') > 900) and (userId=#{userId}) and (to_char(attdate, 'yyyymmdd') = to_char(sysdate, 'yyyymmdd')))
+  		update attend set attendance='지각' where ((to_char(attdate, 'HH24MI') > 900) and (userId=#{userId}) and (code=#{code}) and (to_char(attdate, 'yyyymmdd') = to_char(sysdate, 'yyyymmdd')))
   		]]>
 	</update>
 	<!-- 퇴근 -->
-  	<update id="worktime2" parameterType="string">
+  	<update id="worktime2" parameterType="hashmap">
   		<![CDATA[
-  		update attend set leavetime = sysdate where ((to_char(attdate, 'yyyymmdd') = to_char(sysdate, 'yyyymmdd')) and (userId=#{userId}))
+  		update attend set leavetime = sysdate where ((to_char(attdate, 'yyyymmdd') = to_char(sysdate, 'yyyymmdd')) and (userId=#{userId}) and (code=#{code}))
   		]]>
   	</update>
-  	<update id="leaveAttendance">
+  	<update id="leaveAttendance" parameterType="hashmap">
  	 <![CDATA[
-  		update attend set attendance='정상출근' where ((to_char(leavetime, 'HH24MI') > 1800) and (to_char(attdate, 'yyyymmdd') = to_char(sysdate, 'yyyymmdd')) and (userId=#{userId}))
+  		update attend set attendance='정상출근' where ((to_char(leavetime, 'HH24MI') > 1800) and (to_char(attdate, 'yyyymmdd') = to_char(sysdate, 'yyyymmdd')) and (userId=#{userId}) and (code=#{code}))
   		]]>
   	</update>
-  
-  
+  <!--출근 기록 체크  -->
+	<select id="workRecodeCheck" parameterType="hashmap" resultType="int">
+  	<![CDATA[
+		select count(*) from attend where (userId=#{userId}) and (code=#{code}) and (to_char(worktime, 'yyyymmdd') = to_char(sysdate, 'yyyymmdd'))
+	]]>
+  </select>
+  <!--출근기록 가져오기  -->
+	<select id="workRecode" parameterType="hashmap" resultType="string">
+ 		select worktime from attend where (userId=#{userId}) and (code=#{code}) and (to_char(worktime, 'yyyymmdd') = to_char(sysdate, 'yyyymmdd'))
+	</select>
   
 </mapper>
