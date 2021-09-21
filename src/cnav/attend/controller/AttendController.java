@@ -33,12 +33,12 @@ public class AttendController {
 		//근태기록지 체크
 		int WTrecodeCheck = attendService.WTrecodeCheck();//출근시간 기록 체크
 		String workTimeRecode=null;
-		String leaveTimeRecode=null;
 		if(WTrecodeCheck ==1) {
 			workTimeRecode = attendService.getWorktimeRecode();
 			System.out.println("workTimeRecode 가져오기 :"+workTimeRecode);//확인용
 		}
 		int LTrecodeCheck = attendService.LTrecodeCheck();//퇴근시간기록 체크
+		String leaveTimeRecode=null;
 		if(LTrecodeCheck ==1) {
 			leaveTimeRecode = attendService.getLeavetimeRecode();
 		}
