@@ -108,7 +108,7 @@
 				회사코드(숫자만가능)(필수) : <input type="text" name="code" id="code" onblur="check_input()" autofocus/><br/>
 				<div id="codeCheckRes"></div><br/>
 				회사명(필수) : <input type="text" name="bizName" id="bizName"/><br/>
-				대표자명(필수) : <input type="text" name="bizCEO" id="bizCEO"/><br/>
+				대표자명(필수) : <input type="text" name="bizCEO" id="bizCEO" placeholder="유재석"/><br/>
 				사업자 번호(필수) : <input type="text" name="bizNumber" id="bizNumber"/><br/>
 				전화번호(필수) : <input type="text" name="bizTel" id="bizTel" placeholder="027865678"/><br/>
 				이메일 : <input type="text" name="bizEmail" id="bizEmail"/><br/>
@@ -120,7 +120,7 @@
 					<label><input type="checkbox" name="project" value="1" />프로젝트</label>
 					<label><input type="checkbox" name="calendar" value="1" />스케쥴</label>
 					<label><input type="checkbox" name="reservation" value="1" />예약</label>
-					<label><input type="checkbox" name="board" value="1" />자유게시판</label>
+					<label><input type="checkbox" name="topic" value="1" />자유게시판</label>
 					<label><input type="checkbox" name="poll" value="1" />투표</label>
 				</fieldset><br/><br/>
 				<input type="submit" value="신청"/>

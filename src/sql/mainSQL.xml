@@ -13,7 +13,7 @@
   	</insert>
   	
   	<insert id="addCat" parameterType="catDTO">
-  		insert into category values(#{code}, #{approval}, #{mail}, #{attend}, #{project}, #{calendar}, #{reservation}, #{board}, #{poll})
+  		insert into category values(#{code}, #{approval}, #{mail}, #{attend}, #{project}, #{calendar}, #{reservation}, #{topic}, #{poll})
   	</insert>
   	<update id="addUserBiz" parameterType="hashmap">
   		update users set code=#{code} where userId=#{userId}
