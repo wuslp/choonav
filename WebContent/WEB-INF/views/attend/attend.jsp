@@ -143,14 +143,33 @@
 <body>
 	
 	<div id="" class="">
+		<!--로그인된 세션이 없을경우 startPage 로 이동시켜주기  -->
+		<div id=""> 
+			<c:if test="${sessionScope.sid == null}">
+			<script>
+				alert("로그인후 이용할 수 있습니다");
+				var link = "http://localhost:8080/cnav/main/startPage.cnav";
+	    		window.location.href = link;
+	    		</script>
+			</c:if>
+		</div>
+		<div class="">
+				<h1><a href="/cnav/main/main.cnav">Choonav 메인으로</a></h1>
+		</div>
+		<!--근태관리 페이지 본문 시작  -->
 		<div id="" class="">
 			<h1>근태관리</h1>
 			<h5><fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" />
-			
-			<input type="button" value="출근" id="button1">
-			<input type="datetime" id="worktime" value="" disabled>
-			<input type="button" value="퇴근" id="button2" >
-			<input type="datetime" id="leavetime" value="" disabled>
+			<c:if test="${recodeCheck =='1' }">
+				<input type="button" value="출근완료" id="button1">
+				<input type="datetime" id="worktime" value="${workTimeRecode }" disabled>
+			</c:if>
+			<c:if test="${recodeCheck !='1' }">
+				<input type="button" value="출근" id="button1">
+				<input type="datetime" id="worktime" value="" pattern="\d{4}-\d{2}-\d{2}" disabled>
+			</c:if>
+				<input type="button" value="퇴근" id="button2" >
+				<input type="datetime" id="leavetime" value="" disabled>
 			</h5>
 		</div><br/><br/><br/><br/><br/>
 		
