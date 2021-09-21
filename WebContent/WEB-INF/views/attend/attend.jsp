@@ -86,9 +86,6 @@
  						window.location.replace("/cnav/attend/attend.cnav?attcategory="+attcategory+"&pageNum"+pageNum);
  						//$(location).attr('href', 'http://localhost:8080/cnav/attend/attend.cnav?attcategory='attcategory)
  						console.log("success!!!");
- 						//console.log("data : " + data);
- 						//결과를 idCheckRes 태그에 적용 코드
- 						//$("#idCheckRes").val(data);
  					},
  					error:function(e){
  						console.log("error~!");
@@ -96,9 +93,6 @@
  					}
  				});//ajax
  				//location.reload();
- 				//load("/cnav/attend/attend.cnav?attcategory"+attcategory);
- 				//$("#test99").load(window.location.href + "#test99");
- 				//$("#test99").load("/cnav/attend/attend.cnav?attcategory"+attcategory);
  			 }
  		 })
  		 /* $("#search1").change(function(){
@@ -133,10 +127,7 @@
 			leavetime.value ="<%=new java.util.Date()%>";
 		}
 	} --%>
-	
-
 	</script>
-
 
 </head>
 
