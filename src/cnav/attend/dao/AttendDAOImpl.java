@@ -114,22 +114,41 @@ public class AttendDAOImpl implements AttendDAO{
 		sqlSession.update("attend.worktime2",map);
 		sqlSession.update("attend.leaveAttendance",map);
 	}
-	//기록 여부 체크
+	//출근 기록 여부 체크 
 	@Override
-	public int recodeCheck(String userId, String code) throws SQLException {
+	public int WTrecodeCheck(String userId, String code) throws SQLException {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("userId", userId);
 		map.put("code", code);
 		int recodeCheck=sqlSession.selectOne("attend.workRecodeCheck",map);
 		return recodeCheck;
 	}
-	//기록 가져오기
+	//출근 기록 가져오기
 	@Override
 	public String getWorktimeRecode(String userId, String code) throws SQLException {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("userId", userId);
 		map.put("code", code);
 		String result = sqlSession.selectOne("attend.workRecode",map);
+		return result;
+	}
+	//퇴근 기록 여부 체크 
+	@Override
+	public int LTrecodeCheck(String userId, String code) throws SQLException {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userId", userId);
+		map.put("code", code);
+		int recodeCheck=sqlSession.selectOne("attend.leaveRecodeCheck",map);
+		return recodeCheck;
+	}
+
+	//퇴근기록 가져오기
+	@Override
+	public String getLeavetimeRecode(String userId, String code) throws SQLException {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userId", userId);
+		map.put("code", code);
+		String result = sqlSession.selectOne("attend.leaveRecode",map);
 		return result;
 	}
 

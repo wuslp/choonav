@@ -31,12 +31,18 @@ public class AttendController {
 		//세션 값->service처리 
 		System.out.println("77번 attend 근태리스트 출력");
 		//근태기록지 체크
-		int recodeCheck = attendService.recodeCheck();
+		int WTrecodeCheck = attendService.WTrecodeCheck();//출근시간 기록 체크
 		String workTimeRecode=null;
-		if(recodeCheck ==1) {
+		String leaveTimeRecode=null;
+		if(WTrecodeCheck ==1) {
 			workTimeRecode = attendService.getWorktimeRecode();
-			System.out.println("workTimeRecode 가져오기 :"+workTimeRecode);
+			System.out.println("workTimeRecode 가져오기 :"+workTimeRecode);//확인용
 		}
+		int LTrecodeCheck = attendService.LTrecodeCheck();//퇴근시간기록 체크
+		if(LTrecodeCheck ==1) {
+			leaveTimeRecode = attendService.getLeavetimeRecode();
+		}
+		
 		Map<String, Object> result = null;
 		//String id = (String)session.getAttribute("sid");
 		//String code = (String)session.getAttribute("scode");
@@ -71,8 +77,10 @@ public class AttendController {
 		model.addAttribute("category", result.get("category"));
 		model.addAttribute("search1", result.get("search1"));
 		model.addAttribute("search2", result.get("search2"));
-		model.addAttribute("recodeCheck", recodeCheck);
+		model.addAttribute("WTrecodeCheck", WTrecodeCheck);
 		model.addAttribute("workTimeRecode", workTimeRecode);
+		model.addAttribute("LTrecodeCheck", LTrecodeCheck);
+		model.addAttribute("leaveTimeRecode", leaveTimeRecode);
 		return "attend/attend";
 		}
 		

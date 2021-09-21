@@ -57,15 +57,27 @@
   		update attend set attendance='정상출근' where ((to_char(leavetime, 'HH24MI') > 1800) and (to_char(attdate, 'yyyymmdd') = to_char(sysdate, 'yyyymmdd')) and (userId=#{userId}) and (code=#{code}))
   		]]>
   	</update>
-  <!--출근 기록 체크  -->
+	<!--출근 기록 체크  -->
 	<select id="workRecodeCheck" parameterType="hashmap" resultType="int">
   	<![CDATA[
 		select count(*) from attend where (userId=#{userId}) and (code=#{code}) and (to_char(worktime, 'yyyymmdd') = to_char(sysdate, 'yyyymmdd'))
 	]]>
-  </select>
-  <!--출근기록 가져오기  -->
+	</select>
+	<!--출근기록 가져오기  -->
 	<select id="workRecode" parameterType="hashmap" resultType="string">
  		select worktime from attend where (userId=#{userId}) and (code=#{code}) and (to_char(worktime, 'yyyymmdd') = to_char(sysdate, 'yyyymmdd'))
+	</select>
+	<!--퇴근 기록 체크  -->
+	<select id="leaveRecodeCheck" parameterType="hashmap" resultType="int">
+  	<![CDATA[
+		select count(*) from attend where (userId=#{userId}) and (code=#{code}) and (to_char(leavetime, 'yyyymmdd') = to_char(sysdate, 'yyyymmdd'))
+	]]>
+	</select>
+	<!--퇴근기록 가져오기  -->
+	<select id="workRecode" parameterType="hashmap" resultType="string">
+	<![CDATA[
+		select leavetime from attend where (userId=#{userId}) and (code=#{code}) and (to_char(leavetime, 'yyyymmdd') = to_char(sysdate, 'yyyymmdd'))
+	]]>
 	</select>
   
 </mapper>

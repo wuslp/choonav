@@ -159,22 +159,28 @@
 		<!--근태관리 페이지 본문 시작  -->
 		<div id="" class="">
 			<h1>근태관리</h1>
-			<h5><fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" />
-			<c:if test="${recodeCheck =='1' }">
+			<!-- 실시간 날짜 -->
+			<h5><fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" /></h5>
+			<!--출근 퇴근 기록여부에따른 버튼 able  -->
+			<c:if test="${WTrecodeCheck =='1' }">
 				<input type="button" value="출근완료" id="button1">
 				<input type="datetime" id="worktime" value="${workTimeRecode }" disabled>
 			</c:if>
-			<c:if test="${recodeCheck !='1' }">
+			<c:if test="${WTrecodeCheck !='1' }">
 				<input type="button" value="출근" id="button1">
 				<input type="datetime" id="worktime" value="" pattern="\d{4}-\d{2}-\d{2}" disabled>
 			</c:if>
+			<c:if test="${LTrecodeCheck =='1' }">
+				<input type="button" value="퇴근완료" id="button2">
+				<input type="datetime" id="leavetime" value="${leaveTimeRecode }" disabled>
+			</c:if>			
+			<c:if test="${LTrecodeCheck !='1' }">			
 				<input type="button" value="퇴근" id="button2" >
 				<input type="datetime" id="leavetime" value="" disabled>
-			</h5>
+			</c:if>
 		</div><br/><br/><br/><br/><br/>
 		
 		<div id="" class="">
-			
 				<form action="/cnav/attend/attend.cnav" method="get">
 				<select id="attcategory" name="attcategory">
 					<option value="">-- 선택 --</option>

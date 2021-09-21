@@ -21,7 +21,12 @@ public interface AttendDAO {
 	public void workInsert(String userId,String code) throws SQLException;
 	public void workInsert2(String userId, String code) throws SQLException;
 	//출근기록 체크
-	public int recodeCheck(String userId,String code) throws SQLException;
+	public int WTrecodeCheck(String userId,String code) throws SQLException;
 	//출근 기록
 	public String getWorktimeRecode(String userId, String code) throws SQLException;
+	//퇴근기록 체크
+	public int LTrecodeCheck(String userId,String code) throws SQLException;
+	//퇴근 기록
+	public String getLeavetimeRecode(String userId, String code) throws SQLException;
+		
 }
