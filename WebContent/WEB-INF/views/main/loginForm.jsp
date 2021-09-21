@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,6 +29,16 @@
 	</script>
 </head>
 <body>
+<!--로그인된 세션이 있을경우 main 페이지로 이동시켜주기  -->
+	<div id=""> 
+		<c:if test="${sessionScope.sid != null}">
+		<script>
+			var link = "http://localhost:8080/cnav/main/main.cnav";
+    		window.location.href = link;
+    		</script>
+		</c:if>
+	</div>
+<!--로그인된 세션이 없을경우 로그인 페이지  -->
 	<div class="main-container">
 		<div class="header">
 				<h1><a href="/cnav/main/startPage.cnav">Choonav</a></h1>

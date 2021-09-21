@@ -76,8 +76,15 @@ public class MainController {
 	
 	//로그인으로 이동
 	@RequestMapping("loginForm.cnav")
-	public String loginForm() {
-		
+	public String loginForm(HttpSession session,Model model) {
+		int result =0;
+		if(session.getAttribute("sid") != null) {
+			result = 1;
+		}else {
+			result =0;
+		}
+		System.out.println("result값"+result);
+		model.addAttribute("result",result);
 		return "main/loginForm";
 	}
 	//ajaxCodeAvail 회원가입시 회사코드 체크
@@ -91,7 +98,7 @@ public class MainController {
 		}else if(dto.getCode()==""){//db에 등록되지 않은 회사코드일 경우
 			data="관리자 회사계정 개설";//이 문자열 저장해서 리턴=>한글깨짐발생
 		}else {
-			data="관리자가 회사계정을 먼저 개설해 주세요";//이 문자열 저장해서 리턴=>한글깨짐발생
+			data="관리자가 회사계정을 먼저 개설해 주세요";//이 문자열 저장해서 리턴
 		}
 		HttpHeaders respHeaders = new HttpHeaders();//헤더 객체 만들어
 		respHeaders.add("Content-Type", "text/html;charset=utf-8");//헤더 정보 추가 (charset=utf-8 로 한글깨짐 방지하여 결과물 응답해주기)
@@ -146,7 +153,7 @@ public class MainController {
 		mainService.removeSessionAttr("scode");
 		mainService.removeSessionAttr("sauth");
 		
-		int result = 0;
+		int result = 0;//result변수 선언
 		if(session.getAttribute("sid") != null) {
 			result = 2;
 		}else {
@@ -157,6 +164,17 @@ public class MainController {
 		System.out.println("session 권한 :"+session.getAttribute("sauth"));
 		System.out.println("session 코드 :"+session.getAttribute("scode"));
 		return "main/loginPro";
+	}
+	//로그아웃처리
+	@RequestMapping("logout.cnav")
+	public String logout(HttpSession session) {//세션삭제후 startPage로 이동
+		
+		mainService.removeSessionAttr("sid");
+		mainService.removeSessionAttr("scode");
+		mainService.removeSessionAttr("sauth");
+		//세션삭제 확인용
+		System.out.println("세션 sid :"+session.getAttribute("sid") +"세션 scode : "+ session.getAttribute("scode")+"세션 auth: "+session.getAttribute("sauth"));
+		return "main/startPage";
 	}
 	
 	//main
