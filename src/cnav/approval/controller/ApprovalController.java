@@ -1,9 +1,11 @@
 package cnav.approval.controller;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,10 +28,20 @@ public class ApprovalController {
 	
 	// appForm 결재 문서 작성 폼 
 	@RequestMapping("appForm.cnav")
-	public String appForm(HttpServletRequest request, Model model) {
+	public String appForm(HttpServletRequest request, Model model, HttpSession session) throws SQLException{
+		session.setAttribute("sid", "java"); // 나중에 로그인쪽 코드 완료되면 지우기, 임시로 여기서 아이디세션 저장
+		session.setAttribute("code", "1005"); // 나중에 로그인쪽 코드 완료되면 지우기, 임시로 여기서 코드세션 저장
+		// 로그인된 아이디 세션 꺼내기
+		String userId = (String)session.getAttribute("sid");
+		// 로그인된 아이디 코드 꺼내기
+		String code = (String)session.getAttribute("code");
+		List list = approvalService.getUsersId(userId, code);
+		
 		System.out.println("appForm 출력");
+		model.addAttribute("list", list);
 		return "approval/appForm";
 	}
+	
 	// appPro 결재 문서 처리 
 	@RequestMapping("appPro.cnav")
 	public String appPro(ApprovalDTO dto) throws SQLException {
