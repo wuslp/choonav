@@ -222,4 +222,15 @@ public class ApprovalDAOImpl implements ApprovalDAO {
 			}
 		}
 
+	// 결재자에 넣을 같은회사 유저아이디들 가져오기
+	@Override
+	public List getUsersId(String userId, String code) throws SQLException {
+		HashMap map = new HashMap();
+		map.put("code", code);
+		map.put("userId", userId);
+		List list = sqlSession.selectList("approval.getUsersId", map);
+		
+		return list;
+	}
+
 }

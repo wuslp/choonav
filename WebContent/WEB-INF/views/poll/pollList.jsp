@@ -7,9 +7,27 @@
 <head>
 	<meta charset="UTF-8">
 	<title>pollList Page</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript">
+	</script>
+ 	
 </head>
 <body>
-	<div><!-- 리스트 자체는 모두 보이고 , 투표하기 버튼을 해당하는 대상만 보이게? -->
+	<div>
+		<!--로그인된 세션이 없을경우 startPage 로 이동시켜주기  -->
+		<div id=""> 
+			<c:if test="${sessionScope.sid == null}">
+			<script>
+				alert("로그인후 이용할 수 있습니다");
+				var link = "http://localhost:8080/cnav/main/startPage.cnav";
+	    		window.location.href = link;
+	    		</script>
+			</c:if>
+		</div>
+		<div class="">
+				<h1><a href="/cnav/main/main.cnav">Choonav 메인으로</a></h1>
+		</div>
+		<!-- 투표 리스트 본문-->
 		<div>
 			<h1>투표목록</h1>
 		</div>

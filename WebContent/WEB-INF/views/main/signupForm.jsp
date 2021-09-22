@@ -36,9 +36,66 @@
 				}
 			});//ajax
 		});//change
-	});//ready//id 중복검사
+		//관리자가 회사코드로된 계정을 계설했을때만 일반회원이 회사코드로 가입가능하도록
+		$("#code").change(function(){	//code입력란에 변화가 있을떄 동작
+		var codeVal =$("#code").val();
+		console.log("code : "+codeVal);
+		//ajax요청 
+			$.ajax({
+				url : "/cnav/main/ajaxCodeCheck.cnav",
+				type : "post",
+				data : {code: codeVal},
+				success:function(data){//data매개변수 = Controller에서 리턴해준 결과가 들어온다(대입)
+					console.log("success!!!");
+					console.log("data : " + data);
+					//결과를 idCheckRes 태그에 적용 코드
+					$('#codeCheckRes').text(data);//텍스트
+					$('#codeCheckRes').css('color', 'red');//강조
+				},
+				error:function(e){
+					console.log("error~!");
+					console.log(e);
+				}
+			});//ajax
+		});//change
+		//email 양식 유효성 검사
+		$("#email").change(function(){	//email입력란에 변화가 있을떄 동작
+			var emailVal =$("#email").val();
+			console.log("email : "+emailVal );
+				$.ajax({
+					url : "/cnav/main/ajaxEmailAvail.cnav",
+					type : "post",
+					data : {email: emailVal},
+					success:function(data){
+						console.log("success!!!");
+						//결과를 emailCheckRes 태그에 적용
+						$('#emailCheckRes').text(data);//텍스트
+						$('#emailCheckRes').css('color', 'red');//강조
+					},
+					error:function(e){
+						console.log("error~!");
+						console.log(e);
+					}
+				});//ajax
+			});//change
+	});//ready //id 중복검사 and 회사코드 가입가능검사
 		
 		function check(){
+			var checkCode = $("#codeCheckRes").text();
+			//관리자가 회사코드로 개설한 코드의 회사직원만 가입할 수 있도록
+			if(checkCode=="관리자가 회사계정을 먼저 개설해 주세요"){
+				alert("회사계정을 개설해 주세요. 회사코드 공백 필요 !!");
+				$("#code").focus();
+				return false;
+			}
+			var codeVal = $("#code").val();
+			//회사코드 관리자코드 가입불가 
+			if(codeVal=="0000"){
+				alert("해당 회사코드는 가입할수 없습니다");
+				$("#code").focus();
+				return false;
+			}
+			
 			var userId = $("#userId").val();
 			//id입력란 필수 
 			if(userId==""){
@@ -65,6 +122,20 @@
 				$("#pw").focus();
 				return false;
 			}	
+			//이메일 필수
+			if($("#email").val()==""){
+				alert("email 은 필수입니다")
+				$("#email").focus();
+				return false;
+			}
+			var checkEmail = $("#emailCheckRes").text();
+			//email 양식 검사
+			if(checkEmail=="이메일 형식을 확인해 주세요"){
+				alert("이메일은 xxxx@xxx.xxx 형식이여야 합니다");
+				$("#email").focus();
+				return false;
+			}
+
 		}//check
 	
 	</script>
@@ -86,7 +157,8 @@
 					회사코드
 				</td>
 				<td>
-					<input type="text" name="code" />
+					<input type="text" name="code" id="code"/>
+					<div id="codeCheckRes"></div>
 				</td>
 			</tr>
 			<tr>
@@ -94,7 +166,7 @@
 					아이디(*)
 				</td>
 				<td>
-					<input type="text" name="userId" id="userId"/>
+					<input type="text" name="userId" id="userId" autofocus/>
 					<div id="idCheckRes"></div>
 				</td>
 			</tr>
@@ -132,10 +204,11 @@
 			</tr>
 			<tr>
 				<td>
-					이메일
+					이메일(필수)
 				</td>
 				<td>
-				<input type="text" name="email" />
+					<input type="text" name="email" id="email" placeholder="cnav@gmail.com"/>
+					<div id="emailCheckRes"></div>
 				</td>
 			</tr>
 			<tr>

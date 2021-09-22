@@ -65,32 +65,29 @@
 				alert("시작일보다 큰 날짜를 선택해 주세요");
 				$("#endDate").empty();
 			}
-			
 		})
-		
-		
 	})
 	
 	</script>
 </head>
 <body>
-<!-- 
-		<c:if test="${sessionScope.sid == null}">
+	<div id="">
+		<!--로그인된 세션이 없을경우 startPage 로 이동시켜주기  -->
+		<div id=""> 
+			<c:if test="${sessionScope.sid == null}">
 			<script>
 				alert("로그인후 이용할 수 있습니다");
-				history.go(-1);
-			</script>
-		</c:if>
-	<div align="right"> 
-		<c:if test="${sessionScope.sid != null}">
-			<button onclick="window.location='/cnav/member/logout.cnav'">로그아웃</button>
-		</c:if>
-	</div>
-
- -->
-	<div id="">
-		<h1>투표 만들기</h1>
+				var link = "http://localhost:8080/cnav/main/startPage.cnav";
+	    		window.location.href = link;
+	    		</script>
+			</c:if>
+		</div>
+		<div class="">
+				<h1><a href="/cnav/main/main.cnav">Choonav 메인으로</a></h1>
+		</div>
+		<!--투표폼 본문  -->
 		<div id="">
+		<h1>투표 만들기</h1>
 			<form action="/cnav/poll/pollPro.cnav" onsubmit="return check()" name="pF">
 				<div id="">
 				투표기간(필수) <input type="date" id="stDate" name="stDate" min=<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" /> > <strong>~</strong> <input type="date" id="endDate" name="endDate" ><br/>

@@ -2,6 +2,8 @@ package cnav.main.service;
 
 import java.sql.SQLException;
 
+import javax.servlet.http.HttpServletResponse;
+
 import cnav.main.dto.BusinessDTO;
 import cnav.main.dto.CategoryDTO;
 import cnav.main.dto.UserDTO;
@@ -23,7 +25,7 @@ public interface MainService {
 	//세션삭제
 	public void removeSessionAttr(String sessionName);
 	//아이디 비밀번호 찾기 (회원정보 가져오기)
-	public UserDTO findUser(UserDTO dto) throws SQLException;
+	public UserDTO findUser(HttpServletResponse response, UserDTO dto) throws Exception;
 	
 	
 }

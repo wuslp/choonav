@@ -21,12 +21,6 @@ public class PollController {
 	@Autowired
 	private PollServiceImpl pollService=null;
 	
-	//투표폼
-	@RequestMapping("pollForm.cnav")
-	public String pollForm() {
-		
-		return "poll/pollForm";
-	}
 	//투표리스트 로딩
 	@RequestMapping("pollList.cnav")
 	public String pollList(Model model,String pageNum, String sel, String search,String sort) throws SQLException {
@@ -64,7 +58,13 @@ public class PollController {
 		
 		return "poll/pollList";
 	}
-	
+	//투표폼
+	@RequestMapping("pollForm.cnav")
+	public String pollForm() {
+		
+		return "poll/pollForm";
+	}
+		
 	//투표생성
 	@RequestMapping("pollPro.cnav")
 	public String pollPro(HttpSession session, PollDTO dto) throws SQLException{

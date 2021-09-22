@@ -9,7 +9,7 @@ public class CategoryDTO {
 	private Integer project;
 	private Integer calendar;
 	private Integer reservation;
-	private Integer board;
+	private Integer topic;
 	private Integer poll;
 	public String getCode() {
 		return code;
@@ -53,17 +53,18 @@ public class CategoryDTO {
 	public void setReservation(Integer reservation) {
 		this.reservation = reservation;
 	}
-	public Integer getBoard() {
-		return board;
-	}
-	public void setBoard(Integer board) {
-		this.board = board;
-	}
+	
 	public Integer getPoll() {
 		return poll;
 	}
 	public void setPoll(Integer poll) {
 		this.poll = poll;
+	}
+	public Integer getTopic() {
+		return topic;
+	}
+	public void setTopic(Integer topic) {
+		this.topic = topic;
 	}
 	
 	

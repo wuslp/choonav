@@ -31,7 +31,7 @@ public class MainDAOImpl implements MainDAO{
 	public void addBiz(BusinessDTO bdto, CategoryDTO cdto, UserDTO udto) throws SQLException {
 		Map<String, Object> map = new HashMap<String, Object>(); 
 		map.put("userId", udto.getUserId());
-		map.put("code",bdto.getCode());		
+		map.put("code", bdto.getCode());		
 		sqlSession.insert("main.addBiz",bdto);
 		sqlSession.insert("main.addCat",cdto);
 		sqlSession.update("main.addUserBiz",map);

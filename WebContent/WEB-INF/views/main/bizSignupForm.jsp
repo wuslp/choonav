@@ -13,6 +13,7 @@
 		$("#code").change(function(){//회사코드 입력란에 변화가 있을떄 동작
 		var idVal =$("#code").val();//회사코드 입력란에 사용자가 작성한 값을 받는다
 		console.log("code : "+idVal);
+		
 		//ajax요청 
 			$.ajax({
 				url : "/cnav/main/ajaxCodeAvail.cnav",
@@ -102,11 +103,12 @@
 		<!-- 회사코드 입력 안된경우에 비즈니스계정 만들기페이지로 자동이동-->
 			<h1>비즈니스 계정으로 신청</h1>
 			<form action="/cnav/main/bizSignupPro.cnav" onsubmit="return check()" name="biz">
+			<!-- userId를 signupForm에서 넘겨줌 -->
 			<input type="hidden" name="userId" value="${signupId }"/>
-				회사코드(숫자만가능)(필수) : <input type="text" name="code" id="code" onblur="check_input()"/><br/>
+				회사코드(숫자만가능)(필수) : <input type="text" name="code" id="code" onblur="check_input()" autofocus/><br/>
 				<div id="codeCheckRes"></div><br/>
 				회사명(필수) : <input type="text" name="bizName" id="bizName"/><br/>
-				대표자명(필수) : <input type="text" name="bizCEO" id="bizCEO"/><br/>
+				대표자명(필수) : <input type="text" name="bizCEO" id="bizCEO" placeholder="유재석"/><br/>
 				사업자 번호(필수) : <input type="text" name="bizNumber" id="bizNumber"/><br/>
 				전화번호(필수) : <input type="text" name="bizTel" id="bizTel" placeholder="027865678"/><br/>
 				이메일 : <input type="text" name="bizEmail" id="bizEmail"/><br/>
@@ -118,7 +120,7 @@
 					<label><input type="checkbox" name="project" value="1" />프로젝트</label>
 					<label><input type="checkbox" name="calendar" value="1" />스케쥴</label>
 					<label><input type="checkbox" name="reservation" value="1" />예약</label>
-					<label><input type="checkbox" name="board" value="1" />게시판</label>
+					<label><input type="checkbox" name="topic" value="1" />자유게시판</label>
 					<label><input type="checkbox" name="poll" value="1" />투표</label>
 				</fieldset><br/><br/>
 				<input type="submit" value="신청"/>

@@ -63,5 +63,7 @@ public interface ApprovalDAO {
 	// 3번째 승인자 승인 상태 변경 
 	public void updateAppState3(Integer appNum, int sign, int newState) throws SQLException;
 
+	// 결재자에 넣을 같은회사 유저아이디들 가져오기
+	public List getUsersId(String userId, String code) throws SQLException;
 
 }
