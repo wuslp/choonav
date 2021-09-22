@@ -72,7 +72,7 @@ public class PollController {
 		String id = (String)session.getAttribute("sid");
 		String code = (String)session.getAttribute("scode");
 		dto.setUserId(id);
-		dto.setUserId(code);
+		dto.setCode(code);
 		pollService.insertArticle(dto);
 		
 		return "redirect:/poll/pollList.cnav";

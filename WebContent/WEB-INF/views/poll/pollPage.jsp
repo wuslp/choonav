@@ -105,14 +105,14 @@
 						<!-- <input type="button" value="삭제" onclick="DelPoll()"> -->
 					</c:if>
 					<!-- 투표대상이 전체이거나 해당할때 -->
-					<c:if test="${userIdDept==article.target && article.target=='전체'}">
+					<c:if test="${userIdDept==article.target || article.target=='전체'}">
 						<c:set value="${result }" var="result"/>
 						<c:if test="${article.pollStatus eq '진행중' }">
 							 <input type="button" value="투표" id="" onclick="check()"> 
 						</c:if>
 					</c:if>	
 					<!-- 투표대상이 해당하지 않을때 -->
-					<c:if test="${userIdDept!=article.target && article.target!='전체'}">
+					<c:if test="${!userIdDept==article.target}">
 						<input type="button" value="투표대상이 아닙니다" disabled> 
 					</c:if>
 					<!-- 마감된 투표일때 -->
