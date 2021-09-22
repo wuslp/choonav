@@ -5,6 +5,11 @@
 <head>
 	<meta charset="UTF-8">
 	<title>loginForm</title>
+	<!-- 로고 글씨체 -->	
+	<link rel="preconnect" href="https://fonts.googleapis.com"> 
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+	<link href="https://fonts.googleapis.com/css2?family=Charm&family=Playball&display=swap" rel="stylesheet">
+
 	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
 	
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -48,7 +53,6 @@
 				<input type="button" value="비밀번호 찾기" onclick="window.open('/cnav/main/findPw.cnav','findPw','width=400,height=600,location=no,status=no,scrollbars=yes');"/>
 				</div>
 			</form>
-		</div>	
 	</div>
 </body>
 </html>

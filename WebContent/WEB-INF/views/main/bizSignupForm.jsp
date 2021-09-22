@@ -125,8 +125,8 @@
 				<input type="reset" value="재작성"/>
 				<input type="button" onclick="history.back();" value="취소"/>
 			</form>
-		</div>
 	</div>
+</div>
 
 </body>
 </html>

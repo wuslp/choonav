@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import cnav.approval.dto.ApprovalDTO;
+import cnav.main.dto.UserDTO;
 
 // 2번 : 인터페이스에는 추상메서드가 들어온다, 
 
@@ -61,5 +62,6 @@ public interface ApprovalDAO {
 	
 	// 3번째 승인자 승인 상태 변경 
 	public void updateAppState3(Integer appNum, int sign, int newState) throws SQLException;
+
 
 }

@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.Map;
 
 import cnav.approval.dto.ApprovalDTO;
+import cnav.main.dto.UserDTO;
 
 // 2번 비즈니스 로직 처리 
 public interface ApprovalService {
@@ -55,4 +56,6 @@ public interface ApprovalService {
 	public void addTake2(ApprovalDTO dto) throws SQLException;
 	
 	public void takeOk3(Integer appNum, int sign, int newState) throws SQLException;
+	
+
 }
