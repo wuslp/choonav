@@ -2,6 +2,9 @@ package cnav.main.service;
 
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,6 +17,7 @@ import cnav.main.dao.MainDAOImpl;
 import cnav.main.dto.BusinessDTO;
 import cnav.main.dto.CategoryDTO;
 import cnav.main.dto.UserDTO;
+import cnav.project.dto.ProjectDTO;
 
 @Service
 public class MainServiceImpl implements MainService{
@@ -110,6 +114,41 @@ public class MainServiceImpl implements MainService{
 			out.close();
 		}
 		return udto;
+	}
+
+	@Override
+	public Map<String, Object> getNoticeList(String scode) throws SQLException {
+		int startRow = 1; // 페이지 시작글 번호 
+		int endRow = 5; // 페이지 마지막 글번호
+		
+		// 프로젝트 게시판 글 가져오기 
+		List articleList = null;  	// 전체(검색된) 게시글들 담아줄 변수
+		int count = 0; 							// 전체(검색된) 글의 개수 
+		int number = 0; 						// 브라우저 화면에 뿌려줄 가상 글 번호  
+		
+		// 전체 글의 개수 가져오기 
+		count = mainDAO.getNoticeCount(scode); // DB에 저장되어있는 전체 글의 개수를 가져와 담기
+		System.out.println("Notice count : " + count);
+		// 글이 하나라도 있으면 글들을 다시 가져오기 
+		if(count > 0){
+			articleList = mainDAO.getNoticeList(scode, startRow, endRow);
+			System.out.println("articleList" +articleList);
+		}
+		number = count; 	// 게시판 목록에 뿌려줄 가상의 글 번호  
+	
+		// Controller에게 전달해야되는 데이터가 많으니 HashMap에 넘겨줄 데이터를 저장해서 한번에 전달 
+		Map<String, Object> result = new HashMap<>(); 
+		result.put("articleList", articleList);
+		result.put("count", count);
+		result.put("number", number);
+				
+		return result;
+	}
+
+	@Override
+	public BusinessDTO getBizInfo(String scode) throws SQLException {
+		BusinessDTO dto = mainDAO.getBizInfo(scode);
+		return dto;
 	}
 	
 	

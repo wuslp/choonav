@@ -1,6 +1,8 @@
 package cnav.main.service;
 
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -26,6 +28,9 @@ public interface MainService {
 	public void removeSessionAttr(String sessionName);
 	//아이디 비밀번호 찾기 (회원정보 가져오기)
 	public UserDTO findUser(HttpServletResponse response, UserDTO dto) throws Exception;
-	
+	// 공지사항 리스트 가져오기
+	public Map<String, Object> getNoticeList(String scode) throws SQLException;
+	// 회사정보 가져오기
+	public BusinessDTO getBizInfo(String scode) throws SQLException;
 	
 }
