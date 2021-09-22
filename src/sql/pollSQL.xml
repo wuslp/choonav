@@ -9,53 +9,53 @@
 		<selectKey keyProperty="pollNum" order="BEFORE" resultType="int"><!-- 시퀀스 뽑아서 num에 바인딩 -->
 		 	select poll_seq.nextval from dual
 		</selectKey>
-		insert into poll(pollNum, userId, stDate, endDate, target, pollTitle, pollCon, ans1, ans2, ans3, ans4)
-		values(#{pollNum}, #{userId}, #{stDate}, #{endDate}, #{target}, #{pollTitle}, #{pollCon}, #{ans1}, #{ans2}, #{ans3}, #{ans4})
+		insert into poll(pollNum, userId, stDate, endDate, target, pollTitle, pollCon, ans1, ans2, ans3, ans4, code)
+		values(#{pollNum}, #{userId}, #{stDate}, #{endDate}, #{target}, #{pollTitle}, #{pollCon}, #{ans1}, #{ans2}, #{ans3}, #{ans4}, #{code})
 	</insert>
 	<!-- 리스트 가져오기 -->
-	<select id="getArticleCount" resultType="int">
-		select count(*) from poll
+	<select id="getArticleCount" resultType="int" parameterType="string">
+		select count(*) from poll where code=#{code}
 	</select>
 	<select id="getArticles" parameterType="hashmap" resultType="pollDTO">
 		<![CDATA[
 		  select B.*, r
-		   from (select A.*, rownum r from (select * from poll order by stDate asc) A order by stDate asc) B
+		   from (select A.*, rownum r from (select * from poll where code=#{code} order by stDate asc) A order by stDate asc) B
 		   where r >= #{startRow} and r <= #{endRow}
 		  ]]>
 	</select>
 	<!-- 진행중 , 완료 상태 업데이트-->
 	<!-- 진행중 -->
-	<update id="updatest2">
+	<update id="updatest2" parameterType="string">
 		<![CDATA[
-		update poll set pollStatus='진행중' where (to_char(stDate, 'yyyymmdd') >= to_char(sysdate, 'yyyymmdd'))
+		update poll set pollStatus='진행중' where (code=#{code}) and (to_char(stDate, 'yyyymmdd') >= to_char(sysdate, 'yyyymmdd'))
+		]]>
+	</update>
+	<!-- 완료 -->
+	<update id="updatest1" parameterType="string">
+		<![CDATA[
+		update poll set pollStatus='완료' where (code=#{code}) and (to_char(endDate, 'yyyymmdd') < to_char(sysdate, 'yyyymmdd'))
 		]]>
 	</update>
 	
-	<!-- 완료 -->
-	<update id="updatest1">
-		<![CDATA[
-		update poll set pollStatus='완료' where (to_char(endDate, 'yyyymmdd') < to_char(sysdate, 'yyyymmdd'))
-		]]>
-	</update>
 	<!-- 검색 리스트 가져오기 -->
 	<select id="getArticleCount2" parameterType="hashmap" resultType="int">
-		select count(*) from poll where ${sel} like '%'||#{search}||'%'
+		select count(*) from poll where (code=#{code}) and (${sel} like '%'||#{search}||'%')
 	</select>
 	<select id="getArticles2" parameterType="hashmap" resultType="pollDTO">
 		<![CDATA[
 	  	select B.*, r
-	   from (select A.*, rownum r from (select * from poll where ${sel} like '%'||#{search}||'%' order by stDate asc) A order by stDate asc) B
+	   from (select A.*, rownum r from (select * from poll where (code=#{code}) and (${sel} like '%'||#{search}||'%') order by stDate asc) A order by stDate asc) B
 	   where r >= #{startRow} and r <= #{endRow}
 		]]>
 	</select>
 	<!-- 진행중 완료 리스트 가져오기 -->
-	<select id="getArticleCount3" resultType="int" parameterType="string">
-		select count(*) from poll where pollStatus like '%'||#{sort}||'%'
+	<select id="getArticleCount3" resultType="int" parameterType="hashmap">
+		select count(*) from poll where code=#{code} and pollStatus like '%'||#{sort}||'%'
 	</select>
 	<select id="getArticles3" parameterType="hashmap" resultType="pollDTO">
 		<![CDATA[
 	  	select B.*, r
-	   from (select A.*, rownum r from (select * from poll where pollStatus=#{sort} order by stDate asc) A order by stDate asc) B
+	   from (select A.*, rownum r from (select * from poll where code=#{code} and pollStatus=#{sort} order by stDate asc) A order by stDate asc) B
 	   where r >= #{startRow} and r <= #{endRow}
 		]]>
 	</select>
@@ -70,6 +70,12 @@
 	<!-- 기록유무 가져오기 -->
 	<select id="recordPoll" parameterType="hashmap" resultType="int">
 		select count(*) from pollUser where pollNum = #{pollNum} and userId=#{userId}
+	</select>
+	<!-- 접속중인 id의 부서정보 가져오기 -->
+	<select id="getUserDept" parameterType="string" resultType="string">
+		<![CDATA[
+		select dept from users where userId=#{userId}
+		]]>
 	</select>
 	
 	<!-- 투표수 추가 -->

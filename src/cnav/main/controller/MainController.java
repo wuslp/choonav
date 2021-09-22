@@ -207,9 +207,9 @@ public class MainController {
 		//회사코드에 해당하는 카테고리 dto 전체 넘겨주기
 		CategoryDTO cdto = mainService.takeCategory(scode);
 		// 회사코드에 해당하는 공지사항 리스트 가져오기
-		Map<String, Object> result = mainService.getNoticeList("1111");
+		Map<String, Object> result = mainService.getNoticeList(scode);
 		// 회사코드에 해당하는 회사정보 가져오기
-		BusinessDTO bizDTO = mainService.getBizInfo("1005");
+		BusinessDTO bizDTO = mainService.getBizInfo(scode);
 		
 		// view에 전달할 데이터 보내기 
 		model.addAttribute("articleList", result.get("articleList"));
