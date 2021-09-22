@@ -2,6 +2,7 @@ package cnav.main.dao;
 
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -89,6 +90,30 @@ public class MainDAOImpl implements MainDAO{
 			udto = sqlSession.selectOne("main.getPw",dto);
 		}
 		return udto;
+	}
+	
+	// 회사 정보 가져오기
+	@Override
+	public BusinessDTO getBizInfo(String scode) throws SQLException {
+		return sqlSession.selectOne("main.getBizInfo", scode);
+	}
+
+	// 공지사항 글개수
+	@Override
+	public int getNoticeCount(String scode) throws SQLException {
+		return sqlSession.selectOne("main.countNoti", scode);
+	}
+	
+	// 공지사항 리스트 가져오기
+	@Override
+	public List getNoticeList(String scode, int start, int end) throws SQLException {
+		HashMap map = new HashMap();
+		map.put("scode", scode);
+		map.put("start", start);
+		map.put("end", end);
+		
+		List list = sqlSession.selectList("main.getNotiList", map);
+		return list;
 	}
 
 }

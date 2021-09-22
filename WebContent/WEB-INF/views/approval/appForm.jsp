@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,8 +53,8 @@
 		결재자
 		<select name="name1">
 			<option value="">선택</option>
-				<c:forEach var="users" items="${cnavUsers}">
-					<option value="${users.userId}">${users.userId}</option>
+				<c:forEach var="users" items="${list}">
+					<option value="${users.userId}">${users.name} ${users.position}</option>
 				</c:forEach> 	
 		</select><br/>
 		

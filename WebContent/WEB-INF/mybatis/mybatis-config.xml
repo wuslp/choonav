@@ -26,6 +26,7 @@
 		<typeAlias type="cnav.calendar.dto.CalendarDTO" alias="calDTO"/>
 		<typeAlias type="cnav.project.dto.ProjectDTO" alias="projectDTO"/>
 		<typeAlias type="cnav.topic.dto.TopicDTO" alias="topicDTO"/>
+		<typeAlias type="cnav.main.dto.NoticeDTO" alias="notiDTO"/>
   	</typeAliases>
   
   
