@@ -27,7 +27,6 @@ public class PollController {
 		// 비지니스로직처리해당하는것이 작성된 service 의 메서드 호출 
 		// -> 결과 받아올것이 있으면 서비스로부터 리턴받은것 view로 전달 
 		//세션 id값->service처리 
-		System.out.println("89번 poll 투표 리스트 출력");
 		System.out.println("85번 sort :"+sort);
 		Map<String, Object> result = null;
 		//String id = (String)session.getAttribute("sid");
