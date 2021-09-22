@@ -74,7 +74,7 @@
 	]]>
 	</select>
 	<!--퇴근기록 가져오기  -->
-	<select id="workRecode" parameterType="hashmap" resultType="string">
+	<select id="leaveRecode" parameterType="hashmap" resultType="string">
 	<![CDATA[
 		select leavetime from attend where (userId=#{userId}) and (code=#{code}) and (to_char(leavetime, 'yyyymmdd') = to_char(sysdate, 'yyyymmdd'))
 	]]>
