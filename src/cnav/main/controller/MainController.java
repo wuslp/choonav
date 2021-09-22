@@ -123,6 +123,26 @@ public class MainController {
 		//return data; 한글깨짐
 		return new ResponseEntity<String>(data, respHeaders	, HttpStatus.OK);
 	}
+	//이메일 형식 유효성 검사 ajaxEmailAvail
+	@RequestMapping("ajaxEmailAvail.cnav")
+	public ResponseEntity<String> ajaxEmailAvail(UserDTO dto) throws SQLException{
+		System.out.println("55번 controller email : "+dto.getEmail());
+
+		String data ="";
+		String pattern = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
+		boolean regax = Pattern.matches(pattern, dto.getEmail());
+		System.out.println("이메일체크 결과 : "+regax);
+		if(regax) {//이메일 형식이 맞을때
+			data="환영합니다 :)";
+		}else {//이메일 형식이 아닐때
+			data="이메일 형식을 확인해 주세요";
+		}
+		HttpHeaders respHeaders = new HttpHeaders();
+		respHeaders.add("Content-Type", "text/html;charset=utf-8");
+		return new ResponseEntity<String>(data, respHeaders	, HttpStatus.OK);
+	}
+	
+	
 	//회사정보 등록시 회사코드 중복체크
 	@RequestMapping("ajaxCodeAvail.cnav")
 	public ResponseEntity<String> ajaxCodeAvail(BusinessDTO dto) throws SQLException{//responsebody 어노테이션 필요없다.헤더정보까지 다 보내준다

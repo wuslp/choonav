@@ -53,7 +53,26 @@
 				}
 			});//ajax
 		});//change
-		
+		//email 양식 유효성 검사
+		$("#email").change(function(){	//email입력란에 변화가 있을떄 동작
+			var emailVal =$("#email").val();
+			console.log("email : "+emailVal );
+				$.ajax({
+					url : "/cnav/main/ajaxEmailAvail.cnav",
+					type : "post",
+					data : {email: emailVal},
+					success:function(data){
+						console.log("success!!!");
+						//결과를 emailCheckRes 태그에 적용
+						$('#emailCheckRes').text(data);//텍스트
+						$('#emailCheckRes').css('color', 'red');//강조
+					},
+					error:function(e){
+						console.log("error~!");
+						console.log(e);
+					}
+				});//ajax
+			});//change
 	});//ready //id 중복검사 and 회사코드 가입가능검사
 		
 		function check(){
@@ -65,7 +84,7 @@
 				return false;
 			}
 			var codeVal = $("#code").val();
-			//id입력란 필수 
+			//회사코드 관리자코드 가입불가 
 			if(codeVal=="0000"){
 				alert("해당 회사코드는 가입할수 없습니다");
 				$("#code").focus();
@@ -98,6 +117,20 @@
 				$("#pw").focus();
 				return false;
 			}	
+			//이메일 필수
+			if($("#email").val()==""){
+				alert("email 은 필수입니다")
+				$("#email").focus();
+				return false;
+			}
+			var checkEmail = $("#emailCheckRes").text();
+			//email 양식 검사
+			if(checkEmail=="이메일 형식을 확인해 주세요"){
+				alert("이메일은 xxxx@xxx.xxx 형식이여야 합니다");
+				$("#email").focus();
+				return false;
+			}
+
 		}//check
 	
 	</script>
@@ -169,7 +202,8 @@
 					이메일(필수)
 				</td>
 				<td>
-				<input type="text" name="email" />
+					<input type="text" name="email" id="email" placeholder="cnav@gmail.com"/>
+					<div id="emailCheckRes"></div>
 				</td>
 			</tr>
 			<tr>
