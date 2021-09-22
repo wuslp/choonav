@@ -20,6 +20,8 @@ public interface PollService {
 	public PollDTO getPollArticle(int pollNum) throws SQLException;
 	//투표유무 기록 가져오기
 	public int recordPoll(int pollNum,String userId) throws SQLException;
+	//접속중인 해당 userId의 부서정보 가져오기
+	public String getUserDept(String userId) throws SQLException;
 	
 	//투표시
 	public void plusPoll(String pollNum,String obj_value) throws SQLException;
