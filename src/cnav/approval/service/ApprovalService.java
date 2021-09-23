@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import cnav.approval.dto.ApprovalDTO;
+import cnav.main.dto.UserDTO;
 
 // 2번 비즈니스 로직 처리 
 public interface ApprovalService {
@@ -59,5 +60,5 @@ public interface ApprovalService {
 	
 	// 결재자에 넣을 같은회사 유저아이디들 가져오기
 	public List getUsersId(String userId, String code) throws SQLException;
-	
+
 }

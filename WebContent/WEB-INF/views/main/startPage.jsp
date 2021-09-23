@@ -10,6 +10,11 @@
 	<META NAME="Keywords" CONTENT="">
 	<META NAME="Description" CONTENT=""> -->
 	
+<!-- 로고 글씨체 -->	
+<link rel="preconnect" href="https://fonts.googleapis.com"> 
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+<link href="https://fonts.googleapis.com/css2?family=Charm&family=Playball&display=swap" rel="stylesheet">
+	
 	<title>ChooNav</title>
 	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
 

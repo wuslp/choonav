@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import cnav.approval.dto.ApprovalDTO;
 import cnav.approval.service.ApprovalServiceImpl;
+import cnav.main.dto.UserDTO;
 
 // 모든 요청이 들어오는 곳. 페이지 매핑을 해주자 1번 !!! (해당 메서드)
 
@@ -212,6 +213,7 @@ public class ApprovalController {
 			
 			
 			
+
 			@RequestMapping("index.cnav")
 			public String index()throws Exception {
 				return "approval/index";

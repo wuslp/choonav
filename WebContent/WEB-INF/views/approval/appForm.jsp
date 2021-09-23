@@ -20,8 +20,13 @@
 <script>
 	function check(){
 		if(appTitle==""){
-			alert("id 는 필수 입니다");
+			alert("제목을 입력해주세요.");
 			$("#appTitle").focus();
+			return false;
+		}
+		if(name1==""){
+			alert("제목을 입력해주세요.");
+			$("#name1").focus();
 			return false;
 		}
 	}	

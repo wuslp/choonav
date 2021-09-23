@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import cnav.approval.dao.ApprovalDAOImpl;
 import cnav.approval.dto.ApprovalDTO;
+import cnav.main.dto.UserDTO;
 
 // 비즈니스 로직 처리 
 
@@ -274,4 +275,5 @@ public class ApprovalServiceImpl implements ApprovalService{
 		List list = approvalDAO.getUsersId(userId, code);
 		return list;
 	}
+
 }

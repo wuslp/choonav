@@ -35,7 +35,7 @@ body {
 .main-container .header h1 a{
 	text-decoration :none;
 	color: #fff;
-    font-family: cursive;
+    font-family: charm;
 }
 
 .main-container .hero{
@@ -45,7 +45,7 @@ body {
     transform: translate(-50%,-50%);
     color: white;
     text-align: center;
-    font-family: cursive;	
+    font-family: charm;	
 }
 
 .main-container .hero h2{
@@ -63,7 +63,6 @@ body {
 	color:white;
 	padding:10px 20px;
 	border-radius:20px;
-	margin-top:30px;
 	outline :none;
 	cursor: pointer;
 	transition: all .4s;
