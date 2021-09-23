@@ -58,7 +58,6 @@
 		</div>
 	</div>
 </body>
-
 <script>
 $.datetimepicker.setLocale('kr');
 $('#start').datetimepicker({
@@ -93,6 +92,7 @@ $('#end').datetimepicker({
     	})
     }
 })
+
 </script>
 
 </html>
