@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="layoutSidenav_nav">
 	<nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
 		<div class="sb-sidenav-menu">
-			<div class="nav">
-				<br/>
-
+			<div class="nav"><br/>
+			<c:if test="${cdto.approval==1}">
 				<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
 					<div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div> 결재 
 					<div class="sb-sidenav-collapse-arrow">
@@ -20,6 +19,7 @@
 								<a class="nav-link" href="layout-sidenav-light.html">받은 결재함</a>
 						</nav>
 					</div>
+			</c:if>
 				
 				<a class="nav-link" href="/cnav/attend/attend.cnav">
 					<div class="sb-nav-link-icon">
