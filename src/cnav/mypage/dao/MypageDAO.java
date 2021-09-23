@@ -9,4 +9,6 @@ public interface MypageDAO {
 	public int getSearchMytopicCount(String userId, String code) throws SQLException;
 	public List getMypjList(String userId, String code, int start, int end) throws SQLException;
 	public List getMytopicList(String userId, String code, int start, int end) throws SQLException;
+	public int getTopicCommCount(String userId, String code) throws SQLException;
+	public List getMytopicCommList(String userId, String code, int start, int end) throws SQLException;
 }
