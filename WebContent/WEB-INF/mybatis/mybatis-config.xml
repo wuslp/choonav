@@ -28,6 +28,7 @@
 		<typeAlias type="cnav.topic.dto.TopicDTO" alias="topicDTO"/>
 		<typeAlias type="cnav.main.dto.NoticeDTO" alias="notiDTO"/>
 		<typeAlias type="cnav.mypage.dto.TopicCommDTO" alias="topCommDTO"/>
+		<typeAlias type="cnav.mypage.dto.UserInfoDTO" alias="userInfoDTO"/>
   	</typeAliases>
   
   

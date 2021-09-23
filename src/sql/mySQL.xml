@@ -45,4 +45,25 @@
 		where r >= #{start} and r <= #{end}
 		]]>
 	</select>
+	
+	<select id="selectUserInfo" parameterType="hashmap" resultType="userInfoDTO">
+		select b.bizName, u.name, u.email, u.tel, u.dept, u.position from business b, users u where b.code = u.code and u.userId=#{userId} and u.code=#{code}
+	</select>
+	
+	<update id="UpdateUser" parameterType="hashmap">
+		update users set email=#{email}, tel=#{tel} where userId=#{userId}
+	</update>
+	
+	<select id="idPwCheck" parameterType="hashmap" resultType="int">
+		select count(*) from users where userId=#{userId} and pw=#{pw}
+	</select>
+	
+	<update id="updatePw" parameterType="hashmap">
+		update users set pw=#{pw} where userId=#{userId}
+	</update>
+	
+	<delete id="deleteUser" parameterType="String">
+		delete from users where userId=#{value}
+	</delete>
+	
 </mapper> 
