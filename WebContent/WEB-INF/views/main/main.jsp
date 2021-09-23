@@ -21,7 +21,7 @@
 					<a href="#">공지사항</a><br/><br/>
 					
 				<c:if test="${cdto.approval==1}">
-					<a href="#">결재</a><br/><br/>
+					<a href="/cnav/approval/sendAppList.cnav">결재</a><br/><br/>
 				</c:if>
 				<c:if test="${cdto.mail==1}">
 					<a href="#">메일</a><br/><br/>

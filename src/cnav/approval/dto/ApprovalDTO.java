@@ -20,6 +20,7 @@ public class ApprovalDTO {
 	private String state2;
 	private String state3;
 	private String reject;
+	private String code;
 	
 	// getter/setter
 	public Integer getAppNum() {
@@ -124,4 +125,11 @@ public class ApprovalDTO {
 	public void setReject(String reject) {
 		this.reject = reject;
 	}
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+	
 }
