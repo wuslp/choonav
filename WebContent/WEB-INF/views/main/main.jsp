@@ -17,6 +17,7 @@
 			<h1> </h1><br/><br/><br/>
 				<h2>선택한 카테고리만 보이게</h2>
 					<a href="#">공지사항</a><br/><br/>
+					
 				<c:if test="${cdto.approval==1}">
 					<a href="#">결재</a><br/><br/>
 				</c:if>
@@ -41,9 +42,7 @@
 				<c:if test="${cdto.poll==1}">
 					<a href="/cnav/poll/pollList.cnav">투표</a><br/><br/>
 				</c:if>
-			</div><br/><br/>
-			<h3>로그아웃</h3>
-			<div><a href="/cnav/main/logout.cnav">logout</a></div>
+			</div>
 		</div>
 	</div>
 </body>

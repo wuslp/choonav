@@ -167,11 +167,22 @@ public class ApprovalController {
 	
 	// 승인  
 	@RequestMapping("takeOk.cnav")
-	public String takeOk1(Integer appNum, int sign, @ModelAttribute("pageNum") String pageNum, Model model) throws SQLException {
+	public String takeOk1(Integer appNum, int sign, @ModelAttribute("pageNum") String pageNum, Model model, HttpSession session) throws SQLException {
 		//ApprovalDTO dto = approvalService.takeAppCont(appNum);
 		approvalService.takeOk(appNum, sign, 2);	
 		model.addAttribute("appNum", appNum); 
 		//model.addAttribute("approval", dto);
+		
+		session.setAttribute("sid", "java"); // 나중에 로그인쪽 코드 완료되면 지우기, 임시로 여기서 아이디세션 저장
+		session.setAttribute("code", "1005"); // 나중에 로그인쪽 코드 완료되면 지우기, 임시로 여기서 코드세션 저장
+		// 로그인된 아이디 세션 꺼내기
+		String userId = (String)session.getAttribute("sid");
+		// 로그인된 아이디 코드 꺼내기
+		String code = (String)session.getAttribute("code");
+		List list = approvalService.getUsersId(userId, code);
+		
+		model.addAttribute("list", list);
+		
 		return "approval/takeOk";
 	}
 	
@@ -185,11 +196,23 @@ public class ApprovalController {
 		
 		
 		@RequestMapping("takeOk2.cnav")
-		public String takeOk2(Integer appNum, int sign, @ModelAttribute("pageNum") String pageNum, Model model) throws SQLException {
+		public String takeOk2(Integer appNum, int sign, @ModelAttribute("pageNum") String pageNum, Model model, HttpSession session) throws SQLException {
 			//ApprovalDTO dto = approvalService.takeAppCont(appNum);
 			approvalService.takeOk2(appNum, sign, 2);	
 			model.addAttribute("appNum", appNum); 
 			//model.addAttribute("approval", dto);
+			
+			session.setAttribute("sid", "java"); // 나중에 로그인쪽 코드 완료되면 지우기, 임시로 여기서 아이디세션 저장
+			session.setAttribute("code", "1005"); // 나중에 로그인쪽 코드 완료되면 지우기, 임시로 여기서 코드세션 저장
+			// 로그인된 아이디 세션 꺼내기
+			String userId = (String)session.getAttribute("sid");
+			// 로그인된 아이디 코드 꺼내기
+			String code = (String)session.getAttribute("code");
+			List list = approvalService.getUsersId(userId, code);
+			
+			model.addAttribute("list", list);
+			
+			
 			return "approval/takeOk2";
 		}
 		
