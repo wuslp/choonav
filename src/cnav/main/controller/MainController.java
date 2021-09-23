@@ -1,6 +1,8 @@
 package cnav.main.controller;
 
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -204,6 +206,17 @@ public class MainController {
 		String scode =(String)session.getAttribute("scode");
 		//회사코드에 해당하는 카테고리 dto 전체 넘겨주기
 		CategoryDTO cdto = mainService.takeCategory(scode);
+		// 회사코드에 해당하는 공지사항 리스트 가져오기
+		Map<String, Object> result = mainService.getNoticeList(scode);
+		// 회사코드에 해당하는 회사정보 가져오기
+		BusinessDTO bizDTO = mainService.getBizInfo(scode);
+		
+		// view에 전달할 데이터 보내기 
+		model.addAttribute("articleList", result.get("articleList"));
+		model.addAttribute("count", result.get("count"));
+		model.addAttribute("number", result.get("number"));
+		model.addAttribute("bizDTO", bizDTO);
+		
 		model.addAttribute("cdto",cdto);
 		return "main/main";
 	}
