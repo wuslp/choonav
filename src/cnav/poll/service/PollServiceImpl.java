@@ -72,7 +72,6 @@ public class PollServiceImpl implements PollService{
 		result.put("count", count);
 		result.put("number", number);
 		result.put("code", code);
-
 		//있으면 리스트 불러오기
 		
 		return result;
