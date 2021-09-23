@@ -129,7 +129,7 @@ public class MypageServiceImpl implements MypageService {
 		
 		// 전체 글의 개수 가져오기 
 		count = myDAO.getTopicCommCount(userId, code); // DB에 저장되어있는 전체 글의 개수를 가져와 담기
-		System.out.println("Mycount : " + count);
+		System.out.println("My comm count : " + count);
 		// 글이 하나라도 있으면 글들을 다시 가져오기 
 		if(count > 0){
 			articleList = myDAO.getMytopicCommList(userId, code, startRow, endRow);

@@ -31,7 +31,7 @@ public class ReservationController {
 	@RequestMapping("allRez.cnav")
 	public String allRez(Model model, HttpSession session) throws SQLException{
 		session.setAttribute("code", "1111");
-		String code = (String)session.getAttribute("code");
+		String code = (String)session.getAttribute("scode");
 		List list = rezService.getRezList(code);
 		
 		model.addAttribute("list", list);
@@ -60,9 +60,9 @@ public class ReservationController {
 		rezDTO.setsTime(rezDTO.getsDate().trim().split(" ")[1]);
 		rezDTO.seteTime(rezDTO.geteDate().trim().split(" ")[1]);
 		session.setAttribute("sid", "java");
-		session.setAttribute("code", "1111");
+		session.setAttribute("scode", "1111");
 		rezDTO.setUserId((String)session.getAttribute("sid"));
-		rezDTO.setCode((String)session.getAttribute("code"));
+		rezDTO.setCode((String)session.getAttribute("scode"));
 		int res = rezService.insertRez(rezDTO);
 		System.out.println("res:"+res);
 		model.addAttribute("res", res);
@@ -73,8 +73,8 @@ public class ReservationController {
 	// 예약 Content 페이지
 		@RequestMapping("rezContent.cnav")
 		public String rezContent(int rezNum, HttpSession session, Model model) throws SQLException {
-			session.setAttribute("code", "1111");
-			String code = (String)session.getAttribute("code");
+			session.setAttribute("scode", "1111");
+			String code = (String)session.getAttribute("scode");
 			ReservationDTO dto = new ReservationDTO();
 			dto.setCode(code);
 			dto.setRezNum(rezNum);
@@ -105,8 +105,8 @@ public class ReservationController {
 		public String myRez(HttpSession session, Model model, String pageNum) throws SQLException {
 			session.setAttribute("sid", "java");
 			String userId = (String)session.getAttribute("sid");
-			session.setAttribute("code", "1111");
-			String code = (String)session.getAttribute("code");
+			session.setAttribute("scode", "1111");
+			String code = (String)session.getAttribute("scode");
 			ReservationDTO dto = new ReservationDTO();
 			dto.setCode(code);
 			dto.setUserId(userId);
