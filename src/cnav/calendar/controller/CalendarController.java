@@ -23,8 +23,8 @@ public class CalendarController {
 	// 전체일정 보기
 	@RequestMapping("calendar.cnav")
 	public String calendar(Model model, HttpSession session) throws SQLException {
-		session.setAttribute("code", "1111");
-		String code = (String)session.getAttribute("code");
+		session.setAttribute("scode", "1111");
+		String code = (String)session.getAttribute("scode");
 		List list = calService.getCalList(code);
 		model.addAttribute("list", list);
 		
@@ -36,8 +36,8 @@ public class CalendarController {
 	public String myCalendar(Model model, HttpSession session) throws SQLException {
 		session.setAttribute("sid", "java");
 		String userId = (String)session.getAttribute("sid");
-		session.setAttribute("code", "1111");
-		String code = (String)session.getAttribute("code");
+		session.setAttribute("scode", "1111");
+		String code = (String)session.getAttribute("scode");
 		CalendarDTO dto = new CalendarDTO();
 		dto.setCode(code);
 		dto.setUserId(userId);
@@ -65,9 +65,9 @@ public class CalendarController {
 		System.out.println(dto.getCalMemo());
 		System.out.println(dto.getCalType());
 		
-		session.setAttribute("code", "1111");
+		session.setAttribute("scode", "1111");
 		session.setAttribute("sid", "java");
-		String code = (String)session.getAttribute("code");
+		String code = (String)session.getAttribute("scode");
 		String userId = (String)session.getAttribute("sid");
 		
 		dto.setCode(code);
@@ -84,8 +84,8 @@ public class CalendarController {
 	@RequestMapping("calContent.cnav")
 	public String calContent(int calNum, Model model, HttpSession session) throws SQLException {
 		
-		session.setAttribute("code", "1111");
-		String code = (String)session.getAttribute("code");
+		session.setAttribute("scode", "1111");
+		String code = (String)session.getAttribute("scode");
 		CalendarDTO dto = new CalendarDTO();
 		dto.setCode(code);
 		dto.setCalNum(calNum);
