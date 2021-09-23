@@ -104,8 +104,10 @@
 						<input type="button" value="삭제" onclick="window.location='/cnav/poll/pollDelete.cnav?pollNum=${article.pollNum}'" id="">
 					</c:if>
 					<!--회사 관리자일경우 삭제보이게  -->
-					<c:if test="${sessionScope.sauth == '1'}">
-						<input type="button" value="삭제" onclick="window.location='/cnav/poll/pollDelete.cnav?pollNum=${article.pollNum}'" id="">
+					<c:if test="${!article.userId == sessionScope.sid}">
+						<c:if test="${sessionScope.sauth == '1'}">
+							<input type="button" value="삭제" onclick="window.location='/cnav/poll/pollDelete.cnav?pollNum=${article.pollNum}'" id="">
+						</c:if>
 					</c:if>
 					<!-- 투표대상이 전체이거나 해당할때 -->
 					<c:if test="${userIdDept==article.target || article.target=='전체'}">
