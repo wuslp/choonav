@@ -31,7 +31,7 @@ public class ApprovalServiceImpl implements ApprovalService{
 	// 보낸 결재 확인 sendAppList 
 	
 	@Override
-	public Map<String, Object> getSendAppList(String pageNum) throws SQLException {
+	public Map<String, Object> getSendAppList(String userId, String code, String pageNum) throws SQLException {
 		
 		// ** 게시글 페이지 관련 정보 세팅 ** 
 		// 한페이지에 보여줄 게시글의 수 
@@ -52,11 +52,11 @@ public class ApprovalServiceImpl implements ApprovalService{
 
 		
 		// 전체 글의 개수 가져오기 
-		count = approvalDAO.getAppCount();   // DB에 저장되어있는 전체 글의 개수를 가져와 담기
+		count = approvalDAO.getAppCount(userId, code);   // DB에 저장되어있는 전체 글의 개수를 가져와 담기
 		System.out.println("count : " + count);
 		// 글이 하나라도 있으면 글들을 다시 가져오기 
 		if(count > 0){
-			sendAppList = approvalDAO.getApprovals(startRow, endRow);  
+			sendAppList = approvalDAO.getApprovals(userId, code, startRow, endRow);  
 		}
 		number = count - (currentPage-1) * pageSize; 	// 게시판 목록에 뿌려줄 가상의 글 번호  
 		
@@ -80,7 +80,7 @@ public class ApprovalServiceImpl implements ApprovalService{
 	
 	// 검색한 글 목록 가져오기 (list 검색) 
 	@Override
-	public Map<String, Object> sendAppSearch(String pageNum, String sel, String search) throws SQLException {
+	public Map<String, Object> sendAppSearch(String pageNum, String sel, String search, String userId, String code) throws SQLException {
 		// ** 게시글 페이지 관련 정보 세팅 ** 
 		// 한페이지에 보여줄 게시글의 수 
 		int pageSize = 5; 
@@ -142,7 +142,7 @@ public class ApprovalServiceImpl implements ApprovalService{
 	
 	// 받은 결재 리스트 
 	@Override
-	public Map<String, Object> getTakeAppList(String pageNum) throws SQLException {
+	public Map<String, Object> getTakeAppList(String userId, String code, String pageNum) throws SQLException {
 		
 		// ** 게시글 페이지 관련 정보 세팅 ** 
 		// 한페이지에 보여줄 게시글의 수 
@@ -163,11 +163,11 @@ public class ApprovalServiceImpl implements ApprovalService{
 
 		
 		// 전체 글의 개수 가져오기 
-		count = approvalDAO.takeAppCount();   // DB에 저장되어있는 전체 글의 개수를 가져와 담기
+		count = approvalDAO.takeAppCount(userId, code);   // DB에 저장되어있는 전체 글의 개수를 가져와 담기
 		System.out.println("count : " + count);
 		// 글이 하나라도 있으면 글들을 다시 가져오기 
 		if(count > 0){
-			takeAppList = approvalDAO.takeApprovals(startRow, endRow);  
+			takeAppList = approvalDAO.takeApprovals(userId, code, startRow, endRow);  
 		}
 		number = count - (currentPage-1) * pageSize; 	// 게시판 목록에 뿌려줄 가상의 글 번호  
 		
@@ -187,7 +187,7 @@ public class ApprovalServiceImpl implements ApprovalService{
 	
 	// 받은 결재 검색 목록 
 	@Override
-	public Map<String, Object> takeAppSearch(String pageNum, String sel, String search) throws SQLException {
+	public Map<String, Object> takeAppSearch(String pageNum, String sel, String search, String userId, String code) throws SQLException {
 		// ** 게시글 페이지 관련 정보 세팅 ** 
 		// 한페이지에 보여줄 게시글의 수 
 		int pageSize = 5; 

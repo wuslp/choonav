@@ -30,7 +30,8 @@ public class ApprovalController {
 	// appForm 결재 문서 작성 폼 
 	@RequestMapping("appForm.cnav")
 	public String appForm(HttpServletRequest request, Model model, HttpSession session) throws SQLException{
-		session.setAttribute("sid", "java"); // 나중에 로그인쪽 코드 완료되면 지우기, 임시로 여기서 아이디세션 저장
+		
+		session.setAttribute("sid", "apple"); // 나중에 로그인쪽 코드 완료되면 지우기, 임시로 여기서 아이디세션 저장
 		session.setAttribute("code", "1005"); // 나중에 로그인쪽 코드 완료되면 지우기, 임시로 여기서 코드세션 저장
 		// 로그인된 아이디 세션 꺼내기
 		String userId = (String)session.getAttribute("sid");
@@ -45,8 +46,13 @@ public class ApprovalController {
 	
 	// appPro 결재 문서 처리 
 	@RequestMapping("appPro.cnav")
-	public String appPro(ApprovalDTO dto) throws SQLException {
+	public String appPro(HttpSession session, ApprovalDTO dto) throws SQLException {
 		// 비즈니스 로직 처리 : 데이터 db 저장
+		String id = (String)session.getAttribute("sid");
+		String code = (String)session.getAttribute("code");
+		dto.setUserId(id);
+		dto.setCode(code);
+		
 		approvalService.addApp(dto);
 		return "approval/appPro";
 	}
@@ -54,13 +60,18 @@ public class ApprovalController {
 	
 	// 보낸 결재 리스트
 	@RequestMapping("sendAppList.cnav")
-	public String sendAppList(String pageNum, String sel, String search, Model model) throws SQLException {
+	public String sendAppList(HttpSession session, String pageNum, String sel, String search, Model model) throws SQLException {
+			//	session.setAttribute("sid", "apple");
+			//	session.setAttribute("code", "1005");
+				String userId = (String)session.getAttribute("sid");
+				String code = (String)session.getAttribute("code");
+				
 				Map<String, Object> result = null;
 				// 전체 게시글 sel search == null (검색 안한 전체 글 보여주기) 
 				if(sel == null || search == null) {
-					result = approvalService.getSendAppList(pageNum);
+					result = approvalService.getSendAppList(pageNum, userId, code);
 				}else { // 검색 게시글 sel search != null
-					result = approvalService.sendAppSearch(pageNum, sel, search);
+					result = approvalService.sendAppSearch(pageNum, sel, search, userId, code);
 				}	
 				// view에 전달할 데이터 보내기 
 				model.addAttribute("pageSize", result.get("pageSize"));
@@ -73,6 +84,8 @@ public class ApprovalController {
 				model.addAttribute("number", result.get("number"));
 				model.addAttribute("sel", sel);
 				model.addAttribute("search", search);
+				
+				System.out.println("유저 아이디 코드 :" + userId + code);
 				
 		return "approval/sendAppList";	
 	}
@@ -115,13 +128,16 @@ public class ApprovalController {
 	
 	// takeAppList 받은 결재 리스트
 	@RequestMapping("takeAppList.cnav")
-	public String takeAppList(String pageNum, String sel, String search, Model model) throws SQLException {
+	public String takeAppList(HttpSession session, String pageNum, String sel, String search, Model model) throws SQLException {
+		String userId = (String)session.getAttribute("sid");
+		String code = (String)session.getAttribute("code");
+		
 		Map<String, Object> result = null;
 		// 전체 게시글 sel search == null (검색 안한 전체 글 보여주기) 
 		if(sel == null || search == null) {
-			result = approvalService.getTakeAppList(pageNum);
+			result = approvalService.getTakeAppList(pageNum, userId, code);
 		}else { // 검색 게시글 sel search != null
-			result = approvalService.takeAppSearch(pageNum, sel, search);
+			result = approvalService.takeAppSearch(pageNum, sel, search, userId, code);
 		}	
 		// view에 전달할 데이터 보내기 
 		model.addAttribute("pageSize", result.get("pageSize"));
@@ -167,11 +183,22 @@ public class ApprovalController {
 	
 	// 승인  
 	@RequestMapping("takeOk.cnav")
-	public String takeOk1(Integer appNum, int sign, @ModelAttribute("pageNum") String pageNum, Model model) throws SQLException {
+	public String takeOk1(Integer appNum, int sign, @ModelAttribute("pageNum") String pageNum, Model model, HttpSession session) throws SQLException {
 		//ApprovalDTO dto = approvalService.takeAppCont(appNum);
 		approvalService.takeOk(appNum, sign, 2);	
 		model.addAttribute("appNum", appNum); 
 		//model.addAttribute("approval", dto);
+		
+		session.setAttribute("sid", "java"); // 나중에 로그인쪽 코드 완료되면 지우기, 임시로 여기서 아이디세션 저장
+		session.setAttribute("code", "1005"); // 나중에 로그인쪽 코드 완료되면 지우기, 임시로 여기서 코드세션 저장
+		// 로그인된 아이디 세션 꺼내기
+		String userId = (String)session.getAttribute("sid");
+		// 로그인된 아이디 코드 꺼내기
+		String code = (String)session.getAttribute("code");
+		List list = approvalService.getUsersId(userId, code);
+		
+		model.addAttribute("list", list);
+		
 		return "approval/takeOk";
 	}
 	
@@ -185,11 +212,23 @@ public class ApprovalController {
 		
 		
 		@RequestMapping("takeOk2.cnav")
-		public String takeOk2(Integer appNum, int sign, @ModelAttribute("pageNum") String pageNum, Model model) throws SQLException {
+		public String takeOk2(Integer appNum, int sign, @ModelAttribute("pageNum") String pageNum, Model model, HttpSession session) throws SQLException {
 			//ApprovalDTO dto = approvalService.takeAppCont(appNum);
 			approvalService.takeOk2(appNum, sign, 2);	
 			model.addAttribute("appNum", appNum); 
 			//model.addAttribute("approval", dto);
+			
+			session.setAttribute("sid", "java"); // 나중에 로그인쪽 코드 완료되면 지우기, 임시로 여기서 아이디세션 저장
+			session.setAttribute("code", "1005"); // 나중에 로그인쪽 코드 완료되면 지우기, 임시로 여기서 코드세션 저장
+			// 로그인된 아이디 세션 꺼내기
+			String userId = (String)session.getAttribute("sid");
+			// 로그인된 아이디 코드 꺼내기
+			String code = (String)session.getAttribute("code");
+			List list = approvalService.getUsersId(userId, code);
+			
+			model.addAttribute("list", list);
+			
+			
 			return "approval/takeOk2";
 		}
 		

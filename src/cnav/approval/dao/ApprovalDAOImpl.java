@@ -28,19 +28,23 @@ public class ApprovalDAOImpl implements ApprovalDAO {
 	
 	// sendAppList 전체 글 개수 가져오기
 	@Override 
-	public int getAppCount() throws SQLException {
-		int result = sqlSession.selectOne("approval.countAll");
+	public int getAppCount(String userId, String code) throws SQLException {
+		HashMap map = new HashMap();
+		map.put("userId", userId);
+		map.put("code", code);
 		
-		return result;
+		return sqlSession.selectOne("approval.countAll", map);
 	}
 	
 	// 한페이지 게시글 목록 가져오기 
 	@Override
-	public List<ApprovalDTO> getApprovals(int start, int end) throws SQLException{
+	public List<ApprovalDTO> getApprovals(String userId, String code, int start, int end) throws SQLException{
 		
 		HashMap map = new HashMap();
 		map.put("start", start);
 		map.put("end", end);
+		map.put("code", code);
+		map.put("userId", userId);
 		
 		List<ApprovalDTO> approvalList = sqlSession.selectList("approval.getApprovals", map);
 		
@@ -97,7 +101,11 @@ public class ApprovalDAOImpl implements ApprovalDAO {
 	
 	// takeAppList 전체 글 개수 가져오기
 	@Override 
-	public int takeAppCount() throws SQLException {
+	public int takeAppCount(String userId, String code) throws SQLException {
+		HashMap map = new HashMap();
+		map.put("userId", userId);
+		map.put("code", code);
+		
 		int result = sqlSession.selectOne("approval.takeCountAll");
 		
 		return result;
@@ -105,14 +113,14 @@ public class ApprovalDAOImpl implements ApprovalDAO {
 	
 	// 한페이지 게시글 목록 가져오기
 	@Override
-	public List<ApprovalDTO> takeApprovals(int start, int end) throws SQLException{
+	public List<ApprovalDTO> takeApprovals(String userId, String code, int start, int end) throws SQLException{
 		
 		HashMap map = new HashMap();
 		map.put("start", start);
 		map.put("end", end);
 		//RequestContextHolder 로session 꺼내서 확인 
-		String id = "java02"; 
-		map.put("id", id);
+		map.put("code", code);
+		map.put("userId", userId);
 		
 		
 		List<ApprovalDTO> takeApprovalList = sqlSession.selectList("approval.takeApprovals", map);
