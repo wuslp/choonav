@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cnav.mypage.dto.TopicCommDTO;
 import cnav.mypage.service.MypageService;
 import cnav.project.dto.ProjectDTO;
 import cnav.reservation.dto.ReservationDTO;
@@ -62,6 +63,29 @@ public class MypageDAOImpl implements MypageDAO{
 		
 		List<TopicDTO> list = sqlSession.selectList("my.selectMytopiclist", map);
 		System.out.println("dao"+list);
+		return list;
+	}
+	@Override
+	public int getTopicCommCount(String userId, String code) throws SQLException {
+		HashMap map = new HashMap();
+		map.put("userId", userId);
+		map.put("code", code);
+		
+		return sqlSession.selectOne("my.countMytopicComm", map);
+	}
+	@Override
+	public List getMytopicCommList(String userId, String code, int start, int end) throws SQLException {
+		System.out.println("topic service");
+		HashMap map = new HashMap();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("code", code);
+		map.put("userId", userId);
+		
+		
+		List<TopicCommDTO> list = sqlSession.selectList("my.selectMytopicCommlist", map);
+		System.out.println("dao"+list);
+		
 		return list;
 	}
 

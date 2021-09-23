@@ -118,6 +118,10 @@ body {
 	color:#000;
 }
 
+.sendAppList{
+	
+}
+
 /* 결재 상세 (sendAppContent) */
 .appContentTitle{text-align: center; font-size: xx-large; font-weight: bold;}
 .appContentLeft {float: left; }

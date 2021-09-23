@@ -22,9 +22,9 @@ public class MypageController {
 	@RequestMapping("myPjList.cnav")
 	public String myPjList(HttpSession session, Model model, String pageNum) throws SQLException {
 		session.setAttribute("sid", "java");
-		session.setAttribute("code", "1111");
+		session.setAttribute("scode", "1111");
 		String userId = (String)session.getAttribute("sid");
-		String code = (String)session.getAttribute("code");
+		String code = (String)session.getAttribute("scode");
 		
 		Map<String, Object> result = null;
 		result = myService.getMyPjList(userId, code, pageNum);
@@ -51,11 +51,10 @@ public class MypageController {
 	@RequestMapping("myTopicList.cnav")
 	public String myTopicList(HttpSession session, Model model, String pageNum) throws SQLException {
 		session.setAttribute("sid", "java");
-		session.setAttribute("aid", "java");
-		session.setAttribute("code", "1111");
+		session.setAttribute("scode", "1111");
 		
 		String userId = (String)session.getAttribute("sid");
-		String code = (String)session.getAttribute("code");
+		String code = (String)session.getAttribute("scode");
 		
 		Map<String, Object> result = null;
 		result = myService.getMyTopicList(userId, code, pageNum);
@@ -79,5 +78,35 @@ public class MypageController {
 		}
 	}
 	
+	// 내가 쓴 댓글 가져오기
+	@RequestMapping("myCommentsList.cnav")
+	public String myCommentsList(HttpSession session, Model model, String pageNum) throws SQLException {
+		session.setAttribute("sid", "java");
+		session.setAttribute("scode", "1111");
+		
+		String userId = (String)session.getAttribute("sid");
+		String code = (String)session.getAttribute("scode");
+		
+		Map<String, Object> result = null;
+		result = myService.getMyTopCommList(userId, code, pageNum);
+		System.out.println(result.get("articleList"));
+		// view에 전달할 데이터 보내기 
+		model.addAttribute("pageSize", result.get("pageSize"));
+		model.addAttribute("pageNum", result.get("pageNum"));
+		model.addAttribute("currentPage", result.get("currentPage"));
+		model.addAttribute("startRow", result.get("startRow"));
+		model.addAttribute("endRow", result.get("endRow"));
+		model.addAttribute("articleList", result.get("articleList"));
+		model.addAttribute("count", result.get("count"));
+		model.addAttribute("number", result.get("number"));
+		
+		session.setAttribute("sauto", "1");
+		String auto = (String)session.getAttribute("sauto");
+		if(auto.equals("1")){
+			return "bizMypage/bizCommentsList";
+		}else {
+			return "userMypage/myCommentsList";
+		}
+	}
 	
 }

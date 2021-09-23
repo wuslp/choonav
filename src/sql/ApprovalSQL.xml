@@ -10,19 +10,20 @@
 		<selectKey keyProperty="appNum" order="BEFORE" resultType="int">
 			select approval_seq.nextval from dual 
 		</selectKey>
-		insert into approval values(approval_seq.nextval,#{appType},'홍길동',#{dept},#{name1},#{name2},#{name3},#{appStart},#{appFinish},#{appTitle},#{appContent},#{appRequest},sysdate,0,0,0,#{reject})
+		insert into approval(appNum, appType, userId, dept, name1, name2, name3, appStart, appFinish, appTitle, appContent, appRequest, appDate, state1, state2, state3, code) 
+		values(approval_seq.nextval,#{appType},#{userId},#{dept},#{name1},#{name2},#{name3},#{appStart},#{appFinish},#{appTitle},#{appContent},#{appRequest},sysdate,0,0,0, #{code})
 	</insert>
 	
 	
 	<!-- 보낸 결재함 전체 글 -->
-	<select id="countAll" resultType="int">
-		select count(*) from approval
+	<select id="countAll" parameterType="approvalDTO" resultType="int">
+		select count(*) from approval where code = #{code} and userId=#{userId}
 	</select>
 	<!-- 페이징 -->
 	<select id="getApprovals" parameterType="hashmap" resultType="approvalDTO">
 		<![CDATA[
 		select * from (select rownum rnum, approval.* from 
-		(select * from approval order by appNum desc) approval) 
+		(select * from approval where userId=#{userId} and code=#{code} user order by appNum desc) approval) 
 				where rnum >= #{start} and rnum <=#{end}
 		]]>		
 	</select>

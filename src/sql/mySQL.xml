@@ -31,4 +31,18 @@
 		where r >= #{start} and r <= #{end}
 		]]>
 	</select>
+	
+	<select id="countMytopicComm" parameterType="hashmap" resultType="int">
+		select count(*) from topcomments where code = #{code} and userId=#{userId}
+	</select>
+	
+	<select id="selectMytopicCommlist" parameterType="hashmap" resultType="topCommDTO">
+		<![CDATA[
+		select B.* from 
+			(select A.*, rownum r from        
+				(SELECT t.topTitle, c.* FROM topic t, topComments c WHERE  c.code = #{code} and c.userId=#{userId} and t.topNum = c.topnum) A 
+			order by a.topcomnum desc) B
+		where r >= #{start} and r <= #{end}
+		]]>
+	</select>
 </mapper> 
