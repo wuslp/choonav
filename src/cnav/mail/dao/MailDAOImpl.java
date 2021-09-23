@@ -36,7 +36,8 @@ public class MailDAOImpl implements MailDAO {
 		
 		return recMailList;
 	}
-
+	
+	// 검색한 받은 편지함 count
 	@Override
 	public int recMailSearchCount(String sel, String search, String id) throws SQLException {
 		
@@ -49,7 +50,8 @@ public class MailDAOImpl implements MailDAO {
 		
 		return result;
 	}
-
+	
+	// 검색한 받은 편지함 list
 	@Override
 	public List<MailDTO> recMailSearch(int start, int end, String sel, String search, String id) throws SQLException {
 		
@@ -87,6 +89,7 @@ public class MailDAOImpl implements MailDAO {
 		return sendMailList;
 	}
 	
+	// 검색한 보낸 편지함 count
 	@Override
 	public int sendMailSearchCount(String sel, String search, String id) throws SQLException {
 		
@@ -99,7 +102,7 @@ public class MailDAOImpl implements MailDAO {
 		
 		return result;
 	}
-	
+	// 검색한 보낸 편지함 list
 	@Override
 	public List<MailDTO> sendMailSearch(int start, int end, String sel, String search, String id) throws SQLException {
 		

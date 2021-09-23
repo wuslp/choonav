@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>사원 관리</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<br />
