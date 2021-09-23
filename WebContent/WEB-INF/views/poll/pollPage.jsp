@@ -102,10 +102,14 @@
 					<!-- 투표글 작성자일경우만 삭제버튼 보이게 처리 -->
 					<c:if test="${article.userId == sessionScope.sid}">
 						<input type="button" value="삭제" onclick="window.location='/cnav/poll/pollDelete.cnav?pollNum=${article.pollNum}'" id="">
-						<!-- <input type="button" value="삭제" onclick="DelPoll()"> -->
+					</c:if>
+					<!--회사 관리자일경우 삭제보이게  -->
+					<c:if test="${sessionScope.sauth == '1'}">
+						<input type="button" value="삭제" onclick="window.location='/cnav/poll/pollDelete.cnav?pollNum=${article.pollNum}'" id="">
 					</c:if>
 					<!-- 투표대상이 전체이거나 해당할때 -->
 					<c:if test="${userIdDept==article.target || article.target=='전체'}">
+						<!-- 해당 id가 투표기록이 있는지 확인 result -->
 						<c:set value="${result }" var="result"/>
 						<c:if test="${article.pollStatus eq '진행중' }">
 							 <input type="button" value="투표" id="" onclick="check()"> 

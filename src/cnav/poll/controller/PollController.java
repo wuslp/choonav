@@ -29,8 +29,6 @@ public class PollController {
 		//세션 id값->service처리 
 		System.out.println("85번 sort :"+sort);
 		Map<String, Object> result = null;
-		//String id = (String)session.getAttribute("sid");
-		//String id ="genie0921";	
 		//serviceImpl에서 호출할 메서드
 		System.out.println("87번 : "+search);
 		
