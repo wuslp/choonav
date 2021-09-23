@@ -46,10 +46,10 @@
 					<a href="#">프로젝트</a><br/><br/>
 				</c:if>
 				<c:if test="${cdto.calendar==1}">
-					<a href="#">일정</a><br/><br/>
+					<a href="/cnav/cal/calendar.cnav">일정</a><br/><br/>
 				</c:if>
 				<c:if test="${cdto.reservation==1}">
-					<a href="#">예약</a><br/><br/>
+					<a href="/cnav/rez/allRez.cnav">예약</a><br/><br/>
 				</c:if>
 				<c:if test="${cdto.topic==1}">
 					<a href="#">자유게시판</a><br/><br/>
