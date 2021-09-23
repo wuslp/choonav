@@ -74,7 +74,6 @@
  				window.location.replace("/cnav/attend/attend.cnav");
 			 }else{
  				 alert(attcategory+"리스트 필터링");
- 				 
  				//ajax요청 
  				$.ajax({
  					url : "/cnav/attend/attend.cnav",
@@ -112,7 +111,7 @@
 			$("#search2").focus();
 			return false;
 		}
-		if(search1 >= search2){
+		if(search1 > search2){
 			alert("마지막일은 시작일보다 작아야 합니다");
 			$("#search1").focus();
 			return false;
