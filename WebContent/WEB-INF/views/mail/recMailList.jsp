@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>받은 메일함 - 메인</title>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript">
 		$(function(){
 			var chkObj = document.getElementsByName("RowCheck");
@@ -42,38 +42,41 @@
 			}
 			else{
 				var chk = confirm("정말 삭제하시겠습니까?");
-				$.ajax({
-					url : url,
-					type : 'POST',
-					traditional : true,
-					data : {
-						valueArr : valueArr			// 보내고자 하는 data 변수
-					},
-					success: function(jdata){
-						alert(jdata);
-						if(jdata = 1){
-							alert("삭제 성공");
-							location.replace("/cnav/mail/recMailList.cnav")
+				if(chk == true){
+					$.ajax({
+						url : url,
+						type : 'POST',
+						traditional : true,
+						data : {
+							valueArr : valueArr			// 보내고자 하는 data 변수
+						},
+						success: function(jdata){
+							console.log(jdata);
+							if(jdata == 1){
+								alert("삭제 성공");
+								location.replace("/cnav/mail/recMailList.cnav");
+							}
 						}
-						else{
-							alert("삭제 실패");
-						}
-					}
-				})
+					})
+				}
+				if(chk == false){
+					alert("삭제 실패");
+				}
 			}
 		}
 	</script>
 </head>
 <body>
 	<br />
-	<!-- <div align="right"> 
+	<div id=""> 
 		<c:if test="${sessionScope.sid == null}">
-			<button onclick="window.location='/spring/member/loginForm.do'">로그인</button>
+		<script>
+			alert("로그인후 이용할 수 있습니다");
+			var link = "http://localhost:8080/cnav/main/startPage.cnav";
+	   		window.location.href = link;
+	   		</script>
 		</c:if>
-		<c:if test="${sessionScope.sid != null}">
-			<button onclick="window.location='/spring/member/logout.do'">로그아웃</button>
-		</c:if>
-	</div> -->
+	</div>
 	
 	<h1 align="center"> 받은 메일함 </h1>
 	
@@ -137,7 +140,7 @@
 			</div>
 		</table>
 	</div>
-	<!-- </c:if>  -->
+	</c:if>
 	
 		<br /> <br /> 
 	<%-- 페이지 번호 --%>

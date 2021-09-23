@@ -37,7 +37,7 @@
 					<a href="/cnav/approval/sendAppList.cnav">결재</a><br/><br/>
 				</c:if>
 				<c:if test="${cdto.mail==1}">
-					<a href="#">메일</a><br/><br/>
+					<a href="/cnav/mail/recMailList.cnav">메일</a><br/><br/>
 				</c:if>
 				<c:if test="${cdto.attend==1}">
 					<a href="/cnav/attend/attend.cnav">근태</a><br/><br/>

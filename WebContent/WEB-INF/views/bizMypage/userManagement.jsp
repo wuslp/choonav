@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>사원 관리</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<br />
@@ -22,7 +23,7 @@
 	<c:if test="${count == 0}">
 	<div align="center">
 		<div>
-			<td align="center"> 회사 내 등록된 사원이 없습니다. </td>
+			<td align="center"> 회사 내 등록된 사원이  없습니다. </td>
 		</div>
 	</div>
 	</c:if>

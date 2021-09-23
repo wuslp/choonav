@@ -67,8 +67,8 @@
 		<selectKey keyProperty="mailNum" order="BEFORE" resultType="int">
 			select mail_seq.nextVal from dual
 		</selectKey>
-		insert into mail(mailNum, userId, mailRid, mailSub, mailContent, mailFile, mailReg, mailResult)
-		values(#{mailNum}, #{userId}, #{mailRid}, #{mailSub}, #{mailContent}, #{mailFile}, sysdate, '0')
+		insert into mail(mailNum, code, userId, mailRid, mailSub, mailContent, mailFile, mailReg, mailResult)
+		values(#{mailNum}, #{code}, #{userId}, #{mailRid}, #{mailSub}, #{mailContent}, #{mailFile}, sysdate, '0')
 	</insert>
 	
 	<delete id="deleteMail" parameterType="String">
