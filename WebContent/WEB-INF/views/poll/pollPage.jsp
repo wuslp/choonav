@@ -91,21 +91,23 @@
 					대상		 : ${article.target}<br/>
 					내용		 : ${article.pollCon}<br/>
 					항목 <br/>
-					1 :<input type="radio" id="ans1" name="ans1" value="1"/>${article.ans1}<br/>
-					2 :<input type="radio" id="ans2" name="ans1" value="2"/>${article.ans2}<br/>
+					1 :<label><input type="radio" id="ans1" name="ans1" value="1"/> ${article.ans1}</label><br/>
+					2 :<label><input type="radio" id="ans2" name="ans1" value="2"/> ${article.ans2}</label><br/>
 					<c:if test="${article.ans3 != null}">
-					3 :<input type="radio" id="ans3" name="ans1" value="3"> ${article.ans3}<br/>
+					3 :<label><input type="radio" id="ans3" name="ans1" value="3"> ${article.ans3}</label><br/>
 					</c:if>
 					<c:if test="${article.ans4 != null}">
-					4 :<input type="radio" id="ans4" name="ans1" value="4"> ${article.ans4}<br/><br/><br/>
+					4 :<label><input type="radio" id="ans4" name="ans1" value="4"> ${article.ans4}</label><br/><br/><br/>
 					</c:if>
 					<!-- 투표글 작성자일경우만 삭제버튼 보이게 처리 -->
 					<c:if test="${article.userId == sessionScope.sid}">
 						<input type="button" value="삭제" onclick="window.location='/cnav/poll/pollDelete.cnav?pollNum=${article.pollNum}'" id="">
 					</c:if>
 					<!--회사 관리자일경우 삭제보이게  -->
-					<c:if test="${sessionScope.sauth == '1'}">
-						<input type="button" value="삭제" onclick="window.location='/cnav/poll/pollDelete.cnav?pollNum=${article.pollNum}'" id="">
+					<c:if test="${!article.userId == sessionScope.sid &&sessionScope.sauth=='1'}">
+						<c:if test="${sessionScope.sauth == '1'}">
+							<input type="button" value="삭제" onclick="window.location='/cnav/poll/pollDelete.cnav?pollNum=${article.pollNum}'" id="">
+						</c:if>
 					</c:if>
 					<!-- 투표대상이 전체이거나 해당할때 -->
 					<c:if test="${userIdDept==article.target || article.target=='전체'}">

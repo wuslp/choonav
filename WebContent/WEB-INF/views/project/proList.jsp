@@ -5,11 +5,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
+	<meta charset="utf-8" />
 	<title>프로젝트 목록</title>
 </head>
 <body>
-	<br/>
 		<h1 align="center">프로젝트 목록</h1>
 		
 		<%--프로젝트내용/부서 검색 --%>
@@ -139,32 +138,6 @@
 	</div>	
 		
 		
-		
-		
-		
-		
-
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 </body>
 </html>
