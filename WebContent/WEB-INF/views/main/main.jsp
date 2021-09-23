@@ -15,6 +15,19 @@
 <body>
 	<div>
 		<div>
+			<!--로그인된 세션이 없을경우 startPage 로 이동시켜주기  -->
+			<div id=""> 
+				<c:if test="${sessionScope.sid == null}">
+				<script>
+					alert("로그인후 이용할 수 있습니다");
+					var link = "http://localhost:8080/cnav/main/startPage.cnav";
+		    		window.location.href = link;
+		    		</script>
+				</c:if>
+			</div>
+			<div class="">
+					<h1><a href="/cnav/main/main.cnav">Choonav 메인으로</a></h1>
+			</div>
 			<div>
 			<h1> </h1><br/><br/><br/>
 				<h2>선택한 카테고리만 보이게</h2>
