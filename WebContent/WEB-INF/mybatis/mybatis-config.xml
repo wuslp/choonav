@@ -21,7 +21,8 @@
   		<typeAlias type="cnav.main.dto.CategoryDTO" alias="catDTO"/>
   		<typeAlias type="cnav.main.dto.UserDTO" alias="userDTO"/>
 		<typeAlias type="cnav.approval.dto.ApprovalDTO" alias="approvalDTO"/>
-
+		<typeAlias type="cnav.project.dto.ProjectDTO" alias="projectDTO"/>
+		
   	</typeAliases>
   
   
@@ -31,6 +32,7 @@
   	<mapper resource="/sql/pollSQL.xml"/>
   	<mapper resource="/sql/mainSQL.xml"/>
   	<mapper resource="/sql/ApprovalSQL.xml" />
+  	<mapper resource="/sql/projectSQL.xml"/>
 
   </mappers>
   
