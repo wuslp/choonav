@@ -60,6 +60,8 @@
 			</div>
 		</div>
 	</div>
+	<!--로그아웃  -->
+	<a href="/cnav/main/logout.cnav">로그아웃 </a>
 	<!-- 메인 content -->
 	<table>
 		<!-- 회사 공지사항 -->
