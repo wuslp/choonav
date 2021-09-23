@@ -9,11 +9,11 @@
   	</insert>
   	
   	<insert id="addBiz" parameterType="busDTO">
-  		insert into business values(#{code},#{bizName},#{bizCEO},#{bizNumber},#{bizTel},#{bizEmail})
+  		insert into business values(#{code},#{bizName},#{bizCEO},#{bizNumber},#{bizTel},#{bizEmail},#{userId})
   	</insert>
   	
   	<insert id="addCat" parameterType="catDTO">
-  		insert into category values(#{code}, #{approval}, #{mail}, #{attend}, #{project}, #{calendar}, #{reservation}, #{board}, #{poll})
+  		insert into category values(#{code}, #{approval}, #{mail}, #{attend}, #{project}, #{calendar}, #{reservation}, #{topic}, #{poll})
   	</insert>
   	<update id="addUserBiz" parameterType="hashmap">
   		update users set code=#{code} where userId=#{userId}
@@ -50,4 +50,23 @@
   	<select id="getPw" parameterType="userDTO" resultType="userDTO">
   		select pw from users where name=#{name} and userId=#{userId}
   	</select>
+  	
+  	<!-- 공지사항 글개수 가져오기 -->
+  	<select id="countNoti" parameterType="string" resultType="int">
+		select count(*) from notice where code = #{scode}
+	</select>
+	<!-- 공지사항 글목록 가져오기 -->
+	<select id="getNotiList" parameterType="map" resultType="notiDTO">
+		<![CDATA[
+		select B.* from 
+			(select A.*, rownum r from 
+				(select * from notice where code=#{scode} order by notiNum desc) A 
+			order by notiNum desc) B
+		where r >= #{start} and r <= #{end}
+		]]>
+	</select>
+	<!-- 회사정보 가져오기 -->
+	<select id="getBizInfo" parameterType="string" resultType="busDTO">
+		select * from business where code = #{value}
+	</select>
   </mapper>

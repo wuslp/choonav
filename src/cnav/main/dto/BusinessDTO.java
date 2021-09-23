@@ -8,6 +8,14 @@ public class BusinessDTO {
 	private String bizNumber;
 	private String bizTel;
 	private String bizEmail;
+	private String userId;
+	
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 	public String getCode() {
 		return code;
 	}

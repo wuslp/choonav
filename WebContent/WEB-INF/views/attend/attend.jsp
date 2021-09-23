@@ -86,9 +86,6 @@
  						window.location.replace("/cnav/attend/attend.cnav?attcategory="+attcategory+"&pageNum"+pageNum);
  						//$(location).attr('href', 'http://localhost:8080/cnav/attend/attend.cnav?attcategory='attcategory)
  						console.log("success!!!");
- 						//console.log("data : " + data);
- 						//결과를 idCheckRes 태그에 적용 코드
- 						//$("#idCheckRes").val(data);
  					},
  					error:function(e){
  						console.log("error~!");
@@ -96,9 +93,6 @@
  					}
  				});//ajax
  				//location.reload();
- 				//load("/cnav/attend/attend.cnav?attcategory"+attcategory);
- 				//$("#test99").load(window.location.href + "#test99");
- 				//$("#test99").load("/cnav/attend/attend.cnav?attcategory"+attcategory);
  			 }
  		 })
  		 /* $("#search1").change(function(){
@@ -133,29 +127,51 @@
 			leavetime.value ="<%=new java.util.Date()%>";
 		}
 	} --%>
-	
-
 	</script>
-
 
 </head>
 
 <body>
 	
 	<div id="" class="">
+		<!--로그인된 세션이 없을경우 startPage 로 이동시켜주기  -->
+		<div id=""> 
+			<c:if test="${sessionScope.sid == null}">
+			<script>
+				alert("로그인후 이용할 수 있습니다");
+				var link = "http://localhost:8080/cnav/main/startPage.cnav";
+	    		window.location.href = link;
+	    		</script>
+			</c:if>
+		</div>
+		<div class="">
+				<h1><a href="/cnav/main/main.cnav">Choonav 메인으로</a></h1>
+		</div>
+		<!--근태관리 페이지 본문 시작  -->
 		<div id="" class="">
 			<h1>근태관리</h1>
-			<h5><fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" />
-			
-			<input type="button" value="출근" id="button1">
-			<input type="datetime" id="worktime" value="" disabled>
-			<input type="button" value="퇴근" id="button2" >
-			<input type="datetime" id="leavetime" value="" disabled>
-			</h5>
+			<!-- 실시간 날짜 -->
+			<h5><fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" /></h5>
+			<!--출근 퇴근 기록여부에따른 버튼 able  -->
+			<c:if test="${WTrecodeCheck =='1' }">
+				<input type="button" value="출근완료" id="button1">
+				<input type="datetime" id="worktime" value="${workTimeRecode }" disabled>
+			</c:if>
+			<c:if test="${WTrecodeCheck !='1' }">
+				<input type="button" value="출근" id="button1">
+				<input type="datetime" id="worktime" value="" pattern="\d{4}-\d{2}-\d{2}" disabled>
+			</c:if>
+			<c:if test="${LTrecodeCheck =='1' }">
+				<input type="button" value="퇴근완료" id="button2">
+				<input type="datetime" id="leavetime" value="${leaveTimeRecode }" disabled>
+			</c:if>			
+			<c:if test="${LTrecodeCheck !='1' }">			
+				<input type="button" value="퇴근" id="button2" >
+				<input type="datetime" id="leavetime" value="" disabled>
+			</c:if>
 		</div><br/><br/><br/><br/><br/>
 		
 		<div id="" class="">
-			
 				<form action="/cnav/attend/attend.cnav" method="get">
 				<select id="attcategory" name="attcategory">
 					<option value="">-- 선택 --</option>

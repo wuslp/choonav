@@ -112,6 +112,16 @@
 	<update id="insertAddTake3"  parameterType="approvalDTO">
 		update approval set name3 = #{name3} where appNum=#{appNum}
 	</update>
-	
+
+	<!-- 회원 select로 불러오기 -->
+	<select id="" parameterType="userDTO">
+		select userId from users where code=#{code}
+	</select>
+
+	<!-- 결재자에 넣을 유저정보 가져오기 -->
+	<select id="getUsersId" parameterType="hashmap" resultType="userDTO">
+		select * from users where code=#{code} and userId != #{userId}
+	</select>
+
 	
 </mapper>

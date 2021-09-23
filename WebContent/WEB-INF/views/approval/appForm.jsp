@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,8 +20,13 @@
 <script>
 	function check(){
 		if(appTitle==""){
-			alert("id 는 필수 입니다");
+			alert("제목을 입력해주세요.");
 			$("#appTitle").focus();
+			return false;
+		}
+		if(name1==""){
+			alert("제목을 입력해주세요.");
+			$("#name1").focus();
 			return false;
 		}
 	}	
@@ -52,8 +58,8 @@
 		결재자
 		<select name="name1">
 			<option value="">선택</option>
-				<c:forEach var="users" items="${users.getUserId()}">
-					<option value="${users.userId}">${users.userId}</option>
+				<c:forEach var="users" items="${list}">
+					<option value="${users.userId}">${users.name} ${users.position}</option>
 				</c:forEach> 	
 		</select><br/>
 		

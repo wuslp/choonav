@@ -27,9 +27,6 @@
 	 					success:function(data){//data매개변수 = Controller에서 리턴해준 결과가 들어온다(대입)
 	 						console.log("success!!!");
 	 						window.location.replace("/cnav/poll/pollRes.cnav?pollNum="+pollNum);
-	 						//console.log("data : " + data);
-	 						//결과를 idCheckRes 태그에 적용 코드
-	 						//$("#idCheckRes").val(data);
 	 					},
 	 					error:function(e){
 	 						console.log("error~!");
@@ -46,9 +43,6 @@
 		}
 	}
 	
-	
-	
-
 	//투표삭제
 	function DelPoll(){
 		var pollNum=$("#pollN").val();
@@ -72,19 +66,23 @@
 	</script>
 </head>
 <body>
-<!-- 
-		<c:if test="${sessionScope.sid == null}">
+	<div id="">
+		<!--로그인된 세션이 없을경우 startPage 로 이동시켜주기  -->
+		<div id=""> 
+			<c:if test="${sessionScope.sid == null}">
 			<script>
 				alert("로그인후 이용할 수 있습니다");
-				history.go(-1);
-			</script>
-		</c:if>
- -->
-
-	<div id="">
-		<h1> 투표 </h1>
+				var link = "http://localhost:8080/cnav/main/startPage.cnav";
+	    		window.location.href = link;
+	    		</script>
+			</c:if>
+		</div>
+		<div class="">
+				<h1><a href="/cnav/main/main.cnav">Choonav 메인으로</a></h1>
+		</div>
+		<!--투표페이지 본문 시작  -->
 		<div id="">
-			<!--  -->
+			<h1> 투표 </h1>
 				<input type="hidden" value="${article.pollNum}" id="pollN"/>
 				<input type="hidden" value="${result}" id="result"/>
 				<div id="">
@@ -93,28 +91,40 @@
 					대상		 : ${article.target}<br/>
 					내용		 : ${article.pollCon}<br/>
 					항목 <br/>
-					1 :<input type="radio" id="ans1" name="ans1" value="1"/>${article.ans1}<br/>
-					2 :<input type="radio" id="ans2" name="ans1" value="2"/>${article.ans2}<br/>
+					1 :<label><input type="radio" id="ans1" name="ans1" value="1"/> ${article.ans1}</label><br/>
+					2 :<label><input type="radio" id="ans2" name="ans1" value="2"/> ${article.ans2}</label><br/>
 					<c:if test="${article.ans3 != null}">
-					3 :<input type="radio" id="ans3" name="ans1" value="3"> ${article.ans3}<br/>
+					3 :<label><input type="radio" id="ans3" name="ans1" value="3"> ${article.ans3}</label><br/>
 					</c:if>
 					<c:if test="${article.ans4 != null}">
-					4 :<input type="radio" id="ans4" name="ans1" value="4"> ${article.ans4}<br/><br/><br/>
+					4 :<label><input type="radio" id="ans4" name="ans1" value="4"> ${article.ans4}</label><br/><br/><br/>
 					</c:if>
-					<!--<c:if test="${article.userId == sessionScope.sid}">
-						1.페이지 바로 매핑-->
-						<!--
+					<!-- 투표글 작성자일경우만 삭제버튼 보이게 처리 -->
+					<c:if test="${article.userId == sessionScope.sid}">
 						<input type="button" value="삭제" onclick="window.location='/cnav/poll/pollDelete.cnav?pollNum=${article.pollNum}'" id="">
-						2.
-						<input type="button" value="삭제" onclick="DelPoll()">
-					</c:if>-->
-					<c:set value="${result }" var="result"/>
-					<c:if test="${article.pollStatus eq '진행중' }">
-						 <input type="button" value="투표" id="" onclick="check()"> 
-						<!-- <input type="button" value="투표" id="" onclick="test()"> -->
 					</c:if>
+					<!--회사 관리자일경우 삭제보이게  -->
+					<c:if test="${!article.userId == sessionScope.sid &&sessionScope.sauth=='1'}">
+						<c:if test="${sessionScope.sauth == '1'}">
+							<input type="button" value="삭제" onclick="window.location='/cnav/poll/pollDelete.cnav?pollNum=${article.pollNum}'" id="">
+						</c:if>
+					</c:if>
+					<!-- 투표대상이 전체이거나 해당할때 -->
+					<c:if test="${userIdDept==article.target || article.target=='전체'}">
+						<!-- 해당 id가 투표기록이 있는지 확인 result -->
+						<c:set value="${result }" var="result"/>
+						<c:if test="${article.pollStatus eq '진행중' }">
+							 <input type="button" value="투표" id="" onclick="check()"> 
+						</c:if>
+					</c:if>	
+					<!-- 투표대상이 해당하지 않을때 -->
+					<c:if test="${!userIdDept==article.target}">
+						<input type="button" value="투표대상이 아닙니다" disabled> 
+					</c:if>
+					<!-- 마감된 투표일때 -->
 					<c:if test="${article.pollStatus eq '완료' }">
-						<input type="button" value="마감된 투표" id="" disabled>
+							<input type="button" value="마감된 투표" id="" disabled>
+							<input type="button" value="결과보기" onclick="window.location='/cnav/poll/pollResult.cnav?pollNum=${article.pollNum}'">
 					</c:if>
 					<input type="button" value="취소" id="" onClick="window.location='/cnav/poll/pollList.cnav'">
 				</div>

@@ -4,6 +4,7 @@ public class PollUserDTO {
 
 	private String pollNum;
 	private String userId;
+	
 	public String getPollNum() {
 		return pollNum;
 	}

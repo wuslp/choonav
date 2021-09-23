@@ -1,6 +1,12 @@
 package cnav.main.service;
 
+import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +17,7 @@ import cnav.main.dao.MainDAOImpl;
 import cnav.main.dto.BusinessDTO;
 import cnav.main.dto.CategoryDTO;
 import cnav.main.dto.UserDTO;
+import cnav.project.dto.ProjectDTO;
 
 @Service
 public class MainServiceImpl implements MainService{
@@ -89,15 +96,59 @@ public class MainServiceImpl implements MainService{
 
 	//조건주고 회원정보 가져오기
 	@Override
-	public UserDTO findUser(UserDTO dto) throws SQLException {
+	public UserDTO findUser(HttpServletResponse response, UserDTO dto) throws Exception {
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
 		//있는지 확인하고
 		int result =0;
 			result = mainDAO.countUser(dto);
 		UserDTO udto=null;
-		if(result!=0) {//회원정보가 존재하면
+		if(result !=0) {//회원정보가 존재하면
 			udto = mainDAO.getUserIdPw(dto);//그정보 불러와주기
+		}else {//입력값으로 회원가입한 계정이 존재하지않거나 입력값 오류일때 
+			//메세지 띄워주기
+			out.println("<script>");
+			out.println("alert('가입된 계정이 없습니다.\\n입력값을 다시 확인해 주세요');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			out.close();
 		}
 		return udto;
+	}
+
+	@Override
+	public Map<String, Object> getNoticeList(String scode) throws SQLException {
+		int startRow = 1; // 페이지 시작글 번호 
+		int endRow = 5; // 페이지 마지막 글번호
+		
+		// 프로젝트 게시판 글 가져오기 
+		List articleList = null;  	// 전체(검색된) 게시글들 담아줄 변수
+		int count = 0; 							// 전체(검색된) 글의 개수 
+		int number = 0; 						// 브라우저 화면에 뿌려줄 가상 글 번호  
+		
+		// 전체 글의 개수 가져오기 
+		count = mainDAO.getNoticeCount(scode); // DB에 저장되어있는 전체 글의 개수를 가져와 담기
+		System.out.println("Notice count : " + count);
+		// 글이 하나라도 있으면 글들을 다시 가져오기 
+		if(count > 0){
+			articleList = mainDAO.getNoticeList(scode, startRow, endRow);
+			System.out.println("articleList" +articleList);
+		}
+		number = count; 	// 게시판 목록에 뿌려줄 가상의 글 번호  
+	
+		// Controller에게 전달해야되는 데이터가 많으니 HashMap에 넘겨줄 데이터를 저장해서 한번에 전달 
+		Map<String, Object> result = new HashMap<>(); 
+		result.put("articleList", articleList);
+		result.put("count", count);
+		result.put("number", number);
+				
+		return result;
+	}
+
+	@Override
+	public BusinessDTO getBizInfo(String scode) throws SQLException {
+		BusinessDTO dto = mainDAO.getBizInfo(scode);
+		return dto;
 	}
 	
 	

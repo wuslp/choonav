@@ -1,9 +1,6 @@
 body {
   margin: 0;
-}
-
-div {
-  box-sizing: border-box;
+  padding : 0;
 }
 
 .bar {
@@ -17,6 +14,108 @@ div {
   width: 0;
   height: 100%;
   background: #fc3232;
+}
+
+/* 처음페이지 startPage , 로그인 페이지 */
+.main-container{
+	margin:0;
+	padding:0;
+	box-sizing: border-box; 
+	width:100%;
+	height:100vh;
+	background : linear-gradient(rgba(0,0,0,78%), rgba(0,0,0,59%)), url(/cnav/resources/imgs/universe.jpg); 
+}
+
+.main-container .header{
+	width: 90%;
+	height : 80px;
+	margin: 0 auto;
+	padding-top: 1px;
+}
+.main-container .header h1 a{
+	text-decoration :none;
+	color: #fff;
+    font-family: charm;
+}
+
+.main-container .hero{
+	position :absolute;
+	left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    color: white;
+    text-align: center;
+    font-family: charm;	
+}
+
+.main-container .hero h2{
+	font-size:60px;
+	margin-bottom :20px;
+}
+
+.main-container .hero p{
+	font-size:22px;
+}
+
+.main-container .hero input{
+	background : none;
+	border:2px solid #f080dd99;
+	color:white;
+	padding:10px 20px;
+	border-radius:20px;
+	outline :none;
+	cursor: pointer;
+	transition: all .4s;
+}
+
+.main-container .hero input:hover{
+	background-color: #7f7982a1;
+	color:#000;
+}
+
+/* 회원가입 */
+
+.signup {
+	position :absolute;
+	left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    color: white;
+    text-align: center;
+    font-family: cursive;
+}
+.signup table input{
+	background : #8a909463;
+	border:2px solid #f080dd99;
+	color:white;
+	padding:8px 20px;
+	border-radius:20px;
+	margin-top:5px;
+	outline :none;
+}
+
+.signup table select{
+    background: none;
+    border: 2px solid #f080dd99;
+    color: white;
+    padding: 8px 30px;
+    border-radius: 20px;
+}    
+
+.signup .sign-button input{
+	background : none;
+	border:2px solid #f080dd99;
+	color:white;
+	padding:10px 25px;
+	border-radius:20px;
+	margin-top:30px;
+	outline :none;
+	cursor: pointer;
+	transition: all .4s;
+}
+.signup .sign-button input:hover{
+	background-color: #7f7982a1;
+	color:#000;
 }
 
 /* 결재 상세 (sendAppContent) */

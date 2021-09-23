@@ -7,6 +7,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
 
 import cnav.poll.dao.PollDAO;
 import cnav.poll.dao.PollDAOImpl;
@@ -27,6 +29,11 @@ public class PollServiceImpl implements PollService{
 	//모든 리스트 가져오기
 	@Override
 	public Map<String, Object> getArticleList(String pageNum) throws SQLException {
+		//로그인중인 세션 정보 가져오기
+		String userId = (String)RequestContextHolder.getRequestAttributes().getAttribute("sid", RequestAttributes.SCOPE_SESSION);//아이디
+		String code = (String)RequestContextHolder.getRequestAttributes().getAttribute("scode", RequestAttributes.SCOPE_SESSION);//회사코드
+		String auth = (String)RequestContextHolder.getRequestAttributes().getAttribute("sauth", RequestAttributes.SCOPE_SESSION);//권한
+		
 		// 한페이지에 보여줄 게시글의 수 
 		int pageSize = 3; 
 		// 현재 페이지 번호
@@ -44,13 +51,13 @@ public class PollServiceImpl implements PollService{
 		int count = 0; 
 		int number = 0; 			// 브라우저 화면에 뿌려줄 가상 글 번호  
 		
-		//개수 있는지
+		//해당 회사코드주고 해당하는 투표 개수 있는지
 		// 전체 글의 개수 가져오기 
-		count = pollDAO.getArticleCount();
+		count = pollDAO.getArticleCount(code);
 		System.out.println("count : " + count);
 		// 글이 하나라도 있으면 글들을 다시 가져오기 
 		if(count > 0){
-			articleList = pollDAO.getArticles(startRow, endRow); 
+			articleList = pollDAO.getArticles(startRow, endRow, code); 
 		}
 		
 		number = count - (currentPage-1) * pageSize; 	// 게시판 목록에 뿌려줄 가상의 글 번호  
@@ -64,13 +71,18 @@ public class PollServiceImpl implements PollService{
 		result.put("articleList", articleList);
 		result.put("count", count);
 		result.put("number", number);
-
+		result.put("code", code);
 		//있으면 리스트 불러오기
 		
 		return result;
 	}
 	@Override
 	public Map<String, Object> getSearchArticleList(String pageNum, String sel, String search) throws SQLException {
+		//로그인중인 세션 정보 가져오기
+		String userId = (String)RequestContextHolder.getRequestAttributes().getAttribute("sid", RequestAttributes.SCOPE_SESSION);//아이디
+		String code = (String)RequestContextHolder.getRequestAttributes().getAttribute("scode", RequestAttributes.SCOPE_SESSION);//회사코드
+		String auth = (String)RequestContextHolder.getRequestAttributes().getAttribute("sauth", RequestAttributes.SCOPE_SESSION);//권한
+
 		// 한페이지에 보여줄 게시글의 수 
 		int pageSize = 3; 
 		// 현재 페이지 번호
@@ -90,12 +102,12 @@ public class PollServiceImpl implements PollService{
 		
 		//개수 있는지
 		// 전체 글의 개수 가져오기 
-		count = pollDAO.getArticleCount2(sel,search);
+		count = pollDAO.getArticleCount2(sel,search, code);
 		System.out.println("count : " + count);
 		// 글이 하나라도 
 		//있으면 리스트 불러오기
 		if(count > 0){
-			articleList = pollDAO.getArticles2(startRow, endRow, sel, search); 
+			articleList = pollDAO.getArticles2(startRow, endRow, sel, search, code); 
 		}
 		
 		number = count - (currentPage-1) * pageSize; 	// 게시판 목록에 뿌려줄 가상의 글 번호  
@@ -111,12 +123,18 @@ public class PollServiceImpl implements PollService{
 		result.put("number", number);
 		result.put("sel", sel);
 		result.put("search", search);
+		result.put("code", code);
 
 		return result;
 	}
 	//진행중 완료글
 	@Override
 	public Map<String, Object> getSortArticle(String pageNum,String sort) throws SQLException {
+		//로그인중인 세션 정보 가져오기
+		String userId = (String)RequestContextHolder.getRequestAttributes().getAttribute("sid", RequestAttributes.SCOPE_SESSION);//아이디
+		String code = (String)RequestContextHolder.getRequestAttributes().getAttribute("scode", RequestAttributes.SCOPE_SESSION);//회사코드
+		String auth = (String)RequestContextHolder.getRequestAttributes().getAttribute("sauth", RequestAttributes.SCOPE_SESSION);//권한
+				
 		// 한페이지에 보여줄 게시글의 수 
 		int pageSize = 3; 
 		// 현재 페이지 번호
@@ -136,12 +154,12 @@ public class PollServiceImpl implements PollService{
 		
 		//개수 있는지
 		// 전체 글의 개수 가져오기 
-		count = pollDAO.getArticleCount3(sort);
+		count = pollDAO.getArticleCount3(sort,code);
 		System.out.println("count : " + count);
 		// 글이 하나라도 
 		//있으면 리스트 불러오기
 		if(count > 0){
-			articleList = pollDAO.getArticles3(startRow, endRow, sort); 
+			articleList = pollDAO.getArticles3(startRow, endRow, sort, code); 
 		}
 		
 		number = count - (currentPage-1) * pageSize; 	// 게시판 목록에 뿌려줄 가상의 글 번호  
@@ -156,6 +174,7 @@ public class PollServiceImpl implements PollService{
 		result.put("count", count);
 		result.put("number", number);
 		result.put("sort", sort);
+		result.put("code", code);
 		
 		return result;
 	}
@@ -167,6 +186,13 @@ public class PollServiceImpl implements PollService{
 		PollDTO article = pollDAO.getPollArticle(pollNum);
 		return article;
 	}
+	//접속중인 해당 id의 부서정보 가져오기
+	@Override
+	public String getUserDept(String userId) throws SQLException {
+		String userDept=pollDAO.getUserDept(userId);
+		return userDept;
+	}
+	
 	//투표 기록 유무
 	@Override
 	public int recordPoll(int pollNum, String userId) throws SQLException {

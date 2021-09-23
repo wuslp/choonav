@@ -28,11 +28,25 @@ public class AttendController {
 	public String attend(Model model,HttpSession session,String pageNum,String attcategory,String search1,String search2) throws SQLException {
 		// 비지니스로직처리해당하는것이 작성된 service 의 메서드 호출 
 		// -> 결과 받아올것이 있으면 서비스로부터 리턴받은것 view로 전달 
-		//세션 id값->service처리 
-		System.out.println("attend 근태리스트 출력");
+		//세션 값->service처리 
+		System.out.println("77번 attend 근태리스트 출력");
+		//근태기록지 체크
+		int WTrecodeCheck = attendService.WTrecodeCheck();//출근시간 기록 체크
+		String workTimeRecode=null;
+		if(WTrecodeCheck ==1) {
+			workTimeRecode = attendService.getWorktimeRecode();
+			System.out.println("workTimeRecode 가져오기 :"+workTimeRecode);//확인용
+		}
+		int LTrecodeCheck = attendService.LTrecodeCheck();//퇴근시간기록 체크
+		String leaveTimeRecode=null;
+		if(LTrecodeCheck ==1) {
+			leaveTimeRecode = attendService.getLeavetimeRecode();
+		}
+		
 		Map<String, Object> result = null;
 		//String id = (String)session.getAttribute("sid");
-		//String id ="genie0921";	
+		//String code = (String)session.getAttribute("scode");
+		//String auth = (String)session.getAttribute("sauth");
 		//serviceImpl에서 호출할 메서드
 		String pageNum1 = null;
 		pageNum1=pageNum;
@@ -63,6 +77,10 @@ public class AttendController {
 		model.addAttribute("category", result.get("category"));
 		model.addAttribute("search1", result.get("search1"));
 		model.addAttribute("search2", result.get("search2"));
+		model.addAttribute("WTrecodeCheck", WTrecodeCheck);
+		model.addAttribute("workTimeRecode", workTimeRecode);
+		model.addAttribute("LTrecodeCheck", LTrecodeCheck);
+		model.addAttribute("leaveTimeRecode", leaveTimeRecode);
 		return "attend/attend";
 		}
 		
@@ -78,9 +96,6 @@ public class AttendController {
 		attendService.workInsert2();//클릭시 퇴근시간 입력시키기
 		
 	}
-	
-	
-	
 	
 	
 	}

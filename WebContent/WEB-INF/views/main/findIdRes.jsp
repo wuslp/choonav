@@ -17,7 +17,7 @@
 	<div id="">
 		<div id="">
 			<h2>아이디 찾기</h2>
-				${udto.name }님의 아이디는 <br/>
+				${udto.name } 아이디는 <br/>
 				<strong>${udto.userId }</strong> 입니다. <br/>
 				<input type="button" value="로그인" onclick="goLogin()"/>
 				<input type="button" value="비밀번호 찾기" onclick="window.location='/cnav/main/findPw.cnav'"/>
