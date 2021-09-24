@@ -69,4 +69,14 @@
 	<select id="getBizInfo" parameterType="string" resultType="busDTO">
 		select * from business where code = #{value}
 	</select>
+	
+	
+	<!-- ******** -->
+	<select id="getCodeSametUser" parameterType="string" resultType="userDTO">
+		<![CDATA[
+		select * from users where code=#{value}
+		]]>
+	</select>
+	
+	
   </mapper>

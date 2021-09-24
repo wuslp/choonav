@@ -11,11 +11,9 @@ public interface ProjectService {
 	public Map<String,Object> getProjectList(String pageNum) throws SQLException;
 	
 	// 검색 list 가져오기 
-	public Map<String, Object> getSearchProjectList(String pageNum, String sel, String search) throws SQLException;
-	
+	public Map<String, Object> getSearchProjectList(String pageNum, String sel, String search) throws SQLException;	
 	// 진행중 완료를 보여주는 리스트(짜란)
 	public Map<String, Object> getSortProject(String pageNum, String sort) throws SQLException;
-	
 	
 	// 1개의 프로젝트 가져오기(content)
 	public ProjectDTO getProject(int proNum) throws SQLException;
@@ -25,8 +23,8 @@ public interface ProjectService {
 	public ProjectDTO getUpdateProject(int proNum) throws SQLException;
 	// 프로젝트 수정 프로  (modifyPro)
 	public int updateProject(ProjectDTO dto) throws SQLException;
-	// 프로젝트 삭제 처리 (deletePro)
-	public int deleteProject(int proNum) throws SQLException;
+	// 프로젝트 삭제 처리
+	public void deleteProject(String proNum) throws SQLException;
 	
 	
 	

@@ -26,7 +26,6 @@ public class AttendServiceImpl implements AttendService{
 		//정보 가져올 userId 세션에서 처리
 		//string id = (String)session.getAttribute("sid") 한것과 똑같음
 		//********************************************임시처리 
-		//String userId = "genie0921";
 		String userId = (String)RequestContextHolder.getRequestAttributes().getAttribute("sid", RequestAttributes.SCOPE_SESSION);
 		String code = (String)RequestContextHolder.getRequestAttributes().getAttribute("scode", RequestAttributes.SCOPE_SESSION);
 		String auth = (String)RequestContextHolder.getRequestAttributes().getAttribute("sauth", RequestAttributes.SCOPE_SESSION);

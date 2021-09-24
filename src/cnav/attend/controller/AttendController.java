@@ -17,8 +17,6 @@ import cnav.attend.service.AttendServiceImpl;
 @Controller
 @RequestMapping("/attend/*")
 public class AttendController {
-	//**********임시  "genie0921"
-
 	// controller -> service -> serviceImpl -> dao -> daoImpl -> sql.xml 
 	@Autowired
 	private AttendServiceImpl attendService=null;
@@ -56,8 +54,8 @@ public class AttendController {
 		search11=search1;
 		String search22 =null;
 		search22 =search2;
-		System.out.println("97번"+attcategory+search11+search22);
-		if(category == null & search11 == null & search22 ==null) {
+		System.out.println("97번"+category+search11+search22);
+		if(category == null & search11 == null & search22 ==null ) {
 			result = attendService.attendList(pageNum1);
 		}else if(category != null & search11 == null & search22 ==null){
 			result = attendService.attendList2(pageNum1,category);

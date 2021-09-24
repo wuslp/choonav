@@ -10,7 +10,7 @@
     	SELECT
     		  topNum,topComNum, topComment, userId, topReg
     	 FROM topcomments
-    	WHERE topNum = #{topNum} ORDER BY topComNum
+    	WHERE topNum = #{topNum} ORDER BY topComNum desc
 	</select>	
     
     <!-- 댓글 입력 -->
@@ -18,8 +18,8 @@
     	<selectKey keyProperty="topComNum" order="BEFORE" resultType="int">
 			select "topcomments_SEQ".nextVal from dual
 		</selectKey>
-        INSERT INTO topcomments (topComNum, topNum, topComment, userId, topReg)
-        VALUES (#{topComNum}, #{topNum}, #{topComment}, #{userId}, sysdate)
+        INSERT INTO topcomments (topComNum, topNum, topComment, userId, topReg, code)
+        VALUES (#{topComNum}, #{topNum}, #{topComment}, #{userId}, sysdate, #{code})
 	</insert>
 	
 

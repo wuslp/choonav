@@ -42,24 +42,26 @@
 			}
 			else{
 				var chk = confirm("정말 삭제하시겠습니까?");
-				$.ajax({
-					url : url,
-					type : 'POST',
-					traditional : true,
-					data : {
-						valueArr : valueArr			// 보내고자 하는 data 변수
-					},
-					success: function(jdata){
-						if(jdata = 1){
-							alert("삭제 성공");
-							location.replace("/cnav/mail/sendMailList.cnav")
+				if(chk == true){
+					$.ajax({
+						url : url,
+						type : 'POST',
+						traditional : true,
+						data : {
+							valueArr : valueArr			// 보내고자 하는 data 변수
+						},
+						success: function(jdata){
+							console.log(jdata);
+							if(jdata == 1){
+								alert("삭제 성공");
+								location.replace("/cnav/mail/sendMailList.cnav");
+							}
 						}
-						else{
-							alert("삭제 실패");
-						}
-					}
-				})
-			}
+					})
+				}
+				if(chk == false){
+					alert("삭제 실패");
+				}
 		}
 	</script>
 </head>
@@ -113,7 +115,7 @@
 						<input type="checkbox" name="RowCheck" class="chBox" value="${sendMailList.mailNum}" />
 					</td>
 					<td>
-						${sendMailList.mailRid}
+						${sendMailList.ridName}
 					</td>
 					<td>
 						<a href="/cnav/mail/mail.cnav?num=${sendMailList.mailNum}&pageNum=${pageNum}"> ${sendMailList.mailSub} </a>

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 
+import cnav.main.dto.CategoryDTO;
 import cnav.poll.dao.PollDAO;
 import cnav.poll.dao.PollDAOImpl;
 import cnav.poll.dto.PollDTO;
@@ -224,12 +225,5 @@ public class PollServiceImpl implements PollService{
 		pollDAO.pollDelete(pollNum);
 		
 	}
-	
-	
-	
-	
-	
-	
-	
 
 }

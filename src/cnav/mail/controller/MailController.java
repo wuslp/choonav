@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,9 +13,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import cnav.mail.dto.MailDTO;
 import cnav.mail.service.MailServiceImpl;
+import cnav.main.dto.UserDTO;
 
 
 @Controller
@@ -26,16 +29,16 @@ public class MailController {
 	@Autowired
 	private MailServiceImpl MailService = null;
 	
-	// 받은 편지함
+	// 받은 메일함
 	@RequestMapping("recMailList.cnav")
-	public String recMailList(String pageNum, String sel, String search, Model model) throws SQLException{
-		System.out.println("받은mail list");
-		String id = "test";
+	public String recMailList(HttpSession session, String pageNum, String sel, String search, Model model) throws SQLException{
+
+		String id = (String)session.getAttribute("sid");
 		
 		
 		Map<String, Object> result = null;
 		if(sel == null || search == null) {
-			result = MailService.recMailList(pageNum, id); // select * from mail where id=""; 			
+			result = MailService.recMailList(pageNum, id); // select * from mail where id=""; 
 		}else {
 			result = MailService.recMailSearch(pageNum, sel, search, id);
 		}
@@ -61,14 +64,14 @@ public class MailController {
 	
 	// 보낸 편지함
 	@RequestMapping("sendMailList.cnav")
-	public String sendMailList(String pageNum, String sel, String search, Model model) throws SQLException{
+	public String sendMailList(HttpSession session, String pageNum, String sel, String search, Model model) throws SQLException{
 		System.out.println("보낸 mail list");
-		String id = "mero";
+		String id = (String)session.getAttribute("sid");
 		
 		
 		Map<String, Object> result = null;
 		if(sel == null || search == null) {
-			result = MailService.sendMailList(pageNum, id); // select * from mail where id=""; 			
+			result = MailService.sendMailList(pageNum, id); // select * from mail where id="";
 		}else {
 			result = MailService.sendMailSearch(pageNum, sel, search, id);
 		}
@@ -93,15 +96,20 @@ public class MailController {
 	
 	// 메일 보내기
 	@RequestMapping("writeMailForm.cnav")
-	public String writeMailForm() {
+	public String writeMailForm(HttpSession session, Model model) throws SQLException {
+		String code = (String)session.getAttribute("scode");
+		List<UserDTO> userList = MailService.userList(code);
+		model.addAttribute("userList", userList);
+		System.out.println("userList name" + userList);
 		
 		return "mail/writeMailForm";
 	}
 	
 	// 메일 보내기 처리
 	@RequestMapping("writeMailPro.cnav")
-	public String writeMailPro(MailDTO dto, Model model) throws SQLException {
-		dto.setUserId("test");
+	public String writeMailPro(HttpSession session, MailDTO dto, Model model) throws SQLException {
+		String id = (String)session.getAttribute("sid");
+		dto.setUserId(id);
 		int result = MailService.insertMail(dto);
 		
 		
@@ -112,15 +120,17 @@ public class MailController {
 	
 	// 편지함 선택해서 게시물 삭제
 	@RequestMapping("/deleteMailForm")
+	@ResponseBody
 	public String ajaxTest(HttpServletRequest request) throws SQLException {
 		
 		String[] ajaxMsg = request.getParameterValues("valueArr");
 		int size = ajaxMsg.length;
+		String result = null;
 		System.out.println("size" + size);
 		for(int i = 0; i<size; i++) {
-			MailService.delete(ajaxMsg[i]);
+			result = String.valueOf(MailService.delete(ajaxMsg[i]));
 		}
-		return "redirect:/mail/recMailList.cnav";
+		return result;
 	}
 	
 	// 편지 내용에서 삭제
@@ -133,8 +143,8 @@ public class MailController {
 	
 	// 받은 편지 보기
 	@RequestMapping("mail.cnav")
-	public String recMail(@ModelAttribute("pageNum") String pageNum, Integer num, Model model) throws SQLException{
-		String id = "mero";
+	public String recMail(@ModelAttribute("pageNum") String pageNum, Integer num, HttpSession session, Model model) throws SQLException{
+		String id = (String)session.getAttribute("sid");
 		MailDTO mail = MailService.getMail(num);
 		model.addAttribute("mail", mail);
 		model.addAttribute("id", id);

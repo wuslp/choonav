@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import cnav.mail.dto.MailDTO;
+import cnav.main.dto.UserDTO;
 
 public interface MailService {
 	
@@ -28,5 +29,8 @@ public interface MailService {
 	
 	// 메일 본문에서 삭제
 	public int deleteMail(int num) throws SQLException;
+	
+	// 메일함, 보내기용 유저 리스트
+	public List<UserDTO> userList(String code) throws SQLException;
 	
 }

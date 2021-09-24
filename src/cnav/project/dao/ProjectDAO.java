@@ -9,19 +9,19 @@ public interface ProjectDAO {
 
 	
 	// 모든 프로젝트 개수 가져오기 
-	public int getProjectCount() throws SQLException;
+	public int getProjectCount(String userId,String code) throws SQLException;
 	
 	// 모든 프로젝트 목록 불러오기 
-	public List<ProjectDTO> getProjects(int start, int end) throws SQLException;
+	public List<ProjectDTO> getProjects(int start, int end,String code) throws SQLException;
 	
 	// 프로젝트 검색 수 가져오기 
-	public int getSearchProjectCount(String sel, String search) throws SQLException;
+	public int getSearchProjectCount(String sel, String search,String code) throws SQLException;
 	// 검색 list 가져오기 
-	public List<ProjectDTO> getSearchProjects(int start, int end, String sel, String search) throws SQLException;
+	public List<ProjectDTO> getSearchProjects(int start, int end, String sel, String search,String code) throws SQLException;
 	// 진행중/완료 프로젝트
-	public int getProjectState(String sort) throws SQLException;
+	public int getProjectState(String sort, String code) throws SQLException;
 	// 진행중/완료 표시 
-	public List<ProjectDTO> getState(int startRow, int endRow, String sort) throws SQLException;
+	public List<ProjectDTO> getState(int startRow, int endRow, String sort, String code) throws SQLException;
 	
 
 	// 프로젝트 저장
@@ -34,7 +34,7 @@ public interface ProjectDAO {
 	// 프로젝트 수정
 	public void updateProject(ProjectDTO dto) throws SQLException;
 	// 프로젝트 삭제 
-	public void deleteProject(ProjectDTO dto) throws SQLException;
+	public void deleteProject(String proNum) throws SQLException;
 	
 	
 	

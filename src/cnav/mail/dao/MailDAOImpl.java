@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import cnav.mail.dto.MailDTO;
+import cnav.main.dto.UserDTO;
 
 @Repository
 public class MailDAOImpl implements MailDAO {
@@ -36,7 +37,8 @@ public class MailDAOImpl implements MailDAO {
 		
 		return recMailList;
 	}
-
+	
+	// 검색한 받은 편지함 count
 	@Override
 	public int recMailSearchCount(String sel, String search, String id) throws SQLException {
 		
@@ -49,7 +51,8 @@ public class MailDAOImpl implements MailDAO {
 		
 		return result;
 	}
-
+	
+	// 검색한 받은 편지함 list
 	@Override
 	public List<MailDTO> recMailSearch(int start, int end, String sel, String search, String id) throws SQLException {
 		
@@ -87,6 +90,7 @@ public class MailDAOImpl implements MailDAO {
 		return sendMailList;
 	}
 	
+	// 검색한 보낸 편지함 count
 	@Override
 	public int sendMailSearchCount(String sel, String search, String id) throws SQLException {
 		
@@ -99,7 +103,7 @@ public class MailDAOImpl implements MailDAO {
 		
 		return result;
 	}
-	
+	// 검색한 보낸 편지함 list
 	@Override
 	public List<MailDTO> sendMailSearch(int start, int end, String sel, String search, String id) throws SQLException {
 		
@@ -119,7 +123,18 @@ public class MailDAOImpl implements MailDAO {
 	@Override
 	public int insertMail(MailDTO dto) throws SQLException {
 		int result = sqlSession.insert("mail.insertMail", dto);
+		HashMap map = new HashMap();
+		map.put("userId", dto.getUserId());
+		map.put("rid", dto.getMailRid());
+		String userName = sqlSession.selectOne("mail.getUserName", dto.getUserId());
+		String ridName = sqlSession.selectOne("mail.getRidName", dto.getMailRid());
+		System.out.println("mail 유저 네임 " + userName);
+		System.out.println("mail 보낸 네임 " + ridName);
+		map.put("userName", userName);
+		map.put("ridName", ridName);
 		
+		sqlSession.update("mail.updateUserName", map);
+		sqlSession.update("mail.updateRidName", map);
 		
 		return result;
 	}
@@ -151,6 +166,12 @@ public class MailDAOImpl implements MailDAO {
 	public int deleteMail(int num) throws SQLException {
 		int result = sqlSession.delete("mail.delete", num);
 		return result;
+	}
+	// 보내기, 편지함용 유저 리스트
+	@Override
+	public List<UserDTO> userList(String code) throws SQLException {
+		List<UserDTO> userList = sqlSession.selectList("mail.userList", code);
+		return userList;
 	}
 
 }

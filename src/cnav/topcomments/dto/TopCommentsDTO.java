@@ -9,6 +9,14 @@ public class TopCommentsDTO {
 	private String userId;// 작성자 id
 	private Timestamp topReg;// 작성일 reg
 	private String topComment;// 내용 recontent
+	private String code;// 회사 코드
+	
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
 	public Integer getTopComNum() {
 		return topComNum;
 	}
