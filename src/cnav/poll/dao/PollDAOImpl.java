@@ -144,15 +144,6 @@ public class PollDAOImpl implements PollDAO{
 	@Override
 	public void pollDelete(String pollNum) throws SQLException {
 		sqlSession.delete("poll.pollDelete",pollNum);
-		
 	}
-	//**카테고리 가져오기
-	@Override
-	public CategoryDTO takeCategory(String code) throws SQLException {
-		CategoryDTO cdto=sqlSession.selectOne("poll.getCategory",code);
-		return cdto;
-	}
-	
-	
 	
 }

@@ -32,11 +32,7 @@ public class PollController {
 		Map<String, Object> result = null;
 		//serviceImpl에서 호출할 메서드
 		System.out.println("87번 : "+search);
-		//******여기서부터
-		//회사코드에 해당하는 카테고리 dto 전체 넘겨주기
-		CategoryDTO cdto = pollService.takeCategory();
-		//여기까지
-		System.out.println(cdto);
+
 		if(sel == null && search == null && sort == null) {
 			result = pollService.getArticleList(pageNum);//전체리스트
 		}else if(sel == null && search == null && sort != null) {
@@ -58,7 +54,6 @@ public class PollController {
 		model.addAttribute("search", result.get("search"));
 		model.addAttribute("sort", result.get("sort"));
 		model.addAttribute("code", result.get("code"));
-		model.addAttribute("cdto", cdto);
 		
 		return "poll/pollList";
 	}

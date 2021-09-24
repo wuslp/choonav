@@ -39,6 +39,4 @@ public interface PollDAO {
 	//투표글 삭제
 	public void pollDelete(String pollNum) throws SQLException;
 	
-	//**카테고리 가져오기
-	public CategoryDTO takeCategory(String code) throws SQLException;
 }

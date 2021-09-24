@@ -42,6 +42,8 @@
 			<!-- 투표 리스트 본문-->
 			<div>
 				<h1>투표목록</h1>
+				<%-- <h1>${sessionScope.cdto2}</h1>
+				<h1>${sessionScope.cdto2.attend}</h1> --%>
 			</div>
 			<div>
 				<form action="/cnav/poll/pollList.cnav">

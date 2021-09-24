@@ -33,7 +33,5 @@ public interface PollService {
 	
 	//투표글 삭제
 	public void pollDelete(String pollNum) throws SQLException;
-	
-	//카테고리 받아오기
-	public CategoryDTO takeCategory() throws SQLException;
+
 }

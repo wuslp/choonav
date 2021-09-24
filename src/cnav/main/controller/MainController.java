@@ -180,7 +180,7 @@ public class MainController {
 		if(session.getAttribute("sid") != null) {
 			result = 2;
 		}else {
-			result = mainService.idPwCheck(dto);
+			result = mainService.idPwCheck(dto);//아이디 패스워드 있으면 service에서 세션 생성함
 		}
 		model.addAttribute("result",result);
 		System.out.println("session 아이디:"+session.getAttribute("sid"));
@@ -206,7 +206,11 @@ public class MainController {
 		//회사코드 꺼내와서 해당하는 카테고리만 보여주기
 		String scode =(String)session.getAttribute("scode");
 		//회사코드에 해당하는 카테고리 dto 전체 넘겨주기
-		CategoryDTO cdto = mainService.takeCategory(scode);
+		CategoryDTO catDto = mainService.takeCategory(scode);
+		//++회사코드에 해당하는 카테고리(CategoryDTO) 전체로 세션에 저장시켜 주기=>left menu바 에 세션에서 모든페이지에 적용시키기 위해서.
+		mainService.setCatSession(catDto);
+		
+		
 		// 회사코드에 해당하는 공지사항 리스트 가져오기
 		Map<String, Object> result = mainService.getNoticeList(scode);
 		// 회사코드에 해당하는 회사정보 가져오기
@@ -223,7 +227,7 @@ public class MainController {
 		model.addAttribute("number", result.get("number"));
 		model.addAttribute("bizDTO", bizDTO);
 		
-		model.addAttribute("cdto",cdto);
+		//model.addAttribute("cdto",cdto);
 		//*******여기서부터
 		model.addAttribute("list",list);
 		//여기까지 test추가 ->나중에 삭제할것 !!

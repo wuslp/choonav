@@ -106,9 +106,4 @@
 		delete from poll where pollNum = #{value}
 	</delete>
 	
-	<!--카테고리 가져오기  -->
-	<select id="getCategory" parameterType="string" resultType="catDTO">
-		 select * from category where code=${value}
-	</select>
-	
 </mapper>
