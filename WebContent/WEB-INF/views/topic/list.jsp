@@ -11,15 +11,6 @@
 
 <body>
 	<br />
-<%-- 	<div align="right"> 
-		<c:if test="${sessionScope.sid == null}">
-			<button onclick="window.location='/cnav/member/loginForm.cnav'">로그인</button>
-		</c:if>
-		<c:if test="${sessionScope.sid != null}">
-			<button onclick="window.location='/cnav/member/logout.cnav'">로그아웃</button>
-		</c:if>
-	</div> --%>
-	
 	<h1 align="center"> 게시판 </h1>
 	
 	<!-- 게시판에 글이 없을 경우 -->

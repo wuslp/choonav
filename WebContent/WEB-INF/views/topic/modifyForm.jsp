@@ -36,7 +36,6 @@ $(document).ready(function() {
 	<div style="width: 60%; margin: auto;">
 		<form action="/cnav/topic/modifyPro.cnav" > 
 			<input type="hidden" name="topNum" value="${article.topNum}">
-			<input type="text" name="userId" style="width: 20%;" placeholder="작성자" value="${article.userId}" readonly/><br>
 			<input type="text" name="topTitle" style="width: 40%;" placeholder="제목" value="${article.topTitle}"/>
 			<br><br> 
 			<textarea id="summernote" name="topContent"></textarea>
@@ -48,15 +47,10 @@ $(document).ready(function() {
 	/* 제목, 내용 입력했는지 확인 */
 	function goModify(frm) {
 		var title = frm.topTitle.value;
-		var writer = frm.userId.value;
 		var content = frm.topContent.value;
 		
 		if (title.trim() == ''){
 			alert("제목을 입력해주세요");
-			return false;
-		}
-		if (writer.trim() == ''){
-			alert("작성자를 입력해주세요");
 			return false;
 		}
 		if (content.trim() == ''){
