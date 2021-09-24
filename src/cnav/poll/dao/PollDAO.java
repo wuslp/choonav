@@ -3,6 +3,7 @@ package cnav.poll.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import cnav.main.dto.CategoryDTO;
 import cnav.poll.dto.PollDTO;
 
 public interface PollDAO {

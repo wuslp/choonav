@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import cnav.main.dto.CategoryDTO;
 import cnav.poll.dto.PollDTO;
 
 @Repository
@@ -143,9 +144,6 @@ public class PollDAOImpl implements PollDAO{
 	@Override
 	public void pollDelete(String pollNum) throws SQLException {
 		sqlSession.delete("poll.pollDelete",pollNum);
-		
 	}
-	
-	
 	
 }

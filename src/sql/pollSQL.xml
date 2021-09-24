@@ -106,6 +106,4 @@
 		delete from poll where pollNum = #{value}
 	</delete>
 	
-	
-	
 </mapper>

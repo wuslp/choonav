@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import cnav.main.dto.CategoryDTO;
 import cnav.poll.dto.PollDTO;
 import cnav.poll.service.PollServiceImpl;
 
@@ -31,7 +32,7 @@ public class PollController {
 		Map<String, Object> result = null;
 		//serviceImpl에서 호출할 메서드
 		System.out.println("87번 : "+search);
-		
+
 		if(sel == null && search == null && sort == null) {
 			result = pollService.getArticleList(pageNum);//전체리스트
 		}else if(sel == null && search == null && sort != null) {

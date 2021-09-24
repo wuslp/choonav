@@ -31,4 +31,7 @@ public interface MainDAO {
 	public List getNoticeList(String scode, int start, int end) throws SQLException;
 	// 회사정보 가져오기
 	public BusinessDTO getBizInfo(String scode) throws SQLException;
+	
+	//getCodeSametUser
+	public List getCodeSametUser(String scode) throws SQLException;
 }
