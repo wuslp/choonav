@@ -15,9 +15,10 @@
 <form action="/cnav/approval/addTake.cnav?appNum=${appNum}" method="post">
 	<input type="hidden" name="appNum" value="${appNum}" />
 		<select name="name2">
-			<option value="java01" >java01</option> 
-			<option value="java02" >java02</option> 
-			<option value="java03" >java03</option> 
+				<option value="">선택</option>
+				<c:forEach var="users" items="${list}">
+					<option value="${users.userId}">${users.name} ${users.position}</option>
+				</c:forEach> 
 		</select>	
 	<input type="submit" value="완료"/> 
 </form>

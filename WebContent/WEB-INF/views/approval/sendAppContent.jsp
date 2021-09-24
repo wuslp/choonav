@@ -27,11 +27,11 @@
 		</tr>
 		<tr>
 			<td>기안부서</td>
-			<td></td>
+			<td>${approval.dept}</td>
 		</tr>
 		<tr>
 			<td>기안자</td>
-			<td>${approval.userId}</td>
+			<td>${approval.name}</td>
 		</tr>
 		<tr>
 			<td>기안일자</td>
@@ -43,9 +43,9 @@
 
 <table class="appContentRight">
 	<tr>
-		<td>직위 </td>
-		<td>직위 </td>
-		<td>직위 </td>
+		<td>${approval.state1}</td>
+		<td>${approval.state2}</td>
+		<td>${approval.state3}</td>
 	</tr>
 	<tr> <!-- 도장 -->
 		<td>${approval.name1} </td> 

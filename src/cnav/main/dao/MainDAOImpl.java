@@ -2,6 +2,7 @@ package cnav.main.dao;
 
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -31,7 +32,7 @@ public class MainDAOImpl implements MainDAO{
 	public void addBiz(BusinessDTO bdto, CategoryDTO cdto, UserDTO udto) throws SQLException {
 		Map<String, Object> map = new HashMap<String, Object>(); 
 		map.put("userId", udto.getUserId());
-		map.put("code",bdto.getCode());		
+		map.put("code", bdto.getCode());		
 		sqlSession.insert("main.addBiz",bdto);
 		sqlSession.insert("main.addCat",cdto);
 		sqlSession.update("main.addUserBiz",map);
@@ -89,6 +90,37 @@ public class MainDAOImpl implements MainDAO{
 			udto = sqlSession.selectOne("main.getPw",dto);
 		}
 		return udto;
+	}
+	
+	// 회사 정보 가져오기
+	@Override
+	public BusinessDTO getBizInfo(String scode) throws SQLException {
+		return sqlSession.selectOne("main.getBizInfo", scode);
+	}
+
+	// 공지사항 글개수
+	@Override
+	public int getNoticeCount(String scode) throws SQLException {
+		return sqlSession.selectOne("main.countNoti", scode);
+	}
+	
+	// 공지사항 리스트 가져오기
+	@Override
+	public List getNoticeList(String scode, int start, int end) throws SQLException {
+		HashMap map = new HashMap();
+		map.put("scode", scode);
+		map.put("start", start);
+		map.put("end", end);
+		
+		List list = sqlSession.selectList("main.getNotiList", map);
+		return list;
+	}
+
+	//getCodeSametUser
+	@Override
+	public List getCodeSametUser(String scode) throws SQLException {
+		List list = sqlSession.selectList("main.getCodeSametUser",scode);
+		return list;
 	}
 
 }

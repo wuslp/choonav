@@ -37,8 +37,14 @@
   		/WEB-INF/cnav/attend-context.xml
   		/WEB-INF/cnav/poll-context.xml 		
   		/WEB-INF/cnav/main-context.xml 		
-  		/WEB-INF/cnav/approval-context.xml		
-
+  		/WEB-INF/cnav/approval-context.xml
+		/WEB-INF/cnav/mail-context.xml
+		/WEB-INF/cnav/mypage-context.xml
+		/WEB-INF/cnav/topic-context.xml
+		/WEB-INF/cnav/topComments-context.xml
+		/WEB-INF/cnav/notice-context.xml
+		/WEB-INF/cnav/admin-context.xml
+		/WEB-INF/cnav/project-context.xml
  		</param-value>
   	</init-param>
   </servlet>

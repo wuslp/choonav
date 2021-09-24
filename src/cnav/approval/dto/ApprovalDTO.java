@@ -20,6 +20,11 @@ public class ApprovalDTO {
 	private String state2;
 	private String state3;
 	private String reject;
+	private String code;
+	private String name;
+	private String nick1;
+	private String nick2;
+	private String nick3;	
 	
 	// getter/setter
 	public Integer getAppNum() {
@@ -124,4 +129,35 @@ public class ApprovalDTO {
 	public void setReject(String reject) {
 		this.reject = reject;
 	}
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getNick1() {
+		return nick1;
+	}
+	public void setNick1(String nick1) {
+		this.nick1 = nick1;
+	}
+	public String getNick2() {
+		return nick2;
+	}
+	public void setNick2(String nick2) {
+		this.nick2 = nick2;
+	}
+	public String getNick3() {
+		return nick3;
+	}
+	public void setNick3(String nick3) {
+		this.nick3 = nick3;
+	}
+	
 }

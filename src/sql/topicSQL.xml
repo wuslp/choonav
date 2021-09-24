@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="topic">
+	<!-- 검색x, 게시글개수 -->
+	<select id="countAll" parameterType="String" resultType="int">
+		select count(*) from topic where code=#{value}
+	</select>
+
+	<!-- 검색x, 게시글 가져오기 -->
+	<select id="getArticles" parameterType="hashmap" resultType="topicDTO">
+		<![CDATA[
+		select B.*, r from 
+			(select A.*, rownum r from 
+				(select * from topic where code=#{scode} order by topNum desc) A order by topNum desc) B
+		where r >= #{start} and r <= #{end}
+		]]>
+	</select>
+
+	<!-- 검색o, 게시글 수 -->
+	<select id="countSearch" parameterType="hashmap" resultType="int">
+		select count(*) from topic where code=#{scode} and ${sel} like '%'||#{search}||'%'
+	</select>
+
+	<!-- 검색o, 게시글 가져오기 -->
+	<select id="getSearchArticles" parameterType="hashmap" resultType="topicDTO">
+		<![CDATA[
+		select B.*, r from 
+			(select A.*, rownum r from 
+				(select * from topic where code=#{scode} and ${sel} like '%'||#{search}||'%' order by topNum desc) A order by topNum desc) B
+		where r >= #{start} and r <= #{end}
+		]]>
+	</select>
+	
+	<!-- 게시판 insert -->
+<!-- 	<insert id="insertArticle" parameterType="topicDTO">
+	<selectKey keyProperty="num" order="BEFORE" resultType="int">
+		SELECT Topic_SEQ.NEXTVAL FROM DUAL
+	</selectKey>
+	INSERT INTO topic (topNum, userId, topTitle, topContent, topDate, readcount)
+				VALUES (#{num}, #{writer}, #{title}, #{content}, sysdate, 0)
+	</insert>
+	 -->
+	 
+	 <!-- 게시글 저장 -->
+	<insert id="insertArticle" parameterType="topicDTO">
+		<selectKey keyProperty="topNum" order="BEFORE" resultType="int">
+			select "Topic_SEQ".nextVal from dual
+		</selectKey>
+		insert into topic(topNum, topTitle, topContent, topDate, userId, readcount, code) 
+		values(#{topNum}, #{topTitle}, #{topContent}, sysdate, #{userId}, 0, #{code})
+	</insert>
+	
+	<!-- 글 한개 가져오기 -->
+	<select id="getOneArticle" parameterType="int" resultType="topicDTO">
+		select * from topic where topNum = #{value}
+	</select>
+	
+	<!-- 조회수 +1 -->
+	<update id="readcountUp" parameterType="int">
+		update topic set readcount = readcount+1 where topNum = #{value}
+	</update> 
+	
+	<!-- 게시물삭제 -->
+	<delete id="deleteArticle" parameterType="int">
+		DELETE FROM topic WHERE topNum = #{value}
+	</delete>
+	
+	<!-- 게시글 수정폼 -->
+	<select id="getUpdateArticle" parameterType="int" resultType="topicDTO">
+		select * from topic where topNum = #{value}
+	</select>
+	
+	<!-- 게시글 수정 -->
+	<update id="updateArticle" parameterType="topicDTO">
+		UPDATE topic SET topTitle = #{topTitle}, topContent = #{topContent} WHERE topNum = #{topNum}
+	</update>
+	
+</mapper>

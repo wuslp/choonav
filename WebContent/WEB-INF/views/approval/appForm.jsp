@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,10 +17,27 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 	</head>
 	
+<script>
+	function check(){
+		if(appTitle==""){
+			alert("제목을 입력해주세요.");
+			$("#appTitle").focus();
+			return false;
+		}
+		if(name1==""){
+			alert("제목을 입력해주세요.");
+			$("#name1").focus();
+			return false;
+		}
+	}	
+	
+	
+</script>	
+	
 <body>
 
 	<h2> 결재 문서 작성 </h2>
-	<form action="/cnav/approval/appPro.cnav" method="post">
+	<form action="/cnav/approval/appPro.cnav" method="post" onsubmit="return check()">
 		<input type="hidden" name="appNum" value="${appNum}"/>
 		문서형식 
 		<select name="appType">
@@ -39,9 +57,10 @@
 		</select><br/>
 		결재자
 		<select name="name1">
-			<option value="java01" >java01</option> 
-			<option value="java02" >java02</option> 
-			<option value="java03" >java03</option> 
+			<option value="">선택</option>
+				<c:forEach var="users" items="${list}">
+					<option value="${users.userId}">${users.name} ${users.position}</option>
+				</c:forEach> 	
 		</select><br/>
 		
 		일시
@@ -52,7 +71,7 @@
 		<table>
 			<tr>
 				<td> 제목 </td>
-				<td><input type="text" name="appTitle"></td>
+				<td><input type="text" name="appTitle" id="appTitle"></td>
 			</tr>
 			<tr>
 				<td> 내용 </td>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="admin">
+
+	<select id="countAll" resultType="int">
+		select count(*) from business
+	</select>
+
+	<select id="getArticles" parameterType="hashmap" resultType="adminDTO">
+		<![CDATA[
+		select B.*, r from 
+			(select A.*, rownum r from 
+				(select business.code, business.bizName, business.userId, users.auth from  business inner join users on business.userId=users.userId order by business.code desc) A ) B
+		where r >= #{start} and r <= #{end}
+		]]>
+	</select>
+
+	<!-- 회사관리자전환 -->
+	<update id="authUpdate0" parameterType="String">
+		UPDATE users SET auth = '1' WHERE userId=#{value}
+	</update>
+	
+	<!-- 회원으로 전환 -->
+	<update id="authUpdate1" parameterType="String">
+		update users set auth ='0' where userId = #{value}
+	</update>
+</mapper>

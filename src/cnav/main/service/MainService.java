@@ -1,6 +1,10 @@
 package cnav.main.service;
 
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
 
 import cnav.main.dto.BusinessDTO;
 import cnav.main.dto.CategoryDTO;
@@ -23,7 +27,15 @@ public interface MainService {
 	//세션삭제
 	public void removeSessionAttr(String sessionName);
 	//아이디 비밀번호 찾기 (회원정보 가져오기)
-	public UserDTO findUser(UserDTO dto) throws SQLException;
+	public UserDTO findUser(HttpServletResponse response, UserDTO dto) throws Exception;
+	// 공지사항 리스트 가져오기
+	public Map<String, Object> getNoticeList(String scode) throws SQLException;
+	// 회사정보 가져오기
+	public BusinessDTO getBizInfo(String scode) throws SQLException;
+	//로그인중인 아이디의 회사코드로 카테고리 DTO ,가져온것 세션에 저장시키기 ->어느페이지에서나 세션으로 카테고리 뽑아 볼 수 있도록
+	public void setCatSession(CategoryDTO catDto) throws SQLException;
 	
+	//++user리스트 가져오기
+	public List getCodeSametUser(String scode) throws SQLException;
 	
 }

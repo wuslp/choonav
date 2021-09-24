@@ -10,8 +10,14 @@ public class AttendDTO {
 	private Date leaveTime;
 	private String attendance;
 	private String reason;
+	private String code;
 	
-	
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
 	public String getUserId() {
 		return userId;
 	}

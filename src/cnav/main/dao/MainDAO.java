@@ -1,6 +1,7 @@
 package cnav.main.dao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import cnav.main.dto.BusinessDTO;
 import cnav.main.dto.CategoryDTO;
@@ -24,4 +25,13 @@ public interface MainDAO {
 	public int countUser(UserDTO dto) throws SQLException;
 	//아이디 찾아서가져오기
 	public UserDTO getUserIdPw(UserDTO dto) throws SQLException;
+	// db에 저장되어 있는 공지사항 전체글의 개수
+	public int getNoticeCount(String scode) throws SQLException;
+	// 공지사항 리스트 가져오기
+	public List getNoticeList(String scode, int start, int end) throws SQLException;
+	// 회사정보 가져오기
+	public BusinessDTO getBizInfo(String scode) throws SQLException;
+	
+	//getCodeSametUser
+	public List getCodeSametUser(String scode) throws SQLException;
 }

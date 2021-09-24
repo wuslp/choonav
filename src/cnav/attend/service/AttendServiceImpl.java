@@ -26,8 +26,9 @@ public class AttendServiceImpl implements AttendService{
 		//정보 가져올 userId 세션에서 처리
 		//string id = (String)session.getAttribute("sid") 한것과 똑같음
 		//********************************************임시처리 
-		//String userId = (String)RequestContextHolder.getRequestAttributes().getAttribute("sid", RequestAttributes.SCOPE_SESSION);
-		String userId = "genie0921";
+		String userId = (String)RequestContextHolder.getRequestAttributes().getAttribute("sid", RequestAttributes.SCOPE_SESSION);
+		String code = (String)RequestContextHolder.getRequestAttributes().getAttribute("scode", RequestAttributes.SCOPE_SESSION);
+		String auth = (String)RequestContextHolder.getRequestAttributes().getAttribute("sauth", RequestAttributes.SCOPE_SESSION);
 		
 		// 한페이지에 보여줄 게시글의 수 
 		int pageSize = 3; 
@@ -43,20 +44,17 @@ public class AttendServiceImpl implements AttendService{
 		List<AttendDTO> userAttendList = null;  	// 전체 리스트
 		int count = 0;
 		int number = 0;
-		
 
 		// 전체 근태리스트 개수 가져오기 
-		count = attendDAO.getAttendCount(userId);  
+		count = attendDAO.getAttendCount(userId,code);  
 		System.out.println("count : " + count);
 		// 글이 하나라도 있으면 글들을 다시 가져오기 
 		if(count > 0){
-			userAttendList = attendDAO.AttendList(startRow, endRow, userId); 
+			userAttendList = attendDAO.AttendList(startRow, endRow, userId, code); 
 			System.out.println("99번"+userAttendList);
 		}
-		
 		number = count - (currentPage-1) * pageSize; 	// 게시판 목록에 뿌려줄 가상의 글 번호  
 
-		
 		//controller에게 전달해야되는 데이터가 많으니 HashMap 에 넘겨줄 데이터를 저장해서 한번에 전달
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("pageSize", pageSize);
@@ -69,32 +67,15 @@ public class AttendServiceImpl implements AttendService{
 		result.put("number", number);
 
 		return result;
-		
-			
-		// 날짜 출력 형태 패턴 생성 
-		//SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm");
-		// view에게 위에 데이터 전부 보내기 
-		/*
-		 * request.setAttribute("pageSize", pageSize); request.setAttribute("pageNum",pageNum); 
-		 * request.setAttribute("currentPage", currentPage);
-		 * request.setAttribute("startRow", startRow); 
-		 * request.setAttribute("endRow", endRow);
-		 * request.setAttribute("sel", sel);
-		 * request.setAttribute("search",search); 
-		 * request.setAttribute("articleList", articleList);
-		 * request.setAttribute("count", count); 
-		 * request.setAttribute("number", number);
-		 */
 	}
 
 	@Override//카테고리 정했을떄
 	public Map<String, Object> attendList2(String pageNum, String category) throws SQLException {
 		
 		//정보 가져올 userId 세션에서 처리
-		//string id = (String)session.getAttribute("sid") 한것과 똑같음
-		//********************************************임시처리 
-		//String userId = (String)RequestContextHolder.getRequestAttributes().getAttribute("sid", RequestAttributes.SCOPE_SESSION);
-		String userId = "genie0921";
+		String userId = (String)RequestContextHolder.getRequestAttributes().getAttribute("sid", RequestAttributes.SCOPE_SESSION);
+		String code = (String)RequestContextHolder.getRequestAttributes().getAttribute("scode", RequestAttributes.SCOPE_SESSION);
+		String auth = (String)RequestContextHolder.getRequestAttributes().getAttribute("sauth", RequestAttributes.SCOPE_SESSION);
 		
 		// 한페이지에 보여줄 게시글의 수 
 		int pageSize = 3; 
@@ -110,21 +91,19 @@ public class AttendServiceImpl implements AttendService{
 		List<AttendDTO> userAttendList = null;  	// 전체 리스트
 		int count = 0;
 		int number = 0;
-		
 
 		// 전체 근태리스트 개수 가져오기 
-		count = attendDAO.getAttendCount2(userId,category);  
+		count = attendDAO.getAttendCount2(userId,category,code);  
 		System.out.println("count : " + count);
 		// 글이 하나라도 있으면 글들을 다시 가져오기 
 		if(count > 0){
-			userAttendList = attendDAO.AttendList2(startRow, endRow, userId,category); 
+			userAttendList = attendDAO.AttendList2(startRow, endRow, userId, category, code); 
 			System.out.println("95번"+userAttendList);
 		}
 		
 		number = count - (currentPage-1) * pageSize; 	// 게시판 목록에 뿌려줄 가상의 글 번호  
 
-		
-		//controller에게 전달해야되는 데이터가 많으니 HashMap 에 넘겨줄 데이터를 저장해서 한번에 전달
+		//controller에게 HashMap 에 넘겨줄 데이터를 저장해서 한번에 전달
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("pageSize", pageSize);
 		result.put("pageNum", pageNum);
@@ -143,9 +122,9 @@ public class AttendServiceImpl implements AttendService{
 	public Map<String, Object> attendList3(String pageNum, String category, String search1, String search2) throws SQLException {
 		//정보 가져올 userId 세션에서 처리
 		//string id = (String)session.getAttribute("sid") 한것과 똑같음
-		//********************************************임시처리 
-		//String userId = (String)RequestContextHolder.getRequestAttributes().getAttribute("sid", RequestAttributes.SCOPE_SESSION);
-		String userId = "genie0921";
+		String userId = (String)RequestContextHolder.getRequestAttributes().getAttribute("sid", RequestAttributes.SCOPE_SESSION);
+		String code = (String)RequestContextHolder.getRequestAttributes().getAttribute("scode", RequestAttributes.SCOPE_SESSION);
+		String auth = (String)RequestContextHolder.getRequestAttributes().getAttribute("sauth", RequestAttributes.SCOPE_SESSION);
 		
 		// 한페이지에 보여줄 게시글의 수 
 		int pageSize = 3; 
@@ -161,21 +140,18 @@ public class AttendServiceImpl implements AttendService{
 		List<AttendDTO> userAttendList = null;  	// 전체 리스트
 		int count = 0;
 		int number = 0;
-		
 
 		// 전체 근태리스트 개수 가져오기 
-		count = attendDAO.getAttendCount3(userId,search1,search2);  
+		count = attendDAO.getAttendCount3(userId, search1, search2, code);  
 		System.out.println("count : " + count);
-		// 글이 하나라도 있으면 글들을 다시 가져오기 
+		// 글이 하나라도 있으면 가져오기
 		if(count > 0){
-			userAttendList = attendDAO.AttendList3(startRow, endRow, userId,search1,search2); 
+			userAttendList = attendDAO.AttendList3(startRow, endRow, userId, search1, search2, code); 
 			System.out.println("94번"+userAttendList);
 		}
 		
-		number = count - (currentPage-1) * pageSize; 	// 게시판 목록에 뿌려줄 가상의 글 번호  
+		number = count - (currentPage-1) * pageSize; 
 
-		
-		//controller에게 전달해야되는 데이터가 많으니 HashMap 에 넘겨줄 데이터를 저장해서 한번에 전달
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("pageSize", pageSize);
 		result.put("pageNum", pageNum);
@@ -189,7 +165,6 @@ public class AttendServiceImpl implements AttendService{
 		result.put("search1", search1);
 		result.put("search2", search2);
 		
-		
 		return result;
 	}
 	//---근태 리스트 불러오기 끝 
@@ -197,25 +172,56 @@ public class AttendServiceImpl implements AttendService{
 
 	@Override
 	public void workInsert() throws SQLException {
-		//입력시킬 userId 세션에서 처리
-		//string id = (String)session.getAttribute("sid") 한것과 똑같음
-		//********************************************임시처리 
-		//String userId = (String)RequestContextHolder.getRequestAttributes().getAttribute("sid", RequestAttributes.SCOPE_SESSION);
-		String userId = "genie0921";
+		//입력시킬 userId code 세션에서 가져옴 
+		String userId = (String)RequestContextHolder.getRequestAttributes().getAttribute("sid", RequestAttributes.SCOPE_SESSION);
+		String code = (String)RequestContextHolder.getRequestAttributes().getAttribute("scode", RequestAttributes.SCOPE_SESSION);
 				
-		attendDAO.workInsert(userId);
-		
+		attendDAO.workInsert(userId,code);
 	}
 
 	@Override
 	public void workInsert2() throws SQLException {
-		//입력시킬 userId 세션에서 처리
-		//string id = (String)session.getAttribute("sid") 한것과 똑같음
-		//********************************************임시처리 
-		//String userId = (String)RequestContextHolder.getRequestAttributes().getAttribute("sid", RequestAttributes.SCOPE_SESSION);
-		String userId = "genie0921";
+		String userId = (String)RequestContextHolder.getRequestAttributes().getAttribute("sid", RequestAttributes.SCOPE_SESSION);
+		String code = (String)RequestContextHolder.getRequestAttributes().getAttribute("scode", RequestAttributes.SCOPE_SESSION);
 				
-		attendDAO.workInsert2(userId);
+		attendDAO.workInsert2(userId, code);
+	}
+
+	//출근기록 여부
+	@Override
+	public int WTrecodeCheck() throws SQLException {
+		String userId = (String)RequestContextHolder.getRequestAttributes().getAttribute("sid", RequestAttributes.SCOPE_SESSION);
+		String code = (String)RequestContextHolder.getRequestAttributes().getAttribute("scode", RequestAttributes.SCOPE_SESSION);
+		int recodeCheck=attendDAO.WTrecodeCheck(userId,code);
+		return recodeCheck;
+	}
+	//출근 기록
+	@Override
+	public String getWorktimeRecode() throws SQLException {
+		String userId = (String)RequestContextHolder.getRequestAttributes().getAttribute("sid", RequestAttributes.SCOPE_SESSION);
+		String code = (String)RequestContextHolder.getRequestAttributes().getAttribute("scode", RequestAttributes.SCOPE_SESSION);
+		
+		String workTimeRecode=attendDAO.getWorktimeRecode(userId, code);
+		return workTimeRecode;
+	}
+	
+	//퇴근기록 여부
+	@Override
+	public int LTrecodeCheck() throws SQLException {
+		String userId = (String)RequestContextHolder.getRequestAttributes().getAttribute("sid", RequestAttributes.SCOPE_SESSION);
+		String code = (String)RequestContextHolder.getRequestAttributes().getAttribute("scode", RequestAttributes.SCOPE_SESSION);
+		int recodeCheck=attendDAO.LTrecodeCheck(userId,code);
+		return recodeCheck;
+	}
+
+	//퇴근기록 가져오기
+	@Override
+	public String getLeavetimeRecode() throws SQLException {
+		String userId = (String)RequestContextHolder.getRequestAttributes().getAttribute("sid", RequestAttributes.SCOPE_SESSION);
+		String code = (String)RequestContextHolder.getRequestAttributes().getAttribute("scode", RequestAttributes.SCOPE_SESSION);
+		
+		String leaveTimeRecode=attendDAO.getLeavetimeRecode(userId, code);
+		return leaveTimeRecode;
 	}
 
 	

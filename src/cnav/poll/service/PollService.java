@@ -3,6 +3,7 @@ package cnav.poll.service;
 import java.sql.SQLException;
 import java.util.Map;
 
+import cnav.main.dto.CategoryDTO;
 import cnav.poll.dto.PollDTO;
 
 public interface PollService {
@@ -20,6 +21,8 @@ public interface PollService {
 	public PollDTO getPollArticle(int pollNum) throws SQLException;
 	//투표유무 기록 가져오기
 	public int recordPoll(int pollNum,String userId) throws SQLException;
+	//접속중인 해당 userId의 부서정보 가져오기
+	public String getUserDept(String userId) throws SQLException;
 	
 	//투표시
 	public void plusPoll(String pollNum,String obj_value) throws SQLException;
@@ -30,5 +33,5 @@ public interface PollService {
 	
 	//투표글 삭제
 	public void pollDelete(String pollNum) throws SQLException;
-	
+
 }

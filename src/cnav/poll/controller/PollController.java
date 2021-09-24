@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import cnav.main.dto.CategoryDTO;
 import cnav.poll.dto.PollDTO;
 import cnav.poll.service.PollServiceImpl;
 
@@ -21,26 +22,17 @@ public class PollController {
 	@Autowired
 	private PollServiceImpl pollService=null;
 	
-	//투표폼
-	@RequestMapping("pollForm.cnav")
-	public String pollForm() {
-		
-		return "poll/pollForm";
-	}
 	//투표리스트 로딩
 	@RequestMapping("pollList.cnav")
 	public String pollList(Model model,String pageNum, String sel, String search,String sort) throws SQLException {
 		// 비지니스로직처리해당하는것이 작성된 service 의 메서드 호출 
 		// -> 결과 받아올것이 있으면 서비스로부터 리턴받은것 view로 전달 
 		//세션 id값->service처리 
-		System.out.println("89번 poll 투표 리스트 출력");
 		System.out.println("85번 sort :"+sort);
 		Map<String, Object> result = null;
-		//String id = (String)session.getAttribute("sid");
-		//String id ="genie0921";	
 		//serviceImpl에서 호출할 메서드
 		System.out.println("87번 : "+search);
-		
+
 		if(sel == null && search == null && sort == null) {
 			result = pollService.getArticleList(pageNum);//전체리스트
 		}else if(sel == null && search == null && sort != null) {
@@ -61,25 +53,35 @@ public class PollController {
 		model.addAttribute("sel", result.get("sel"));
 		model.addAttribute("search", result.get("search"));
 		model.addAttribute("sort", result.get("sort"));
+		model.addAttribute("code", result.get("code"));
 		
 		return "poll/pollList";
 	}
-	
+	//투표폼
+	@RequestMapping("pollForm.cnav")
+	public String pollForm() {
+		
+		return "poll/pollForm";
+	}
+		
 	//투표생성
 	@RequestMapping("pollPro.cnav")
 	public String pollPro(HttpSession session, PollDTO dto) throws SQLException{
-		//***********임시 id
-		//String id = (String)session.getAttribute("sid");
-		//dto.setUserId(id);
-		dto.setUserId("genie0921");
+		//세션에셔 회사코드 , 작성자 id 뽑아서 저장 
+		String id = (String)session.getAttribute("sid");
+		String code = (String)session.getAttribute("scode");
+		dto.setUserId(id);
+		dto.setCode(code);
 		pollService.insertArticle(dto);
 		
 		return "redirect:/poll/pollList.cnav";
 	}
+	
 	//투표 삭제
 	@RequestMapping("pollDelete.cnav")
-	public void pollDelete(String pollNum) throws SQLException{
+	public String pollDelete(String pollNum) throws SQLException{
 		pollService.pollDelete(pollNum);
+		return "redirect:/poll/pollList.cnav";
 	}
 	
 	//투표 하는 페이지 요청
@@ -88,15 +90,18 @@ public class PollController {
 		
 		//고유번호 주면서 해당 글에대한 내용 받아와 view에 전달
 		PollDTO article = pollService.getPollArticle(pollNum);
-//			세션에서 id가져와서 중복투표방지
-//			String userId = (String)session.getAttribute("sid");
-			String userId = "pikapika4";
-			int result = 0;
-			result = pollService.recordPoll(pollNum,userId);
-		//++세션에서 id 뽑아와서 그 id에 해당하는 대상 부서와 일치할때만 투표버튼 보이게...
-			System.out.println("79번 result 값"+result);
-			model.addAttribute("result",result);//기록있으면 1 없으면 0 
-			model.addAttribute("article",article);
+		//세션에서 id가져와서 중복투표방지
+		//String userId = "pikapika4";
+		String userId = (String)session.getAttribute("sid");
+		int result = 0;
+		result = pollService.recordPoll(pollNum,userId);
+		//++세션에서 id 뽑아와서 그 id에 해당하는 대상 부서와 일치할때만 투표버튼 보이게
+		String userIdDept=pollService.getUserDept(userId);
+		System.out.println("79번 result 값 : "+result);
+		System.out.println("74번 userIdDept 값 : "+userIdDept);
+		model.addAttribute("result",result);//기록있으면 1 없으면 0 
+		model.addAttribute("article",article);
+		model.addAttribute("userIdDept",userIdDept);
 		
 		return "poll/pollPage";
 	}
@@ -107,37 +112,31 @@ public class PollController {
 		System.out.println("넘어오는파라미터 pollNum : "+pollNum);//pollNum값
 		PollDTO article = null;
 		String rePage;
-		String userId="pikapika4";
-//		String userId=(String)session.getAttribute("sid");
+		//중복투표방지 , 투표시 기록 남기기 
+		String userId=(String)session.getAttribute("sid");
 		if(pollNum != null && obj_value != null) {//투표할떄
 			pollService.plusPoll(pollNum,obj_value);//숫자 증가시켜주기
 			pollService.plusPollUser(pollNum,userId);//투표한리스트에 등록하기
 			//투표된 결과값도 받아와야.그값들로 결과창나타내줄 수 있다
 			System.out.println("11111111111");//확인용
-			rePage="poll/test88";
+			rePage="poll/pollResult";
 		}else {//결과로 넘어갈때
 			article = pollService.getPollArticleRes(pollNum);
 			System.out.println("222222222222");//확인용
-			rePage="poll/test88";
+			rePage="poll/pollResult";
 		}
 		model.addAttribute("article",article);
 		System.out.println(article);
 		//return "poll/pollPage";
 		return rePage;
 	}
-	//중복투표 방지
-	//@RequestMapping("pollRec.cnav")
-	//public String pollRec(HttpSession session, String pollNum) throws SQLException{
-		
-	//	return "";
-	//}
-	
-	
-	//test페이지
-	@RequestMapping("test88.cnav")
-	public String test88() {
-		
-		return "poll/test88";
+	//투표결과
+	@RequestMapping("pollResult")
+	public String pollResult(String pollNum,Model model) throws SQLException{
+		PollDTO article = null;
+		article = pollService.getPollArticleRes(pollNum);
+		model.addAttribute("article",article);
+		return "poll/pollResult";
 	}
 	
 }

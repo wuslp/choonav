@@ -32,11 +32,11 @@
 		</tr>
 		<tr>
 			<td>기안부서</td>
-			<td></td>
+			<td>${approval.dept}</td>
 		</tr>
 		<tr>
 			<td>기안자</td>
-			<td>${approval.userId}</td>
+			<td>${approval.name}</td>
 		</tr>
 		<tr>
 			<td>기안일자</td>
@@ -53,9 +53,9 @@
 		<td>직위 </td>
 	</tr>
 	<tr> <!-- 도장 -->
-		<td>${approval.name1} </td> 
-		<td>${approval.name2} </td>
-		<td>${approval.name3} </td>
+		<td>${approval.nick1} </td> 
+		<td>${approval.nick2} </td>
+		<td>${approval.nick3} </td>
 	</tr>
 
 </table>

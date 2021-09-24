@@ -2,7 +2,7 @@ package cnav.project.dto;
 
 public class ProjectDTO {
 	
-	private Integer proNum; 	// 프로젝트 번호a
+	private Integer proNum; 	// 프로젝트 번호
 	private String proName;		// 제목
 	private String proContent;	// 내용
 	private String userId; 		// 작성자(담당자)
@@ -10,6 +10,7 @@ public class ProjectDTO {
 	private String proEnd;		// 종료일
 	private String dept;		// 부서
 	private String proState;	// 진행상태
+	private String code;		// 회사코드
 	
 	public Integer getProNum() {
 		return proNum;
@@ -58,6 +59,12 @@ public class ProjectDTO {
 	}
 	public void setProState(String proState) {
 		this.proState = proState;
+	}
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
 	}
 	
 	

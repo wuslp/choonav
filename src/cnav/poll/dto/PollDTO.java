@@ -25,6 +25,7 @@ public class PollDTO {
 	private Integer res4;
 	private Integer total;
 	private String pollStatus;
+	private String code;
 	
 	public String getPollStatus() {
 		return pollStatus;
@@ -128,8 +129,12 @@ public class PollDTO {
 	public void setTotal(Integer total) {
 		this.total = total;
 	}
-	
-	
+	public void setCode(String code) {
+		this.code=code;
+	}
+	public String getCode() {
+		return code;
+	}
 	
 
 }

@@ -24,21 +24,39 @@ public class ApprovalDAOImpl implements ApprovalDAO {
 		// 팀장이 데이터 주면서 db에 저장하라고 했어! -> 창고 관리자에게.. 
 		sqlSession.insert("approval.insertApp", dto);
 		
+		HashMap map = new HashMap();
+		map.put("name1", dto.getName1());
+		String nick1 = sqlSession.selectOne("approval.getName", dto.getUserId()); //네임 뽑고 
+		map.put("nick1", nick1);
+		sqlSession.update("approval.name1", map);
+		
 	}
+	
+	
+	public String selectName(ApprovalDTO dto) throws SQLException{
+		String name= sqlSession.selectOne("approval.selectName", dto);
+		return name;
+	}
+	
+	
 	
 	// sendAppList 전체 글 개수 가져오기
 	@Override 
-	public int getAppCount() throws SQLException {
-		int result = sqlSession.selectOne("approval.countAll");
+	public int getAppCount(String userId, String code) throws SQLException {
+		HashMap map = new HashMap();
+		map.put("userId", userId);
+		map.put("code", code);
 		
-		return result;
+		return sqlSession.selectOne("approval.countAll", map);
 	}
 	
 	// 한페이지 게시글 목록 가져오기 
 	@Override
-	public List<ApprovalDTO> getApprovals(int start, int end) throws SQLException{
+	public List<ApprovalDTO> getApprovals(String userId, String code, int start, int end) throws SQLException{
 		
 		HashMap map = new HashMap();
+		map.put("userId", userId);
+		map.put("code", code);
 		map.put("start", start);
 		map.put("end", end);
 		
@@ -48,11 +66,13 @@ public class ApprovalDAOImpl implements ApprovalDAO {
 	}
 	// 검색 게시글 수 가져오기 
 		@Override
-		public int searchSendAppCount(String sel, String search) throws SQLException {
+		public int searchSendAppCount(String sel, String search, String userId, String code) throws SQLException {
 			
 			HashMap map = new HashMap();
 			map.put("sel", sel);
 			map.put("search", search);
+			map.put("userId", userId);
+			map.put("code", code);
 			
 			int result = sqlSession.selectOne("approval.countSearch", map);
 			
@@ -60,9 +80,11 @@ public class ApprovalDAOImpl implements ApprovalDAO {
 		}
 		// 검색 게시글 목록 가져오기 
 		@Override
-		public List<ApprovalDTO> sendSearchApprovals(int start, int end, String sel, String search) throws SQLException {
+		public List<ApprovalDTO> sendSearchApprovals(String userId, String code, int start, int end, String sel, String search) throws SQLException {
 			
 			HashMap map = new HashMap();
+			map.put("userId", userId);
+			map.put("code", code);
 			map.put("start", start);
 			map.put("end", end);
 			map.put("sel", sel);
@@ -97,22 +119,27 @@ public class ApprovalDAOImpl implements ApprovalDAO {
 	
 	// takeAppList 전체 글 개수 가져오기
 	@Override 
-	public int takeAppCount() throws SQLException {
-		int result = sqlSession.selectOne("approval.takeCountAll");
+	public int takeAppCount(String userId, String code) throws SQLException {
+		
+		
+		HashMap map = new HashMap();
+		map.put("userId", userId);
+		map.put("code", code);
+		int result = sqlSession.selectOne("approval.takeCountAll", map);
 		
 		return result;
 	}
 	
 	// 한페이지 게시글 목록 가져오기
 	@Override
-	public List<ApprovalDTO> takeApprovals(int start, int end) throws SQLException{
+	public List<ApprovalDTO> takeApprovals(String userId, String code, int start, int end) throws SQLException{
 		
 		HashMap map = new HashMap();
+		//RequestContextHolder 로session 꺼내서 확인 
+		map.put("userId", userId);
+		map.put("code", code);
 		map.put("start", start);
 		map.put("end", end);
-		//RequestContextHolder 로session 꺼내서 확인 
-		String id = "java02"; 
-		map.put("id", id);
 		
 		
 		List<ApprovalDTO> takeApprovalList = sqlSession.selectList("approval.takeApprovals", map);
@@ -123,11 +150,13 @@ public class ApprovalDAOImpl implements ApprovalDAO {
 		
 	// 검색 게시글 수 가져오기 
 	@Override
-	public int searchTakeAppCount(String sel, String search) throws SQLException {
+	public int searchTakeAppCount(String sel, String search, String userId, String code) throws SQLException {
 		
 		HashMap map = new HashMap();
 		map.put("sel", sel);
 		map.put("search", search);
+		map.put("userId", userId);
+		map.put("code", code);
 		
 		int result = sqlSession.selectOne("approval.takeCountSearch", map);
 		
@@ -135,9 +164,11 @@ public class ApprovalDAOImpl implements ApprovalDAO {
 	}
 	// 검색 게시글 목록 가져오기 
 	@Override
-	public List<ApprovalDTO> takeSearchApprovals(int start, int end, String sel, String search) throws SQLException {
+	public List<ApprovalDTO> takeSearchApprovals(String userId, String code, int start, int end, String sel, String search) throws SQLException {
 		
 		HashMap map = new HashMap();
+		map.put("userId", userId);
+		map.put("code", code);
 		map.put("start", start);
 		map.put("end", end);
 		map.put("sel", sel);
@@ -222,4 +253,14 @@ public class ApprovalDAOImpl implements ApprovalDAO {
 			}
 		}
 
+	// 결재자에 넣을 같은회사 유저아이디들 가져오기
+	@Override
+	public List getUsersId(String userId, String code) throws SQLException {
+		HashMap map = new HashMap();
+		map.put("code", code);
+		map.put("userId", userId);
+		List list = sqlSession.selectList("approval.getUsersId", map);
+		
+		return list;
+	}
 }
