@@ -1,24 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>사원 관리</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript">
+		function deptClick(userId){
+			window.open(
+				"/cnav/my/userManagementDePopup.cnav?id=" + userId,
+				"Popup_frame",
+				"width=500, height = 500"
+			);
+		}
+		function posiClick(userId){
+			window.open(
+				"/cnav/my/userManagementPosPopup.cnav?id=" + userId,
+				"Popup_frame",
+				"width=500, height = 500"
+			);
+		}
+		
+	</script>
 </head>
 <body>
 	<br />
-	<!-- <div align="right"> 
-		<c:if test="${sessionScope.sid == null}">
-			<button onclick="window.location='/spring/member/loginForm.do'">로그인</button>
-		</c:if>
-		<c:if test="${sessionScope.sid != null}">
-			<button onclick="window.location='/spring/member/logout.do'">로그아웃</button>
-		</c:if>
-	</div> -->
 	
-	<h3 align="left"> 사원 정보 수정</h3>>
+	<h3 align="left"> 사원 정보 수정</h3>
 	
 	<c:if test="${count == 0}">
 	<div align="center">
@@ -33,46 +44,34 @@
 		<table>
 			<div>
 				<tr>
-					<td>
-						<input type="checkbox" name="allCheck" id="allCheck"/>
-					</td>
 					<td>No.</td>
 					<td>이름</td>
-					<td>회사명</td>
 					<td>부서명</td>
 					<td>직위</td>
 				</tr>
 			</div>
 			<div>
-				<c:forEach var="recMailList" items="${recMailList}">
+				<c:forEach var="userList" items="${userList}">
 				<tr>
-					<td class="checkBox">
-						<input type="checkbox" name="RowCheck" class="chBox" />
+					<td>
+						${number}
+						<c:set var="number" value="${number-1}"/>
 					</td>
 					<td>
-						넘버
+						${userList.name}
 					</td>
-					<td>
-						이름
+					<td id = "dept" onclick = "deptClick('${userList.userId}')">
+						${userList.dept}
 					</td>
-					<td>
-						회사명
-					</td>
-					<td>
-						부서명
-					</td>
-					<td>
-						직위
+					<td id = "position" onclick = "posiClick('${userList.userId}')">
+						${userList.position}
 					</td>
 				</c:forEach>
 				</tr>
 			</div>
-			<div class="delete">
-				<td><input type="button" value="선택삭제" class="del-btn" onclick="deleteValue();" /></td>
-			</div>
 		</table>
 	</div>
-	<!-- </c:if>  -->
+	</c:if>
 	
 		<br /> <br /> 
 	<%-- 페이지 번호 --%>
@@ -91,34 +90,34 @@
 		<%-- 검색했을때 페이지번호들 --%>
 		<c:if test="${sel != null && search != null}">
 			<c:if test="${startPage > pageBlock}">
-				<a href="/cnav/mail/recMailList.cnav?pageNum=${startPage-pageBlock}&sel=${sel}&search=${search}" class="pageNums"> &lt; &nbsp;</a>
+				<a href="/cnav/my/userManagement.cnav?pageNum=${startPage-pageBlock}&sel=${sel}&search=${search}" class="pageNums"> &lt; &nbsp;</a>
 			</c:if>
 			<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
-				<a href="/cnav/mail/recMailList.cnav?pageNum=${i}&sel=${sel}&search=${search}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
+				<a href="/cnav/my/userManagement.cnav?pageNum=${i}&sel=${sel}&search=${search}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
 			</c:forEach>
 			<c:if test="${endPage < pageCount}">
-				&nbsp; <a href="/cnav/mail/recMailList.cnav?pageNum=${startPage+pageBlock}&sel=${sel}&search=${search}" class="pageNums"> &gt; </a>
+				&nbsp; <a href="/cnav/my/userManagement.cnav?pageNum=${startPage+pageBlock}&sel=${sel}&search=${search}" class="pageNums"> &gt; </a>
 			</c:if>
 		</c:if>
 		
 		<%-- 검색 안했을때 페이지번호들   --%> 
 		<c:if test="${sel == null || search == null}">
 			<c:if test="${startPage > pageBlock}">
-				<a href="/cnav/mail/recMailList.cnav?pageNum=${startPage-pageBlock}" class="pageNums"> &lt; &nbsp;</a>
+				<a href="/cnav/my/userManagement.cnav?pageNum=${startPage-pageBlock}" class="pageNums"> &lt; &nbsp;</a>
 			</c:if>
 			<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
-				<a href="/cnav/mail/recMailList.cnav?pageNum=${i}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
+				<a href="/cnav/my/userManagement.cnav?pageNum=${i}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
 			</c:forEach>
 			<c:if test="${endPage < pageCount}">
-				&nbsp; <a href="/cnav/mail/recMailList.cnav?pageNum=${startPage+pageBlock}" class="pageNums"> &gt; </a>
+				&nbsp; <a href="/cnav/my/userManagement.cnav?pageNum=${startPage+pageBlock}" class="pageNums"> &gt; </a>
 			</c:if>
 		</c:if>
 	</c:if>
 	
 	<%-- 이름/부서명 검색 --%>
-	<form action="/cnav/mail/recMailList.cnav">
+	<form action="/cnav/my/userManagement.cnav">
 		<select name="sel">
-			<option value="userId">이름</option>
+			<option value="name">이름</option>
 			<option value="dept">부서명</option>
 		</select>
 		<input type="text" name="search" />
@@ -127,7 +126,7 @@
 	<br />
 	<br /> 
 	<c:if test="${sel != null && search != null}">
-		<button onclick="window.location='/cnav/bizMypage/userManagement.cnav'"> 목록 </button> <br />
+		<button onclick="window.location='/cnav/my/userManagement.cnav'"> 목록 </button> <br />
 	</c:if>
 	</div>
 

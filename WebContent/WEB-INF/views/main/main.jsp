@@ -16,7 +16,7 @@
 	<div>
 		<div>
 			<!--로그인된 세션이 없을경우 startPage 로 이동시켜주기  -->
-			<div id=""> 
+			<div id="">
 				<c:if test="${sessionScope.sid == null}">
 				<script>
 					alert("로그인후 이용할 수 있습니다");
