@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="notice">
+
+	<select id="countAll" resultType="int">
+		select count(*) from notice
+	</select>
+
+	<select id="getArticles" parameterType="hashmap" resultType="noticeDTO">
+		<![CDATA[
+		select B.*, r from 
+			(select A.*, rownum r from 
+				(select * from notice order by notiNum desc) A order by notiNum desc) B
+		where r >= #{start} and r <= #{end}
+		]]>
+	</select>
+
+	<select id="countSearch" parameterType="hashmap" resultType="int">
+		select count(*) from notice where ${sel} like '%'||#{search}||'%'
+	</select>
+
+	<select id="getSearchArticles" parameterType="hashmap" resultType="noticeDTO">
+		<![CDATA[
+		select B.*, r from 
+			(select A.*, rownum r from 
+				(select * from notice where ${sel} like '%'||#{search}||'%' order by notiNum desc) A order by notiNum desc) B
+		where r >= #{start} and r <= #{end}
+		]]>
+	</select>
+	
+	<!-- 게시판 insert -->
+<!-- 	<insert id="insertArticle" parameterType="noticeDTO">
+	<selectKey keyProperty="num" order="BEFORE" resultType="int">
+		SELECT Topic_SEQ.NEXTVAL FROM DUAL
+	</selectKey>
+	INSERT INTO notice (notiNum, userId, notiTitle, notiContent, notiDate, readcount)
+				VALUES (#{num}, #{writer}, #{title}, #{content}, sysdate, 0)
+	</insert>
+	 -->
+	<insert id="insertArticle" parameterType="noticeDTO">
+		<selectKey keyProperty="notiNum" order="BEFORE" resultType="int">
+			select "Topic_SEQ".nextVal from dual
+		</selectKey>
+		insert into notice(notiNum, notiTitle, notiContent, notiDate, userId, readcount) 
+		values(#{notiNum}, #{notiTitle}, #{notiContent}, sysdate, #{userId}, 0)
+	</insert>
+	
+	<select id="getOneArticle" parameterType="int" resultType="noticeDTO">
+		select * from notice where notiNum = #{value}
+	</select>
+	
+	<update id="readcountUp" parameterType="int">
+		update notice set readcount = readcount+1 where notiNum = #{value}
+	</update> 
+	
+	<!-- 게시물삭제 -->
+	<delete id="deleteArticle" parameterType="int">
+		DELETE FROM notice WHERE notiNum = #{value}
+	</delete>
+	
+	<!-- 게시글 수정폼 -->
+	<select id="getUpdateArticle" parameterType="int" resultType="noticeDTO">
+		select * from notice where notiNum = #{value}
+	</select>
+	
+	<!-- 게시글 수정 -->
+	<update id="updateArticle" parameterType="noticeDTO">
+		UPDATE notice SET notiTitle = #{notiTitle}, notiContent = #{notiContent} WHERE notiNum = #{notiNum}
+	</update>
+	
+</mapper>
