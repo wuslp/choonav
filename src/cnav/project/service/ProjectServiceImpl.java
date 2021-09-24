@@ -7,7 +7,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
 
 import cnav.project.dao.ProjectDAOImpl;
 import cnav.project.dto.ProjectDTO;
@@ -21,10 +22,12 @@ public class ProjectServiceImpl implements ProjectService{
 	
 	// 모든 프로젝트 가져오기(proList)
 	@Override
-	public Map<String, Object> getProjectList(String pageNum) throws SQLException{
+	public Map<String, Object> getProjectList(String pageNum) throws SQLException{		
+		// 로그인된 세션 정보 가져오기 
+		String userId=(String)RequestContextHolder.getRequestAttributes().getAttribute("sid", RequestAttributes.SCOPE_SESSION); // 아이디
+		String code=(String)RequestContextHolder.getRequestAttributes().getAttribute("scode", RequestAttributes.SCOPE_SESSION); // 회사코드
 		
-		int pageSize=5;
-		
+		int pageSize=5;		
 		if(pageNum==null) { // proList.cnav 라고만 요청했을때, 즉 pageNum 파라미터 안넘어왔을때
 			pageNum="1";
 		}
@@ -39,12 +42,13 @@ public class ProjectServiceImpl implements ProjectService{
 		int count=0;	// 전체 검색된 프로젝트 갯수
 		int number=0;	// 브라우저 화면에 뿌려줄 가상 글 번호들..?
 		  
+		// 해당 회사코드에 프로젝트 갯수가 있는지
 		// 전체 프로젝트 개수 가져오기 
-		count=projectDAO.getProjectCount(); // DB에 저장되어있는 전체 글의 개수를 가져와 담기 
+		count=projectDAO.getProjectCount(userId,code); // DB에 저장되어있는 전체 글의 개수를 가져와 담기 
 		System.out.println("count : "+count);
 		// 하나라도 있으면 프로젝트들을 다시 가져오기 
 		if(count >0) {
-			projectList=projectDAO.getProjects(startRow, endRow);
+			projectList=projectDAO.getProjects(startRow, endRow,code);
 		}
 		
 		number=count-(currentPage-1)*pageSize; // 프로젝트 목록에 뿌려줄 가상의 글번호들
@@ -59,6 +63,7 @@ public class ProjectServiceImpl implements ProjectService{
 		result.put("projectList", projectList);
 		result.put("count", count);
 		result.put("number", number);
+		result.put("code",code);
 		
 		return result;		
 		
@@ -67,7 +72,10 @@ public class ProjectServiceImpl implements ProjectService{
 	// 프로젝트 검색한거 가져오기 (list 검색)
 	@Override
 	public Map<String, Object> getSearchProjectList(String pageNum, String sel, String search) throws SQLException {
-		// 한페이지에 보여줄 게시글의 수 
+		String userId=(String)RequestContextHolder.getRequestAttributes().getAttribute("sid", RequestAttributes.SCOPE_SESSION); // 아이디
+		String code=(String)RequestContextHolder.getRequestAttributes().getAttribute("scode", RequestAttributes.SCOPE_SESSION); // 회사코드
+			
+			// 한페이지에 보여줄 게시글의 수 
 			int pageSize = 5; 
 			// 현재 페이지 번호
 			if(pageNum == null){ //pageNum 파라미터 안넘어왔을때.
@@ -86,12 +94,12 @@ public class ProjectServiceImpl implements ProjectService{
 				
 			//개수 있는지
 			// 전체 글의 개수 가져오기 
-			count = projectDAO.getSearchProjectCount(sel,search);
+			count = projectDAO.getSearchProjectCount(sel,search,code);  
 			System.out.println("count : " + count);
 			// 글이 하나라도 
 			//있으면 리스트 불러오기
 			if(count > 0){
-				projectList = projectDAO.getSearchProjects(startRow, endRow, sel, search); 
+				projectList = projectDAO.getSearchProjects(startRow, endRow, sel, search,code); 
 			}
 					
 			number = count - (currentPage-1) * pageSize; 	// 게시판 목록에 뿌려줄 가상의 글 번호  
@@ -107,13 +115,17 @@ public class ProjectServiceImpl implements ProjectService{
 			result.put("number", number);
 			result.put("sel", sel);
 			result.put("search", search);
+			result.put("code",code);
 				
-				return result;
+			return result;
 		}
 		
 		// 진행중/ 완료
 		@Override
 		public Map<String, Object> getSortProject(String pageNum, String sort) throws SQLException{
+			String userId=(String)RequestContextHolder.getRequestAttributes().getAttribute("sid", RequestAttributes.SCOPE_SESSION); // 아이디
+			String code=(String)RequestContextHolder.getRequestAttributes().getAttribute("scode", RequestAttributes.SCOPE_SESSION); 
+					
 			// 한페이지에 보여줄 게시글의 수 
 			int pageSize = 5; 
 			// 현재 페이지 번호
@@ -127,18 +139,18 @@ public class ProjectServiceImpl implements ProjectService{
 			int endRow = currentPage * pageSize; // 페이지 마지막 글번호
 
 			// 밖에서 사용가능하게 if문 시작 전에 미리 선언
-			List<ProjectDTO> articleList = null;  	// 전체 게시글들 담아줄 변수
+			List<ProjectDTO> projectList = null;  	// 전체 게시글들 담아줄 변수
 			int count = 0; 
 			int number = 0; 			// 브라우저 화면에 뿌려줄 가상 글 번호  
 			
 			//개수 있는지
 			// 전체 글의 개수 가져오기 
-			count = projectDAO.getProjectState(sort);
+			count = projectDAO.getProjectState(sort,code);
 			System.out.println("count : " + count);
 			// 글이 하나라도 
 			//있으면 리스트 불러오기
 			if(count > 0){
-				articleList = projectDAO.getState(startRow, endRow, sort); 
+				projectList = projectDAO.getState(startRow, endRow, sort,code); 
 			}
 			
 			number = count - (currentPage-1) * pageSize; 	// 게시판 목록에 뿌려줄 가상의 글 번호  
@@ -149,10 +161,11 @@ public class ProjectServiceImpl implements ProjectService{
 			result.put("currentPage", currentPage);
 			result.put("startRow", startRow);
 			result.put("endRow", endRow);
-			result.put("articleList", articleList);
+			result.put("projectList", projectList);
 			result.put("count", count);
 			result.put("number", number);
 			result.put("sort", sort);
+			result.put("code", code);
 			
 			return result;
 		}
@@ -168,8 +181,7 @@ public class ProjectServiceImpl implements ProjectService{
 	@Override
 	public ProjectDTO getProject(int proNum) throws SQLException {
 		// 해당 정보 가져오기
-		ProjectDTO project=projectDAO.getProject(proNum);
-		
+		ProjectDTO project=projectDAO.getProject(proNum);	
 		return project;
 	}
 	
@@ -187,12 +199,10 @@ public class ProjectServiceImpl implements ProjectService{
 		projectDAO.updateProject(dto);
 		return 0;
 	}
-	// 프로젝트 삭제 
+	// 프로젝트 삭제
 	@Override
-	public int deleteProject(int proNum) throws SQLException {
-		ProjectDTO dto=new ProjectDTO();
-		projectDAO.deleteProject(dto);
-		return 0;
+	public void deleteProject(String proNum) throws SQLException{
+		projectDAO.deleteProject(proNum);
 	}
 	
 	
