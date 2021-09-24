@@ -8,7 +8,7 @@
                         <div class="nav">
                         
                        	 <!-- 공지사항 고정 -->
-                        	<a class="nav-link" href="">
+                        	<a class="nav-link" href="/cnav/notice/list.cnav">
                                 <div class="sb-nav-link-icon"><i class="fas fa-exclamation-circle"></i></div>
                                	공지사항
                             </a>
@@ -44,9 +44,9 @@
                             </a>
                             <div class="collapse" id="mailLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/cnav/approval/sendAppList.cnav">메일 쓰기</a>
-                                    <a class="nav-link" href="/cnav/approval/sendAppList.cnav">보낸 메일함</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">받은 메일함</a>
+                                    <a class="nav-link" href="/cnav/mail/writeMailForm.cnav">메일 쓰기</a>
+                                    <a class="nav-link" href="/cnav/mail/sendMailList.cnav">보낸 메일함</a>
+                                    <a class="nav-link" href="/cnav/mail/recMailList.cnav">받은 메일함</a>
                                 </nav>
                             </div>
                            </c:if>
@@ -59,8 +59,8 @@
                             </a>
                             <div class="collapse" id="reserveLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="">전체 예약</a>
-                                    <a class="nav-link" href="">내 예약</a>
+                                    <a class="nav-link" href="/cnav/rez/allRez.cnav">전체 예약</a>
+                                    <a class="nav-link" href="/cnav/rez/myRez.cnav">내 예약</a>
                                 </nav>
                             </div>
                            </c:if>
@@ -73,21 +73,21 @@
                             </a>
                             <div class="collapse" id="dayLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="">전체 일정</a>
-                                    <a class="nav-link" href="/cnav/approval/takeAppList.cnav">내 일정</a>
+                                    <a class="nav-link" href="/cnav/cal/calendar.cnav">전체 일정</a>
+                                    <a class="nav-link" href="/cnav/cal/myCalendar.cnav">내 일정</a>
                                 </nav>
                             </div>
                             </c:if>
 							<!--  -->
 							<c:if test="${sessionScope.cdto.project==1}">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="/cnav/project/proList.cnav">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 	프로젝트
                             </a>
                             </c:if>
                             <!-- 자유 게시판 -->
                            <c:if test="${sessionScope.cdto.topic==1}"> 
-                            <a class="nav-link" href="tables.html">
+                            <a class="nav-link" href="/cnav/topic/list.cnav">
                                 <div class="sb-nav-link-icon"><i class="fas fa-comments"></i></div>
                                 	자유 게시판
                             </a>

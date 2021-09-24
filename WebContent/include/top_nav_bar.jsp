@@ -31,8 +31,7 @@
 			aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
 			<ul class="dropdown-menu dropdown-menu-end"
 				aria-labelledby="navbarDropdown">
-				<li><a class="dropdown-item" href="#!">Settings</a></li>
-				<li><a class="dropdown-item" href="#!">Activity Log</a></li>
+				<li><a class="dropdown-item" href="/cnav/my/mypage.cnav">마이페이지</a></li>
 				<li><hr class="dropdown-divider" /></li>
 
 				<li><a class="dropdown-item" href="/cnav/main/logout.cnav">로그아웃</a></li>
