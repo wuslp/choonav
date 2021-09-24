@@ -5,6 +5,9 @@ import java.util.List;
 
 import cnav.main.dto.UserDTO;
 
+import cnav.mypage.dto.UserInfoDTO;
+
+
 public interface MypageDAO {
 
 	public int getSearchMypjCount(String userId, String code) throws SQLException;
@@ -13,6 +16,7 @@ public interface MypageDAO {
 	public List getMytopicList(String userId, String code, int start, int end) throws SQLException;
 	public int getTopicCommCount(String userId, String code) throws SQLException;
 	public List getMytopicCommList(String userId, String code, int start, int end) throws SQLException;
+
 	
 	// 관리자 맞는지 확인
 	public int manageCheck(String id, String code) throws SQLException;
@@ -30,4 +34,11 @@ public interface MypageDAO {
 	public int updateDepUser(UserDTO dto) throws SQLException;
 	// 팝업 -> posi 수정
 	public int updatePosUser(UserDTO dto) throws SQLException;
+
+	public UserInfoDTO getUserInfo(String userId, String code) throws SQLException;
+	public int updateUserInfo(String userId, String code, UserDTO dto) throws SQLException;
+	public int idPwCheck(String userId, String pw) throws SQLException;
+	public int updatePw(String userId, String pw) throws SQLException;
+	public void deleteUser(String userId) throws SQLException;
+
 }

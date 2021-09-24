@@ -8,9 +8,11 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import cnav.mail.dto.MailDTO;
 import cnav.main.dto.UserDTO;
 import cnav.mypage.dto.TopicCommDTO;
+import cnav.mypage.dto.UserInfoDTO;
 import cnav.mypage.service.MypageService;
 import cnav.project.dto.ProjectDTO;
 import cnav.reservation.dto.ReservationDTO;
@@ -160,6 +162,49 @@ public class MypageDAOImpl implements MypageDAO{
 	public int updatePosUser(UserDTO dto) throws SQLException {
 		int result = sqlSession.update("my.updatePosUser", dto);
 		return result;
+	}
+	@Override
+	public UserInfoDTO getUserInfo(String userId, String code) throws SQLException {
+		HashMap map = new HashMap();
+		map.put("userId", userId);
+		map.put("code", code);
+		
+		UserInfoDTO dto = sqlSession.selectOne("my.selectUserInfo", map);
+		return dto;
+	}
+	@Override
+	public int updateUserInfo(String userId, String code, UserDTO dto) throws SQLException {
+		HashMap map = new HashMap();
+		map.put("userId", userId);
+		map.put("email", dto.getEmail());
+		map.put("tel", dto.getTel());
+		
+		int result = sqlSession.update("my.UpdateUser", map);
+		return result;
+	}
+	
+	@Override
+	public int idPwCheck(String userId, String pw) throws SQLException {
+		HashMap map = new HashMap();
+		map.put("userId", userId);
+		map.put("pw", pw);
+		
+		int result = sqlSession.selectOne("my.idPwCheck", map);
+		return result;
+	}
+	
+	@Override
+	public int updatePw(String userId, String pw) throws SQLException {
+		HashMap map = new HashMap();
+		map.put("userId", userId);
+		map.put("pw", pw);
+		
+		int result = sqlSession.update("my.updatePw", map);
+		return result;
+	}
+	@Override
+	public void deleteUser(String userId) throws SQLException {
+		sqlSession.delete("my.deleteUser", userId);
 	}
 
 }

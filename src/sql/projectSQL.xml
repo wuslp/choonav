@@ -5,66 +5,60 @@
 <mapper namespace="project">
 
 	<!-- 전체 프로젝트 수 불러오기 -->
-	<select id="countAll" resultType="int">
-		select count(*) from project
+	<select id="countAll" resultType="int" parameterType="string">
+		select count(*) from project where code=#{code}
 	</select>
 
 	<!--프로젝트 리스트 불러오기  -->
-	<select id="getProjects" parameterType="hashmap" resultType="projectDTO">
-	
+	<select id="getProjects" parameterType="hashmap" resultType="projectDTO">	
 		<![CDATA[
 			select * from (select rownum rnum, project.* from 
-			(select * from project order by proNum desc) project) 
-				where rnum >= #{start} and rnum <=#{end}	
+       			(select * from project where code=#{code} order by proNum desc) project) 
+           			 where rnum >= #{start} and rnum <=#{end}
 		]]>
 	</select>
 	
 	<!-- 검색 -->
 	<select id="getSearchProjectCount" parameterType="hashmap" resultType="int">
-		select count(*) from project where #{sel} like '%'||#{search}||'%'
-	</select>
-	
+		select count(*) from project where (code=#{code}) and #{sel} like '%'||#{search}||'%'
+	</select>	
 	<!-- 검색한 프로젝트 가져오기 -->
-	<select id="getSearchProjects" parameterType="hashmap" resultType="projectDTO">
-		
+	<select id="getSearchProjects" parameterType="hashmap" resultType="projectDTO">		
 		<![CDATA[
-			select * from (select rownum rnum, project.* from 
-			(select * from project where ${sel} like '%'||#{search}||'%' order by proNum desc) project) 
-				where rnum >= #{start} and rnum <=#{end}
+		 	select B.*, r
+	  		 from (select A.*, rownum r from (select * from project where (code=#{code}) and ${sel} like '%'||#{search}||'%' order by proStart asc) A order by proStart asc) B
+	  			 where r >= #{start} and r <= #{end}
 		]]>
 	</select>
-	
-	<!-- 진행중 완료 리스트 가져오기 -->
-	<select id="getProjectState" resultType="int" parameterType="string">
-		select count(*) from project where proState like '%'||#{sort}||'%'
-	</select>
-	<select id="getState" parameterType="hashmap" resultType="projectDTO">
-		<![CDATA[
-	  	select B.*, r
-	  	 from (select A.*, rownum r from (select * from project where proState=#{sort} order by proStart asc) A order by proStart asc) B
-	   		where r >= #{startRow} and r <= #{endRow}
-		]]>
-	</select>
-	
-	
-	
 	
 	<!-- 진행중, 완료 상태 업데이트 -->
 	<update id="updat2">
 		<![CDATA[
-			update project set proState='진행중' where (to_char(proStart, 'yyyymmdd') >= to_char(sysdate, 'yyyymmdd'))
+			update project set proState='진행중' where (code=#{code}) and (to_char(proStart, 'yyyymmdd') >= to_char(sysdate, 'yyyymmdd'))
 		]]>	
 	</update>
 	<!-- 완료 -->
 	<update id="updat1">
 		<![CDATA[
-			update project set proState='완료' where (to_char(proEnd, 'yyyymmdd') < to_char(sysdate, 'yyyymmdd'))
+			update project set proState='완료' where (code=#{code}) and (to_char(proEnd, 'yyyymmdd') < to_char(sysdate, 'yyyymmdd'))
 		]]>
 	</update>
+	<!-- 진행중 완료 리스트 가져오기 -->
+	<select id="getProjectState" resultType="int" parameterType="hashmap">
+		select count(*) from project where code=#{code} and proState like '%'||#{sort}||'%'
+	</select>
+	<select id="getState" parameterType="hashmap" resultType="projectDTO">
+		<![CDATA[
+	  	select B.*, r
+	  	 from (select A.*, rownum r from (select * from project where code=#{code} and proState=#{sort} order by proStart asc) A order by proStart asc) B
+	   		where r >= #{start} and r <= #{end}
+		]]>
+	</select>
+	
 	
 	<!-- 프로젝트 저장 -->
 	<insert id="insertProject" parameterType="projectDTO">
-		insert into project values(project_seq.nextVal,#{proName},#{proContent},'java',#{proStart},#{proEnd},#{dept},#{proState})	
+		insert into project values(project_seq.nextVal,#{proName},#{proContent},'java',#{proStart},#{proEnd},#{dept},#{proState},#{code})	
 	</insert>
 	
 	
@@ -87,7 +81,7 @@
 	</update>
 	
 	<!-- 프로젝트 삭제 -->
-	<delete id="deleteProject" parameterType="projectDTO">
+	<delete id="deleteProject" parameterType="string">
 		delete from project where proNum=#{proNum}
 	</delete>
 	

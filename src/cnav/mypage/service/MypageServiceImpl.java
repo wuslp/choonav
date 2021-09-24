@@ -7,11 +7,15 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+
 
 import cnav.mail.dto.MailDTO;
 import cnav.main.dto.UserDTO;
 import cnav.mypage.dao.MypageDAO;
 import cnav.mypage.dto.TopicCommDTO;
+import cnav.mypage.dto.UserInfoDTO;
 import cnav.project.dto.ProjectDTO;
 import cnav.reservation.dto.ReservationDTO;
 import cnav.topic.dto.TopicDTO;
@@ -152,6 +156,44 @@ public class MypageServiceImpl implements MypageService {
 				
 		return result;
 		
+	}
+
+	@Override
+	public UserInfoDTO getUserInfo(String userId, String code) throws SQLException {
+		return myDAO.getUserInfo(userId, code);
+	}
+
+	@Override
+	public int updateUserInfo(String userId, String code, UserDTO dto) throws SQLException {
+		return myDAO.updateUserInfo(userId, code, dto);
+	}
+	// 세션 삭제 
+	@Override
+	public void removeSessionAttr(String sessionName) {
+		RequestContextHolder.getRequestAttributes().removeAttribute(sessionName, RequestAttributes.SCOPE_SESSION);
+		
+	}
+
+	@Override
+	public int pwChenge(String nowPw, String newPw, String userId) throws SQLException {
+		// id, pw 체크하고 맞으면 삭제, 틀리면 삭제 안함
+		int result = myDAO.idPwCheck(userId, nowPw);
+		if(result == 1) {
+			myDAO.updatePw(userId, newPw);
+		}
+		return result;
+	}
+
+	@Override
+	public int deleteUser(String userId, String pw) throws SQLException {
+		// id, pw 체크하고 맞으면 삭제, 틀리면 삭제 안함
+		int result = myDAO.idPwCheck(userId, pw);
+		System.out.println("회원탈퇴 result" + result);
+		if(result == 1) {
+			myDAO.deleteUser(userId);
+			removeSessionAttr("sid"); // 위에서 세션삭제 메소드 만든것 있으니 활용
+		}
+		return result;
 	}
 	
 	// 회사 코드 내에 있는 세션 로그인한 사람이 관리자가 맞는지 확인

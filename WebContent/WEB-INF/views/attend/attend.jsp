@@ -74,7 +74,6 @@
  				window.location.replace("/cnav/attend/attend.cnav");
 			 }else{
  				 alert(attcategory+"리스트 필터링");
- 				 
  				//ajax요청 
  				$.ajax({
  					url : "/cnav/attend/attend.cnav",
@@ -95,13 +94,29 @@
  				//location.reload();
  			 }
  		 })
- 		 /* $("#search1").change(function(){
- 			var selectCate = $("#search1").val();//확인용
- 			alert(selectCate);
- 		 }) */
- 		 
-
- 	})
+ 	})//ready
+ 	
+	function check(){
+		var search1 = $("#search1").val();
+		//조회 시작일 필수
+		if(search1==""){
+			alert("조회시작일을 선택해주세요");
+			$("#search1").focus();
+			return false;
+		}
+		var search2 = $("#search2").val();
+		//조회 시작일 필수 
+		if(search2==""){
+			alert("조회마지막일을 선택해주세요");
+			$("#search2").focus();
+			return false;
+		}
+		if(search1 > search2){
+			alert("마지막일은 시작일보다 작아야 합니다");
+			$("#search1").focus();
+			return false;
+		}
+	}
  <%-- 		$("#button1").click(){
 			var worktime = document.getElementById("worktime");
 			var btn1Val =$("#button1").val();
@@ -172,7 +187,7 @@
 		</div><br/><br/><br/><br/><br/>
 		
 		<div id="" class="">
-				<form action="/cnav/attend/attend.cnav" method="get">
+				<form action="/cnav/attend/attend.cnav" method="get" onsubmit="return check()">
 				<select id="attcategory" name="attcategory">
 					<option value="">-- 선택 --</option>
 					<option value="">전체</option>
