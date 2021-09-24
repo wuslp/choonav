@@ -59,7 +59,7 @@
 					<a href="/cnav/attend/attend.cnav">근태</a><br/><br/>
 				</c:if>
 				<c:if test="${sessionScope.cdto.project==1}">
-					<a href="#">프로젝트</a><br/><br/>
+					<a href="/cnav/project/proList.cnav">프로젝트</a><br/><br/>
 				</c:if>
 				<c:if test="${sessionScope.cdto.calendar==1}">
 					<a href="/cnav/cal/calendar.cnav">일정</a><br/><br/>
