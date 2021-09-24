@@ -71,7 +71,7 @@ public class MainServiceImpl implements MainService{
 		if(result ==1) {
 			//session에 속성추가
 			//servlet이 아니라도 
-			//service,dao 어디에서나 request속성을 꺼낼수 있는 매세드.session에 set한것과 같은 것
+			//service,dao 어디에서나 request속성을 꺼낼수 있는 매서드.session에 set한것과 같은 것
 			//id , code , auth
 			RequestContextHolder.getRequestAttributes().setAttribute("sid", dto.getUserId(), RequestAttributes.SCOPE_SESSION);
 			//RequestContextHolder.getRequestAttributes().setAttribute("sauth", dto.getAuth(), RequestAttributes.SCOPE_SESSION);
@@ -149,6 +149,13 @@ public class MainServiceImpl implements MainService{
 	public BusinessDTO getBizInfo(String scode) throws SQLException {
 		BusinessDTO dto = mainDAO.getBizInfo(scode);
 		return dto;
+	}
+
+	//userList가져오기
+	@Override
+	public List getCodeSametUser(String scode) throws SQLException {
+		List list=mainDAO.getCodeSametUser(scode);
+		return list;
 	}
 	
 	

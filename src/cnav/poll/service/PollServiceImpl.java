@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 
+import cnav.main.dto.CategoryDTO;
 import cnav.poll.dao.PollDAO;
 import cnav.poll.dao.PollDAOImpl;
 import cnav.poll.dto.PollDTO;
@@ -223,6 +224,14 @@ public class PollServiceImpl implements PollService{
 	public void pollDelete(String pollNum) throws SQLException {
 		pollDAO.pollDelete(pollNum);
 		
+	}
+	//**카테고리 불러오기
+	@Override
+	public CategoryDTO takeCategory() throws SQLException {
+		//세션에서 회사코드 꺼내주기
+		String code = (String)RequestContextHolder.getRequestAttributes().getAttribute("scode", RequestAttributes.SCOPE_SESSION);
+		CategoryDTO cdto=pollDAO.takeCategory(code);
+		return cdto;
 	}
 	
 	

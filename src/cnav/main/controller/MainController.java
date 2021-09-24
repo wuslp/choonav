@@ -1,6 +1,7 @@
 package cnav.main.controller;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -211,6 +212,11 @@ public class MainController {
 		// 회사코드에 해당하는 회사정보 가져오기
 		BusinessDTO bizDTO = mainService.getBizInfo(scode);
 		
+		//*******여기서부터
+		List list = new ArrayList();
+		list = mainService.getCodeSametUser(scode);
+		//여기까지 test추가 ->나중에 삭제할것 !!
+		
 		// view에 전달할 데이터 보내기 
 		model.addAttribute("articleList", result.get("articleList"));
 		model.addAttribute("count", result.get("count"));
@@ -218,6 +224,9 @@ public class MainController {
 		model.addAttribute("bizDTO", bizDTO);
 		
 		model.addAttribute("cdto",cdto);
+		//*******여기서부터
+		model.addAttribute("list",list);
+		//여기까지 test추가 ->나중에 삭제할것 !!
 		return "main/main";
 	}
 	//아이디 찾기 폼

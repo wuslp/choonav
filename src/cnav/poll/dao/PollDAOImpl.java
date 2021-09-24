@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import cnav.main.dto.CategoryDTO;
 import cnav.poll.dto.PollDTO;
 
 @Repository
@@ -144,6 +145,12 @@ public class PollDAOImpl implements PollDAO{
 	public void pollDelete(String pollNum) throws SQLException {
 		sqlSession.delete("poll.pollDelete",pollNum);
 		
+	}
+	//**카테고리 가져오기
+	@Override
+	public CategoryDTO takeCategory(String code) throws SQLException {
+		CategoryDTO cdto=sqlSession.selectOne("poll.getCategory",code);
+		return cdto;
 	}
 	
 	

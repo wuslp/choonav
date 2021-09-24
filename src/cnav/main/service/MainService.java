@@ -33,4 +33,7 @@ public interface MainService {
 	// 회사정보 가져오기
 	public BusinessDTO getBizInfo(String scode) throws SQLException;
 	
+	//++user리스트 가져오기
+	public List getCodeSametUser(String scode) throws SQLException;
+	
 }

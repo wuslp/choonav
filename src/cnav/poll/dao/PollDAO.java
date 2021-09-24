@@ -3,6 +3,7 @@ package cnav.poll.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import cnav.main.dto.CategoryDTO;
 import cnav.poll.dto.PollDTO;
 
 public interface PollDAO {
@@ -38,4 +39,6 @@ public interface PollDAO {
 	//투표글 삭제
 	public void pollDelete(String pollNum) throws SQLException;
 	
+	//**카테고리 가져오기
+	public CategoryDTO takeCategory(String code) throws SQLException;
 }
