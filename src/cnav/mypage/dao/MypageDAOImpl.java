@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import cnav.mail.dto.MailDTO;
 import cnav.main.dto.UserDTO;
+import cnav.mypage.dto.PjCommDTO;
 import cnav.mypage.dto.TopicCommDTO;
 import cnav.mypage.dto.UserInfoDTO;
 import cnav.mypage.service.MypageService;
@@ -24,6 +25,7 @@ public class MypageDAOImpl implements MypageDAO{
 	@Autowired
 	private SqlSessionTemplate sqlSession = null;
 	
+	// 내프로젝트 총개수
 	@Override
 	public int getSearchMypjCount(String userId, String code) throws SQLException {
 		HashMap map = new HashMap();
@@ -32,6 +34,8 @@ public class MypageDAOImpl implements MypageDAO{
 		
 		return sqlSession.selectOne("my.countMypj", map);
 	}
+	
+	// 내게시물 총개수
 	@Override
 	public int getSearchMytopicCount(String userId, String code) throws SQLException {
 		HashMap map = new HashMap();
@@ -40,7 +44,8 @@ public class MypageDAOImpl implements MypageDAO{
 		
 		return sqlSession.selectOne("my.countMytopic", map);
 	}
-
+	
+	// 내프로젝트 리스트 가져오기
 	@Override
 	public List getMypjList(String userId, String code, int start, int end) throws SQLException {
 		HashMap map = new HashMap();
@@ -55,6 +60,7 @@ public class MypageDAOImpl implements MypageDAO{
 		return list;
 	}
 
+	// 내게시물 리스트 가져오기
 	@Override
 	public List getMytopicList(String userId, String code, int start, int end) throws SQLException {
 		System.out.println("topic service");
@@ -69,6 +75,8 @@ public class MypageDAOImpl implements MypageDAO{
 		System.out.println("dao"+list);
 		return list;
 	}
+	
+	// 내가쓴 댓글 개수 (자유게시판)
 	@Override
 	public int getTopicCommCount(String userId, String code) throws SQLException {
 		HashMap map = new HashMap();
@@ -77,6 +85,8 @@ public class MypageDAOImpl implements MypageDAO{
 		
 		return sqlSession.selectOne("my.countMytopicComm", map);
 	}
+	
+	// 내가쓴 댓글 리스트 가져오기 (자유게시판)
 	@Override
 	public List getMytopicCommList(String userId, String code, int start, int end) throws SQLException {
 		System.out.println("topic service");
@@ -163,6 +173,8 @@ public class MypageDAOImpl implements MypageDAO{
 		int result = sqlSession.update("my.updatePosUser", dto);
 		return result;
 	}
+	
+	// 계정정보
 	@Override
 	public UserInfoDTO getUserInfo(String userId, String code) throws SQLException {
 		HashMap map = new HashMap();
@@ -172,6 +184,8 @@ public class MypageDAOImpl implements MypageDAO{
 		UserInfoDTO dto = sqlSession.selectOne("my.selectUserInfo", map);
 		return dto;
 	}
+	
+	// 계정정보 수정
 	@Override
 	public int updateUserInfo(String userId, String code, UserDTO dto) throws SQLException {
 		HashMap map = new HashMap();
@@ -183,6 +197,7 @@ public class MypageDAOImpl implements MypageDAO{
 		return result;
 	}
 	
+	// id, pw 체크
 	@Override
 	public int idPwCheck(String userId, String pw) throws SQLException {
 		HashMap map = new HashMap();
@@ -193,6 +208,7 @@ public class MypageDAOImpl implements MypageDAO{
 		return result;
 	}
 	
+	// pw 변경
 	@Override
 	public int updatePw(String userId, String pw) throws SQLException {
 		HashMap map = new HashMap();
@@ -202,9 +218,36 @@ public class MypageDAOImpl implements MypageDAO{
 		int result = sqlSession.update("my.updatePw", map);
 		return result;
 	}
+	
+	// 회원탈퇴
 	@Override
 	public void deleteUser(String userId) throws SQLException {
 		sqlSession.delete("my.deleteUser", userId);
+	}
+
+	// 내가쓴 댓글 개수 (프로젝트)
+	@Override
+	public int getPjCommCount(String userId, String code) throws SQLException {
+		HashMap map = new HashMap();
+		map.put("userId", userId);
+		map.put("code", code);
+		
+		return sqlSession.selectOne("my.countMyPjComm", map);
+	}
+
+	// 내가쓴 댓글 리스트 (프로젝트)
+	@Override
+	public List getMyPjCommList(String userId, String code, int start, int end) throws SQLException {
+		HashMap map = new HashMap();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("code", code);
+		map.put("userId", userId);
+		
+		
+		List<PjCommDTO> list = sqlSession.selectList("my.selectMyPjCommlist", map);
+		
+		return list;
 	}
 
 }

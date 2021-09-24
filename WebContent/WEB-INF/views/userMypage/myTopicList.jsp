@@ -4,48 +4,38 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>myTopicList</title>
 </head>
-<style>
-.divTable{ display: table; width: 100%; loat: center; }
-.divTableRow { display: table-row; }
-.divTableHeading { background-color: #EEE; display: table-header-group; }
-.divTableCell, .divTableHead { border: 1px solid #999999; display: table-cell; padding: 3px 10px; }
-.divTableHeading { background-color: #EEE; display: table-header-group; font-weight: bold; }
-.divTableFoot { background-color: #EEE; display: table-footer-group; font-weight: bold; }
-.divTableBody { display: table-row-group; }
-.left {
-	float: left;
-}
-</style>
 <body>
 <c:if test="${count == 0}">
 <div>작성한 자유게시판 글이 없습니다.</div>
 </c:if>
 <c:if test="${count > 0}">
-	<div class="divTable" style="width: 40%;"> 
-		<div class="divTableBody"> 
-			<div class="divTableRow">
-				<div class="divTableCell">No.</div>
-				<div class="divTableCell">제목</div>
-				<div class="divTableCell">작성자</div>
-				<div class="divTableCell">시간</div>
-				<div class="divTableCell">조회수</div>
-				<div class="divTableCell">수정</div>
-				<div class="divTableCell">삭제</div>
-			</div>
-			<c:forEach var="item" items="${articleList}">
-			<div class="divTableRow">
-				<div class="divTableCell" onclick="window.location='/cnav/topic/content.cnav?topNum=${item.topNum}'">${number}<c:set var="number" value="${number - 1}" /> </div>
-				<div class="divTableCell" onclick="window.location='/cnav/topic/content.cnav?topNum=${item.topNum}'">${item.topTitle}</div>
-				<div class="divTableCell" onclick="window.location='/cnav/topic/content.cnav?topNum=${item.topNum}'">${item.userId}</div>
-				<div class="divTableCell" onclick="window.location='/cnav/topic/content.cnav?topNum=${item.topNum}'">${item.topDate}</div>
-				<div class="divTableCell" onclick="window.location='/cnav/topic/content.cnav?topNum=${item.topNum}'">${item.readcount}</div>
-				<div class="divTableCell"><button onclick="window.location='/cnav/topic/modifyForm.cnav?topNum=${item.topNum}'" >수정</button></div>
-				<div class="divTableCell"><button onclick="deleteConfirm(${item.topNum})" >삭제</button></div>
-			</div>
-			</c:forEach>
-		</div>
+	<table>
+		<tr>
+			<td>No.</td>
+			<td>제목</td>
+			<td>작성자</td>
+			<td>시간</td>
+			<td>조회수</td>
+			<td>수정</td>
+			<td>삭제</td>
+		</tr>
+		<c:forEach var="item" items="${articleList}">
+		<tr>
+			<td onclick="window.location='/cnav/topic/content.cnav?topNum=${item.topNum}'">${number}<c:set var="number" value="${number - 1}" /> </td>
+			<td onclick="window.location='/cnav/topic/content.cnav?topNum=${item.topNum}'" >${item.topTitle}</td>
+			<td onclick="window.location='/cnav/topic/content.cnav?topNum=${item.topNum}'" >${item.userId}</td>
+			<td onclick="window.location='/cnav/topic/content.cnav?topNum=${item.topNum}'" >${item.topDate}</td>
+			<td onclick="window.location='/cnav/topic/content.cnav?topNum=${item.topNum}'" >${item.readcount}</td>
+			<td><button onclick="window.location='/cnav/topic/modifyForm.cnav?topNum=${item.topNum}'" />수정</button></td>
+			<td><button onclick="deleteConfirm(${item.topNum})" />삭제</button></td>
+		</tr>
+		</c:forEach>
+	</table>
+	
+	
+	
 		<%-- 페이지 번호 --%>
 		<div align="center">
 		<c:if test="${count > 0}">
@@ -79,7 +69,7 @@
 </body>
 <script>
 	function deleteConfirm(topNum){
-		if(confirm("해당 프로젝트를 삭제하겠습니까?") == true){
+		if(confirm("해당 글을 삭제하겠습니까?") == true){
 			window.location='/cnav/topic/delete.cnav?topNum=' + topNum;
 		}else{
 			return;

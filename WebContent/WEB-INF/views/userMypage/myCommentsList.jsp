@@ -6,9 +6,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>myCommentsList</title>
 </head>
 <body>
+<h3> 내가 쓴 댓글 </h3>
+<a href="/cnav/my/myCommentsList.cnav?">자유게시판 댓글</a>
+<a href="/cnav/my/myPjCommentsList.cnav?type=pj">프로젝트 댓글</a>
 <c:if test="${count == 0}">
 <div>작성한 댓글이 없습니다.</div>
 </c:if>
@@ -18,7 +21,7 @@
 		<div>
 			<div class="divTableCell" onclick="window.location='/cnav/topic/content.cnav?topNum=${item.topNum}'">${item.topComment}</div>
 			<div class="divTableCell" onclick="window.location='/cnav/topic/content.cnav?topNum=${item.topNum}'">${item.topReg}</div>
-			<div class="divTableCell" onclick="window.location='/cnav/topic/content.cnav?topNum=${item.topNum}'">${item.topTitle}</div>
+			<div class="divTableCell" onclick="window.location='/cnav/topic/content.cnav?topNum=${item.topNum}'">[원문제목] ${item.topTitle}</div>
 		</div>
 		</c:forEach>
 		</div>
@@ -38,13 +41,13 @@
 			
 			<%-- 검색 안했을때 페이지번호들   --%> 
 				<c:if test="${startPage > pageBlock}">
-					<a href="/cnav/my/bizPjList.cnav?pageNum=${startPage-pageBlock}" class="pageNums"> &lt; &nbsp;</a>
+					<a href="/cnav/my/myCommentsList.cnav?pageNum=${startPage-pageBlock}" class="pageNums"> &lt; &nbsp;</a>
 				</c:if>
 				<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
-					<a href="/cnav/my/bizPjList.cnav?pageNum=${i}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
+					<a href="/cnav/my/myCommentsList.cnav?pageNum=${i}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
 				</c:forEach>
 				<c:if test="${endPage < pageCount}">
-					&nbsp; <a href="/cnav/my/bizPjList.cnav?pageNum=${startPage+pageBlock}" class="pageNums"> &gt; </a>
+					&nbsp; <a href="/cnav/my/myCommentsList.cnav?pageNum=${startPage+pageBlock}" class="pageNums"> &gt; </a>
 				</c:if>
 		</c:if> <%-- end:count > 0 --%>
 		</div> <%-- page번호 div 끝 --%>
