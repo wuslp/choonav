@@ -1,6 +1,7 @@
 package cnav.project.controller;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,7 +29,12 @@ public class ProjectController {
 	
 	// 프로젝트 목록 
 	@RequestMapping("proList.cnav")
-	public String proList(String pageNum, String sel, String search, String sort, Model model) throws SQLException{
+	public String proList(String pageNum, String sel, String search, String sort, Model model) throws SQLException{		
+		//session.setAttribute("sid", "java");
+		//session.setAttribute("code", "1313");
+		
+		
+		
 		// 해당 페이지에 맞는 화면에 뿌려줄 게시글 가져와서 view에 전달하기 
 		Map<String, Object> result=null;
 		//String id = (String)session.getAttribute("sid"); // 세션 id값은 service가 처리
@@ -41,7 +47,7 @@ public class ProjectController {
 		}else {
 			result=projectService.getSearchProjectList(pageNum, sel, search); //검색
 		}	
-					
+					 
 
 		// view에 전달할 데이터 보내기 
 		model.addAttribute("pageSize", result.get("pageSize"));
@@ -55,24 +61,36 @@ public class ProjectController {
 		model.addAttribute("sel",result.get("sel"));
 		model.addAttribute("search",result.get("search"));
 		model.addAttribute("sort",result.get("sort"));
-		
-		
-		
+		model.addAttribute("code",result.get("code"));
+			
 		return "project/proList"; 
 	}
 		
 		
 	// 프로젝트 작성
 	@RequestMapping("proWriteForm.cnav")
-	public String proWriteForm() throws SQLException {
-
+	public String proWriteForm(HttpSession session) throws SQLException {
+		
+		//session.setAttribute("sid", "java");
+		//session.setAttribute("code", "1331");
+					
+		System.out.println("proWriteForm 나와라");
+		
+		
 		return "project/proWriteForm";
 	}
 	
 	// 프로젝트 작성 처리 페이지 
 	@RequestMapping("proWritePro.cnav")
-	public String proWritePro(ProjectDTO dto) throws SQLException{
-		dto.setUserId("java"); // 나중에 session에서 id 꺼내 추가로 변경해주기
+	public String proWritePro(HttpSession session,ProjectDTO dto) throws SQLException{
+		//session.setAttribute("sid", "java");
+		//session.setAttribute("code", "1313");	
+		String id=(String)session.getAttribute("sid");
+		String code=(String)session.getAttribute("code");
+				
+		dto.setUserId(id); // 나중에 session에서 id 꺼내 추가로 변경해주기
+		dto.setCode(code);
+		
 		// 비즈니스 로직 처리~해 : 데이터 DB에 저장하기
 		projectService.insertProject(dto);
 		
@@ -84,6 +102,10 @@ public class ProjectController {
 	// 프로젝트 상세 페이지 요청(proContent 페이지)
 	@RequestMapping("proContent.cnav")
 	public String proContent(@ModelAttribute("pageNum") String pageNum, Integer proNum, Model model) throws SQLException{
+		
+		//session.setAttribute("code","1313");
+		//String code=(String)session.getAttribute("scode");
+		
 		// 고유번호 주면서 해당 글에 대한 내용 받아와 view에 전달
 		ProjectDTO project=projectService.getProject(proNum);
 		model.addAttribute("project", project);
@@ -109,8 +131,8 @@ public class ProjectController {
 	}
 	// 프로젝트 삭제 
 	@RequestMapping("proDelForm.cnav")
-	public String proDelForm(int proNum) throws SQLException{
-		return "project/proDelForm";
+	public void proDelForm(String proNum) throws SQLException{
+		projectService.deleteProject(proNum);
 	}
 	
 	

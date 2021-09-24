@@ -50,6 +50,7 @@
 	<mapper resource="/sql/topCommentsSQL.xml" />
 	<mapper resource="/sql/noticeSQL.xml" />
 	<mapper resource="/sql/adminSQL.xml" />
+	<mapper resource="/sql/projectSQL.xml" />
 
   </mappers>
   
