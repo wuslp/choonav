@@ -31,7 +31,8 @@
 		<typeAlias type="cnav.topcomments.dto.TopCommentsDTO" alias="topCommentsDTO"/>
 		<typeAlias type="cnav.mypage.dto.UserInfoDTO" alias="userInfoDTO"/>
 		<typeAlias type="cnav.admin.dto.AdminDTO" alias="adminDTO"/>
-		<typeAlias type="cnav.mypage.dto.TopicCommDTO" alias="topCommDTO"/>
+		<typeAlias type="cnav.mypage.dto.TopicCommDTO" alias="topCommDTO"/><!-- 마이페이지용 자게댓글dto -->
+		<typeAlias type="cnav.mypage.dto.PjCommDTO" alias="pjCommDTO"/><!-- 마이페이지용 플젝댓글dto -->
   	</typeAliases>
   
    

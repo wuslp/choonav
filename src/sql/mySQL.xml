@@ -3,15 +3,17 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="my">
-
+	<!-- 프로젝트 내게시물수 -->
 	<select id="countMypj" parameterType="projectDTO" resultType="int">
 		select count(*) from project where code = #{code} and userId=#{userId}
 	</select>
-
+	
+	<!-- 자유게시판 내게시물수 -->
 	<select id="countMytopic" parameterType="topicDTO" resultType="int">
 		select count(*) from topic where code = #{code} and userId=#{userId}
 	</select>
 	
+	<!-- 프로젝트 내게시물 리스트 -->
 	<select id="selectMypjlist" parameterType="hashmap" resultType="projectDTO">
 		<![CDATA[
 		select B.* from 
@@ -22,6 +24,7 @@
 		]]>
 	</select>
 	
+	<!-- 자유게시판 내게시물 리스트 -->
 	<select id="selectMytopiclist" parameterType="hashmap" resultType="topicDTO">
 		<![CDATA[
 		select B.* from 
@@ -32,16 +35,34 @@
 		]]>
 	</select>
 	
+	<!-- 자유게시판 내댓글 수 -->
 	<select id="countMytopicComm" parameterType="hashmap" resultType="int">
 		select count(*) from topcomments where code = #{code} and userId=#{userId}
 	</select>
 	
+	<!-- 자유게시판 내댓글 리스트 -->
 	<select id="selectMytopicCommlist" parameterType="hashmap" resultType="topCommDTO">
 		<![CDATA[
 		select B.* from 
 			(select A.*, rownum r from        
 				(SELECT t.topTitle, c.* FROM topic t, topComments c WHERE  c.code = #{code} and c.userId=#{userId} and t.topNum = c.topnum) A 
 			order by a.topcomnum desc) B
+		where r >= #{start} and r <= #{end}
+		]]>
+	</select>
+	
+	<!-- 프로젝트 내댓글 수 -->
+	<select id="countMyPjComm" parameterType="hashmap" resultType="int">
+		select count(*) from projectcomments where code = #{code} and userId=#{userId}
+	</select>
+	
+	<!-- 프로젝트 내댓글 리스트 -->
+	<select id="selectMyPjCommlist" parameterType="hashmap" resultType="pjCommDTO">
+		<![CDATA[
+		select B.* from 
+			(select A.*, rownum r from        
+				(SELECT t.proName, c.* FROM project t, projectcomments c WHERE  c.code = #{code} and c.userId=#{userId} and t.proNum = c.proNum) A 
+			order by a.procomnum desc) B
 		where r >= #{start} and r <= #{end}
 		]]>
 	</select>
@@ -92,22 +113,27 @@
 		update users set position = #{position} where userId = #{userId}
 	</update>
 	
+	<!-- 계정정보 -->
 	<select id="selectUserInfo" parameterType="hashmap" resultType="userInfoDTO">
 		select b.bizName, u.name, u.email, u.tel, u.dept, u.position from business b, users u where b.code = u.code and u.userId=#{userId} and u.code=#{code}
 	</select>
 	
+	<!-- 계정정보 수정 -->
 	<update id="UpdateUser" parameterType="hashmap">
 		update users set email=#{email}, tel=#{tel} where userId=#{userId}
 	</update>
 	
+	<!-- 아디비번체크 -->
 	<select id="idPwCheck" parameterType="hashmap" resultType="int">
 		select count(*) from users where userId=#{userId} and pw=#{pw}
 	</select>
 	
+	<!-- 비번업뎃 -->
 	<update id="updatePw" parameterType="hashmap">
 		update users set pw=#{pw} where userId=#{userId}
 	</update>
 	
+	<!-- 회원탈퇴 -->
 	<delete id="deleteUser" parameterType="String">
 		delete from users where userId=#{value}
 	</delete>
