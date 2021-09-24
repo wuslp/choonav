@@ -10,9 +10,23 @@
 		<selectKey keyProperty="appNum" order="BEFORE" resultType="int">
 			select approval_seq.nextval from dual 
 		</selectKey>
-		insert into approval(appNum, appType, userId, dept, name1, name2, name3, appStart, appFinish, appTitle, appContent, appRequest, appDate, state1, state2, state3, code) 
-		values(approval_seq.nextval,#{appType},#{userId},#{dept},#{name1},#{name2},#{name3},#{appStart},#{appFinish},#{appTitle},#{appContent},#{appRequest},sysdate,0,0,0, #{code})
+		insert into approval(appNum, appType, userId, dept, name1, name2, name3, appStart, appFinish, appTitle, appContent, appRequest, appDate, state1, state2, state3, code, name) 
+		values(approval_seq.nextval,#{appType},#{userId},#{dept},#{name1},#{name2},#{name3},#{appStart},#{appFinish},#{appTitle},#{appContent},#{appRequest},sysdate,0,0,0,#{code},#{name})
 	</insert>
+	
+	<select id="selectName" parameterType="ApprovalDTO" resultType="String">
+		select name from users where userId=#{userId}
+	</select>
+	 
+	 
+	 <!-- 받은 결재함에 userId 대신 name 가져오기  -->
+	<select id="getName" parameterType="String" resultType="String">
+		select name from users where userId=#{value}
+	</select>
+	
+	<update id="name1" parameterType="Hashmap">
+		update approval set nick1 = #{nick1} where name1=#{name1}
+	</update>
 	
 	
 	<!-- 보낸 결재함 전체 글 -->
@@ -23,7 +37,7 @@
 	<select id="getApprovals" parameterType="hashmap" resultType="approvalDTO">
 		<![CDATA[
 		select * from (select rownum rnum, approval.* from 
-		(select * from approval where userId=#{userId} and code=#{code} user order by appNum desc) approval) 
+		(select * from approval where userId=#{userId} and code=#{code} order by appNum desc) approval) 
 				where rnum >= #{start} and rnum <=#{end}
 		]]>		
 	</select>
@@ -43,18 +57,23 @@
 		delete from approval where appNum=#{appNum}
 	</delete>
 	
+<!-- ///////////////////////////////////////////////////////////////////////////////////// -->
 	
 	<!-- 받은 결재함 전체 글 -->
-	<select id="takeCountAll" resultType="int">
-		select count(*) from approval
+	<select id="takeCountAll" parameterType="approvalDTO" resultType="int">
+		select count(*) from approval where code = #{code} and userId=#{userId}
 	</select>
+	
 	<!-- 페이징 -->
 	<select id="takeApprovals" parameterType="hashmap" resultType="approvalDTO">
 		<![CDATA[
 		select * from (select rownum rnum, approval.* from 
-		(select * from approval where name1=#{id} or name2=#{id} or name3=#{id} order by appNum desc) approval) 
+		(select * from approval where name1=#{userId} or name2=#{userId} or name3=#{userId} order by appNum desc) approval) 
 				where rnum >= #{start} and rnum <=#{end}
 		]]>		
+		<!-- 	select * from (select rownum rnum, approval.* from 
+			(select * from approval where userId=#{userId} and code=#{code} and name1=#{name1} or name2=#{name2} or name3=#{name3} order by appNum desc) approval) 
+					where rnum >= #{start} and rnum <=#{end} -->
 	</select>
 	
 	
@@ -123,6 +142,7 @@
 	<select id="getUsersId" parameterType="hashmap" resultType="userDTO">
 		select * from users where code=#{code} and userId != #{userId}
 	</select>
-
+	
+	
 	
 </mapper>

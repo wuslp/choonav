@@ -48,23 +48,22 @@
 			<c:forEach var="approval" items="${takeAppList}">
 				<tr>
 					<td>${number}
-						<c:set var="number" value="${number-1}"/>
+						<c:set var="number" value="${number+1}"/>
 					</td>
-					<%--
-					<c:if test="${approval.name1 == sessionScope.sid}">  --%>
-					<c:if test='${approval.name1 == "java02"}'>
+					
+					<c:if test="${approval.name1 == sessionScope.sid}">  
 						<c:set var="sign" value="1" />
 					</c:if>
-					<c:if test='${approval.name2 == "java02"}'>
+					<c:if test='${approval.name2 == sessionScope.sid}'>
 						<c:set var="sign" value="2" />
 					</c:if>
-					<c:if test='${approval.name3 == "java02"}'>
+					<c:if test='${approval.name3 == sessionScope.sid}'>
 						<c:set var="sign" value="3" />
 					</c:if>
 					
 		 			<td><a href="/cnav/approval/takeAppContent.cnav?num=${approval.appNum}&sign=${sign}"> ${approval.appTitle} </a></td>
-					<td>${approval.userId}</td>
-					<td>${approval.name1}</td>
+					<td>${approval.name}</td>
+					<td>${approval.nick1}</td>
 					<td>
 						<c:if test="${approval.state1 == 1}">
 								반려
@@ -77,7 +76,7 @@
 						</c:if>
 					</td>
 					
-					<td>${approval.name2}</td>
+					<td>${approval.nick2}</td>
 						<c:if test='${approval.name2 != null}'> 
 					<td>
 						<c:if test="${approval.state2 == 1}">
@@ -96,7 +95,7 @@
 					</td>
 					</c:if>
 					
-					<td>${approval.name3}</td>
+					<td>${approval.nick3}</td>
 					<c:if test='${approval.name3 != null}'>
 					<td>
 						<c:if test="${approval.state3 == 1}">
