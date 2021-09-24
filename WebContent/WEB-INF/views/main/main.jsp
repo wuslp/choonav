@@ -46,7 +46,7 @@
 			<div>
 			<h1> </h1><br/><br/><br/>
 				<h2>선택한 카테고리만 보이게</h2>
-					<a href="#">공지사항</a><br/><br/>
+					<a href="/cnav/notice/list.cnav">공지사항</a><br/><br/>
 					
 				<c:if test="${cdto.approval==1}">
 					<a href="/cnav/approval/sendAppList.cnav">결재</a><br/><br/>
@@ -67,7 +67,7 @@
 					<a href="/cnav/rez/allRez.cnav">예약</a><br/><br/>
 				</c:if>
 				<c:if test="${cdto.topic==1}">
-					<a href="#">자유게시판</a><br/><br/>
+					<a href="/cnav/topic/list.cnav">자유게시판</a><br/><br/>
 				</c:if>
 				<c:if test="${cdto.poll==1}">
 					<a href="/cnav/poll/pollList.cnav">투표</a><br/><br/>
