@@ -7,6 +7,7 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                         
+                       	 <!-- 공지사항 고정 -->
                         	<a class="nav-link" href="">
                                 <div class="sb-nav-link-icon"><i class="fas fa-exclamation-circle"></i></div>
                                	공지사항
