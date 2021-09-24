@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cnav.mail.dto.MailDTO;
 import cnav.mail.service.MailServiceImpl;
+import cnav.main.dto.UserDTO;
 
 
 @Controller
@@ -28,7 +29,7 @@ public class MailController {
 	@Autowired
 	private MailServiceImpl MailService = null;
 	
-	// 받은 편지함
+	// 받은 메일함
 	@RequestMapping("recMailList.cnav")
 	public String recMailList(HttpSession session, String pageNum, String sel, String search, Model model) throws SQLException{
 
@@ -55,7 +56,6 @@ public class MailController {
 		
 		System.out.println("sel" + sel);
 		System.out.println("list" + result);
-		System.out.println("받은mail list의 id" + id);
 		
 		
 		
@@ -96,7 +96,11 @@ public class MailController {
 	
 	// 메일 보내기
 	@RequestMapping("writeMailForm.cnav")
-	public String writeMailForm() {
+	public String writeMailForm(HttpSession session, Model model) throws SQLException {
+		String code = (String)session.getAttribute("scode");
+		List<UserDTO> userList = MailService.userList(code);
+		model.addAttribute("userList", userList);
+		System.out.println("userList name" + userList);
 		
 		return "mail/writeMailForm";
 	}
@@ -105,12 +109,9 @@ public class MailController {
 	@RequestMapping("writeMailPro.cnav")
 	public String writeMailPro(HttpSession session, MailDTO dto, Model model) throws SQLException {
 		String id = (String)session.getAttribute("sid");
-		String code = (String)session.getAttribute("scode");
 		dto.setUserId(id);
-		dto.setCode(code);
 		int result = MailService.insertMail(dto);
 		
-		System.out.println("아이디랑 회사코드 나오는지 확인 " + id + code);
 		
 		model.addAttribute("result", result);
 		

@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import cnav.mail.dto.MailDTO;
+import cnav.main.dto.UserDTO;
 
 public interface MailDAO {
 	//public List<MailDTO> recMailList(String id) throws SQLException;
@@ -46,4 +47,7 @@ public interface MailDAO {
 	
 	// 메일 본문에서 삭제
 	public int deleteMail(int num) throws SQLException;
+	
+	// 보내기, 편지함용 유저 확인
+	public List<UserDTO> userList(String code) throws SQLException;
 }

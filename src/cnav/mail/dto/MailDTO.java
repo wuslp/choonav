@@ -5,7 +5,6 @@ import java.sql.Timestamp;
 public class MailDTO {
 	
 	private Integer mailNum;
-	private String code;
 	private String userId;
 	private String mailRid;
 	private String mailSub;
@@ -13,13 +12,21 @@ public class MailDTO {
 	private String mailFile;
 	private String mailResult;
 	private Timestamp mailReg;
+	private String userName;
+	private String ridName;
 	
 
-	public String getCode() {
-		return code;
+	public String getUserName() {
+		return userName;
 	}
-	public void setCode(String code) {
-		this.code = code;
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getRidName() {
+		return ridName;
+	}
+	public void setRidName(String ridName) {
+		this.ridName = ridName;
 	}
 	public Integer getMailNum() {
 		return mailNum;

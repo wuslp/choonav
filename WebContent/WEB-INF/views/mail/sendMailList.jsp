@@ -115,7 +115,7 @@
 						<input type="checkbox" name="RowCheck" class="chBox" value="${sendMailList.mailNum}" />
 					</td>
 					<td>
-						${sendMailList.mailRid}
+						${sendMailList.ridName}
 					</td>
 					<td>
 						<a href="/cnav/mail/mail.cnav?num=${sendMailList.mailNum}&pageNum=${pageNum}"> ${sendMailList.mailSub} </a>

@@ -63,12 +63,13 @@
 		]]>
 	</select>
 	
+	
 	<insert id="insertMail" parameterType="mailDTO">
 		<selectKey keyProperty="mailNum" order="BEFORE" resultType="int">
 			select mail_seq.nextVal from dual
 		</selectKey>
-		insert into mail(mailNum, code, userId, mailRid, mailSub, mailContent, mailFile, mailReg, mailResult)
-		values(#{mailNum}, #{code}, #{userId}, #{mailRid}, #{mailSub}, #{mailContent}, #{mailFile}, sysdate, '0')
+		insert into mail(mailNum, userId, mailRid, mailSub, mailContent, mailFile, mailReg, mailResult)
+		values(#{mailNum}, #{userId}, #{mailRid}, #{mailSub}, #{mailContent}, #{mailFile}, sysdate, '0')
 	</insert>
 	
 	<delete id="deleteMail" parameterType="String">
@@ -86,6 +87,27 @@
 	 <delete id="delete" parameterType="int">
 	 	delete from mail where mailNum = #{value}
 	 </delete>
+	 
+	 
+	 <select id="userList" parameterType="String" resultType="userDTO">
+	 	select * from users where code = #{code}
+	 </select>
+	 
+	 <select id="getUserName" parameterType="String" resultType="String">
+	 	select name from users where userId = #{value}
+	 </select>
+	 
+	 <select id="getRidName" parameterType="String" resultType="String">
+	 	select name from users where userId = #{value}
+	 </select>
+	 
+	 <update id="updateUserName" parameterType="Hashmap">
+	 	update mail set userName = #{userName} where userId = #{userId}
+	 </update>
+	 
+	 <update id="updateRidName" parameterType="Hashmap">
+	 	update mail set ridName = #{ridName} where mailRid = #{rid}
+	 </update>
 
 </mapper>
 
