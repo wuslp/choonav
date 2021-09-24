@@ -34,7 +34,7 @@
 		<typeAlias type="cnav.mypage.dto.TopicCommDTO" alias="topCommDTO"/>
   	</typeAliases>
   
-  
+   
   <!-- 매퍼들의 위치를 설정 -->
   <mappers>
   	<mapper resource="/sql/attendSQL.xml"/>
