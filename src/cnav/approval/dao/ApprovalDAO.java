@@ -13,15 +13,18 @@ public interface ApprovalDAO {
 	// 결재 문서 작성 
 	public void insertApp(ApprovalDTO dto) throws SQLException;
 	
+	// 이름 먼저 뽑아두기
+	 public String selectName(ApprovalDTO dto) throws SQLException;
+	
 	// 전체 게시글 개수 가져오기 
 	public int getAppCount(String userId, String code) throws SQLException;
 	// 한 페이지의 글 목록 가져오기 (StartRow, endRow)
 	public List<ApprovalDTO> getApprovals(String userId, String code, int start, int end) throws SQLException; 
 	
 	// 검색 게시글 수 가져오기 
-	public int searchSendAppCount(String sel, String search) throws SQLException; 
+	public int searchSendAppCount(String sel, String search, String userId, String code) throws SQLException; 
 	// 검색 게시글 목록 가져오기 
-	public List<ApprovalDTO> sendSearchApprovals(int start, int end, String sel, String search) throws SQLException;
+	public List<ApprovalDTO> sendSearchApprovals(String userId, String code, int start, int end, String sel, String search ) throws SQLException;
 
 	// send 보낸 게시글 1개 가져오기 
 	public ApprovalDTO getAppCont(int appNum) throws SQLException;
@@ -38,9 +41,9 @@ public interface ApprovalDAO {
 	public List<ApprovalDTO> takeApprovals(String userId, String code, int start, int end) throws SQLException; 
 	
 	// 검색 게시글 수 가져오기 
-	public int searchTakeAppCount(String sel, String search) throws SQLException; 
+	public int searchTakeAppCount(String sel, String search, String userId, String code ) throws SQLException; 
 	// 검색 게시글 목록 가져오기 
-	public List<ApprovalDTO> takeSearchApprovals(int start, int end, String sel, String search) throws SQLException;
+	public List<ApprovalDTO> takeSearchApprovals(String userId, String code, int start, int end, String sel, String search) throws SQLException;
 	
 	// take 받은 게시글 1개 가져오기 
 	public ApprovalDTO takeAppCont(int appNum) throws SQLException;
@@ -65,5 +68,6 @@ public interface ApprovalDAO {
 
 	// 결재자에 넣을 같은회사 유저아이디들 가져오기
 	public List getUsersId(String userId, String code) throws SQLException;
+
 
 }

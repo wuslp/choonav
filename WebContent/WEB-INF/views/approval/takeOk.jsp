@@ -17,7 +17,7 @@
 		<select name="name2">
 				<option value="">선택</option>
 				<c:forEach var="users" items="${list}">
-					<option value="${users.name}">${users.name} ${users.position}</option>
+					<option value="${users.userId}">${users.name} ${users.position}</option>
 				</c:forEach> 
 		</select>	
 	<input type="submit" value="완료"/> 

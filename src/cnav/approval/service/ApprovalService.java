@@ -15,6 +15,7 @@ public interface ApprovalService {
 	// 결재 문서 작성
 	public void addApp(ApprovalDTO dto) throws SQLException;
 	
+	
 	// sendAppList 목록 가져오기 
 	public Map<String, Object> getSendAppList(String userId, String code, String pageNum) throws SQLException;
 	
@@ -60,5 +61,4 @@ public interface ApprovalService {
 	
 	// 결재자에 넣을 같은회사 유저아이디들 가져오기
 	public List getUsersId(String userId, String code) throws SQLException;
-
 }

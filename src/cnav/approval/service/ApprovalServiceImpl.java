@@ -24,9 +24,12 @@ public class ApprovalServiceImpl implements ApprovalService{
 	@Override
 	public void addApp(ApprovalDTO dto) throws SQLException{
 		// 데이터 줄게 결재 작성한거 저장해줘 ! 를 데이터 담당자에게 .
+		String name = approvalDAO.selectName(dto);
+		dto.setName(name);
+		System.out.println(name);
 		approvalDAO.insertApp(dto);
-	}
-	
+		
+	}	
 	
 	// 보낸 결재 확인 sendAppList 
 	
@@ -96,11 +99,11 @@ public class ApprovalServiceImpl implements ApprovalService{
 		List<ApprovalDTO> sendAppList = null;  	// 검색된 게시글들 담아줄 변수
 		int count = 0; 							// 검색된 글의 개수 
 		int number = 0; 						// 브라우저 화면에 뿌려줄 가상 글 번호  
-		count = approvalDAO.searchSendAppCount(sel, search); // 검색된 글의 총 개수 가져오기 
+		count = approvalDAO.searchSendAppCount(userId, code, sel, search); // 검색된 글의 총 개수 가져오기 
 		System.out.println("검색 count : " + count);
 		// 검색한 글이 하나라도 있으면 검색한 글 가져오기 
 		if(count > 0){
-			sendAppList = approvalDAO.sendSearchApprovals(startRow, endRow, sel, search); 
+			sendAppList = approvalDAO.sendSearchApprovals(userId, code, startRow, endRow, sel, search); 
 		}
 		number = count - (currentPage-1) * pageSize; 	// 게시판 목록에 뿌려줄 가상의 글 번호  
 		// Controller에게 전달해야되는 데이터가 많으니 HashMap에 넘겨줄 데이터를 저장해서 한번에 전달 
@@ -164,7 +167,7 @@ public class ApprovalServiceImpl implements ApprovalService{
 		
 		// 전체 글의 개수 가져오기 
 		count = approvalDAO.takeAppCount(userId, code);   // DB에 저장되어있는 전체 글의 개수를 가져와 담기
-		System.out.println("count : " + count);
+		System.out.println("받은 count : " + count);
 		// 글이 하나라도 있으면 글들을 다시 가져오기 
 		if(count > 0){
 			takeAppList = approvalDAO.takeApprovals(userId, code, startRow, endRow);  
@@ -203,11 +206,11 @@ public class ApprovalServiceImpl implements ApprovalService{
 		List<ApprovalDTO> takeAppList = null;  	// 검색된 게시글들 담아줄 변수
 		int count = 0; 							// 검색된 글의 개수 
 		int number = 0; 						// 브라우저 화면에 뿌려줄 가상 글 번호  
-		count = approvalDAO.searchTakeAppCount(sel, search); // 검색된 글의 총 개수 가져오기 
+		count = approvalDAO.searchTakeAppCount(userId, code, sel, search); // 검색된 글의 총 개수 가져오기 
 		System.out.println("검색 count : " + count);
 		// 검색한 글이 하나라도 있으면 검색한 글 가져오기 
 		if(count > 0){
-			takeAppList = approvalDAO.takeSearchApprovals(startRow, endRow, sel, search); 
+			takeAppList = approvalDAO.takeSearchApprovals(userId, code, startRow, endRow, sel, search); 
 		}
 		number = count - (currentPage-1) * pageSize; 	// 게시판 목록에 뿌려줄 가상의 글 번호  
 		// Controller에게 전달해야되는 데이터가 많으니 HashMap에 넘겨줄 데이터를 저장해서 한번에 전달 
@@ -275,5 +278,6 @@ public class ApprovalServiceImpl implements ApprovalService{
 		List list = approvalDAO.getUsersId(userId, code);
 		return list;
 	}
+	
 
 }
