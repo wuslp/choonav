@@ -14,18 +14,18 @@
                             </a>
                         	
                             <!-- 근태  -->
-
+                           <c:if test="${sessionScope.cdto.attend==1}"> 
                             <a class="nav-link" href="/cnav/attend/attend.cnav">
                                 <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
-                                근태
+                              		 근태
                             </a>
                            </c:if> 
                             
                             <!-- 결재 -->
-
+                           <c:if test="${sessionScope.cdto.approval==1}"> 
                             <a class="nav-link collapsed" href="/cnav/approval/sendAppList.cnav" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                결재
+                                	결재
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
@@ -35,10 +35,11 @@
                                 </nav>
                             </div>
                          	</c:if>
-
+                           <!-- 메일 -->
+                          <c:if test="${sessionScope.cdto.mail==1}"> 
                             <a class="nav-link collapsed" href="/cnav/approval/sendAppList.cnav" data-bs-toggle="collapse" data-bs-target="#mailLayouts" aria-expanded="false" aria-controls="mailLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-envelope"></i></div>
-                                메일
+                               	 메일
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="mailLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
@@ -49,10 +50,11 @@
                                 </nav>
                             </div>
                            </c:if>
-
+                            <!-- 예약 -->
+                          <c:if test="${sessionScope.cdto.reservation==1}">  
                             <a class="nav-link collapsed" href="/cnav/approval/sendAppList.cnav" data-bs-toggle="collapse" data-bs-target="#reserveLayouts" aria-expanded="false" aria-controls="reserveLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                예약
+                                	예약
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="reserveLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
@@ -62,10 +64,11 @@
                                 </nav>
                             </div>
                            </c:if>
-
+                            <!-- 일정 -->
+                           <c:if test="${sessionScope.cdto.calendar==1}"> 
                             <a class="nav-link collapsed" href="/cnav/approval/sendAppList.cnav" data-bs-toggle="collapse" data-bs-target="#dayLayouts" aria-expanded="false" aria-controls="dayLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-calendar-alt"></i></div>
-                                일정
+                              	  일정
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="dayLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
@@ -75,20 +78,25 @@
                                 </nav>
                             </div>
                             </c:if>
-
+							<!--  -->
+							<c:if test="${sessionScope.cdto.project==1}">
+                            <a class="nav-link" href="#">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                프로젝트
+                                	프로젝트
                             </a>
                             </c:if>
-
+                            <!-- 자유 게시판 -->
+                           <c:if test="${sessionScope.cdto.topic==1}"> 
                             <a class="nav-link" href="tables.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-comments"></i></div>
-                                자유 게시판
+                                	자유 게시판
                             </a>
                            </c:if>
-
+                           <!-- 투표 -->
+                           <c:if test="${sessionScope.cdto.poll==1}">
+                            <a class="nav-link" href="/cnav/poll/pollList.cnav">
                                 <div class="sb-nav-link-icon"><i class="fas fa-check-circle"></i></div>
-                                투표
+                               	 투표
                             </a>
                            </c:if> 
                             
