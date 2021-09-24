@@ -10,7 +10,7 @@ public class TopicDTO {
 	private Timestamp topDate;
 	private String userId;
 	private Integer readcount;
-	private Integer recnt;
+	private Integer recnt; // 게시글 댓글 수
 	private String code;
 	
 	public String getCode() {

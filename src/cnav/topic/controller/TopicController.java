@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,14 +30,17 @@ public class TopicController {
 	
 	
 	@RequestMapping("list.cnav") // list.cnav?pageNum=2 list.cnav -> 
-	public String list(String pageNum, String sel, String search, Model model) throws SQLException {
+	public String list(HttpSession session, String pageNum, String sel, String search, Model model) throws SQLException {
+		// code 회사 코드에 맞게 자유게시판 글 가져오기
+		String scode =(String)session.getAttribute("scode");
+		
 		// 해당 페이지에 맞는 화면에 뿌려줄 게시글 가져와서 view 전달 
 		Map<String, Object> result = null;
 		// 전체 게시글 sel search == null (검색 안한 전체 글 보여주기) 
 		if(sel == null || search == null) {
-			result = topicService.getArticleList(pageNum);
+			result = topicService.getArticleList(pageNum, scode);
 		}else { // 검색 게시글 sel search != null
-			result = topicService.getArticleSearch(pageNum, sel, search);
+			result = topicService.getArticleSearch(pageNum, sel, search, scode);
 		}
 		
 		// view에 전달할 데이터 보내기 
@@ -58,14 +62,17 @@ public class TopicController {
 	// 글작성 Form 페이지
 	@RequestMapping("writeForm.cnav")
 	public String writeForm() {
-		
 		return "topic/writeForm";		
 	}
 	
 	// 글 작성 처리 페이지
 	@RequestMapping("writePro.cnav")
-	public String writePro(TopicDTO dto) throws SQLException {
-		topicService.insertArticle(dto);
+	public String writePro(TopicDTO dto, HttpSession session) throws SQLException {
+		// code 회사 코드에 맞게 자유게시판 글 작성하기
+		String scode =(String)session.getAttribute("scode");
+		String sid =(String)session.getAttribute("sid");
+		
+		topicService.insertArticle(dto, scode, sid);
 		
 		return "redirect:/topic/list.cnav"; //?topNum="+ dto.getTopNum();
 	}

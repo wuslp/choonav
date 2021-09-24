@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 
+
+import cnav.mail.dto.MailDTO;
 import cnav.main.dto.UserDTO;
 import cnav.mypage.dao.MypageDAO;
 import cnav.mypage.dto.TopicCommDTO;
@@ -191,6 +193,110 @@ public class MypageServiceImpl implements MypageService {
 			myDAO.deleteUser(userId);
 			removeSessionAttr("sid"); // 위에서 세션삭제 메소드 만든것 있으니 활용
 		}
+		return result;
+	}
+	
+	// 회사 코드 내에 있는 세션 로그인한 사람이 관리자가 맞는지 확인
+	@Override
+	public int manageCheck(String id, String code) throws SQLException {
+		
+		int count = myDAO.manageCheck(id, code);
+		
+		return count;
+	}
+	
+	// 회사 사원 정보 리스트
+	@Override
+	public Map<String, Object> userList(String pageNum, String code) throws SQLException {
+		int pageSize = 10;
+		if(pageNum == null) {
+			pageNum = "1";
+		}
+		
+		int currentPage = Integer.parseInt(pageNum);
+		int startRow = (currentPage - 1) * pageSize + 1;
+		int endRow = currentPage * pageSize;
+		
+		List<UserDTO> userList = null;
+		int count = 0;
+		int number = 0;
+		
+		count = myDAO.userListCount(code); // 회사 사원 정보 count
+		System.out.println("회사사원정보 list count : " + count);
+		
+		if(count > 0) {
+			userList = myDAO.userList(startRow, endRow, code);
+		}
+		number = count - (currentPage - 1) * pageSize;
+		
+		Map<String, Object> result = new HashMap<>();
+		result.put("pageSize", pageSize);
+		result.put("pageNum", pageNum);
+		result.put("currentPage", currentPage);
+		result.put("startRow", startRow);
+		result.put("endRow", endRow);
+		result.put("userList", userList);
+		result.put("count", count);
+		result.put("number", number);
+		
+		return result;
+	}
+	
+	// 회사 사원 정보 -> 관리자가 검색했을 때 리스트
+	@Override
+	public Map<String, Object> userListSearch(String pageNum, String sel, String search, String code)
+			throws SQLException {
+		
+		int pageSize = 10;
+		if(pageNum == null) {
+			pageNum = "1";
+		}
+		
+		int currentPage = Integer.parseInt(pageNum);
+		int startRow = (currentPage - 1) * pageSize + 1;
+		int endRow = currentPage * pageSize;
+		
+		List<UserDTO> userList = null;
+		int count = 0;
+		int number = 0;
+		
+		count = myDAO.userListSearchCount(sel, search, code); // 회사 사원 정보 검색한 결과 count
+		System.out.println("회사사원정보 검색 list count : " + count);
+		
+		if(count > 0) {
+			userList = myDAO.userListSearch(startRow, endRow, sel, search, code);
+		}
+		number = count - (currentPage - 1) * pageSize;
+		
+		Map<String, Object> result = new HashMap<>();
+		result.put("pageSize", pageSize);
+		result.put("pageNum", pageNum);
+		result.put("currentPage", currentPage);
+		result.put("startRow", startRow);
+		result.put("endRow", endRow);
+		result.put("userList", userList);
+		result.put("count", count);
+		result.put("number", number);
+		
+		return result;
+	}
+	// 팝업 -> 한명 불러오기
+	@Override
+	public UserDTO userOne(String id) throws SQLException {
+		UserDTO dto = myDAO.userOne(id);
+		return dto;
+	}
+	
+	// Dept 수정
+	@Override
+	public int updateDepUser(UserDTO dto) throws SQLException {
+		int result = myDAO.updateDepUser(dto);
+		return result;
+	}
+	// Posi 수정
+	@Override
+	public int updatePosUser(UserDTO dto) throws SQLException {
+		int result = myDAO.updatePosUser(dto);
 		return result;
 	}
 	
