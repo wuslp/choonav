@@ -47,17 +47,14 @@
 						</td> --%>
 						<td> ${article.bizName} </td>
 						<td> ${article.userId} </td>
-						<c:if test="${article.auth != 2}">
-							<td> 
-								<form>
-									<c:if test="${article.auth == 0}">
-										<button onclick="auth0( ${article.userId})">회원</button>
-									</c:if>
-									<c:if test="${article.auth == 1}">
-										<button onclick="auth1( ${article.userId})">회사관리자</button>
-									</c:if>
-								</form>
-							${article.auth}
+						<c:if test="${article.auth == 0}">
+							<td>
+							<button onclick="auth0('${article.userId}')">회원</button>
+							</td>
+						</c:if>
+						<c:if test="${article.auth == 1}">
+							<td>
+							<button onclick="auth1('${article.userId}')">회사관리자</button>
 							</td>
 						</c:if>
 						<c:if test="${article.auth == 2}">
@@ -110,14 +107,12 @@
 		if (chk) {
 			location.href='authUpdate0.cnav?userId='+userId;
 		}
-		location.reload();
 	}	
 	function auth1(userId) {
 		var chk = confirm("회원으로 전환하시겠습니까?");
 		if (chk) {
 			location.href='authUpdate1.cnav?userId='+userId;
 		}
-		location.reload();
 	}	
 </script>
 </html>
