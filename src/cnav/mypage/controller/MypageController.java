@@ -1,9 +1,11 @@
 package cnav.mypage.controller;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +30,12 @@ public class MypageController {
 	private MypageService myService = null;
 	
 	@RequestMapping("myPjList.cnav")
-	public String myPjList(HttpSession session, Model model, String pageNum) throws SQLException {
+	public String myPjList(HttpSession session, Model model, String pageNum) throws SQLException, IOException {
+		
+		if(session.getAttribute("sid") == null) {
+			return "main/loginForm";
+		}
+		
 		String userId = (String)session.getAttribute("sid");
 		String code = (String)session.getAttribute("scode");
 		
@@ -56,6 +63,10 @@ public class MypageController {
 	
 	@RequestMapping("myTopicList.cnav")
 	public String myTopicList(HttpSession session, Model model, String pageNum) throws SQLException {
+		
+		if(session.getAttribute("sid") == null) {
+			return "main/loginForm";
+		}
 		
 		String userId = (String)session.getAttribute("sid");
 		String code = (String)session.getAttribute("scode");
@@ -86,6 +97,9 @@ public class MypageController {
 	@RequestMapping("myCommentsList.cnav")
 	public String myCommentsList(HttpSession session, Model model, String pageNum) throws SQLException {
 		
+		if(session.getAttribute("sid") == null) {
+			return "main/loginForm";
+		}
 		
 		String userId = (String)session.getAttribute("sid");
 		String code = (String)session.getAttribute("scode");
@@ -117,6 +131,9 @@ public class MypageController {
 	@RequestMapping("myPjCommentsList.cnav")
 	public String myPjCommentsList(HttpSession session, Model model, String pageNum) throws SQLException {
 		
+		if(session.getAttribute("sid") == null) {
+			return "main/loginForm";
+		}
 		
 		String userId = (String)session.getAttribute("sid");
 		String code = (String)session.getAttribute("scode");
@@ -226,6 +243,10 @@ public class MypageController {
 	@RequestMapping("mypage.cnav")
 	public String mypage(HttpSession session, Model model) throws SQLException {
 		
+		if(session.getAttribute("sid") == null) {
+			return "main/loginForm";
+		}
+		
 		String userId = (String)session.getAttribute("sid");
 		String code = (String)session.getAttribute("scode");
 		UserInfoDTO dto = myService.getUserInfo(userId, code);
@@ -246,6 +267,10 @@ public class MypageController {
 	// 마이페이지 - 계정정보 수정 form page
 	@RequestMapping("modifyForm.cnav")
 	public String modifyForm(HttpSession session, Model model) throws SQLException {
+		
+		if(session.getAttribute("sid") == null) {
+			return "main/loginForm";
+		}
 		
 		String userId = (String)session.getAttribute("sid");
 		String code = (String)session.getAttribute("scode");
@@ -268,6 +293,10 @@ public class MypageController {
 	@RequestMapping("modifyPro.cnav")
 	public String modifyPro(HttpSession session, Model model, UserDTO dto) throws SQLException {
 		
+		if(session.getAttribute("sid") == null) {
+			return "main/loginForm";
+		}
+		
 		String userId = (String)session.getAttribute("sid");
 		String code = (String)session.getAttribute("scode");
 		int res = myService.updateUserInfo(userId, code, dto);
@@ -288,6 +317,10 @@ public class MypageController {
 	@RequestMapping("pwChangeForm.cnav")
 	public String pwChangeForm(HttpSession session, Model model, UserDTO dto) throws SQLException {
 		
+		if(session.getAttribute("sid") == null) {
+			return "main/loginForm";
+		}
+		
 		String userId = (String)session.getAttribute("sid");
 		String code = (String)session.getAttribute("scode");
 		
@@ -303,6 +336,10 @@ public class MypageController {
 	// 마이페이지 - 비밀번호 변경 pro page
 	@RequestMapping("pwChangePro.cnav")
 	public String pwChangePro(HttpSession session, Model model, String nowPw, String newPw) throws SQLException {
+		
+		if(session.getAttribute("sid") == null) {
+			return "main/loginForm";
+		}
 		
 		String userId = (String)session.getAttribute("sid");
 		String code = (String)session.getAttribute("scode");
@@ -322,6 +359,11 @@ public class MypageController {
 	// 마이페이지 - 회원탈퇴 form page
 	@RequestMapping("deleteForm.cnav")
 	public String deleteForm(HttpSession session, Model model) throws SQLException {
+		
+		if(session.getAttribute("sid") == null) {
+			return "main/loginForm";
+		}
+		
 		String userId = (String)session.getAttribute("sid");
 		String code = (String)session.getAttribute("scode");
 		
@@ -337,6 +379,11 @@ public class MypageController {
 	// 마이페이지 - 회원탈퇴 Pro page
 	@RequestMapping("deletePro.cnav")
 	public String deletePro(HttpSession session, Model model,String pw) throws SQLException {
+		
+		if(session.getAttribute("sid") == null) {
+			return "main/loginForm";
+		}
+		
 		String userId = (String)session.getAttribute("sid");
 		String code = (String)session.getAttribute("scode");
 		
