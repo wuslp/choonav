@@ -19,7 +19,7 @@
 
 	<!-- 회사관리자전환 -->
 	<update id="authUpdate0" parameterType="String">
-		update users set auth = '1' where userId = #{value}
+		UPDATE users SET auth = '1' WHERE userId=#{value}
 	</update>
 	
 	<!-- 회원으로 전환 -->
