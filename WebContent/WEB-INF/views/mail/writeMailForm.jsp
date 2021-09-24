@@ -14,7 +14,12 @@
 	<form action="/cnav/mail/writeMailPro.cnav" method="post" style="center;">
 		<div style="text-align: center;">
 			<div>
-				<input type="text" name="mailRid" placeholder="받는 사람" />
+				<select name="mailRid">
+				<option value="">선택</option>
+				<c:forEach var="userList" items="${userList}">
+					<option value="${userList.userId}">${userList.name} ${userList.position}</option>
+				</c:forEach> 	
+				</select>
 			</div>
 			<div>
 				첨부파일 : <input type="button" name="mailFile" value="pc에서 등록"/>

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import cnav.mail.dao.MailDAOImpl;
 import cnav.mail.dto.MailDTO;
+import cnav.main.dto.UserDTO;
 
 @Repository
 public class MailServiceImpl implements MailService {
@@ -201,6 +202,13 @@ public class MailServiceImpl implements MailService {
 		int result = MailDAO.deleteMail(num);
 		
 		return result;
+	}
+	// 메일함, 보내기용 유저 리스트
+	@Override
+	public List<UserDTO> userList(String code) throws SQLException {
+		List<UserDTO> userList = MailDAO.userList(code);
+		
+		return userList;
 	}
 
 }
