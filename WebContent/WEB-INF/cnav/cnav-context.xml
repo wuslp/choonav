@@ -89,5 +89,16 @@
 	<!-- mypage -->
 	<context:component-scan base-package="cnav.mypage.service" />
 	<context:component-scan base-package="cnav.mypage.dao" />
-	
+	<!-- 자유게시판 -->
+	<context:component-scan base-package="cnav.topic.service" />
+	<context:component-scan base-package="cnav.topic.dao" />
+	<!-- 게시판댓글 -->
+	<context:component-scan base-package="cnav.topcomments.service" />
+	<context:component-scan base-package="cnav.topcomments.dao" />
+	<!-- 공지사항 -->
+	<context:component-scan base-package="cnav.notice.service" />
+	<context:component-scan base-package="cnav.notice.dao" />
+	<!-- 전체관리자마이페이지 -->
+	<context:component-scan base-package="cnav.admin.service" />
+	<context:component-scan base-package="cnav.admin.dao" />
 </beans>
