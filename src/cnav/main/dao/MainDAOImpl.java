@@ -116,11 +116,5 @@ public class MainDAOImpl implements MainDAO{
 		return list;
 	}
 
-	//getCodeSametUser
-	@Override
-	public List getCodeSametUser(String scode) throws SQLException {
-		List list = sqlSession.selectList("main.getCodeSametUser",scode);
-		return list;
-	}
 
 }

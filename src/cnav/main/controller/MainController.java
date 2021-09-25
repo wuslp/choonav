@@ -216,11 +216,6 @@ public class MainController {
 		// 회사코드에 해당하는 회사정보 가져오기
 		BusinessDTO bizDTO = mainService.getBizInfo(scode);
 		
-		//*******여기서부터
-		List list = new ArrayList();
-		list = mainService.getCodeSametUser(scode);
-		//여기까지 test추가 ->나중에 삭제할것 !!
-		
 		// view에 전달할 데이터 보내기 
 		model.addAttribute("articleList", result.get("articleList"));
 		model.addAttribute("count", result.get("count"));
@@ -228,9 +223,6 @@ public class MainController {
 		model.addAttribute("bizDTO", bizDTO);
 		
 		//model.addAttribute("cdto",cdto);
-		//*******여기서부터
-		model.addAttribute("list",list);
-		//여기까지 test추가 ->나중에 삭제할것 !!
 		return "main/main";
 	}
 	//아이디 찾기 폼
@@ -242,10 +234,9 @@ public class MainController {
 	//아이디 찾기
 	@RequestMapping("findIdRes.cnav")
 	public String findIdRes(HttpServletResponse response ,Model model,UserDTO dto) throws Exception {
-		System.out.println("63번 이름 확인 :"+dto.getName());
-		System.out.println("62번 이메일 확인 :"+dto.getEmail());
 		UserDTO udto = mainService.findUser(response, dto);
 		
+		System.out.println("62번 이름 확인 :"+dto.getName());
 		model.addAttribute("udto", udto);
 		return "main/findIdRes";
 	}

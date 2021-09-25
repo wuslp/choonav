@@ -35,8 +35,9 @@
 				<c:if test="${sessionScope.sid == null}">
 				<script>
 					alert("로그인후 이용할 수 있습니다");
-					var link = "http://localhost:8080/cnav/main/startPage.cnav";
-		    		window.location.href = link;
+					//var link = "http://localhost:8080/cnav/main/startPage.cnav";
+		    		//window.location.href = link;
+		    		window.history.back();
 		    		</script>
 				</c:if>
 			</div>
@@ -45,8 +46,6 @@
 			</div>
 			<div>
 			<h1> </h1><br/><br/><br/>
-				<h2>선택한 카테고리만 보이게</h2>
-				<h2>${sessionScope.cdto}</h2>
 					<a href="/cnav/notice/list.cnav">공지사항</a><br/><br/>
 					
 				<c:if test="${sessionScope.cdto.approval==1}">
@@ -77,16 +76,7 @@
 		</div>
 	</div>
 	<!--로그아웃  -->
-	<a href="/cnav/main/logout.cnav">로그아웃 </a><br/><br/><br/>
-	<!-- *****************여기서부터 -->
-	<!-- 테이블에서 user 회사코드랑 일치하는 회원들 select 로 불러오기 -->
-	<h3>테이블에서 user 회사코드랑 일치하는 회원들 select 로 불러오기 </h3>
-	<select id="" name="userlist">
-    <c:forEach  var="item" items="${list}">
-        <option value="${item.name}">${item.name }</option>
-    </c:forEach>
-	</select>
-	<!-- *****************여기까지 test추가 ->나중에 삭제할것 !! --><br/><br/><br/>
+	<a href="/cnav/main/logout.cnav">로그아웃 </a><br/><br/><br/><br/><br/><br/>
 	
 	
 	<!-- 메인 content -->
