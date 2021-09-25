@@ -11,7 +11,7 @@
 
 	<!--프로젝트 리스트 불러오기  -->
 	<select id="getProjects" parameterType="hashmap" resultType="projectDTO">	
-		<![CDATA[ 수정해주세요 무슨 버전 남길건지..밑에거 남길게여
+		<![CDATA[ 
 
 			select * from (select rownum rnum, project.* from 
        			(select * from project where code=#{code} order by proNum desc) project) 
@@ -55,19 +55,6 @@
 		]]>
 	</select>
 	
-	
-	<!-- 진행중 완료 리스트 가져오기 -->
-	<select id="getProjectState" resultType="int" parameterType="string">
-		select count(*) from project where proState like '%'||#{sort}||'%'
-	</select>
-	<select id="getState" parameterType="hashmap" resultType="projectDTO">
-		<![CDATA[
-	  	select B.*, r
-	  	 from (select A.*, rownum r from (select * from project where proState=#{sort} order by proStart asc) A order by proStart asc) B
-	   		where r >= #{startRow} and r <= #{endRow}
-		]]>
-	</select>
-
 	<!-- 프로젝트 저장 -->
 	<insert id="insertProject" parameterType="projectDTO">
 		insert into project values(project_seq.nextVal,#{proName},#{proContent},'java',#{proStart},#{proEnd},#{dept},#{proState},#{code})	
@@ -79,13 +66,6 @@
 		select * from project where proNum=#{value}	
 	</select>
 
-	<!-- 아이디 체크 -->
-<!--  	<select id="userIdCheck" parameterType="projectDTO" resultType="int">
-		select count(*) from project where proNum=#{proNum} and userId=#{userId}
-	</select> -->
-	
-	 
-	
 	<!-- 프로젝트 수정 -->
 	<update id="updateProject" parameterType="projectDTO">
 		update project set proName=#{proName}, proContent=#{proContent}
