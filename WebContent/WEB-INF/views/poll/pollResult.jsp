@@ -149,20 +149,20 @@
 						내용		 : ${article.pollCon}<br/><br/>
 						<strong>&nbsp;&nbsp; 총 투표수 : ${article.total}</strong> <br/>
 						항목 <br/>
-						1 :${article.ans1}<br/>
+						1 :&emsp;${article.ans1}<br/>
 							<div class="zt-skill-bar"><div data-width="<fmt:formatNumber value = "${(article.res1/article.total)*100}"/>" style="">${article.ans1}<c:out value="${name}" /><span>결과비율 : <fmt:formatNumber value="${article.res1/article.total}" type="percent"/></span></div></div>
 		
-						2 :${article.ans2}<br/>
+						2 :&emsp;${article.ans2}<br/>
 							<div class="zt-skill-bar"><div data-width="<fmt:formatNumber value = "${article.res2/article.total*100}"/>" style="">${article.ans2}<span><fmt:formatNumber value="${article.res2/article.total}" type="percent"/></span></div></div>
 		
 						<c:if test="${article.ans3 != null}">
-						3 :${article.ans3}<br/>
+						3 :&emsp;${article.ans3}<br/>
 						</c:if>
 						<c:if test="${article.res3 ne '0'}">
 							<div class="zt-skill-bar"><div data-width="<fmt:formatNumber value = "${article.res3/article.total*100}"/>" style=";">${article.ans3}<span><fmt:formatNumber value="${article.res3/article.total}" type="percent"/></span></div></div>
 						</c:if>
 						<c:if test="${article.ans4 != null}">
-						4 :${article.ans4}<br/>
+						4 :&emsp;${article.ans4}<br/>
 						</c:if>
 						<c:if test="${article.res4 ne '0'}">
 							<div class="zt-skill-bar"><div data-width="<fmt:formatNumber value = "${article.res4/article.total*100}"/>" style=";">${article.ans4}<span><fmt:formatNumber value="${article.res4/article.total}" type="percent"/></span></div></div>

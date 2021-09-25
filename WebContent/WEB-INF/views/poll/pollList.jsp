@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,12 +14,11 @@
 	<meta name="author" content="" />
 	<title>pollList Page</title>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script type="text/javascript">
-	</script>
-	
  	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+	<script type="text/javascript">
+	</script>
 </head>
 <body class="sb-nav-fixed">
 	<jsp:include page="/include/top_nav_bar.jsp" />
@@ -67,6 +67,7 @@
 								<td>No.</td>
 								<td>진행상태</td>
 								<td>제목</td>
+								<td>내용</td>
 								<td>기간</td>
 								<td>대상</td>
 							</tr>
@@ -75,8 +76,28 @@
 									<td>${number}
 									<c:set var="number" value="${number - 1}" /> </td>
 									<td>${article.pollStatus}</td>
-									<td><a href="/cnav/poll/pollPage.cnav?pollNum=${article.pollNum}&pageNum=${pageNum}"> ${article.pollTitle} </a></td>
-									<td><fmt:formatDate value="${article.stDate}" pattern="yyyy-MM-dd" /> ~ <fmt:formatDate value="${article.endDate}" pattern="yyyy-MM-dd" /></td>
+<%-- 									<td><a href="/cnav/poll/pollPage.cnav?pollNum=${article.pollNum}&pageNum=${pageNum}"> ${article.pollTitle} </a></td>
+ --%>								<td>&nbsp;
+ 										<c:choose>
+									 	<c:when test="${fn:length(article.pollTitle) gt 4}">
+									    	<a href="/cnav/poll/pollPage.cnav?pollNum=${article.pollNum}&pageNum=${pageNum}"><c:out value="${fn:substring(article.pollTitle, 0, 3)}"></c:out>....</a>
+									    </c:when>
+									    <c:otherwise>
+									    	<a href="/cnav/poll/pollPage.cnav?pollNum=${article.pollNum}&pageNum=${pageNum}"><c:out value="${article.pollTitle}"></c:out></a>
+									    </c:otherwise>
+										</c:choose>
+									</td>
+									<td>&nbsp;
+ 										<c:choose>
+									 	<c:when test="${fn:length(article.pollCon) gt 7}">
+									    	<c:out value="${fn:substring(article.pollCon, 0, 6)}"></c:out>....</a>
+									    </c:when>
+									    <c:otherwise>
+									    	<c:out value="${article.pollCon}"></c:out></a>
+									    </c:otherwise>
+										</c:choose>
+									</td>
+									<td>&nbsp;<fmt:formatDate value="${article.stDate}" pattern="yyyy-MM-dd" /> ~ <fmt:formatDate value="${article.endDate}" pattern="yyyy-MM-dd" /></td>
 									<td>${article.target}</td>
 									
 								</tr>

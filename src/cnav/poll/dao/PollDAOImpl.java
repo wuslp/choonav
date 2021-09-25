@@ -1,6 +1,7 @@
 package cnav.poll.dao;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,8 +9,12 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
 
 import cnav.main.dto.CategoryDTO;
+import cnav.poll.dto.PollCommentsDTO;
 import cnav.poll.dto.PollDTO;
 
 @Repository
@@ -144,6 +149,49 @@ public class PollDAOImpl implements PollDAO{
 	@Override
 	public void pollDelete(String pollNum) throws SQLException {
 		sqlSession.delete("poll.pollDelete",pollNum);
+	}
+	//투표글 댓글달기
+	@Override
+	public int pollComment(PollCommentsDTO pdto) throws SQLException {
+		//세션에 저장된것 꺼내서 담아주기. code,userId
+		//code
+		String code=(String)RequestContextHolder.getRequestAttributes().getAttribute("scode",RequestAttributes.SCOPE_SESSION);
+		System.out.println("35번 세션 코드 출력 : "+code);
+		String userId=(String)RequestContextHolder.getRequestAttributes().getAttribute("sid", RequestAttributes.SCOPE_SESSION);
+		pdto.setCode(code);
+		pdto.setUserId(userId);
+		int result = sqlSession.insert("poll.pollComment",pdto);
+		
+		return result;
+	}
+	//투표글 댓글 개수
+	@Override
+	public int countComment(String pollNum) throws SQLException {
+		int result=0;
+		result = sqlSession.selectOne("poll.countComment",pollNum);
+		return result;
+	}
+	//투표글 리스트 가져오기
+	@Override
+	public List pollCommList(String pollNum) throws SQLException {
+		List comList = new ArrayList();
+		comList = sqlSession.selectList("poll.pollCommList",pollNum);
+		return comList;
+	}
+	//댓글 작성자 와 접속중인 아이디가 일치하는지 체크
+	@Override
+	public String CheckId(String pollComNum, String userId) throws SQLException {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pollComNum", pollComNum);
+		map.put("userId", userId);
+		int checkId = sqlSession.selectOne("poll.CheckId",map); 
+		String result = Integer.toString(checkId);
+		return result;
+	}
+	//댓글 삭제
+	@Override
+	public void commDelete(String pollComNum) throws SQLException {
+		sqlSession.delete("poll.commDelete",pollComNum);
 	}
 	
 }
