@@ -1,6 +1,8 @@
 package cnav.poll.controller;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,8 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import cnav.main.dto.CategoryDTO;
+import cnav.poll.dto.PollCommentsDTO;
 import cnav.poll.dto.PollDTO;
 import cnav.poll.service.PollServiceImpl;
 
@@ -80,9 +85,11 @@ public class PollController {
 	
 	//투표 삭제
 	@RequestMapping("pollDelete.cnav")
-	public String pollDelete(String pollNum) throws SQLException{
+	@ResponseBody
+	public void pollDelete(String pollNum) throws SQLException{
 		pollService.pollDelete(pollNum);
-		return "redirect:/poll/pollList.cnav";
+		System.out.println("넘어오는 삭제 num"+pollNum);
+		//return "redirect:/poll/pollList.cnav";
 	}
 	
 	//투표 하는 페이지 요청
@@ -100,19 +107,24 @@ public class PollController {
 		String userIdDept=pollService.getUserDept(userId);
 		System.out.println("79번 result 값 : "+result);
 		System.out.println("74번 userIdDept 값 : "+userIdDept);
+		List ComList= new ArrayList();
+		ComList =pollService.pollCommList(pollNum);
+		model.addAttribute("ComList",ComList);
 		model.addAttribute("result",result);//기록있으면 1 없으면 0 
 		model.addAttribute("article",article);
 		model.addAttribute("userIdDept",userIdDept);
+		model.addAttribute("ComList",ComList);
 		
 		return "poll/pollPage";
 	}
 	//투표하면 그값 +1 씩 
 	@RequestMapping("pollRes.cnav")
-	public String pollRes(HttpSession session,String pollNum,String obj_value,Model model,HttpServletRequest request) throws SQLException{
+	@ResponseBody
+	public void pollRes(HttpSession session,String pollNum,String obj_value,Model model,HttpServletRequest request) throws SQLException{
 		System.out.println("넘어오는파라미터 an1 : "+obj_value);//ans1로 안의값이 넘어온다
 		System.out.println("넘어오는파라미터 pollNum : "+pollNum);//pollNum값
 		PollDTO article = null;
-		String rePage;
+		//String rePage;
 		//String RespollNum=(String)request.getParameter("pollNum");
 		//중복투표방지 , 투표시 기록 남기기 
 		String userId=(String)session.getAttribute("sid");
@@ -121,16 +133,16 @@ public class PollController {
 			pollService.plusPollUser(pollNum,userId);//투표한리스트에 등록하기
 			//투표된 결과값도 받아와야.그값들로 결과창나타내줄 수 있다
 			System.out.println("11111111111");//확인용
-			rePage="poll/pollResult";
+			//rePage="poll/pollResult";
 		}else {//결과로 넘어갈때
 			article = pollService.getPollArticleRes(pollNum);
 			System.out.println("222222222222");//확인용
-			rePage="poll/pollResult";
+			//rePage="poll/pollResult";
 		}
 		model.addAttribute("article",article);
 		//model.addAttribute("RespollNum",RespollNum);
 		//return "poll/pollPage";
-		return rePage;
+		//return rePage;
 	}
 	//투표결과
 	@RequestMapping("pollResult")
@@ -140,5 +152,42 @@ public class PollController {
 		model.addAttribute("article",article);
 		return "poll/pollResult";
 	}
+	//댓글등록
+	@RequestMapping("pollInsertComm.cnav")
+	@ResponseBody
+	public String pollInsertComm(PollCommentsDTO pdto) throws SQLException {
+		System.out.println("코멘트단것"+pdto.getPollComment());
+		System.out.println("코멘트단것"+pdto.getPollNum());
+		String result =String.valueOf(pollService.pollComment(pdto));
+		
+		 return result;
+	}
 	
+	//댓글 삭제하기
+	@RequestMapping("commDelete.cnav")
+	public ModelAndView commDelete(String pollComNum, Model model,String pollNum) throws SQLException {
+		
+		String pollNumber = pollNum;
+		String result=null;
+		System.out.println("pollComNum 넘어오냐"+pollComNum);
+		result = pollService.CheckId(pollComNum);
+		System.out.println(result);
+		ModelAndView mav = new ModelAndView();
+		if(result.equals("1")) {
+			System.out.println("result 1이다");
+			pollService.commDelete(pollComNum);
+		}
+		//뷰의경로
+		mav.setViewName("poll/pollDeleteRes");
+		//뷰로 넘겨줄값
+		mav.addObject("result", result);
+		mav.addObject("pollNum", pollNumber);
+		
+		return mav;
+	}
+	@RequestMapping("pollDeleteRes")
+	public String pollDeleteRes() {
+		
+		return "poll/pollDeleteRes";
+	}
 }

@@ -17,6 +17,7 @@
   		<typeAlias type="cnav.attend.dto.AttendDTO" alias="attendDTO"/>
   		<typeAlias type="cnav.poll.dto.PollDTO" alias="pollDTO"/>
   		<typeAlias type="cnav.poll.dto.PollUserDTO" alias="pollUserDTO"/>
+		<typeAlias type="cnav.poll.dto.PollCommentsDTO" alias="pollCommDTO"/>
   		<typeAlias type="cnav.main.dto.BusinessDTO" alias="busDTO"/>
   		<typeAlias type="cnav.main.dto.CategoryDTO" alias="catDTO"/>
   		<typeAlias type="cnav.main.dto.UserDTO" alias="userDTO"/>
