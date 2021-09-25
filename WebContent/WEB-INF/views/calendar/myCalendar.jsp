@@ -75,45 +75,13 @@
 		window.open(url,name,option)
 	}
 </script>
-<style>
-
-  body {
-    margin: 40px 10px;
-    padding: 0;
-    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-    font-size: 14px;
-  }
-
-  #calendar {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-  
-  .add-button {
-    position: absolute;
-    top: 1px;
-    right: 230px;
-    background: #2C3E50;
-    border: 0;
-    color: white;
-    height: 35px;
-    border-radius: 3px;
-    width: 157px;
-    }
-    
-.left {
-	float: left;
-}
-.center {
-	float: center;
-}
-</style>
 <body>
 	<jsp:include page="/include/top_nav_bar.jsp" />
 	<div id="layoutSidenav">
 		<jsp:include page="/include/left_nav_bar.jsp" />
 	<div id="layoutSidenav_content">
 	
+	<h3> 내 일정 </h3>
 	<div id='calendar'></div>
 	
 	<jsp:include page="/include/footer.jsp" />

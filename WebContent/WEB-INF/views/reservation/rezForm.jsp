@@ -39,12 +39,7 @@
 				<h3> 예약항목 </h3>
 			</div>
 			<div>
-				<select name="category">
-					<option value="회의실1">회의실1</option>
-					<option value="회의실2">회의실2</option>
-					<option value="회의실3">회의실3</option>
-					<option value="회의실4">회의실4</option>
-				</select>
+				<input type="text" name="category" />
 			</div>
 			<div>
 				<h3> 목적 </h3>

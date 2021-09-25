@@ -33,6 +33,7 @@
 	
 	<div id='calendar' class="center"></div>
 	
+	<h3> 내 예약 </h3>
 	<c:if test="${count == 0}">
 		<div>
 			예약한 내역이 없습니다.
