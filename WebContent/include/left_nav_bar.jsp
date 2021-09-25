@@ -105,7 +105,13 @@
                                 </nav>
                             </div>
                            </c:if> 
-                            
+                            <!-- 9.전체 관리자 권한 =2일 경우 회사관리자권한 수정해주는 카테고리 필요 -->
+                           <c:if test="${sessionScope.sauth==2}">
+                            <a class="nav-link" href="/cnav/admin/adminMypage.cnav">
+                                <div class="sb-nav-link-icon"><i class="fas fa-exclamation-circle"></i></div>
+                               	 	관리자 권한 수정 페이지
+                            </a>
+                           </c:if> 
                          
                             
                         </div>

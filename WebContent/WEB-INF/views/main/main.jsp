@@ -24,14 +24,10 @@
 <body class="sb-nav-fixed">
 	<jsp:include page="/include/top_nav_bar.jsp" />
 	<div id="layoutSidenav">
-
 		<jsp:include page="/include/left_nav_bar.jsp" />
-
 		<div id="layoutSidenav_content">
-	<div>
-		<div>
 			<!--로그인된 세션이 없을경우 startPage 로 이동시켜주기  -->
-			<div id="">
+			<div id="logincheck">
 				<c:if test="${sessionScope.sid == null}">
 				<script>
 					alert("로그인후 이용할 수 있습니다");
@@ -40,108 +36,72 @@
 		    		window.history.back();
 		    		</script>
 				</c:if>
-			</div>
-			<div class="">
-					<h1><a href="/cnav/main/main.cnav">Choonav 메인으로</a></h1>
-			</div>
-			<div>
-			<h1> </h1><br/><br/><br/>
-					<a href="/cnav/notice/list.cnav">공지사항</a><br/><br/>
-					
-				<c:if test="${sessionScope.cdto.approval==1}">
-					<a href="/cnav/approval/sendAppList.cnav">결재</a><br/><br/>
-				</c:if>
-				<c:if test="${sessionScope.cdto.mail==1}">
-					<a href="/cnav/mail/recMailList.cnav">메일</a><br/><br/>
-				</c:if>
-				<c:if test="${sessionScope.cdto.attend==1}">
-					<a href="/cnav/attend/attend.cnav">근태</a><br/><br/>
-				</c:if>
-				<c:if test="${sessionScope.cdto.project==1}">
-					<a href="/cnav/project/proList.cnav">프로젝트</a><br/><br/>
-				</c:if>
-				<c:if test="${sessionScope.cdto.calendar==1}">
-					<a href="/cnav/cal/calendar.cnav">일정</a><br/><br/>
-				</c:if>
-				<c:if test="${sessionScope.cdto.reservation==1}">
-					<a href="/cnav/rez/allRez.cnav">예약</a><br/><br/>
-				</c:if>
-				<c:if test="${sessionScope.cdto.topic==1}">
-					<a href="/cnav/topic/list.cnav">자유게시판</a><br/><br/>
-				</c:if>
-				<c:if test="${sessionScope.cdto.poll==1}">
-					<a href="/cnav/poll/pollList.cnav">투표</a><br/><br/>
-				</c:if>
-			</div>
-		</div>
-	</div>
-	<!--로그아웃  -->
-	<a href="/cnav/main/logout.cnav">로그아웃 </a><br/><br/><br/><br/><br/><br/>
-	
-	
-	<!-- 메인 content -->
-	<table>
-		<!-- 회사 공지사항 -->
-		<tr>
-			<table>
-				<c:if test="${count == 0}">
-					등록된 공지사항이 없습니다.
-				</c:if>
-				<c:if test="${count > 0}">
-				<tr>
-					<td> No. </td>
-					<td> 제목 </td>
-					<td> 작성일 </td>
-				</tr>
-				<c:forEach var="item" items="${articleList}">
-					<tr>
-						<td>${number}<c:set var="number" value="${number - 1}" /> </td>
-						<td>${item.notiTitle}</td>
-						<td>${item.notiDate}</td>
-					</tr>
-				</c:forEach>
-				</c:if>
-			</table>
-		</tr>
-		<tr>
-			<!-- 회사정보 -->
-			<td>
+			</div><!--logincheck -->
+			<!--로그아웃  -->
+			<a href="/cnav/main/logout.cnav">로그아웃 </a><br/><br/><br/><br/><br/><br/>
+			<div id="main"><!-- 메인 content -->
 				<table>
-					<tr>회사정보</tr>
+					<!-- 회사 공지사항 -->
 					<tr>
-						<td>회사명</td>
-						<td>${bizDTO.bizName}</td>
+						<table>
+							<c:if test="${count == 0}">
+								등록된 공지사항이 없습니다.
+							</c:if>
+							<c:if test="${count > 0}">
+							<tr>
+								<td> No. </td>
+								<td> 제목 </td>
+								<td> 작성일 </td>
+							</tr>
+							<c:forEach var="item" items="${articleList}">
+								<tr>
+									<td>${number}<c:set var="number" value="${number - 1}" /> </td>
+									<td>${item.notiTitle}</td>
+									<td>${item.notiDate}</td>
+								</tr>
+							</c:forEach>
+							</c:if>
+						</table>
 					</tr>
 					<tr>
-						<td>대표자</td>
-						<td>${bizDTO.bizCEO}</td>
-					</tr>
-					<tr>
-						<td>회사번호</td>
-						<td>${bizDTO.bizTel}</td>
-					</tr>
-					<tr>
-						<td>회사이메일</td>
-						<td>${bizDTO.bizEmail}</td>
+						<!-- 회사정보 -->
+						<td>
+							<table>
+								<tr>회사정보</tr>
+								<tr>
+									<td>회사명</td>
+									<td>${bizDTO.bizName}</td>
+								</tr>
+								<tr>
+									<td>대표자</td>
+									<td>${bizDTO.bizCEO}</td>
+								</tr>
+								<tr>
+									<td>회사번호</td>
+									<td>${bizDTO.bizTel}</td>
+								</tr>
+								<tr>
+									<td>회사이메일</td>
+									<td>${bizDTO.bizEmail}</td>
+								</tr>
+							</table>
+						</td>
+						
+						<!-- 실시간 시계 -->
+						<td>
+							<a id="codepen-link" href='https://www.codepen.io/seanfree' target='_blank'></a>
+							<div id="clock">
+							  <ul id="tick-marks"></ul>
+							  <div class="second ticker"></div>
+							  <div class="minute ticker"></div>
+							  <div class="hour ticker"></div>
+							  <div id="time-output"></div>
+							</div>
+						</td>
 					</tr>
 				</table>
-			</td>
-			
-			<!-- 실시간 시계 -->
-			<td>
-				<a id="codepen-link" href='https://www.codepen.io/seanfree' target='_blank'></a>
-				<div id="clock">
-				  <ul id="tick-marks"></ul>
-				  <div class="second ticker"></div>
-				  <div class="minute ticker"></div>
-				  <div class="hour ticker"></div>
-				  <div id="time-output"></div>
-				</div>
-			</td>
-		</tr>
-	</table>
-			<jsp:include page="/include/footer.jsp" />
-		</div>
+			</div><!-- main 메인 content -->
+		<jsp:include page="/include/footer.jsp" />
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 		<script src="<%=request.getContextPath()%>/resources/startbootstrap/js/scripts.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
@@ -149,5 +109,7 @@
 		<script src="<%=request.getContextPath()%>/resources/startbootstrap/assets/demo/chart-bar-demo.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
 		<script src="<%=request.getContextPath()%>/resource/startbootstrap/js/datatables-simple-demo.js"></script>
+		</div><!-- id="layoutSidenav_content" -->
+	</div><!-- id="layoutSidenav" -->
 </body>
 </html>
