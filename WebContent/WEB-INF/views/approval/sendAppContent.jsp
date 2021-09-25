@@ -48,9 +48,9 @@
 		<td>${approval.state3}</td>
 	</tr>
 	<tr> <!-- 도장 -->
-		<td>${approval.name1} </td> 
-		<td>${approval.name2} </td>
-		<td>${approval.name3} </td>
+		<td>${approval.nick1} </td> 
+		<td>${approval.nick2} </td>
+		<td>${approval.nick3} </td>
 	</tr>
 
 </table>

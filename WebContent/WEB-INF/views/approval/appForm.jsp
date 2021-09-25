@@ -56,7 +56,7 @@
 			<option value="개발">기획팀</option> 
 		</select><br/>
 		결재자
-		<select name="name1">
+		<select name="id1">
 			<option value="">선택</option>
 				<c:forEach var="users" items="${list}">
 					<option value="${users.userId}">${users.name} ${users.position}</option>
