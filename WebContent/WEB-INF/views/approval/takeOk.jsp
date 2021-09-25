@@ -14,7 +14,7 @@
 	
 <form action="/cnav/approval/addTake.cnav?appNum=${appNum}" method="post">
 	<input type="hidden" name="appNum" value="${appNum}" />
-		<select name="name2">
+		<select name="id2">
 				<option value="">선택</option>
 				<c:forEach var="users" items="${list}">
 					<option value="${users.userId}">${users.name} ${users.position}</option>

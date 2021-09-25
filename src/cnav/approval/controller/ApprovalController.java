@@ -49,9 +49,9 @@ public class ApprovalController {
 		// 비즈니스 로직 처리 : 데이터 db 저장
 		String userId = (String)session.getAttribute("sid");
 		String code = (String)session.getAttribute("scode");
-
 		dto.setUserId(userId);
 		dto.setCode(code);
+		
 		List list = approvalService.getUsersId(userId, code);
 		
 		approvalService.addApp(dto);
