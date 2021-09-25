@@ -6,7 +6,15 @@
 <html lang="en">
  <head>
     <meta charset="UTF-8">
-	<title>pollForm page</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<title>pollResult page</title>
+	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript">
 	(function( $ ) {
@@ -106,46 +114,73 @@
     </style>
 </head>
 
- <body>
-    <div class="zt-span6 last">
-    
-    	<div id="">
-		<h1><strong>투표 결과 페이지</strong></h1>
-		<p>&nbsp;</p>
-		<p>&nbsp;</p>
-		<div id="">
-			<!--div 수정필요  -->
-				<div id="">
-					투표기간	<fmt:formatDate value="${article.stDate}" pattern="yyyy-MM-dd"/><strong>~</strong><fmt:formatDate value="${article.endDate}" pattern="yyyy-MM-dd"/><br/>
-					제목		 : ${article.pollTitle}<br/>
-					대상		 : ${article.target}<br/>
-					내용		 : ${article.pollCon}<br/>
-					항목 <br/>
-					<strong>&nbsp;&nbsp; 총 투표수 : ${article.total}</strong> <br/>
-					1 :${article.ans1}<br/>
-						<div class="zt-skill-bar"><div data-width="<fmt:formatNumber value = "${article.res1/article.total*100}"/>" style="">${article.ans1}<c:out value="${name}" /><span>결과비율 : <fmt:formatNumber value="${article.res1/article.total}" type="percent"/></span></div></div>
-	
-					2 :${article.ans2}<br/>
-						<div class="zt-skill-bar"><div data-width="<fmt:formatNumber value = "${article.res2/article.total*100}"/>" style="">${article.ans2}<span><fmt:formatNumber value="${article.res2/article.total}" type="percent"/></span></div></div>
-	
-					<c:if test="${article.ans3 != null}">
-					3 :${article.ans3}<br/>
+ <body class="sb-nav-fixed">
+	<jsp:include page="/include/top_nav_bar.jsp" />
+	<div id="layoutSidenav">
+		<jsp:include page="/include/left_nav_bar.jsp" />
+		<div id="layoutSidenav_content">
+   			<!--로그인된 세션이 없을경우 startPage 로 이동시켜주기  -->
+			<div id=""> 
+					<c:if test="${sessionScope.sid == null}">
+					<script>
+						alert("로그인후 이용할 수 있습니다");
+			    		window.history.back();
+			    		</script>
 					</c:if>
-					<c:if test="${article.res3 ne '0'}">
-						<div class="zt-skill-bar"><div data-width="<fmt:formatNumber value = "${article.res3/article.total*100}"/>" style=";">${article.ans3}<span><fmt:formatNumber value="${article.res3/article.total}" type="percent"/></span></div></div>
+			</div>
+			<!--pollNum 없을경우 이동시켜주기  -->
+			<div id=""> 
+					<c:if test="${pollNum == null}">
+					<script>
+						alert("접근할 수 없습니다");
+						window.history.back();
+			    		</script>
 					</c:if>
-					<c:if test="${article.ans4 != null}">
-					4 :${article.ans4}<br/>
-					</c:if>
-					<c:if test="${article.res4 ne '0'}">
-						<div class="zt-skill-bar"><div data-width="<fmt:formatNumber value = "${article.res4/article.total*100}"/>" style=";">${article.ans4}<span><fmt:formatNumber value="${article.res4/article.total}" type="percent"/></span></div></div>
-					</c:if><br/><br/>
-					<input type="button" value="리스트로" id="" onClick="window.location='/cnav/poll/pollList.cnav'">
-				
-				</div>
-		</div>
+			</div>
+		    <div class="zt-span6 last">
+		    	<div id="">
+				<h1><strong>투표 결과</strong></h1>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+					<div id="">
+						투표기간	<fmt:formatDate value="${article.stDate}" pattern="yyyy-MM-dd"/><strong>~</strong><fmt:formatDate value="${article.endDate}" pattern="yyyy-MM-dd"/><br/><br/>
+						제목		 : ${article.pollTitle}<br/><br/>
+						대상		 : ${article.target}<br/><br/>
+						내용		 : ${article.pollCon}<br/><br/>
+						<strong>&nbsp;&nbsp; 총 투표수 : ${article.total}</strong> <br/>
+						항목 <br/>
+						1 :${article.ans1}<br/>
+							<div class="zt-skill-bar"><div data-width="<fmt:formatNumber value = "${(article.res1/article.total)*100}"/>" style="">${article.ans1}<c:out value="${name}" /><span>결과비율 : <fmt:formatNumber value="${article.res1/article.total}" type="percent"/></span></div></div>
+		
+						2 :${article.ans2}<br/>
+							<div class="zt-skill-bar"><div data-width="<fmt:formatNumber value = "${article.res2/article.total*100}"/>" style="">${article.ans2}<span><fmt:formatNumber value="${article.res2/article.total}" type="percent"/></span></div></div>
+		
+						<c:if test="${article.ans3 != null}">
+						3 :${article.ans3}<br/>
+						</c:if>
+						<c:if test="${article.res3 ne '0'}">
+							<div class="zt-skill-bar"><div data-width="<fmt:formatNumber value = "${article.res3/article.total*100}"/>" style=";">${article.ans3}<span><fmt:formatNumber value="${article.res3/article.total}" type="percent"/></span></div></div>
+						</c:if>
+						<c:if test="${article.ans4 != null}">
+						4 :${article.ans4}<br/>
+						</c:if>
+						<c:if test="${article.res4 ne '0'}">
+							<div class="zt-skill-bar"><div data-width="<fmt:formatNumber value = "${article.res4/article.total*100}"/>" style=";">${article.ans4}<span><fmt:formatNumber value="${article.res4/article.total}" type="percent"/></span></div></div>
+						</c:if><br/><br/>
+						<input type="button" value="리스트로" id="" onClick="window.location='/cnav/poll/pollList.cnav'">
+					
+					</div>
+				</div><!--  -->
+			</div><!-- class="zt-span6 last" -->
+			<jsp:include page="/include/footer.jsp" />
+		</div><!-- <div id="layoutSidenav_content"> -->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+		<script src="<%=request.getContextPath()%>/resources/startbootstrap/js/scripts.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+		<script src="<%=request.getContextPath()%>/resources/startbootstrap/assets/demo/chart-area-demo.js"></script>
+		<script src="<%=request.getContextPath()%>/resources/startbootstrap/assets/demo/chart-bar-demo.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+		<script src="<%=request.getContextPath()%>/resource/startbootstrap/js/datatables-simple-demo.js"></script>
 	</div>
-	
-</div>
- </body>
+</body>
 </html>

@@ -148,7 +148,6 @@
 		</div>
 	<div class="signup">	
 		<h1>회원가입</h1>
-			<!-- 유효성 중복체크 추가 -->
 		<form action="/cnav/main/signupPro.cnav" method="post" onsubmit="return check()">
 		<br/>
 		<table>

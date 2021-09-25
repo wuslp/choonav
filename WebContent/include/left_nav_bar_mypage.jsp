@@ -35,9 +35,9 @@
                                 </nav>
                             </div>
                             
-                             <!-- 사원 정보 : 관리자권한 가지고 있는 아이디만 보ㅁ-->
+                             <!-- 사원 정보 : 관리자권한 가지고 있는 아이디만 보임-->
                             <c:if test="${sauth==1}"> 
-                             <a class="nav-link collapsed" href="/cnav/approval/sendAppList.cnav" data-bs-toggle="collapse" data-bs-target="#dayLayouts" aria-expanded="false" aria-controls="dayLayouts">
+                             <a class="nav-link collapsed"  data-bs-toggle="collapse" data-bs-target="#dayLayouts" aria-expanded="false" aria-controls="dayLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-check-circle"></i></div>
                               	  사원 정보
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>

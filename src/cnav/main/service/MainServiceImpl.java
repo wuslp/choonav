@@ -150,12 +150,6 @@ public class MainServiceImpl implements MainService{
 		BusinessDTO dto = mainDAO.getBizInfo(scode);
 		return dto;
 	}
-	//userList가져오기
-	@Override
-	public List getCodeSametUser(String scode) throws SQLException {
-		List list=mainDAO.getCodeSametUser(scode);
-		return list;
-	}
 	//로그인중인 아이디의 회사코드로 카테고리 DTO ,가져온것 세션에 저장시키기
 	@Override
 	public void setCatSession(CategoryDTO catDto) throws SQLException {

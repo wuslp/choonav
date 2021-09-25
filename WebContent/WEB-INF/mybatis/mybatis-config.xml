@@ -47,8 +47,6 @@
   	<mapper resource="/sql/mainSQL.xml"/>
   	<mapper resource="/sql/ApprovalSQL.xml" />
 
-  	<mapper resource="/sql/projectSQL.xml"/>
-
   	<mapper resource="/sql/mailSQL.xml" />
   	<mapper resource="/sql/bizMypageSQL.xml" />
   	<mapper resource="/sql/calSQL.xml" />

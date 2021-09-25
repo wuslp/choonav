@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
@@ -13,7 +12,7 @@
                                	공지사항
                             </a>
                         	
-                            <!-- 근태  -->
+                            <!--1. 근태  -->
                            <c:if test="${sessionScope.cdto.attend==1}"> 
                             <a class="nav-link" href="/cnav/attend/attend.cnav">
                                 <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
@@ -21,7 +20,7 @@
                             </a>
                            </c:if> 
                             
-                            <!-- 결재 -->
+                            <!--2. 결재 -->
                            <c:if test="${sessionScope.cdto.approval==1}"> 
                             <a class="nav-link collapsed" href="/cnav/approval/sendAppList.cnav" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
@@ -35,9 +34,9 @@
                                 </nav>
                             </div>
                          	</c:if>
-                           <!-- 메일 -->
+                           <!--3. 메일 -->
                           <c:if test="${sessionScope.cdto.mail==1}"> 
-                            <a class="nav-link collapsed" href="/cnav/approval/sendAppList.cnav" data-bs-toggle="collapse" data-bs-target="#mailLayouts" aria-expanded="false" aria-controls="mailLayouts">
+                            <a class="nav-link collapsed" href="" data-bs-toggle="collapse" data-bs-target="#mailLayouts" aria-expanded="false" aria-controls="mailLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-envelope"></i></div>
                                	 메일
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -50,9 +49,9 @@
                                 </nav>
                             </div>
                            </c:if>
-                            <!-- 예약 -->
+                            <!--4. 예약 -->
                           <c:if test="${sessionScope.cdto.reservation==1}">  
-                            <a class="nav-link collapsed" href="/cnav/approval/sendAppList.cnav" data-bs-toggle="collapse" data-bs-target="#reserveLayouts" aria-expanded="false" aria-controls="reserveLayouts">
+                            <a class="nav-link collapsed" href="" data-bs-toggle="collapse" data-bs-target="#reserveLayouts" aria-expanded="false" aria-controls="reserveLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 	예약
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -64,9 +63,9 @@
                                 </nav>
                             </div>
                            </c:if>
-                            <!-- 일정 -->
+                            <!--5. 일정 -->
                            <c:if test="${sessionScope.cdto.calendar==1}"> 
-                            <a class="nav-link collapsed" href="/cnav/approval/sendAppList.cnav" data-bs-toggle="collapse" data-bs-target="#dayLayouts" aria-expanded="false" aria-controls="dayLayouts">
+                            <a class="nav-link collapsed" href="" data-bs-toggle="collapse" data-bs-target="#dayLayouts" aria-expanded="false" aria-controls="dayLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-calendar-alt"></i></div>
                               	  일정
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -78,31 +77,36 @@
                                 </nav>
                             </div>
                             </c:if>
-							<!--  -->
+							<!--6. 프로젝트  -->
 							<c:if test="${sessionScope.cdto.project==1}">
                             <a class="nav-link" href="/cnav/project/proList.cnav">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 	프로젝트
                             </a>
                             </c:if>
-                            <!-- 자유 게시판 -->
+                            <!-- 7. 자유 게시판 -->
                            <c:if test="${sessionScope.cdto.topic==1}"> 
                             <a class="nav-link" href="/cnav/topic/list.cnav">
                                 <div class="sb-nav-link-icon"><i class="fas fa-comments"></i></div>
                                 	자유 게시판
                             </a>
                            </c:if>
-                           <!-- 투표 -->
+                           <!-- 8.투표 -->
                            <c:if test="${sessionScope.cdto.poll==1}">
-                            <a class="nav-link" href="/cnav/poll/pollList.cnav">
+                            <a class="nav-link collapsed" href="" data-bs-toggle="collapse" data-bs-target="#dayLayouts" aria-expanded="false" aria-controls="dayLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-check-circle"></i></div>
                                	 투표
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
+                            <div class="collapse" id="dayLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="/cnav/poll/pollList.cnav">투표 리스트</a>
+                                    <a class="nav-link" href="/cnav/poll/pollForm.cnav">투표 만들기</a>
+                                </nav>
+                            </div>
                            </c:if> 
                             
                          
-                            
-                            
                             
                         </div>
                     </div>

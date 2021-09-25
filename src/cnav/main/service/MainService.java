@@ -35,7 +35,4 @@ public interface MainService {
 	//로그인중인 아이디의 회사코드로 카테고리 DTO ,가져온것 세션에 저장시키기 ->어느페이지에서나 세션으로 카테고리 뽑아 볼 수 있도록
 	public void setCatSession(CategoryDTO catDto) throws SQLException;
 	
-	//++user리스트 가져오기
-	public List getCodeSametUser(String scode) throws SQLException;
-	
 }
