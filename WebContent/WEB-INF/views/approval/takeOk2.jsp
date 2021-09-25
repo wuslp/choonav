@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +13,7 @@
 	
 <form action="/cnav/approval/addTake2.cnav?appNum=${appNum}" method="post">
 	<input type="hidden" name="appNum" value="${appNum}" />
-		<select name="name3">
+		<select name="id3">
 				<option value="">선택</option>
 				<c:forEach var="users" items="${list}">
 					<option value="${users.userId}">${users.name} ${users.position}</option>

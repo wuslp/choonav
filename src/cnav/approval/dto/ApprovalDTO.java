@@ -7,9 +7,9 @@ public class ApprovalDTO {
 	private String appType;
 	private String userId;
 	private String dept;
-	private String name1;
-	private String name2;
-	private String name3;
+	private String id1;
+	private String id2;
+	private String id3;
 	private String appStart;
 	private String appFinish;
 	private String appTitle;
@@ -22,9 +22,9 @@ public class ApprovalDTO {
 	private String reject;
 	private String code;
 	private String name;
-	private String nick1;
-	private String nick2;
-	private String nick3;	
+	private String name1;
+	private String name2;
+	private String name3;	
 	
 	// getter/setter
 	public Integer getAppNum() {
@@ -51,23 +51,23 @@ public class ApprovalDTO {
 	public void setDept(String dept) {
 		this.dept = dept;
 	}
-	public String getName1() {
-		return name1;
+	public String getId1() {
+		return id1;
 	}
-	public void setName1(String name1) {
-		this.name1 = name1;
+	public void setId1(String id1) {
+		this.id1 = id1;
 	}
-	public String getName2() {
-		return name2;
+	public String getId2() {
+		return id2;
 	}
-	public void setName2(String name2) {
-		this.name2 = name2;
+	public void setId2(String id2) {
+		this.id2 = id2;
 	}
-	public String getName3() {
-		return name3;
+	public String getId3() {
+		return id3;
 	}
-	public void setName3(String name3) {
-		this.name3 = name3;
+	public void setId3(String id3) {
+		this.id3 = id3;
 	}
 	public String getAppStart() {
 		return appStart;
@@ -141,23 +141,24 @@ public class ApprovalDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getNick1() {
-		return nick1;
+	public String getName1() {
+		return name1;
 	}
-	public void setNick1(String nick1) {
-		this.nick1 = nick1;
+	public void setName1(String name1) {
+		this.name1 = name1;
 	}
-	public String getNick2() {
-		return nick2;
+	public String getName2() {
+		return name2;
 	}
-	public void setNick2(String nick2) {
-		this.nick2 = nick2;
+	public void setName2(String name2) {
+		this.name2 = name2;
 	}
-	public String getNick3() {
-		return nick3;
+	public String getName3() {
+		return name3;
 	}
-	public void setNick3(String nick3) {
-		this.nick3 = nick3;
+	public void setName3(String name3) {
+		this.name3 = name3;
 	}
+
 	
 }

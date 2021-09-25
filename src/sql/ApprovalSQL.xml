@@ -10,23 +10,29 @@
 		<selectKey keyProperty="appNum" order="BEFORE" resultType="int">
 			select approval_seq.nextval from dual 
 		</selectKey>
-		insert into approval(appNum, appType, userId, dept, name1, name2, name3, appStart, appFinish, appTitle, appContent, appRequest, appDate, state1, state2, state3, code, name) 
-		values(approval_seq.nextval,#{appType},#{userId},#{dept},#{name1},#{name2},#{name3},#{appStart},#{appFinish},#{appTitle},#{appContent},#{appRequest},sysdate,0,0,0,#{code},#{name})
+		insert into approval(appNum, appType, userId, dept, id1, id2, id3, appStart, appFinish, appTitle, appContent, appRequest, appDate, state1, state2, state3, code, name) 
+		values(approval_seq.nextval,#{appType},#{userId},#{dept},#{id1},#{id2},#{id3},#{appStart},#{appFinish},#{appTitle},#{appContent},#{appRequest},sysdate,0,0,0,#{code},#{name})
 	</insert>
 	
+	<!-- name에 내 userI에 해당하는 이름 넣는 용 -->
 	<select id="selectName" parameterType="ApprovalDTO" resultType="String">
 		select name from users where userId=#{userId}
 	</select>
 	 
+	
 	 
 	 <!-- 받은 결재함에 userId 대신 name 가져오기  -->
-	<select id="getName" parameterType="String" resultType="String">
+	<select id="getId" parameterType="String" resultType="String">
 		select name from users where userId=#{value}
 	</select>
 	
-	<update id="name1" parameterType="Hashmap">
-		update approval set nick1 = #{nick1} where name1=#{name1}
+	<update id="id1" parameterType="Hashmap">
+		update approval set name1 = #{name1} where id1=#{id1}
 	</update>
+	
+	
+	
+	
 	
 	
 	<!-- 보낸 결재함 전체 글 -->
@@ -68,12 +74,9 @@
 	<select id="takeApprovals" parameterType="hashmap" resultType="approvalDTO">
 		<![CDATA[
 		select * from (select rownum rnum, approval.* from 
-		(select * from approval where name1=#{userId} or name2=#{userId} or name3=#{userId} order by appNum desc) approval) 
+		(select * from approval where id1=#{userId} or id2=#{userId} or id3=#{userId} order by appNum desc) approval) 
 				where rnum >= #{start} and rnum <=#{end}
 		]]>		
-		<!-- 	select * from (select rownum rnum, approval.* from 
-			(select * from approval where userId=#{userId} and code=#{code} and name1=#{name1} or name2=#{name2} or name3=#{name3} order by appNum desc) approval) 
-					where rnum >= #{start} and rnum <=#{end} -->
 	</select>
 	
 	
@@ -126,17 +129,27 @@
 	
 	<!-- 승인시 다음 사람 지목 -->
 	<update id="insertAddTake2"  parameterType="approvalDTO">
-		update approval set name2 = #{name2} where appNum=#{appNum}
+		update approval set id2 = #{id2} where appNum=#{appNum}
 	</update>
 	
+	<update id="id2" parameterType="Hashmap">
+		update approval set name2 = #{name2} where id2=#{id2}
+	</update>
+	
+	
+	
 	<update id="insertAddTake3"  parameterType="approvalDTO">
-		update approval set name3 = #{name3} where appNum=#{appNum}
+		update approval set id3 = #{id3} where appNum=#{appNum}
+	</update>
+	
+	<update id="id3" parameterType="Hashmap">
+		update approval set name3 = #{name3} where id3=#{id3}
 	</update>
 
-	<!-- 회원 select로 불러오기 -->
-	<select id="" parameterType="userDTO">
+	<!-- 회원 select로 불러오기 
+	<select id="getId1" parameterType="userDTO">
 		select userId from users where code=#{code}
-	</select>
+	</select> -->
 
 	<!-- 결재자에 넣을 유저정보 가져오기 -->
 	<select id="getUsersId" parameterType="hashmap" resultType="userDTO">

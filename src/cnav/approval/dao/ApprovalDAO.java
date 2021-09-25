@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import cnav.approval.dto.ApprovalDTO;
-import cnav.main.dto.UserDTO;
+
 
 // 2번 : 인터페이스에는 추상메서드가 들어온다, 
 
