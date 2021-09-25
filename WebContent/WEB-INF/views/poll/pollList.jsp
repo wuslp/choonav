@@ -31,9 +31,8 @@
 					<c:if test="${sessionScope.sid == null}">
 					<script>
 						alert("로그인후 이용할 수 있습니다");
-						//var link = "http://localhost:8080/cnav/main/startPage.cnav";
-			    		//window.location.href = link;
-			    		window.history.back();
+						var link = "/cnav/main/startPage.cnav";
+			    		window.location.href = link;
 			    		</script>
 					</c:if>
 				</div>

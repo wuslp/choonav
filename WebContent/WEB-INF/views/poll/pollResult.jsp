@@ -124,19 +124,19 @@
 					<c:if test="${sessionScope.sid == null}">
 					<script>
 						alert("로그인후 이용할 수 있습니다");
-			    		window.history.back();
+			    		window.location="/cnav/main/startPage.cnav";
 			    		</script>
 					</c:if>
 			</div>
-			<!--pollNum 없을경우 이동시켜주기  -->
+			<!--pollNum 없을경우  
 			<div id=""> 
-					<c:if test="${pollNum == null}">
+					<c:if test="${RespollNum == null}">
 					<script>
 						alert("접근할 수 없습니다");
 						window.history.back();
 			    		</script>
 					</c:if>
-			</div>
+			</div> -->
 		    <div class="zt-span6 last">
 		    	<div id="">
 				<h1><strong>투표 결과</strong></h1>

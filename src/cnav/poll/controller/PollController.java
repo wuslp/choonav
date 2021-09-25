@@ -3,6 +3,7 @@ package cnav.poll.controller;
 import java.sql.SQLException;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,11 +108,12 @@ public class PollController {
 	}
 	//투표하면 그값 +1 씩 
 	@RequestMapping("pollRes.cnav")
-	public String pollRes(HttpSession session,String pollNum,String obj_value,Model model) throws SQLException{
+	public String pollRes(HttpSession session,String pollNum,String obj_value,Model model,HttpServletRequest request) throws SQLException{
 		System.out.println("넘어오는파라미터 an1 : "+obj_value);//ans1로 안의값이 넘어온다
 		System.out.println("넘어오는파라미터 pollNum : "+pollNum);//pollNum값
 		PollDTO article = null;
 		String rePage;
+		//String RespollNum=(String)request.getParameter("pollNum");
 		//중복투표방지 , 투표시 기록 남기기 
 		String userId=(String)session.getAttribute("sid");
 		if(pollNum != null && obj_value != null) {//투표할떄
@@ -126,7 +128,7 @@ public class PollController {
 			rePage="poll/pollResult";
 		}
 		model.addAttribute("article",article);
-		System.out.println(article);
+		//model.addAttribute("RespollNum",RespollNum);
 		//return "poll/pollPage";
 		return rePage;
 	}
