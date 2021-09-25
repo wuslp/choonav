@@ -8,6 +8,11 @@
 	<!-- 화면 해상도에 따라 글자 크기 대응(모바일 대응) -->
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 	<title>전체 예약 현황</title>
+	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript"></script>
 </head>
 	<link href='../resources/css/main.css' rel='stylesheet' />
 	<!-- jquery CDN -->
@@ -69,54 +74,22 @@
   
 
 </script>
-<style>
-
-  body {
-    margin: 40px 10px;
-    padding: 0;
-    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-    font-size: 14px;
-  }
-
-  #calendar {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-  
-  .add-button {
-    position: absolute;
-    top: 1px;
-    right: 230px;
-    background: #2C3E50;
-    border: 0;
-    color: white;
-    height: 35px;
-    border-radius: 3px;
-    width: 157px;
-}
-
-.left {
-	float: left;
-}
-.center {
-	float: center;
-}
-</style>
 <body>
-	<div class="left" >
-		<a href="allRez.cnav"><h1>전체 예약 현황</h1></a>
-		<a href="myRez.cnav"><h1>내 예약 현황</h1></a>
-	</div>
+	<jsp:include page="/include/top_nav_bar.jsp" />
+	<div id="layoutSidenav">
+		<jsp:include page="/include/left_nav_bar.jsp" />
+	<div id="layoutSidenav_content">
+	
+	<h3> 전체 예약 </h3>
 	<div id='calendar' class="center"></div>
+		
+	<jsp:include page="/include/footer.jsp" />
 </body>
-<script>
-	<%--
-	--%>
-	function click_add() {
-		var url = "rezForm.cnav";
-		var name = "schedulePopup";
-		var option = "width = 600, height = 600 left = 100, top=50,location=no";
-		window.open(url,name,option)
-	};
-</script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+	<script src="<%=request.getContextPath()%>/resources/startbootstrap/js/scripts.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+	<script src="<%=request.getContextPath()%>/resources/startbootstrap/assets/demo/chart-area-demo.js"></script>
+	<script src="<%=request.getContextPath()%>/resources/startbootstrap/assets/demo/chart-bar-demo.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+	<script src="<%=request.getContextPath()%>/resource/startbootstrap/js/datatables-simple-demo.js"></script>
 </html>

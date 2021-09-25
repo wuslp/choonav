@@ -6,7 +6,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>myCommentsList</title>
+	<title>myCommentsPjList</title>
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -18,19 +18,19 @@
 	<div id="layoutSidenav">
 		<jsp:include page="/include/left_nav_bar_mypage.jsp" />
 	<div id="layoutSidenav_content">
-	<h3> 자유게시판 댓글 </h3>
+	<h3> 프로젝트 댓글 </h3>
 	<a href="/cnav/my/myCommentsList.cnav?">자유게시판 댓글</a>
 	<a href="/cnav/my/myPjCommentsList.cnav?type=pj">프로젝트 댓글</a>
 	<c:if test="${count == 0}">
 	<div>작성한 댓글이 없습니다.</div>
 	</c:if>
 	<c:if test="${count > 0}">
-		<div> 
+		<div>
 			<c:forEach var="item" items="${articleList}">
 			<div>
-				<div class="divTableCell" onclick="window.location='/cnav/topic/content.cnav?topNum=${item.topNum}'">${item.topComment}</div>
-				<div class="divTableCell" onclick="window.location='/cnav/topic/content.cnav?topNum=${item.topNum}'">${item.topReg}</div>
-				<div class="divTableCell" onclick="window.location='/cnav/topic/content.cnav?topNum=${item.topNum}'">[원문제목] ${item.topTitle}</div>
+				<div class="divTableCell" onclick="window.location='/cnav/project/proContent.cnav?proNum=${item.proNum}'">${item.proComment}</div>
+				<div class="divTableCell" onclick="window.location='/cnav/project/proContent.cnav?proNum=${item.proNum}'">${item.proReg}</div>
+				<div class="divTableCell" onclick="window.location='/cnav/project/proContent.cnav?proNum=${item.proNum}'">[원문제목] ${item.proName}</div>
 			</div>
 			</c:forEach>
 			</div>
@@ -60,7 +60,6 @@
 					</c:if>
 			</c:if> <%-- end:count > 0 --%>
 			</div> <%-- page번호 div 끝 --%>
-			
 		</div>
 		</c:if>
 	<jsp:include page="/include/footer.jsp" />

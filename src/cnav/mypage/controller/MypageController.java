@@ -1,9 +1,11 @@
 package cnav.mypage.controller;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +30,12 @@ public class MypageController {
 	private MypageService myService = null;
 	
 	@RequestMapping("myPjList.cnav")
-	public String myPjList(HttpSession session, Model model, String pageNum) throws SQLException {
-		session.setAttribute("sid", "java");
-		session.setAttribute("scode", "1111");
+	public String myPjList(HttpSession session, Model model, String pageNum) throws SQLException, IOException {
+		
+		if(session.getAttribute("sid") == null) {
+			return "main/loginForm";
+		}
+		
 		String userId = (String)session.getAttribute("sid");
 		String code = (String)session.getAttribute("scode");
 		
@@ -46,9 +51,9 @@ public class MypageController {
 		model.addAttribute("count", result.get("count"));
 		model.addAttribute("number", result.get("number"));
 		
-		session.setAttribute("sauto", "1");
-		String auto = (String)session.getAttribute("sauto");
-		if(auto.equals("1")){
+		String sauth = (String)session.getAttribute("sauth");
+		model.addAttribute("sauth", sauth);
+		if(sauth.equals("1")){
 			return "bizMypage/bizPjList";
 		}else {
 			return "userMypage/myPjList";
@@ -58,8 +63,10 @@ public class MypageController {
 	
 	@RequestMapping("myTopicList.cnav")
 	public String myTopicList(HttpSession session, Model model, String pageNum) throws SQLException {
-		session.setAttribute("sid", "java");
-		session.setAttribute("scode", "1111");
+		
+		if(session.getAttribute("sid") == null) {
+			return "main/loginForm";
+		}
 		
 		String userId = (String)session.getAttribute("sid");
 		String code = (String)session.getAttribute("scode");
@@ -77,9 +84,8 @@ public class MypageController {
 		model.addAttribute("count", result.get("count"));
 		model.addAttribute("number", result.get("number"));
 		
-		session.setAttribute("sauto", "1");
-		String auto = (String)session.getAttribute("sauto");
-		if(auto.equals("1")){
+		String sauth = (String)session.getAttribute("sauth");
+		if(sauth.equals("1")){
 			return "bizMypage/bizTopicList";
 		}else {
 			return "userMypage/myTopicList";
@@ -89,15 +95,18 @@ public class MypageController {
 	// 내가 쓴 댓글 가져오기
 	@RequestMapping("myCommentsList.cnav")
 	public String myCommentsList(HttpSession session, Model model, String pageNum) throws SQLException {
-		session.setAttribute("sid", "test01");
-		session.setAttribute("scode", "1234");
+		
+		if(session.getAttribute("sid") == null) {
+			return "main/loginForm";
+		}
 		
 		String userId = (String)session.getAttribute("sid");
 		String code = (String)session.getAttribute("scode");
 		
 		Map<String, Object> result = null;
 		result = myService.getMyTopCommList(userId, code, pageNum);
-		System.out.println(result.get("articleList"));
+		
+		
 		// view에 전달할 데이터 보내기 
 		model.addAttribute("pageSize", result.get("pageSize"));
 		model.addAttribute("pageNum", result.get("pageNum"));
@@ -108,14 +117,48 @@ public class MypageController {
 		model.addAttribute("count", result.get("count"));
 		model.addAttribute("number", result.get("number"));
 		
-		session.setAttribute("sauto", "1");
-		String auto = (String)session.getAttribute("sauto");
-		if(auto.equals("1")){
+		String sauth = (String)session.getAttribute("sauth");
+		if(sauth.equals("1")){
 			return "bizMypage/bizCommentsList";
 		}else {
 			return "userMypage/myCommentsList";
 		}
 	}
+	
+	
+	// 내가 쓴 댓글 가져오기 (프로젝트)
+	@RequestMapping("myPjCommentsList.cnav")
+	public String myPjCommentsList(HttpSession session, Model model, String pageNum) throws SQLException {
+		
+		if(session.getAttribute("sid") == null) {
+			return "main/loginForm";
+		}
+		
+		String userId = (String)session.getAttribute("sid");
+		String code = (String)session.getAttribute("scode");
+		
+		Map<String, Object> result = null;
+		result = myService.getMyPjCommList(userId, code, pageNum);
+			
+		// view에 전달할 데이터 보내기 
+		model.addAttribute("pageSize", result.get("pageSize"));
+		model.addAttribute("pageNum", result.get("pageNum"));
+		model.addAttribute("currentPage", result.get("currentPage"));
+		model.addAttribute("startRow", result.get("startRow"));
+		model.addAttribute("endRow", result.get("endRow"));
+		model.addAttribute("articleList", result.get("articleList"));
+		model.addAttribute("count", result.get("count"));
+		model.addAttribute("number", result.get("number"));
+		
+		String sauth = (String)session.getAttribute("sauth");
+		if(sauth.equals("1")){
+			return "bizMypage/bizCommentsPjList";
+		}else {
+			return "userMypage/myCommentsPjList";
+		}
+	}
+	
+	
 	
 	// 관리자 -> 회원 정보 수정
 	@RequestMapping("userManagement.cnav")
@@ -199,6 +242,10 @@ public class MypageController {
 	@RequestMapping("mypage.cnav")
 	public String mypage(HttpSession session, Model model) throws SQLException {
 		
+		if(session.getAttribute("sid") == null) {
+			return "main/loginForm";
+		}
+		
 		String userId = (String)session.getAttribute("sid");
 		String code = (String)session.getAttribute("scode");
 		UserInfoDTO dto = myService.getUserInfo(userId, code);
@@ -206,10 +253,9 @@ public class MypageController {
 		model.addAttribute("dto", dto);
 		model.addAttribute("userId", userId);
 		
-		
-		session.setAttribute("sauto", "0");
-		String auto = (String)session.getAttribute("sauto");
-		if(auto.equals("1")){
+		String sauth = (String)session.getAttribute("sauth");
+		model.addAttribute("sauth", sauth);
+		if(sauth.equals("1")){
 			return "bizMypage/bizMypage";
 		}else {
 			return "userMypage/userMypage";
@@ -220,6 +266,10 @@ public class MypageController {
 	@RequestMapping("modifyForm.cnav")
 	public String modifyForm(HttpSession session, Model model) throws SQLException {
 		
+		if(session.getAttribute("sid") == null) {
+			return "main/loginForm";
+		}
+		
 		String userId = (String)session.getAttribute("sid");
 		String code = (String)session.getAttribute("scode");
 		UserInfoDTO dto = myService.getUserInfo(userId, code);
@@ -228,9 +278,8 @@ public class MypageController {
 		model.addAttribute("userId", userId);
 		
 		
-		session.setAttribute("sauto", "0");
-		String auto = (String)session.getAttribute("sauto");
-		if(auto.equals("1")){
+		String sauth = (String)session.getAttribute("sauth");
+		if(sauth.equals("1")){
 			return "bizMypage/bizModifyForm";
 		}else {
 			return "userMypage/userModifyForm";
@@ -241,6 +290,10 @@ public class MypageController {
 	@RequestMapping("modifyPro.cnav")
 	public String modifyPro(HttpSession session, Model model, UserDTO dto) throws SQLException {
 		
+		if(session.getAttribute("sid") == null) {
+			return "main/loginForm";
+		}
+		
 		String userId = (String)session.getAttribute("sid");
 		String code = (String)session.getAttribute("scode");
 		int res = myService.updateUserInfo(userId, code, dto);
@@ -248,9 +301,8 @@ public class MypageController {
 		
 		model.addAttribute("res", res);
 		
-		session.setAttribute("sauto", "0");
-		String auto = (String)session.getAttribute("sauto");
-		if(auto.equals("1")){
+		String sauth = (String)session.getAttribute("sauth");
+		if(sauth.equals("1")){
 			return "bizMypage/bizModifyPro";
 		}else {
 			return "userMypage/userModifyPro";
@@ -261,12 +313,15 @@ public class MypageController {
 	@RequestMapping("pwChangeForm.cnav")
 	public String pwChangeForm(HttpSession session, Model model, UserDTO dto) throws SQLException {
 		
+		if(session.getAttribute("sid") == null) {
+			return "main/loginForm";
+		}
+		
 		String userId = (String)session.getAttribute("sid");
 		String code = (String)session.getAttribute("scode");
 		
-		session.setAttribute("sauto", "0");
-		String auto = (String)session.getAttribute("sauto");
-		if(auto.equals("1")){
+		String sauth = (String)session.getAttribute("sauth");
+		if(sauth.equals("1")){
 			return "bizMypage/bizPwChangeForm";
 		}else {
 			return "userMypage/userPwChangeForm";
@@ -277,15 +332,18 @@ public class MypageController {
 	@RequestMapping("pwChangePro.cnav")
 	public String pwChangePro(HttpSession session, Model model, String nowPw, String newPw) throws SQLException {
 		
+		if(session.getAttribute("sid") == null) {
+			return "main/loginForm";
+		}
+		
 		String userId = (String)session.getAttribute("sid");
 		String code = (String)session.getAttribute("scode");
 		int res = myService.pwChenge(nowPw, newPw, userId);
 		
 		model.addAttribute("res", res);
 		
-		session.setAttribute("sauto", "0");
-		String auto = (String)session.getAttribute("sauto");
-		if(auto.equals("1")){
+		String sauth = (String)session.getAttribute("sauth");
+		if(sauth.equals("1")){
 			return "bizMypage/bizPwChangePro";
 		}else {
 			return "userMypage/userPwChangePro";
@@ -295,12 +353,16 @@ public class MypageController {
 	// 마이페이지 - 회원탈퇴 form page
 	@RequestMapping("deleteForm.cnav")
 	public String deleteForm(HttpSession session, Model model) throws SQLException {
+		
+		if(session.getAttribute("sid") == null) {
+			return "main/loginForm";
+		}
+		
 		String userId = (String)session.getAttribute("sid");
 		String code = (String)session.getAttribute("scode");
 		
-		session.setAttribute("sauto", "0");
-		String auto = (String)session.getAttribute("sauto");
-		if(auto.equals("1")){
+		String sauth = (String)session.getAttribute("sauth");
+		if(sauth.equals("1")){
 			return "bizMypage/bizDeleteForm";
 		}else {
 			return "userMypage/userDeleteForm";
@@ -310,15 +372,19 @@ public class MypageController {
 	// 마이페이지 - 회원탈퇴 Pro page
 	@RequestMapping("deletePro.cnav")
 	public String deletePro(HttpSession session, Model model,String pw) throws SQLException {
+		
+		if(session.getAttribute("sid") == null) {
+			return "main/loginForm";
+		}
+		
 		String userId = (String)session.getAttribute("sid");
 		String code = (String)session.getAttribute("scode");
 		
 		int res = myService.deleteUser(userId, pw);
 		model.addAttribute("res", res);
 		
-		session.setAttribute("sauto", "0");
-		String auto = (String)session.getAttribute("sauto");
-		if(auto.equals("1")){
+		String sauth = (String)session.getAttribute("sauth");
+		if(sauth.equals("1")){
 			return "bizMypage/bizDeletePro";
 		}else {
 			return "userMypage/userDeletePro";

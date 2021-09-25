@@ -23,7 +23,11 @@ public class CalendarController {
 	// 전체일정 보기
 	@RequestMapping("calendar.cnav")
 	public String calendar(Model model, HttpSession session) throws SQLException {
-		session.setAttribute("scode", "1111");
+		
+		if(session.getAttribute("sid") == null) {
+			return "main/loginForm";
+		}
+		
 		String code = (String)session.getAttribute("scode");
 		List list = calService.getCalList(code);
 		model.addAttribute("list", list);
@@ -34,9 +38,13 @@ public class CalendarController {
 	// 내일정
 	@RequestMapping("myCalendar.cnav")
 	public String myCalendar(Model model, HttpSession session) throws SQLException {
-		session.setAttribute("sid", "java");
+		
+		if(session.getAttribute("sid") == null) {
+			return "main/loginForm";
+		}
+		
+		
 		String userId = (String)session.getAttribute("sid");
-		session.setAttribute("scode", "1111");
 		String code = (String)session.getAttribute("scode");
 		CalendarDTO dto = new CalendarDTO();
 		dto.setCode(code);
@@ -59,14 +67,17 @@ public class CalendarController {
 	// 일정 추가 pro 페이지
 	@RequestMapping("calPro.cnav")
 	public String calPro(CalendarDTO dto, HttpSession session, Model model) throws SQLException {
+		
+		if(session.getAttribute("sid") == null) {
+			return "main/loginForm";
+		}
+		
 		System.out.println(dto.getCalTitle());
 		System.out.println(dto.getCalStart());
 		System.out.println(dto.getCalEnd());
 		System.out.println(dto.getCalMemo());
 		System.out.println(dto.getCalType());
 		
-		session.setAttribute("scode", "1111");
-		session.setAttribute("sid", "java");
 		String code = (String)session.getAttribute("scode");
 		String userId = (String)session.getAttribute("sid");
 		
@@ -84,7 +95,10 @@ public class CalendarController {
 	@RequestMapping("calContent.cnav")
 	public String calContent(int calNum, Model model, HttpSession session) throws SQLException {
 		
-		session.setAttribute("scode", "1111");
+		if(session.getAttribute("sid") == null) {
+			return "main/loginForm";
+		}
+		
 		String code = (String)session.getAttribute("scode");
 		CalendarDTO dto = new CalendarDTO();
 		dto.setCode(code);
@@ -100,6 +114,10 @@ public class CalendarController {
 	@RequestMapping("calModifyForm.cnav")
 	public String calModifyForm(CalendarDTO dto, HttpSession session, Model model) throws SQLException {
 		
+		if(session.getAttribute("sid") == null) {
+			return "main/loginForm";
+		}
+		
 		dto = calService.getCalContent(dto);
 		model.addAttribute("dto", dto);
 		
@@ -109,6 +127,11 @@ public class CalendarController {
 	// 일정 수정 pro 페이지
 	@RequestMapping("calModifyPro.cnav")
 	public String calModifyPro(CalendarDTO dto, HttpSession session, Model model) throws SQLException {
+		
+		if(session.getAttribute("sid") == null) {
+			return "main/loginForm";
+		}
+		
 		int res = calService.updateCal(dto);
 		model.addAttribute("res", res);
 		
@@ -118,6 +141,11 @@ public class CalendarController {
 	// 일정 삭제 페이지
 	@RequestMapping("calDelete.cnav")
 	public String calDelete(CalendarDTO dto, HttpSession session, Model model) throws SQLException {
+		
+		if(session.getAttribute("sid") == null) {
+			return "main/loginForm";
+		}
+		
 		System.out.println(dto.getCode());
 		System.out.println(dto.getCalNum());
 		int res = calService.calDelete(dto);

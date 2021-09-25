@@ -21,6 +21,9 @@
   		<typeAlias type="cnav.main.dto.CategoryDTO" alias="catDTO"/>
   		<typeAlias type="cnav.main.dto.UserDTO" alias="userDTO"/>
 		<typeAlias type="cnav.approval.dto.ApprovalDTO" alias="approvalDTO"/>
+	
+		
+
 		<typeAlias type="cnav.mail.dto.MailDTO" alias="mailDTO"/>
 		<typeAlias type="cnav.reservation.dto.ReservationDTO" alias="rezDTO"/>
 		<typeAlias type="cnav.calendar.dto.CalendarDTO" alias="calDTO"/>
@@ -31,7 +34,9 @@
 		<typeAlias type="cnav.topcomments.dto.TopCommentsDTO" alias="topCommentsDTO"/>
 		<typeAlias type="cnav.mypage.dto.UserInfoDTO" alias="userInfoDTO"/>
 		<typeAlias type="cnav.admin.dto.AdminDTO" alias="adminDTO"/>
-		<typeAlias type="cnav.mypage.dto.TopicCommDTO" alias="topCommDTO"/>
+		<typeAlias type="cnav.mypage.dto.TopicCommDTO" alias="topCommDTO"/><!-- 마이페이지용 자게댓글dto -->
+		<typeAlias type="cnav.mypage.dto.PjCommDTO" alias="pjCommDTO"/><!-- 마이페이지용 플젝댓글dto -->
+
   	</typeAliases>
   
    
@@ -41,6 +46,7 @@
   	<mapper resource="/sql/pollSQL.xml"/>
   	<mapper resource="/sql/mainSQL.xml"/>
   	<mapper resource="/sql/ApprovalSQL.xml" />
+
   	<mapper resource="/sql/mailSQL.xml" />
   	<mapper resource="/sql/bizMypageSQL.xml" />
   	<mapper resource="/sql/calSQL.xml" />
@@ -51,6 +57,7 @@
 	<mapper resource="/sql/noticeSQL.xml" />
 	<mapper resource="/sql/adminSQL.xml" />
 	<mapper resource="/sql/projectSQL.xml" />
+
 
   </mappers>
   

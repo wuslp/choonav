@@ -119,7 +119,7 @@
 	<c:if test="${sel != null && search != null}">
 		<button onclick="window.location='/cnav/topic/list.cnav'"> 전체 게시글 보기 </button> <br />
 	</c:if>
-	<button onclick="window.location='/cnav/member/main.cnav'"> 메인으로 </button>
+	<button onclick="window.location='/cnav/main/main.cnav'"> 메인으로 </button>
 	</div>
 	
 </body>

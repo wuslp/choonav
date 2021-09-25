@@ -17,7 +17,7 @@
 	<div id="">
 		<div id="">
 			<h2>비밀번호 찾기</h2>
-				${udto.userId}님의 비밀번호는<br/>
+				아이디 ${udto.userId}님의 비밀번호는<br/>
 				${udto.pw } 입니다<br/><br/>
 				<input type="button" value="로그인" onclick="goLogin()"/>
 		</div>
