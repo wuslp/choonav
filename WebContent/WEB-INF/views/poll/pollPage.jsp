@@ -21,34 +21,39 @@
 		var result = $("#result").val();
 		var pollNum = $("#pollN").val();
 		console.log("result값"+result)
-		if(result=="0"){//기록없으면
-			console.log("2번탐");
-				var pollNum = $("#pollN").val();
-		        var obj_value = $("input:radio[name='ans1']:checked").val();
-		        alert(obj_value);
-		        //에이작스로 숫자보내고 그 숫자에 해당하면 res 각각 +1씩 시켜주기
-		        $.ajax({
-	 					url : "/cnav/poll/pollRes.cnav",
-	 					type : "get",
-	 					data :{"obj_value" :obj_value,"pollNum" :pollNum},
-	 					async: false,
-	 					success:function(data){//data매개변수 = Controller에서 리턴해준 결과가 들어온다(대입)
-	 						console.log("success!!!");
-	 						window.location.replace("/cnav/poll/pollRes.cnav?pollNum="+pollNum);
-	 					},
-	 					error:function(e){
-	 						console.log("error~!");
-	 						console.log(e);
-	 					}
-	 				});//ajax
+		if($(':radio[name="ans1"]:checked').length < 1){//투표 유효성 검사
+			alert("항목을 선택해 주세요");
+		}else{//유효성검사 통과
 			
-		
-		}else{//기록 있으면
-			console.log("1번탐");
-			alert("이미 투표한 글입니다 !")
-			//window.history.back();
-			window.location.replace("/cnav/poll/pollRes.cnav?pollNum="+pollNum);
-		}
+			if(result=="0"){//기록없으면
+				console.log("2번탐");
+					var pollNum = $("#pollN").val();
+			        var obj_value = $("input:radio[name='ans1']:checked").val();
+			        alert(obj_value+"항목에 투표하셨습니다");
+			        //에이작스로 숫자보내고 그 숫자에 해당하면 res 각각 +1씩 시켜주기
+			        $.ajax({
+		 					url : "/cnav/poll/pollRes.cnav",
+		 					type : "get",
+		 					data :{"obj_value" :obj_value,"pollNum" :pollNum},
+		 					async: false,
+		 					success:function(data){//data매개변수 = Controller에서 리턴해준 결과가 들어온다(대입)
+		 						console.log("success!!!");
+		 						window.location.replace("/cnav/poll/pollRes.cnav?pollNum="+pollNum);
+		 					},
+		 					error:function(e){
+		 						console.log("error~!");
+		 						console.log(e);
+		 					}
+		 				});//ajax
+				
+			
+			}else{//기록 있으면
+				console.log("1번탐");
+				alert("이미 투표한 글입니다 !")
+				//window.history.back();
+				window.location.replace("/cnav/poll/pollRes.cnav?pollNum="+pollNum);
+			}//else끝
+		}//유효성검사통과하면
 	}
 	
 	//투표삭제
@@ -100,13 +105,13 @@
 							대상		 : ${article.target}<br/>
 							내용		 : ${article.pollCon}<br/>
 							항목 <br/>
-							1 :<label><input type="radio" id="ans1" name="ans1" value="1"/> ${article.ans1}</label><br/>
-							2 :<label><input type="radio" id="ans2" name="ans1" value="2"/> ${article.ans2}</label><br/>
+							1 :&emsp;<label><input type="radio" id="ans1" name="ans1" value="1"/>&nbsp; ${article.ans1}</label><br/>
+							2 :&emsp;<label><input type="radio" id="ans2" name="ans1" value="2"/>&nbsp; ${article.ans2}</label><br/>
 							<c:if test="${article.ans3 != null}">
-							3 :<label><input type="radio" id="ans3" name="ans1" value="3"> ${article.ans3}</label><br/>
+							3 :&emsp;<label><input type="radio" id="ans3" name="ans1" value="3">&nbsp; ${article.ans3}</label><br/>
 							</c:if>
 							<c:if test="${article.ans4 != null}">
-							4 :<label><input type="radio" id="ans4" name="ans1" value="4"> ${article.ans4}</label><br/><br/><br/>
+							4 :&emsp;<label><input type="radio" id="ans4" name="ans1" value="4">&nbsp; ${article.ans4}</label><br/><br/><br/>
 							</c:if>
 							<!-- 투표글 작성자일경우만 삭제버튼 보이게 처리 -->
 							<c:if test="${article.userId == sessionScope.sid}">
