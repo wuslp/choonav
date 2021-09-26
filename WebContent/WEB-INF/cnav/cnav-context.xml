@@ -104,4 +104,8 @@
 	<!-- project -->
 	<context:component-scan base-package="cnav.project.service" />
 	<context:component-scan base-package="cnav.project.dao" />
+	<!-- 프로젝트 댓글 -->
+	<context:component-scan base-package="cnav.procomments.service" />
+	<context:component-scan base-package="cnav.procomments.dao" />
+	
 </beans>

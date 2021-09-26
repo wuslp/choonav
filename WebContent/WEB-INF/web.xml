@@ -45,6 +45,7 @@
 		/WEB-INF/cnav/notice-context.xml
 		/WEB-INF/cnav/admin-context.xml
 		/WEB-INF/cnav/project-context.xml
+		/WEB-INF/cnav/proComments-context.xml
  		</param-value>
   	</init-param>
   </servlet>

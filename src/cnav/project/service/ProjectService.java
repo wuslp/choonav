@@ -8,8 +8,7 @@ import cnav.project.dto.ProjectDTO;
 public interface ProjectService {
 
 	// 모든 프로젝트 불러오기 (proList)
-	public Map<String,Object> getProjectList(String pageNum) throws SQLException;
-	
+	public Map<String,Object> getProjectList(String pageNum) throws SQLException;	
 	// 검색 list 가져오기 
 	public Map<String, Object> getSearchProjectList(String pageNum, String sel, String search) throws SQLException;	
 	// 진행중 완료를 보여주는 리스트(짜란)

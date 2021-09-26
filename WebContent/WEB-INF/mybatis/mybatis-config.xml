@@ -29,6 +29,7 @@
 		<typeAlias type="cnav.reservation.dto.ReservationDTO" alias="rezDTO"/>
 		<typeAlias type="cnav.calendar.dto.CalendarDTO" alias="calDTO"/>
 		<typeAlias type="cnav.project.dto.ProjectDTO" alias="projectDTO"/>
+		<typeAlias type="cnav.procomments.dto.ProCommentsDTO" alias="proCommentsDTO"/><!--프젝댓글 -->
 		<typeAlias type="cnav.topic.dto.TopicDTO" alias="topicDTO"/>
 		<typeAlias type="cnav.notice.dto.NoticeDTO" alias="noticeDTO"/>
 		<typeAlias type="cnav.main.dto.NoticeDTO" alias="notiDTO"/>
@@ -58,6 +59,7 @@
 	<mapper resource="/sql/noticeSQL.xml" />
 	<mapper resource="/sql/adminSQL.xml" />
 	<mapper resource="/sql/projectSQL.xml" />
+	<mapper resource="/sql/proCommentsSQL.xml"/>
 
 
   </mappers>

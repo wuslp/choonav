@@ -11,37 +11,42 @@
 <body>
 		<h1 align="center">프로젝트 목록</h1>
 		
-		<%--프로젝트내용/부서 검색 --%>
+		<%--프로젝트제목/부서 검색 --%>
 		<div>
 			<form action="/cnav/project/proList.cnav">
 				<a href="/cnav/project/proList.cnav?sort=진행중">진행중</a>
 				<a href="/cnav/project/proList.cnav?sort=완료">완료</a> &nbsp;
 				<select id="" name="sel">
 					<option value="dept">부서</option>
-					<option value="proName">프로젝트</option>
+					<option value="proName">제목</option>
+					<option value="userId">담당자</option>
 				</select>
 						
 				<input type="text" id="" name="search"/>
 				<input type="submit" value="검색">
 				<input type="button" value="만들기" onclick="window.location='/cnav/project/proWriteForm.cnav'">
 			</form>
-
 		</div>
+		<br/>
+	
 	<!-- 리스트 보여주기 -->	
 	<c:if test="${count==0}">
-		<h3 align="center">프로젝트가 없습니다.</h3>	
-	</c:if>
-	
+		<table>
+			<tr>
+				<td>프로젝트가 존재하지 않습니다.</td>
+			</tr>
+		</table>		
+	</c:if>	
 	<c:if test="${count !=0}">
-	<table>
-		<tr>
-			<td>No.</td>
-			<td>프로젝트</td>
-			<td>부서</td>
-			<td>기간</td>			
-			<td>진행상태</td>
-			<td>담당자</td>
-		</tr>
+		<table border="2">
+			<tr>
+				<td>No.</td>
+				<td>프로젝트</td>
+				<td>부서</td>
+				<td>기간</td>			
+				<td>진행상태</td>
+				<td>담당자</td>
+			</tr>
 		<c:forEach var="project" items="${projectList}">
 			<tr>
 				<td>${number}
@@ -51,23 +56,16 @@
 				<td>${project.dept}</td>
 				<td>${project.proStart}~${project.proEnd}</td>
 				<td>${project.proState}</td>
-				<td>
-					<c:if test="${project.proState}">
-						진행중					
-					</c:if>
-					<c:if test="${project.proState}">
-						완료
-					</c:if>						
-				</td>
+				
 				<td>${project.userId}</td>		
 			</tr>
 		</c:forEach>	
 	</table>
 	</c:if>
-	
 	<c:if test="${sel !=null && search !=null}">
 		<button onclick="window.location='/cnav/project/proList.cnav'">전체 목록 보기</button> <br/>		
 	</c:if>
+	
 	
 	<br/><br/>
 	<%--페이지 번호 --%>
@@ -97,7 +95,7 @@
 		</c:if>
 	
 		<%-- 검색 안했을때 페이지번호들   --%> 
-		<c:if test="${sel == null || search == null && sort==null}">
+		<c:if test="${sel == null && search == null && sort==null}">
 			<c:if test="${startPage > pageBlock}">
 				<a href="/cnav/project/proList.cnav?pageNum=${startPage-pageBlock}" class="pageNums"> &lt; &nbsp;</a>
 			</c:if>
@@ -114,15 +112,16 @@
 		<!-- 진행중/완료 -->
 		<c:if test="${sort !=null}">
 			<c:if test="${startPage>pageBlock}">
-				<a href="/cnav/project/proList.cnav?pageNum=${startPage-pageBlock}$sort=${sort}" class="pageNums">&lt; &nbsp;</a>
+				<a href="/cnav/project/proList.cnav?pageNum=${startPage-pageBlock}&sort=${sort}" class="pageNums">&lt; &nbsp;</a>
 			</c:if>
 			<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
 				<a href="/cnav/project/proList.cnav?pageNum=${i}&sort=${sort}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
-			</c:forEach>
+			</c:forEach>		
 			<c:if test="${endPage < pageCount}">
-						&nbsp; <a href="/cnav/project/proList.cnav?pageNum=${startPage+pageBlock}&sort=${sort}" class="pageNums"> &gt; </a>
+						&nbsp; <a href="/cnav/project/proList.cnav?pageNum=${startPage+pageBlock}&sort=${sort}" class="pageNums"> &gt; </a>			
 			</c:if>
-		</c:if> 
+		</c:if>
+		
 	</div>	
 		
 		
