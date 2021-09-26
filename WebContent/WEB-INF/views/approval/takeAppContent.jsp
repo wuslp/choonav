@@ -6,19 +6,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<title>받은 결재 상세</title>
+	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
+	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 </head>
 <script type="text/javascript">
 	function showReject(){
-		window.open("rejectForm.cnav?appNum=${approval.appNum}&sign=${sign}", "width=400, height=300, left=100, top=50");
-	}	
+		window.open("/cnav/approval/rejectForm.cnav?appNum=${approval.appNum}&sign=${sign}","rejectForm","width=500, height=300, left=100, top=50");
+	}
+	function takeOk1(){
+		window.open("/cnav/approval/takeOk.cnav?appNum=${approval.appNum}&sign=${sign}","takeOk1","width=500,height=200");
+	}
+	function takeOk2(){
+		window.open("/cnav/approval/takeOk2.cnav?appNum=${approval.appNum}&sign=${sign}","takeOk2","width=500,height=200");
+	}
+	function takeOk3(){
+		window.open("/cnav/approval/takeOk3.cnav?appNum=${approval.appNum}&sign=${sign}","takeOk3","width=500,height=200");
+	}
 	
 </script>
 
-<body>
-<br/>
+<body class="sb-nav-fixed">
+	<jsp:include page="/include/top_nav_bar.jsp" />
+	<div id="layoutSidenav">
+		<jsp:include page="/include/left_nav_bar.jsp" />
+		<div id="layoutSidenav_content">
+			<div class="approvalWrap">
 
 <div class="appContentTitle">
 <h3>${approval.appType}</h3>
@@ -48,9 +68,30 @@
 
 <table class="appContentRight">
 	<tr>
-		<td>직위 </td>
-		<td>직위 </td>
-		<td>직위 </td>
+		<td>
+			<c:if test="${approval.state1 == 2}">
+				승인
+			</c:if>
+			<c:if test="${approval.state1 == 1}">
+				반려
+			</c:if>
+		</td>
+		<td>
+			<c:if test="${approval.state2 == 2}">
+				승인
+			</c:if>
+			<c:if test="${approval.state2 == 1}">
+				반려
+			</c:if>
+		</td>
+		<td>
+			<c:if test="${approval.state3 == 2}">
+				승인
+			</c:if>
+			<c:if test="${approval.state3 == 1}">
+				반려
+			</c:if>
+		</td>
 	</tr>
 	<tr> <!-- 도장 -->
 		<td>${approval.name1} </td> 
@@ -89,21 +130,33 @@
 <div class="appConBtn">
 	<%-- <c:if test='${!(approval.state1 == "1" && approval.state2 == "1" && approval.state3 == "1" && approval.state1 == "2" && approval.state2 == "2" && approval.state3 == "2" && approval.state2 != "0")}'> --%> 
 	<c:if test='${(approval.id2 ==null && approval.id3 == null)}'> 
-	<button onclick="window.location='/cnav/approval/takeOk.cnav?appNum=${approval.appNum}&sign=${sign}'">승인1</button>
+	<button onclick="takeOk1();">승인1</button>
 	<button onclick="showReject();">반려</button>
 	</c:if>
 	
 	<c:if test='${(approval.state1 != "0" && approval.state1 == "2" && approval.id3 == null && approval.state1 !="1")}'>
-	<button onclick="window.location='/cnav/approval/takeOk2.cnav?appNum=${approval.appNum}&sign=${sign}'">승인2</button> 
+	<button onclick="takeOk2();">승인2</button> 
 	<button onclick="showReject();">반려</button>
 	</c:if>
 	
 	<c:if test='${(approval.state2 !="1" && approval.state2=="2")}'>
-	<button onclick="window.location='/cnav/approval/takeOk3.cnav?appNum=${approval.appNum}&sign=${sign}'">승인3</button> 
+	<button onclick="takeOk3();">승인3</button> 
 	<button onclick="showReject();">반려</button>
 	</c:if>
 	
 	<button onclick="window.location='/cnav/approval/takeAppList.cnav'">취소</button> 
 </div>
+</div><!-- approvalWrap -->
+<jsp:include page="/include/footer.jsp" />
+			
+		</div><!-- layoutSidenav_content" -->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+		<script src="<%=request.getContextPath()%>/resources/startbootstrap/js/scripts.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+		<script src="<%=request.getContextPath()%>/resources/startbootstrap/assets/demo/chart-area-demo.js"></script>
+		<script src="<%=request.getContextPath()%>/resources/startbootstrap/assets/demo/chart-bar-demo.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+		<script src="<%=request.getContextPath()%>/resource/startbootstrap/js/datatables-simple-demo.js"></script>
+	</div><!-- id="layoutSidenav" -->
 </body>
 </html>

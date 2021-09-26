@@ -6,87 +6,130 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<title>보낸 결재 상세</title>
+	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
+	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 </head>
 
-
-<body>
-<br/>
-
-<div class="appContentTitle">
-<h3>${approval.appType}</h3>
-</div>
-
-<div class="appContentLeft">
-	<table>
-		<tr>
-			<td>문서번호</td>
-			<td>${approval.appNum}</td>	
-		</tr>
-		<tr>
-			<td>기안부서</td>
-			<td>${approval.dept}</td>
-		</tr>
-		<tr>
-			<td>기안자</td>
-			<td>${approval.name}</td>
-		</tr>
-		<tr>
-			<td>기안일자</td>
-			<td><fmt:formatDate value="${approval.appDate}" pattern="yyyy.MM.dd"/></td>
-		</tr>
+<body class="sb-nav-fixed">
+	<jsp:include page="/include/top_nav_bar.jsp" />
+	<div id="layoutSidenav">
+		<jsp:include page="/include/left_nav_bar.jsp" />
+		<div id="layoutSidenav_content">
+			<div class="approvalWrap">
+				<div class="appContentTitle">
+				<h3>${approval.appType}</h3>
+				</div>
+				
+				<div class="appContentLeft">
+					<table>
+						<tr>
+							<td>문서번호</td>
+							<td>${approval.appNum}</td>	
+						</tr>
+						<tr>
+							<td>기안부서</td>
+							<td>${approval.dept}</td>
+						</tr>
+						<tr>
+							<td>기안자</td>
+							<td>${approval.name}</td>
+						</tr>
+						<tr>
+							<td>기안일자</td>
+							<td><fmt:formatDate value="${approval.appDate}" pattern="yyyy.MM.dd"/></td>
+						</tr>
+							
+					</table>
+				</div>
+				
+				<table class="appContentRight">
+					<tr>
+						<td>
+							<c:if test="${approval.state1 == 2}">
+								승인
+							</c:if>
+							<c:if test="${approval.state1 == 1}">
+								반려
+							</c:if>
+						</td>
+						<td>
+							<c:if test="${approval.state2 == 2}">
+								승인
+							</c:if>
+							<c:if test="${approval.state2 == 1}">
+								반려
+							</c:if>
+						</td>
+						<td>
+							<c:if test="${approval.state3 == 2}">
+								승인
+							</c:if>
+							<c:if test="${approval.state3 == 1}">
+								반려
+							</c:if>
+						</td>
+						
+					</tr>
+					<tr> <!-- 이름 -->
+						<td>${approval.name1} </td> 
+						<td>${approval.name2} </td>
+						<td>${approval.name3} </td>
+					</tr>
+				
+				</table>
+				<br/><br/><br/><br/><br/><br/>
+				<table class="appCont1">
+					<tr>
+						<td>요청부서</td>
+						<td>${approval.dept}</td>
+					</tr>
+					<tr>
+						<td>일시</td>
+						<td>${approval.appStart} ~ ${approval.appFinish}</td>
+					</tr>
+				</table>
+				
+				<table class="appCont2">
+					<tr>
+						<td>제목</td>
+						<td>${approval.appTitle}</td>
+					</tr>
+					<tr>
+						<td>내용</td>
+						<td>${approval.appContent}</td>
+					</tr>
+					<tr>
+						<td>요청사항</td>
+						<td>${approval.appRequest}</td>
+					</tr>
+				</table>
+				
+				<div class="appConBtn">
+					<c:if test='${!(approval.state1 == "1" || approval.state1 == "2")}'>
+						<button onclick="window.location='/cnav/approval/modifyApp.cnav?appNum=${approval.appNum}&pageNum=${pageNum}'">수정</button> 
+						<button onclick="window.location='/cnav/approval/deleteApp.cnav?appNum=${approval.appNum}&pageNum=${pageNum}'">삭제</button>
+					</c:if>	
+						<button onclick="window.location='/cnav/approval/sendAppList.cnav'">취소</button> 
+				</div>
+			</div><!-- approvalWrap -->
+<jsp:include page="/include/footer.jsp" />
 			
-	</table>
-</div>
-
-<table class="appContentRight">
-	<tr>
-		<td>${approval.state1}</td>
-		<td>${approval.state2}</td>
-		<td>${approval.state3}</td>
-	</tr>
-	<tr> <!-- 도장 -->
-		<td>${approval.nick1} </td> 
-		<td>${approval.nick2} </td>
-		<td>${approval.nick3} </td>
-	</tr>
-
-</table>
-<br/><br/><br/><br/><br/><br/>
-<table class="appCont1">
-	<tr>
-		<td>요청부서</td>
-		<td>${approval.dept}</td>
-	</tr>
-	<tr>
-		<td>일시</td>
-		<td>${approval.appStart} ~ ${approval.appFinish}</td>
-	</tr>
-</table>
-
-<table class="appCont2">
-	<tr>
-		<td>제목</td>
-		<td>${approval.appTitle}</td>
-	</tr>
-	<tr>
-		<td>내용</td>
-		<td>${approval.appContent}</td>
-	</tr>
-	<tr>
-		<td>요청사항</td>
-		<td>${approval.appRequest}</td>
-	</tr>
-</table>
-
-<div class="appConBtn">
-	<c:if test='${!(approval.state1 == "1" || approval.state1 == "2")}'>
-		<button onclick="window.location='/cnav/approval/modifyApp.cnav?appNum=${approval.appNum}&pageNum=${pageNum}'">수정</button> 
-		<button onclick="window.location='/cnav/approval/deleteApp.cnav?appNum=${approval.appNum}&pageNum=${pageNum}'">삭제</button>
-	</c:if>	
-		<button onclick="window.location='/cnav/approval/sendAppList.cnav'">취소</button> 
-</div>
+		</div><!-- layoutSidenav_content" -->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+		<script src="<%=request.getContextPath()%>/resources/startbootstrap/js/scripts.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+		<script src="<%=request.getContextPath()%>/resources/startbootstrap/assets/demo/chart-area-demo.js"></script>
+		<script src="<%=request.getContextPath()%>/resources/startbootstrap/assets/demo/chart-bar-demo.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+		<script src="<%=request.getContextPath()%>/resource/startbootstrap/js/datatables-simple-demo.js"></script>
+	</div><!-- id="layoutSidenav" -->
 </body>
 </html>

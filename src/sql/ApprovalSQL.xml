@@ -67,14 +67,14 @@
 	
 	<!-- 받은 결재함 전체 글 -->
 	<select id="takeCountAll" parameterType="approvalDTO" resultType="int">
-		select count(*) from approval where code = #{code} and userId=#{userId}
+		select count(*) from approval where code = #{code} and id1=#{userId} or id2=#{userId} or id3=#{userId}
 	</select>
 	
 	<!-- 페이징 -->
 	<select id="takeApprovals" parameterType="hashmap" resultType="approvalDTO">
 		<![CDATA[
 		select * from (select rownum rnum, approval.* from 
-		(select * from approval where id1=#{userId} or id2=#{userId} or id3=#{userId} order by appNum desc) approval) 
+		(select * from approval where code=#{code} and id1=#{userId} or id2=#{userId} or id3=#{userId} order by appNum desc) approval) 
 				where rnum >= #{start} and rnum <=#{end}
 		]]>		
 	</select>

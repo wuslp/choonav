@@ -9,7 +9,9 @@
 <body>
 <script>
 	alert("결재가 승인되었습니다.");
-	window.location.href ="/cnav/approval/takeAppList.cnav"; //메인으로 이동 
+	/* window.location.href ="/cnav/approval/takeAppList.cnav"; //메인으로 이동  */
+	opener.parent.location.reload();
+	window.close();
 </script>
 </body>
 </html>

@@ -9,7 +9,8 @@
 <body>
  <script>
 	alert("반려 사유가 등록되었습니다.");
-	window.location.href ="/cnav/approval/takeAppList.cnav"; //메인으로 이동 
+	opener.parent.location.reload();
+	self.close();
 </script>
 
 </body>
