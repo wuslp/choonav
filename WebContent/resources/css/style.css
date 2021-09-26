@@ -125,7 +125,7 @@ body {
 
 /* 메인페이지 */
 #wrapAll{
-	margin: 30px;
+	margin: 10px 30px 30px 30px;
 }
 .bizclock{
 	display: flex;

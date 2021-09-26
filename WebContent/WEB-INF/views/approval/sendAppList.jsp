@@ -27,9 +27,10 @@
 		<div id="layoutSidenav">
 			<jsp:include page="/include/left_nav_bar.jsp" />
 			<div id="layoutSidenav_content">
+			<div id="wrapAll">	
 				<div class="sendAppList">
 				
-					<h2> 보낸결재함 </h2>
+					<h3> 보낸결재함 </h3>
 						<%-- 작성자/내용 검색 --%>
 						<form action="/cnav/approval/sendAppList.cnav">
 							<select name="sel">
@@ -128,8 +129,10 @@
 						</c:if> <%-- end:count > 0 --%>
 					</div>	
 				</div>	
+			</div>	
 	<jsp:include page="/include/footer.jsp" />
 		</div>
+		</div><!-- id="layoutSidenav" -->	
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 		<script src="<%=request.getContextPath()%>/resources/startbootstrap/js/scripts.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
