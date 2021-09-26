@@ -101,7 +101,8 @@ public class ProjectDAOImpl implements ProjectDAO {
 	// 프로젝트 저장
 	@Override
 	public void insertProject(ProjectDTO dto) throws SQLException {
-			sqlSession.insert("project.insertProject",dto);
+			int result =sqlSession.insert("project.insertProject",dto);
+			System.out.println("29번 project insert확인 : "+result);
 				
 	}
 
