@@ -6,8 +6,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport"
-		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<meta name="description" content="" />
 	<meta name="author" content="" />
 	<title>결재 문서 작성</title>
@@ -34,7 +33,11 @@
 	
 </script>	
 	
-<body>
+<body class="sb-nav-fixed">
+	<jsp:include page="/include/top_nav_bar.jsp" />
+	<div id="layoutSidenav">
+		<jsp:include page="/include/left_nav_bar.jsp" />
+		<div id="layoutSidenav_content">
 
 	<h2> 결재 문서 작성 </h2>
 	<form action="/cnav/approval/appPro.cnav" method="post" onsubmit="return check()">
@@ -75,7 +78,7 @@
 			</tr>
 			<tr>
 				<td> 내용 </td>
-				<td><textarea rows="20" cols="60" name="appContent"></textarea></td>
+				<td><textarea rows="10" cols="60" name="appContent"></textarea></td>
 			</tr>
 			<tr>
 				<td> 요청사항 </td>
@@ -86,5 +89,16 @@
 		<input type="submit" value="등록"/>
 		<input type="button" value="취소" onclick="window.location='/cnav/approval/sendAppList.cnav'"/>
 	</form>	
+<jsp:include page="/include/footer.jsp" />
+			
+		</div><!-- layoutSidenav_content" -->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+		<script src="<%=request.getContextPath()%>/resources/startbootstrap/js/scripts.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+		<script src="<%=request.getContextPath()%>/resources/startbootstrap/assets/demo/chart-area-demo.js"></script>
+		<script src="<%=request.getContextPath()%>/resources/startbootstrap/assets/demo/chart-bar-demo.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+		<script src="<%=request.getContextPath()%>/resource/startbootstrap/js/datatables-simple-demo.js"></script>
+	</div><!-- id="layoutSidenav" -->
 </body>
 </html>
