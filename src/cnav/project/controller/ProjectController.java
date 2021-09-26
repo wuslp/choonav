@@ -30,10 +30,6 @@ public class ProjectController {
 	// 프로젝트 목록 
 	@RequestMapping("proList.cnav")
 	public String proList(String pageNum, String sel, String search, String sort, Model model) throws SQLException{		
-		//session.setAttribute("sid", "java");
-		//session.setAttribute("code", "1313");
-		
-		
 		
 		// 해당 페이지에 맞는 화면에 뿌려줄 게시글 가져와서 view에 전달하기 
 		Map<String, Object> result=null;
