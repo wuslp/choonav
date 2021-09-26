@@ -33,7 +33,7 @@
 	<!-- 완료 -->
 	<update id="updatest1" parameterType="string">
 		<![CDATA[
-		update poll set pollStatus='완료' where (code=#{code}) and (to_char(endDate, 'yyyymmdd') <= to_char(sysdate, 'yyyymmdd')) and (to_char(stDate, 'yyyymmdd') <= to_char(sysdate, 'yyyymmdd'))
+		update poll set pollStatus='완료' where (code=#{code}) and (to_char(endDate, 'yyyymmdd') < to_char(sysdate, 'yyyymmdd')) and (to_char(stDate, 'yyyymmdd') <= to_char(sysdate, 'yyyymmdd'))
 		]]>
 	</update>
 	
