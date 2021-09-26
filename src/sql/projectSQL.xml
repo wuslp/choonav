@@ -41,13 +41,13 @@
 		]]>
 	</select>
 	<!-- 진행중, 완료 상태 업데이트 -->
-	<update id="updat2">
+	<update id="updat2" parameterType="string">
 		<![CDATA[
-			update project set proState='진행중' where (code=#{code}) and (to_char(proStart, 'yyyymmdd') >= to_char(sysdate, 'yyyymmdd'))
+			update project set proState='진행중' where (code=#{code}) and (to_char(proStart, 'yyyymmdd') <= to_char(sysdate, 'yyyymmdd'))
 		]]>	
 	</update>
 	<!-- 완료 -->
-	<update id="updat1">
+	<update id="updat1" parameterType="string">
 		<![CDATA[
 			update project set proState='완료' where (code=#{code}) and (to_char(proEnd, 'yyyymmdd') < to_char(sysdate, 'yyyymmdd'))
 		]]>
