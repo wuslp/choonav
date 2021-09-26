@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import cnav.procomments.dto.ProCommentsDTO;
+import cnav.procomments.service.ProCommentsService;
+import cnav.procomments.service.ProCommentsServiceImpl;
 import cnav.project.dto.ProjectDTO;
 import cnav.project.service.ProjectService;
 import cnav.project.service.ProjectServiceImpl;
@@ -26,6 +29,10 @@ public class ProjectController {
 	
 	@Autowired
 	private ProjectServiceImpl projectService=null;
+	
+	// 댓글
+	@Autowired
+	private ProCommentsServiceImpl proCommentsService=null;
 	
 	// 프로젝트 목록 
 	@RequestMapping("proList.cnav")
@@ -65,14 +72,10 @@ public class ProjectController {
 		
 	// 프로젝트 작성
 	@RequestMapping("proWriteForm.cnav")
-	public String proWriteForm(HttpSession session) throws SQLException {
-		
-		//session.setAttribute("sid", "java");
-		//session.setAttribute("code", "1331");
+	public String proWriteForm() throws SQLException {
 					
 		System.out.println("proWriteForm 나와라");
-		
-		
+			
 		return "project/proWriteForm";
 	}
 	
@@ -84,8 +87,7 @@ public class ProjectController {
 		String code=(String)session.getAttribute("scode");
 				
 		dto.setUserId(id); // 나중에 session에서 id 꺼내 추가로 변경해주기
-		dto.setCode(code);
-		
+		dto.setCode(code);	
 		// 비즈니스 로직 처리~해 : 데이터 DB에 저장하기
 		projectService.insertProject(dto);
 		
@@ -97,15 +99,13 @@ public class ProjectController {
 	// 프로젝트 상세 페이지 요청(proContent 페이지)
 	@RequestMapping("proContent.cnav")
 	public String proContent(@ModelAttribute("pageNum") String pageNum, Integer proNum, Model model) throws SQLException{
-		//session.setAttribute("code","1313");
-		//String code=(String)session.getAttribute("scode");
-		
 		// 고유번호 주면서 해당 글에 대한 내용 받아와 view에 전달
 		ProjectDTO project=projectService.getProject(proNum);
 		model.addAttribute("project", project);
-		
+		List<ProCommentsDTO> comment=proCommentsService.comment(proNum);
+		model.addAttribute("comment",comment);
 		return "project/proContent";
-	}
+	} 
 	
 	// 프로젝트 수정 폼
 	@RequestMapping("proModForm.cnav")

@@ -28,9 +28,9 @@
 		]]>
 	</select>
 	
-	<!-- 검색 -->
+	<!-- 검색한 갯수 -->
 	<select id="getSearchProjectCount" parameterType="hashmap" resultType="int">
-		select count(*) from project where (code=#{code}) and #{sel} like '%'||#{search}||'%'
+		select count(*) from project where (code=#{code}) and ${sel} like '%'||#{search}||'%'
 	</select>	
 	<!-- 검색한 프로젝트 가져오기 -->
 	<select id="getSearchProjects" parameterType="hashmap" resultType="projectDTO">		
@@ -60,7 +60,7 @@
 	<select id="getState" parameterType="hashmap" resultType="projectDTO">
 		<![CDATA[
 	  	select B.*, r
-	  	 from (select A.*, rownum r from (select * from project where code=#{code} and proState=#{sort} order by proStart asc) A order by proStart asc) B
+	  	 from (select A.*, rownum r from (select * from project where code=#{code} and proState=#{sort} order by proStart asc) A order by proStart desc) B
 	   		where r >= #{start} and r <= #{end}
 		]]>
 	</select>
