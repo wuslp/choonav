@@ -59,6 +59,11 @@
   		update attend set attendance='정상출근' where ((to_char(leavetime, 'HH24MI') > 1800) and (to_char(attdate, 'yyyymmdd') = to_char(sysdate, 'yyyymmdd')) and (userId=#{userId}) and (code=#{code}))
   		]]>
   	</update>
+  	<update id="AttendanceSet" parameterType="hashmap">
+ 	 <![CDATA[
+  		update attend set attendance='조퇴' where ((to_char(attdate, 'HH24MI') < 900) and (to_char(leavetime, 'HH24MI') < 1801) and (to_char(attdate, 'yyyymmdd') = to_char(sysdate, 'yyyymmdd')) and (userId=#{userId}) and (code=#{code}))
+  		]]>
+  	</update>
 	<!--출근 기록 체크  -->
 	<select id="workRecodeCheck" parameterType="hashmap" resultType="int">
   	<![CDATA[

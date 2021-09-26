@@ -10,7 +10,7 @@
 	<meta name="description" content="" />
 	<meta name="author" content="" />
 
-<title>연습 페이지</title>
+	<title>연습 페이지</title>
 
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
@@ -33,7 +33,6 @@
 
 
 			<jsp:include page="/include/footer.jsp" />
-			
 		</div><!-- layoutSidenav_content" -->
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 		<script src="<%=request.getContextPath()%>/resources/startbootstrap/js/scripts.js"></script>

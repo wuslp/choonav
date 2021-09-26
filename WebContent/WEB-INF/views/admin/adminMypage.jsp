@@ -39,6 +39,15 @@
 		    		</script>
 				</c:if>
 			</div><!--logincheck -->
+			<div id="logincheck">
+				<c:if test="${sessionScope.sauth != '2'}">
+				<script>
+					alert("접근할 수 없는 관리자 페이지 입니다");
+					var link = "/cnav/main/startPage.cnav";
+		    		window.location.href = link;
+		    		</script>
+				</c:if>
+			</div><!--logincheck -->
 			<div>
 			 관리자 권한
 			</div>
