@@ -20,7 +20,6 @@
 }
 #clock{
   border-radius: 50%;
-  height: 450px;
   left: calc(50% - 225px);
   position: relative;
   top: calc(50% - 225px);
