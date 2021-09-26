@@ -15,7 +15,14 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body class="sb-nav-fixed">
+<c:if test="${sessionScope.sid == null}">
+<script>
+	alert("로그인후 이용할 수 있습니다");
+	var link = "/cnav/main/startPage.cnav";
+  		window.location.href = link;
+</script>
+</c:if>
 	<jsp:include page="/include/top_nav_bar.jsp" />
 		<div id="layoutSidenav">
 			<jsp:include page="/include/left_nav_bar.jsp" />
@@ -58,10 +65,10 @@
 										<td>
 										 <c:choose>
 									         <c:when test = '${(approval.state1 == "1" || approval.state2 == "1" || approval.state3 == "1")}'>
-									            반려
+									            <div class="stateReject">반려</div>
 									         </c:when>
 									         <c:when test ='${approval.state3=="2"}'>
-									            승인
+									            <div class="stateOK">승인</div>
 									         </c:when>
 									         <c:otherwise>
 									            진행중

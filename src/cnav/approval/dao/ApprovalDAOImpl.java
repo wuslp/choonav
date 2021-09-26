@@ -83,15 +83,15 @@ public class ApprovalDAOImpl implements ApprovalDAO {
 		}
 		// 검색 게시글 목록 가져오기 
 		@Override
-		public List<ApprovalDTO> sendSearchApprovals(String userId, String code, int start, int end, String sel, String search) throws SQLException {
+		public List<ApprovalDTO> sendSearchApprovals(int start, int end, String sel, String search, String userId, String code) throws SQLException {
 			
 			HashMap map = new HashMap();
-			map.put("userId", userId);
-			map.put("code", code);
 			map.put("start", start);
 			map.put("end", end);
 			map.put("sel", sel);
 			map.put("search", search);
+			map.put("userId", userId);
+			map.put("code", code);
 			
 			List<ApprovalDTO> sendAppList = sqlSession.selectList("approval.sendSearchApprovals", map);
 			
@@ -167,15 +167,15 @@ public class ApprovalDAOImpl implements ApprovalDAO {
 	}
 	// 검색 게시글 목록 가져오기 
 	@Override
-	public List<ApprovalDTO> takeSearchApprovals(String userId, String code, int start, int end, String sel, String search) throws SQLException {
+	public List<ApprovalDTO> takeSearchApprovals(int start, int end, String sel, String search, String userId, String code) throws SQLException {
 		
 		HashMap map = new HashMap();
-		map.put("userId", userId);
-		map.put("code", code);
 		map.put("start", start);
 		map.put("end", end);
 		map.put("sel", sel);
 		map.put("search", search);
+		map.put("userId", userId);
+		map.put("code", code);
 		
 		List<ApprovalDTO> takeAppList = sqlSession.selectList("approval.takeSearchApprovals", map);
 		

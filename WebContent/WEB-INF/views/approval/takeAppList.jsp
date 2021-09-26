@@ -20,6 +20,13 @@
 </head>
 
 <body class="sb-nav-fixed">
+<c:if test="${sessionScope.sid == null}">
+<script>
+	alert("로그인후 이용할 수 있습니다");
+	var link = "/cnav/main/startPage.cnav";
+  		window.location.href = link;
+</script>
+</c:if>
 	<jsp:include page="/include/top_nav_bar.jsp" />
 	<div id="layoutSidenav">
 		<jsp:include page="/include/left_nav_bar.jsp" />
@@ -48,11 +55,11 @@
 				<td>기안제목</td>
 				<td>기안자</td>
 				<td>승인자1</td>
-				<td>승인여부1</td>
+				<td>승인여부</td>
 				<td>승인자2</td>
-				<td>승인여부2</td>
+				<td>승인여부</td>
 				<td>승인자3</td>
-				<td>승인여부3</td>
+				<td>승인여부</td>
 				<td>결재요청일</td>
 				<td>반려사유</td>
 			</tr>

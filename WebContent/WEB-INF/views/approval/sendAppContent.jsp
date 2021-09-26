@@ -19,6 +19,13 @@
 </head>
 
 <body class="sb-nav-fixed">
+<c:if test="${sessionScope.sid == null}">
+<script>
+	alert("로그인후 이용할 수 있습니다");
+	var link = "/cnav/main/startPage.cnav";
+  		window.location.href = link;
+</script>
+</c:if>
 	<jsp:include page="/include/top_nav_bar.jsp" />
 	<div id="layoutSidenav">
 		<jsp:include page="/include/left_nav_bar.jsp" />
@@ -117,7 +124,7 @@
 						<button onclick="window.location='/cnav/approval/modifyApp.cnav?appNum=${approval.appNum}&pageNum=${pageNum}'">수정</button> 
 						<button onclick="window.location='/cnav/approval/deleteApp.cnav?appNum=${approval.appNum}&pageNum=${pageNum}'">삭제</button>
 					</c:if>	
-						<button onclick="window.location='/cnav/approval/sendAppList.cnav'">취소</button> 
+						<button onclick="window.location='/cnav/approval/sendAppList.cnav'">목록</button> 
 				</div>
 			</div><!-- approvalWrap -->
 <jsp:include page="/include/footer.jsp" />

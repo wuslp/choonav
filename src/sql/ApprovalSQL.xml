@@ -82,13 +82,13 @@
 	
 	<!--검색 -->
 	<select id="countSearch" parameterType="hashmap" resultType="int">
-		select count(*) from approval where ${sel} like '%'||#{search}||'%'
+		select count(*) from approval where code = #{code} and ${sel} like '%'||#{search}||'%'
 	</select>
 
 	<select id="sendSearchApprovals" parameterType="hashmap" resultType="approvalDTO">
 		<![CDATA[
 		select * from (select rownum rnum, approval.* from 
-		(select * from approval where ${sel} like '%'||#{search}||'%' order by appNum desc) approval) 
+		(select * from approval where code = #{code} and ${sel} like '%'||#{search}||'%' order by appNum desc) approval) 
 				where rnum >= #{start} and rnum <=#{end}
 		]]>
 	</select>
@@ -105,13 +105,13 @@
 	
 	<!--검색 -->
 	<select id="takeCountSearch" parameterType="hashmap" resultType="int">
-		select count(*) from approval where ${sel} like '%'||#{search}||'%'
+		select count(*) from approval where code = #{code} and ${sel} like '%'||#{search}||'%'
 	</select>
 
 	<select id="takeSearchApprovals" parameterType="hashmap" resultType="approvalDTO">
 		<![CDATA[
 		select * from (select rownum rnum, approval.* from 
-		(select * from approval where ${sel} like '%'||#{search}||'%' order by appNum desc) approval) 
+		(select * from approval where code = #{code} and ${sel} like '%'||#{search}||'%' order by appNum desc) approval) 
 				where rnum >= #{start} and rnum <=#{end}
 		]]>
 	</select>
