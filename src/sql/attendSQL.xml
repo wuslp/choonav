@@ -15,6 +15,10 @@
 		select b.*, r from (select a.*, rownum r from (select * from attend where userId=#{userId} and code=#{code} order by attDate desc)a order by attDate desc)b where r>=#{startRow} and r<=#{endRow}
   	]]>
 	</select>
+	<!-- 퇴근기록 Null일떄 reason에 입력 -->
+	<update id="setLeaveNull" parameterType="hashmap">
+		update attend set reason='퇴근체크 미입력' where (userId=#{userId}) and (leaveTime is null)
+	</update>
   	
   	<!-- 필터링 -->
   	<select id="countCat" parameterType="hashmap" resultType="int">

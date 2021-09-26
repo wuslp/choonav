@@ -26,7 +26,7 @@ public class AttendDAOImpl implements AttendDAO{
 		int result = sqlSession.selectOne("attend.countAll",map); 
 		return result;
 	}
-
+	//본인 근태기록 가져오기
 	@Override
 	public List<AttendDTO> AttendList(int startRow, int endRow, String userId,String code) throws SQLException {
 		
@@ -38,6 +38,8 @@ public class AttendDAOImpl implements AttendDAO{
 		map.put("code", code);
 				
 		List<AttendDTO> attList= sqlSession.selectList("attend.getList",map);
+		int result =sqlSession.update("attend.setLeaveNull",map);
+		System.out.println("90번 퇴근체크안된기록 있는지 : "+result);
 		return attList;
 	}
 	//category 선택 개수

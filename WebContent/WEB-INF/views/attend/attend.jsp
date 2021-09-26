@@ -217,19 +217,19 @@
 						<table border="1">
 							<tr>
 								<td>날짜</td>
-								<td>근태</td>
-								<td>출근</td>
-								<td>퇴근</td>
+								<td>&nbsp;근태</td>
+								<td>&nbsp;출근</td>
+								<td>&nbsp;퇴근</td>
 								<td>기타</td>
 							</tr>
 							
 							<c:if test="${userAttendList != null}">
 								<c:forEach var="List" items="${userAttendList }">
 								<tr id="">
-									<td><fmt:formatDate value="${List.attDate }" type="date"/></td>
-									<td>${List.attendance }</td>
-									<td><fmt:formatDate value="${List.workTime }" pattern="HH:mm" /></td>
-									<td><fmt:formatDate value="${List.leaveTime }" pattern="HH:mm" /></td>
+									<td>&nbsp;<fmt:formatDate value="${List.attDate }" type="date"/></td>
+									<td>&emsp;${List.attendance }</td>
+									<td>&emsp;<fmt:formatDate value="${List.workTime }" pattern="HH:mm" /></td>
+									<td>&emsp;<fmt:formatDate value="${List.leaveTime }" pattern="HH:mm" /></td>
 									<td>${List.reason }</td>
 								</tr>
 								</c:forEach>
