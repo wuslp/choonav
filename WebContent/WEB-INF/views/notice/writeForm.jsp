@@ -26,8 +26,7 @@ $(document).ready(function() {
 	        lang : 'ko-KR'
 	  });
 	});
-</script>
-<script>
+
 function goWrite(frm) {
 	var title = frm.notiTitle.value;
 	var content = frm.notiContent.value;
