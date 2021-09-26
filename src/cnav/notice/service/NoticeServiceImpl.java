@@ -22,7 +22,7 @@ public class NoticeServiceImpl implements NoticeService {
 	
 	// 게시글 목록 가져오기 (list) 
 	@Override
-	public Map<String, Object> getArticleList(String pageNum) throws SQLException {
+	public Map<String, Object> getArticleList(String pageNum, String scode) throws SQLException {
 		
 		// ** 게시글 페이지 관련 정보 세팅 ** 
 		// 한페이지에 보여줄 게시글의 수 
@@ -42,11 +42,11 @@ public class NoticeServiceImpl implements NoticeService {
 		int number = 0; 						// 브라우저 화면에 뿌려줄 가상 글 번호  
 		
 		// 전체 글의 개수 가져오기 
-		count = noticeDAO.getArticleCount();   // DB에 저장되어있는 전체 글의 개수를 가져와 담기
+		count = noticeDAO.getArticleCount(scode);   // DB에 저장되어있는 전체 글의 개수를 가져와 담기
 		System.out.println("count : " + count);
 		// 글이 하나라도 있으면 글들을 다시 가져오기 
 		if(count > 0){
-			articleList = noticeDAO.getArticles(startRow, endRow);  
+			articleList = noticeDAO.getArticles(startRow, endRow, scode);  
 		}
 		number = count - (currentPage-1) * pageSize; 	// 게시판 목록에 뿌려줄 가상의 글 번호  
 
@@ -66,7 +66,7 @@ public class NoticeServiceImpl implements NoticeService {
 	
 	// 검색한 글 목록 가져오기 (list 검색) 
 	@Override
-	public Map<String, Object> getArticleSearch(String pageNum, String sel, String search) throws SQLException {
+	public Map<String, Object> getArticleSearch(String pageNum, String sel, String search, String scode) throws SQLException {
 		// ** 게시글 페이지 관련 정보 세팅 ** 
 		// 한페이지에 보여줄 게시글의 수 
 		int pageSize = 5; 
@@ -84,11 +84,11 @@ public class NoticeServiceImpl implements NoticeService {
 		int count = 0; 							// 검색된 글의 개수 
 		int number = 0; 						// 브라우저 화면에 뿌려줄 가상 글 번호  
 		
-		count = noticeDAO.getSearchArticleCount(sel, search); // 검색된 글의 총 개수 가져오기 
+		count = noticeDAO.getSearchArticleCount(sel, search, scode); // 검색된 글의 총 개수 가져오기 
 		System.out.println("검색 count : " + count);
 		// 검색한 글이 하나라도 있으면 검색한 글 가져오기 
 		if(count > 0){
-			articleList = noticeDAO.getSearchArticles(startRow, endRow, sel, search); 
+			articleList = noticeDAO.getSearchArticles(startRow, endRow, sel, search, scode); 
 		}
 		
 		number = count - (currentPage-1) * pageSize; 	// 게시판 목록에 뿌려줄 가상의 글 번호  
@@ -110,8 +110,8 @@ public class NoticeServiceImpl implements NoticeService {
 	
 	// 글 저장
 	@Override
-	public void insertArticle(NoticeDTO dto) throws SQLException {
-		noticeDAO.insertArticle(dto);
+	public void insertArticle(NoticeDTO dto, String scode, String sid) throws SQLException {
+		noticeDAO.insertArticle(dto, scode, sid);
 	} 
 	
 	@Override

@@ -22,19 +22,20 @@ public class NoticeDAOImpl implements NoticeDAO{
 
 	// 전체 게시글 수 가져오기 
 	@Override
-	public int getArticleCount() throws SQLException {
+	public int getArticleCount(String scode) throws SQLException {
 		// 게시판 전체글 개수 가져오기 (board 테이블활용해보기) 
-		int result = sqlSession.selectOne("notice.countAll"); 
+		int result = sqlSession.selectOne("notice.countAll", scode); 
 		
 		return result;
 	}
 	// 한페이지 게시글 목록 가져오기 
 	@Override
-	public List<NoticeDTO> getArticles(int start, int end) throws SQLException {
+	public List<NoticeDTO> getArticles(int start, int end, String scode) throws SQLException {
 		
 		HashMap map = new HashMap();
 		map.put("start", start);
 		map.put("end", end);
+		map.put("scode", scode);
 		
 		List<NoticeDTO> noticeList = sqlSession.selectList("notice.getArticles", map);
 		
@@ -42,11 +43,12 @@ public class NoticeDAOImpl implements NoticeDAO{
 	}
 	// 검색 게시글 수 가져오기 
 	@Override
-	public int getSearchArticleCount(String sel, String search) throws SQLException {
+	public int getSearchArticleCount(String sel, String search, String scode) throws SQLException {
 		
 		HashMap map = new HashMap();
 		map.put("sel", sel);
 		map.put("search", search);
+		map.put("scode", scode);
 		
 		int result = sqlSession.selectOne("notice.countSearch", map);
 		
@@ -55,22 +57,28 @@ public class NoticeDAOImpl implements NoticeDAO{
 	
 	// 검색 게시글 목록 가져오기 
 	@Override
-	public List<NoticeDTO> getSearchArticles(int start, int end, String sel, String search) throws SQLException {
+	public List<NoticeDTO> getSearchArticles(int start, int end, String sel, String search, String scode) throws SQLException {
 		
 		HashMap map = new HashMap();
 		map.put("start", start);
 		map.put("end", end);
 		map.put("sel", sel);
 		map.put("search", search);
+		map.put("scode", scode);
 		
 		List<NoticeDTO> noticeList = sqlSession.selectList("notice.getSearchArticles", map);
 		
 		return noticeList;
 	}
 	
+	// 게시글 저장
 	@Override
-	public void insertArticle(NoticeDTO dto) throws SQLException {
-
+	public void insertArticle(NoticeDTO dto, String scode, String sid) throws SQLException {
+		String code= scode;
+		String userId = sid;
+		dto.setCode(code);
+		dto.setUserId(userId);
+		
 		sqlSession.insert("notice.insertArticle", dto);
 	}
 	

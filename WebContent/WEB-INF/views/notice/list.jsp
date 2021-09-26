@@ -29,7 +29,7 @@
 		<c:if test="${count == 0}">
 		<table>
 		<!-- 회사관계자만 글쓰기버튼 보이게 -->
-			<c:if test="${!article.userId == sessionScope.sid &&sessionScope.sauth=='1'}">
+			<c:if test="${sessionScope.sauth=='1'}">
 				<tr>
 					<td><button onclick="window.location='/cnav/notice/writeForm.cnav'"> 글쓰기 </button></td>
 				</tr>
@@ -46,7 +46,7 @@
 		<c:if test="${count != 0}">
 		<table>
 			<!-- 회사관계자만 글쓰기버튼 보이게 -->
-			<c:if test="${!article.userId == sessionScope.sid &&sessionScope.sauth=='1'}">
+			<c:if test="${sessionScope.sauth=='1'}">
 				<tr>
 					<td><button onclick="window.location='/cnav/notice/writeForm.cnav'"> 글쓰기 </button></td>
 				</tr>

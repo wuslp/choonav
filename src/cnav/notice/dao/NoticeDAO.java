@@ -9,16 +9,16 @@ public interface NoticeDAO {
 
 	// CRUD
 	// 전체게시글 수 가져오기 
-	public int getArticleCount() throws SQLException; 
+	public int getArticleCount(String scode) throws SQLException; 
 	// 한페이지의 글 목록 가져오기 (startRow, endRow) 
-	public List<NoticeDTO> getArticles(int start, int end) throws SQLException; 
+	public List<NoticeDTO> getArticles(int start, int end, String scode) throws SQLException; 
 	// 검색 게시글 수 가져오기 
-	public int getSearchArticleCount(String sel, String search) throws SQLException; 
+	public int getSearchArticleCount(String sel, String search, String scode) throws SQLException; 
 	// 검색 게시글 목록 가져오기 
-	public List<NoticeDTO> getSearchArticles(int start, int end, String sel, String search) throws SQLException;
+	public List<NoticeDTO> getSearchArticles(int start, int end, String sel, String search, String scode) throws SQLException;
 	
 	// 게시글 저장
-	public void insertArticle(NoticeDTO dto) throws SQLException;
+	public void insertArticle(NoticeDTO dto, String scode, String sid) throws SQLException;
 	
 	// 게시글 한개 정보 가져오기
 	public NoticeDTO getArticle(int notiNum) throws SQLException;
