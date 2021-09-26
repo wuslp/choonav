@@ -18,29 +18,49 @@
 	
 <script>
 	function check(){
-		if(appTitle==""){
-			alert("제목을 입력해주세요.");
-			$("#appTitle").focus();
+		var inputs= document.inputForm;
+		if(! inputs.id1.value){
+			alert("결재자를 선택해주세요.");
 			return false;
 		}
-		if(name1==""){
-			alert("제목을 입력해주세요.");
-			$("#name1").focus();
+		if(! inputs.appStart.value){
+			alert("시작일을 입력해주세요.");
 			return false;
 		}
+		if(! inputs.appFinish.value){
+			alert("종료일을 입력해주세요.");
+			return false;
+		}
+		
+		if(! inputs.appTitle.value){
+			alert("문서 제목을 입력해주세요.");
+			return false;
+		}
+		
+		if(! inputs.appContent.value){
+			alert("문서 내용을 입력해주세요.");
+			return false;
+		}
+		
 	}	
-	
-	
 </script>	
 	
 <body class="sb-nav-fixed">
+<c:if test="${sessionScope.sid == null}">
+<script>
+	alert("로그인후 이용할 수 있습니다");
+	var link = "/cnav/main/startPage.cnav";
+  		window.location.href = link;
+</script>
+</c:if>
+
 	<jsp:include page="/include/top_nav_bar.jsp" />
 	<div id="layoutSidenav">
 		<jsp:include page="/include/left_nav_bar.jsp" />
 		<div id="layoutSidenav_content">
-
+			
 	<h2> 결재 문서 작성 </h2>
-	<form action="/cnav/approval/appPro.cnav" method="post" onsubmit="return check()">
+	<form action="/cnav/approval/appPro.cnav" method="post"  name="inputForm"  onsubmit="return check()">
 		<input type="hidden" name="appNum" value="${appNum}"/>
 		문서형식 
 		<select name="appType">

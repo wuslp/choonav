@@ -119,6 +119,13 @@ body {
 	color:#000;
 }
 
+/* 보낸 결재함 sendAppList */
+.stateReject {
+    background-color: #ff000070;
+}
+.stateOK {
+    background-color: #1987544d;
+}
 
 
 /* 결재 상세 (sendAppContent) */

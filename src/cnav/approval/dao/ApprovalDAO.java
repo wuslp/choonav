@@ -24,7 +24,7 @@ public interface ApprovalDAO {
 	// 검색 게시글 수 가져오기 
 	public int searchSendAppCount(String sel, String search, String userId, String code) throws SQLException; 
 	// 검색 게시글 목록 가져오기 
-	public List<ApprovalDTO> sendSearchApprovals(String userId, String code, int start, int end, String sel, String search ) throws SQLException;
+	public List<ApprovalDTO> sendSearchApprovals(int start, int end, String sel, String search, String userId, String code) throws SQLException;
 
 	// send 보낸 게시글 1개 가져오기 
 	public ApprovalDTO getAppCont(int appNum) throws SQLException;
@@ -43,7 +43,7 @@ public interface ApprovalDAO {
 	// 검색 게시글 수 가져오기 
 	public int searchTakeAppCount(String sel, String search, String userId, String code ) throws SQLException; 
 	// 검색 게시글 목록 가져오기 
-	public List<ApprovalDTO> takeSearchApprovals(String userId, String code, int start, int end, String sel, String search) throws SQLException;
+	public List<ApprovalDTO> takeSearchApprovals(int start, int end, String sel, String search, String userId, String code) throws SQLException;
 	
 	// take 받은 게시글 1개 가져오기 
 	public ApprovalDTO takeAppCont(int appNum) throws SQLException;

@@ -34,6 +34,13 @@
 </script>
 
 <body class="sb-nav-fixed">
+<c:if test="${sessionScope.sid == null}">
+<script>
+	alert("로그인후 이용할 수 있습니다");
+	var link = "/cnav/main/startPage.cnav";
+  		window.location.href = link;
+</script>
+</c:if>
 	<jsp:include page="/include/top_nav_bar.jsp" />
 	<div id="layoutSidenav">
 		<jsp:include page="/include/left_nav_bar.jsp" />
@@ -129,22 +136,28 @@
 
 <div class="appConBtn">
 	<%-- <c:if test='${!(approval.state1 == "1" && approval.state2 == "1" && approval.state3 == "1" && approval.state1 == "2" && approval.state2 == "2" && approval.state3 == "2" && approval.state2 != "0")}'> --%> 
-	<c:if test='${(approval.id2 ==null && approval.id3 == null)}'> 
+	<c:if test='${(approval.id2 ==null && approval.id3 == null && approval.state1 != "1" && approval.state1 != "2")}'> 
+	<c:if test='${(approval.id1==sessionScope.sid)}'>
 	<button onclick="takeOk1();">승인1</button>
 	<button onclick="showReject();">반려</button>
 	</c:if>
+	</c:if>
 	
 	<c:if test='${(approval.state1 != "0" && approval.state1 == "2" && approval.id3 == null && approval.state1 !="1")}'>
+	<c:if test='${(approval.id2==sessionScope.sid)}'>
 	<button onclick="takeOk2();">승인2</button> 
 	<button onclick="showReject();">반려</button>
 	</c:if>
+	</c:if>
 	
-	<c:if test='${(approval.state2 !="1" && approval.state2=="2")}'>
+	<c:if test='${(approval.state2 !="1" && approval.state2=="2" && approval.state3 !="2" && approval.state3 !="1")}'>
+	<c:if test='${(approval.id3==sessionScope.sid)}'>
 	<button onclick="takeOk3();">승인3</button> 
 	<button onclick="showReject();">반려</button>
 	</c:if>
+	</c:if>
 	
-	<button onclick="window.location='/cnav/approval/takeAppList.cnav'">취소</button> 
+	<button onclick="window.location='/cnav/approval/takeAppList.cnav'">목록</button> 
 </div>
 </div><!-- approvalWrap -->
 <jsp:include page="/include/footer.jsp" />
