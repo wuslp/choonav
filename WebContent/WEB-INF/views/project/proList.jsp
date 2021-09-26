@@ -25,21 +25,15 @@
 				<input type="submit" value="검색">
 				<input type="button" value="만들기" onclick="window.location='/cnav/project/proWriteForm.cnav'">
 			</form>
-		
-					
-		 <%--/cnav/project/proList.cnav?sel=userId&search= --%>
-	
+
 		</div>
-	
-	
-	
+	<!-- 리스트 보여주기 -->	
 	<c:if test="${count==0}">
 		<h3 align="center">프로젝트가 없습니다.</h3>	
 	</c:if>
 	
 	<c:if test="${count !=0}">
 	<table>
-
 		<tr>
 			<td>No.</td>
 			<td>프로젝트</td>
@@ -53,10 +47,7 @@
 				<td>${number}
 					<c:set var="number" value="${number-1}"/>
 				</td>
-				<td align="left">
-
-					<a href="/cnav/project/proContent.cnav?proNum=${project.proNum}&pageNum=${pageNum}">${project.proName}</a>
-				</td>
+				<td align="left"><a href="/cnav/project/proContent.cnav?proNum=${project.proNum}&pageNum=${pageNum}">${project.proName}</a></td>
 				<td>${project.dept}</td>
 				<td>${project.proStart}~${project.proEnd}</td>
 				<td>${project.proState}</td>
@@ -66,13 +57,10 @@
 					</c:if>
 					<c:if test="${project.proState}">
 						완료
-					</c:if>
-					
-				
+					</c:if>						
 				</td>
 				<td>${project.userId}</td>		
 			</tr>
-
 		</c:forEach>	
 	</table>
 	</c:if>
@@ -96,7 +84,7 @@
 		</c:if>
 	
 		<%-- 검색했을때 페이지번호들 --%>
-		<c:if test="${sel != null && search != null}">
+		<c:if test="${sel != null && search != null && sort==null}">
 			<c:if test="${startPage > pageBlock}">
 				<a href="/cnav/project/proList.cnav?pageNum=${startPage-pageBlock}&sel=${sel}&search=${search}" class="pageNums"> &lt; &nbsp;</a>
 			</c:if>
@@ -109,7 +97,7 @@
 		</c:if>
 	
 		<%-- 검색 안했을때 페이지번호들   --%> 
-		<c:if test="${sel == null || search == null}">
+		<c:if test="${sel == null || search == null && sort==null}">
 			<c:if test="${startPage > pageBlock}">
 				<a href="/cnav/project/proList.cnav?pageNum=${startPage-pageBlock}" class="pageNums"> &lt; &nbsp;</a>
 			</c:if>
@@ -126,7 +114,7 @@
 		<!-- 진행중/완료 -->
 		<c:if test="${sort !=null}">
 			<c:if test="${startPage>pageBlock}">
-				<a href="/cnav/project/proList.cnav?pageNum=${startPage-pageBlock}$sort=${sort}" class="pageNumbs">&lt; &nbsp;</a>
+				<a href="/cnav/project/proList.cnav?pageNum=${startPage-pageBlock}$sort=${sort}" class="pageNums">&lt; &nbsp;</a>
 			</c:if>
 			<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
 				<a href="/cnav/project/proList.cnav?pageNum=${i}&sort=${sort}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
