@@ -93,7 +93,7 @@ public class NoticeDAOImpl implements NoticeDAO{
 	// 조회수 +1
 	@Override
 	public void readcountUp(int notiNum) throws SQLException {
-		sqlSession.update("topic.readcountUp", notiNum);
+		sqlSession.update("notice.readcountUp", notiNum);
 	}
 	
 	// 게시물 삭제

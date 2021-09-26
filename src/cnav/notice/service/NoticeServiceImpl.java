@@ -114,6 +114,7 @@ public class NoticeServiceImpl implements NoticeService {
 		noticeDAO.insertArticle(dto, scode, sid);
 	} 
 	
+	// 글 가져오기
 	@Override
 	public NoticeDTO getArticle(int notiNum) throws SQLException {
 		noticeDAO.readcountUp(notiNum);
