@@ -9,7 +9,8 @@
 		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<meta name="description" content="" />
 	<meta name="author" content="" />
-<title>연습 페이지</title>
+
+	<title>연습 페이지</title>
 
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
@@ -18,19 +19,21 @@
 <body class="sb-nav-fixed">
 	<jsp:include page="/include/top_nav_bar.jsp" />
 	<div id="layoutSidenav">
-
 		<jsp:include page="/include/left_nav_bar.jsp" />
-
 		<div id="layoutSidenav_content">
 
-			여기에 내용
+
+
+
+
+			*******여기에 본인이 작성한 페이지의 내용********
 
 
 
 
 
 			<jsp:include page="/include/footer.jsp" />
-		</div>
+		</div><!-- layoutSidenav_content" -->
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 		<script src="<%=request.getContextPath()%>/resources/startbootstrap/js/scripts.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
@@ -38,5 +41,6 @@
 		<script src="<%=request.getContextPath()%>/resources/startbootstrap/assets/demo/chart-bar-demo.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
 		<script src="<%=request.getContextPath()%>/resource/startbootstrap/js/datatables-simple-demo.js"></script>
+	</div><!-- id="layoutSidenav" -->
 </body>
 </html>

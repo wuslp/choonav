@@ -6,12 +6,22 @@
 <html>
 <head> 
 	<meta charset="UTF-8">
-	<title>게시판</title>
+	<title>자유게시판</title>
 </head>
 
 <body>
+	<!--로그인된 세션이 없을경우 startPage 로 이동시켜주기  -->
+	<%-- <div id=""> 
+		<c:if test="${sessionScope.sid == null}">
+		<script>
+			alert("로그인후 이용할 수 있습니다");
+			var link = "http://localhost:8080/cnav/main/startPage.cnav";
+	    	window.location.href = link;
+	    	</script>
+		</c:if>
+	</div> --%>
 	<br />
-	<h1 align="center"> 게시판 </h1>
+	<h1 align="center"> 자유게시판 </h1>
 	
 	<!-- 게시판에 글이 없을 경우 -->
 	<div>
@@ -119,7 +129,7 @@
 	<c:if test="${sel != null && search != null}">
 		<button onclick="window.location='/cnav/topic/list.cnav'"> 전체 게시글 보기 </button> <br />
 	</c:if>
-	<button onclick="window.location='/cnav/member/main.cnav'"> 메인으로 </button>
+	<button onclick="window.location='/cnav/main/main.cnav'"> 메인으로 </button>
 	</div>
 	
 </body>

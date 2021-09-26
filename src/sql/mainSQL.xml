@@ -42,13 +42,13 @@
   		select count(*) from users where userId=#{userId} and name=#{name} 
   	</select>
   	<select id="getUserId" parameterType="userDTO" resultType="userDTO">
-  		select userId from users where name=#{name} 
+  		select * from users where name=#{name} 
 		<if test="email!=null">
   		and email=#{email}
   		</if>
   	</select>
   	<select id="getPw" parameterType="userDTO" resultType="userDTO">
-  		select pw from users where name=#{name} and userId=#{userId}
+  		select * from users where name=#{name} and userId=#{userId}
   	</select>
   	
   	<!-- 공지사항 글개수 가져오기 -->
@@ -69,14 +69,5 @@
 	<select id="getBizInfo" parameterType="string" resultType="busDTO">
 		select * from business where code = #{value}
 	</select>
-	
-	
-	<!-- ******** -->
-	<select id="getCodeSametUser" parameterType="string" resultType="userDTO">
-		<![CDATA[
-		select * from users where code=#{value}
-		]]>
-	</select>
-	
 	
   </mapper>

@@ -23,8 +23,8 @@ public class ProjectDAOImpl implements ProjectDAO {
 	@Override
 	public int getProjectCount(String userId,String code) throws SQLException {
 
-		sqlSession.update("project.updat1",code); // 날짜 지난것 완료로 업데이트 
 		sqlSession.update("project.updat2",code); //진행중
+		sqlSession.update("project.updat1",code); // 날짜 지난것 완료로 업데이트 
 		// 프로젝트 전체글 개수 가져오기
 		int count=sqlSession.selectOne("project.countAll",code);		
 		return count;
@@ -101,7 +101,8 @@ public class ProjectDAOImpl implements ProjectDAO {
 	// 프로젝트 저장
 	@Override
 	public void insertProject(ProjectDTO dto) throws SQLException {
-			sqlSession.insert("project.insertProject",dto);
+			int result =sqlSession.insert("project.insertProject",dto);
+			System.out.println("29번 project insert확인 : "+result);
 				
 	}
 

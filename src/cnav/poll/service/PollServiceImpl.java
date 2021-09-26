@@ -1,18 +1,21 @@
 package cnav.poll.service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 
 import cnav.main.dto.CategoryDTO;
 import cnav.poll.dao.PollDAO;
 import cnav.poll.dao.PollDAOImpl;
+import cnav.poll.dto.PollCommentsDTO;
 import cnav.poll.dto.PollDTO;
 
 @Service
@@ -226,4 +229,37 @@ public class PollServiceImpl implements PollService{
 		
 	}
 
+	//댓글등록
+	public int pollComment(PollCommentsDTO pdto) throws SQLException{
+		int result=0;
+		 result =pollDAO.pollComment(pdto);
+		 return result;
+	}
+	//댓글 리스트 가져오기
+	@Override
+	public List pollCommList(int pollNum) throws SQLException {
+		List comList = new ArrayList();
+		int result=0;
+		String pollNumber=Integer.toString(pollNum);
+		result=pollDAO.countComment(pollNumber);
+		if(result >0) {
+			comList = pollDAO.pollCommList(pollNumber);
+		}
+		return comList;
+	}
+	//댓글 삭제
+	@Override
+	public String CheckId(String pollComNum) throws SQLException {
+		String result=null;
+		//세션에서 id 뽑아오기
+		String userId=(String)RequestContextHolder.getRequestAttributes().getAttribute("sid", RequestAttributes.SCOPE_SESSION);
+		result=pollDAO.CheckId(pollComNum,userId);
+		
+		return result;
+	}
+	//댓글 삭제
+	@Override
+	public void commDelete(String pollComNum) throws SQLException {
+		pollDAO.commDelete(pollComNum);
+	}
 }

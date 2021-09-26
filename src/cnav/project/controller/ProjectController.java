@@ -30,10 +30,6 @@ public class ProjectController {
 	// 프로젝트 목록 
 	@RequestMapping("proList.cnav")
 	public String proList(String pageNum, String sel, String search, String sort, Model model) throws SQLException{		
-		//session.setAttribute("sid", "java");
-		//session.setAttribute("code", "1313");
-		
-		
 		
 		// 해당 페이지에 맞는 화면에 뿌려줄 게시글 가져와서 view에 전달하기 
 		Map<String, Object> result=null;
@@ -83,10 +79,9 @@ public class ProjectController {
 	// 프로젝트 작성 처리 페이지 
 	@RequestMapping("proWritePro.cnav")
 	public String proWritePro(HttpSession session,ProjectDTO dto) throws SQLException{
-		//session.setAttribute("sid", "java");
-		//session.setAttribute("code", "1313");	
+		
 		String id=(String)session.getAttribute("sid");
-		String code=(String)session.getAttribute("code");
+		String code=(String)session.getAttribute("scode");
 				
 		dto.setUserId(id); // 나중에 session에서 id 꺼내 추가로 변경해주기
 		dto.setCode(code);
@@ -102,7 +97,6 @@ public class ProjectController {
 	// 프로젝트 상세 페이지 요청(proContent 페이지)
 	@RequestMapping("proContent.cnav")
 	public String proContent(@ModelAttribute("pageNum") String pageNum, Integer proNum, Model model) throws SQLException{
-		
 		//session.setAttribute("code","1313");
 		//String code=(String)session.getAttribute("scode");
 		

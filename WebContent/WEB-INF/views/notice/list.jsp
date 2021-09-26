@@ -11,7 +11,7 @@
 
 <body>
 	<!--로그인된 세션이 없을경우 startPage 로 이동시켜주기  -->
-	<%-- <div id=""> 
+	<div id=""> 
 		<c:if test="${sessionScope.sid == null}">
 		<script>
 			alert("로그인후 이용할 수 있습니다");
@@ -19,7 +19,7 @@
 	    	window.location.href = link;
 	    	</script>
 		</c:if>
-	</div> --%>
+	</div>
 	<br />
 	
 	<h1 align="center"> 공지사항 </h1>
@@ -29,7 +29,7 @@
 		<c:if test="${count == 0}">
 		<table>
 		<!-- 회사관계자만 글쓰기버튼 보이게 -->
-			<c:if test="${!article.userId == sessionScope.sid &&sessionScope.sauth=='1'}">
+			<c:if test="${sessionScope.sauth=='1'}">
 				<tr>
 					<td><button onclick="window.location='/cnav/notice/writeForm.cnav'"> 글쓰기 </button></td>
 				</tr>
@@ -46,7 +46,7 @@
 		<c:if test="${count != 0}">
 		<table>
 			<!-- 회사관계자만 글쓰기버튼 보이게 -->
-			<c:if test="${!article.userId == sessionScope.sid &&sessionScope.sauth=='1'}">
+			<c:if test="${sessionScope.sauth=='1'}">
 				<tr>
 					<td><button onclick="window.location='/cnav/notice/writeForm.cnav'"> 글쓰기 </button></td>
 				</tr>
@@ -137,7 +137,7 @@
 	<c:if test="${sel != null && search != null}">
 		<button onclick="window.location='/cnav/notice/list.cnav'"> 전체 게시글 보기 </button> <br />
 	</c:if>
-	<button onclick="window.location='/cnav/member/main.cnav'"> 메인으로 </button>
+	<button onclick="window.location='/cnav/main/main.cnav'"> 메인으로 </button>
 	</div>
 	
 </body>

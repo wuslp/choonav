@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import cnav.approval.dto.ApprovalDTO;
-import cnav.main.dto.UserDTO;
 
 // 2번 비즈니스 로직 처리 
 public interface ApprovalService {

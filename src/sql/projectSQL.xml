@@ -4,6 +4,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="project">
  
+	<!-- 프로젝트 저장 -->
+	<insert id="insertProject" parameterType="projectDTO">
+		<selectKey keyProperty="proNum" order="BEFORE" resultType="int">
+		 select project_seq.nextVal from dual
+		</selectKey>
+		insert into project values(#{proNum} ,#{proName},#{proContent},#{userId},#{proStart},#{proEnd},#{dept},#{proState},#{code})	
+	</insert>
+	
+	
 	<!-- 전체 프로젝트 수 불러오기 -->
 	<select id="countAll" resultType="int" parameterType="string">
 		select count(*) from project where code=#{code}
@@ -32,13 +41,13 @@
 		]]>
 	</select>
 	<!-- 진행중, 완료 상태 업데이트 -->
-	<update id="updat2">
+	<update id="updat2" parameterType="string">
 		<![CDATA[
-			update project set proState='진행중' where (code=#{code}) and (to_char(proStart, 'yyyymmdd') >= to_char(sysdate, 'yyyymmdd'))
+			update project set proState='진행중' where (code=#{code}) and (to_char(proStart, 'yyyymmdd') <= to_char(sysdate, 'yyyymmdd'))
 		]]>	
 	</update>
 	<!-- 완료 -->
-	<update id="updat1">
+	<update id="updat1" parameterType="string">
 		<![CDATA[
 			update project set proState='완료' where (code=#{code}) and (to_char(proEnd, 'yyyymmdd') < to_char(sysdate, 'yyyymmdd'))
 		]]>
@@ -54,12 +63,6 @@
 	   		where r >= #{start} and r <= #{end}
 		]]>
 	</select>
-	
-	<!-- 프로젝트 저장 -->
-	<insert id="insertProject" parameterType="projectDTO">
-		insert into project values(project_seq.nextVal,#{proName},#{proContent},'java',#{proStart},#{proEnd},#{dept},#{proState},#{code})	
-	</insert>
-	
 	
 	<!-- 한개의 프로젝트 가져오기 -->
 	<select id="getOneProject" parameterType="int" resultType="projectDTO">

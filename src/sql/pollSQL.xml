@@ -27,13 +27,13 @@
 	<!-- 진행중 -->
 	<update id="updatest2" parameterType="string">
 		<![CDATA[
-		update poll set pollStatus='진행중' where (code=#{code}) and (to_char(stDate, 'yyyymmdd') >= to_char(sysdate, 'yyyymmdd'))
+		update poll set pollStatus='진행중' where (code=#{code}) and (to_char(stDate, 'yyyymmdd') <= to_char(sysdate, 'yyyymmdd'))
 		]]>
 	</update>
 	<!-- 완료 -->
 	<update id="updatest1" parameterType="string">
 		<![CDATA[
-		update poll set pollStatus='완료' where (code=#{code}) and (to_char(endDate, 'yyyymmdd') < to_char(sysdate, 'yyyymmdd'))
+		update poll set pollStatus='완료' where (code=#{code}) and (to_char(endDate, 'yyyymmdd') >= to_char(sysdate, 'yyyymmdd'))
 		]]>
 	</update>
 	
@@ -105,5 +105,30 @@
 	<delete id="pollDelete" parameterType="string">
 		delete from poll where pollNum = #{value}
 	</delete>
+	<!-- 투표 댓글 등록 -->
+	<insert id="pollComment" parameterType="pollCommDTO">
+		<selectKey keyProperty="pollComNum" resultType="int" order="BEFORE">
+		 select pollCom_seq.nextval from dual
+		</selectKey>
+		<![CDATA[
+		insert into pollcomment(pollComNum,pollNum, userId, pollReg, pollComment, code) values(#{pollComNum},#{pollNum}, #{userId}, sysdate, #{pollComment}, #{code})
+		]]>
+	</insert>
 	
+	<!-- 투표글 댓글 개수 -->
+	<select id="countComment" parameterType="string" resultType="int">
+		select count(*) from pollcomment where pollNum=#{value}
+	</select>
+	<!-- 댓글 리스트 가져오기 -->
+	<select id="pollCommList" parameterType="string" resultType="pollCommDTO">
+		select * from pollcomment where pollNum=#{pollNum} order by pollReg asc
+	</select>
+	<!-- CheckId -->
+	<select id="CheckId" parameterType="hashmap" resultType="int">
+		select count(*) from pollcomment where pollComNum=#{pollComNum} and userId=#{userId}
+	</select>
+	<!-- 댓글 삭제 -->
+	<delete id="commDelete" parameterType="string">
+		delete from pollcomment where pollcomnum=#{pollComNum}
+	</delete>
 </mapper>

@@ -51,9 +51,9 @@ public class MypageController {
 		model.addAttribute("count", result.get("count"));
 		model.addAttribute("number", result.get("number"));
 		
-		session.setAttribute("sauto", "1");
-		String auto = (String)session.getAttribute("sauto");
-		if(auto.equals("1")){
+		String sauth = (String)session.getAttribute("sauth");
+		model.addAttribute("sauth", sauth);
+		if(sauth.equals("1")){
 			return "bizMypage/bizPjList";
 		}else {
 			return "userMypage/myPjList";
@@ -84,9 +84,8 @@ public class MypageController {
 		model.addAttribute("count", result.get("count"));
 		model.addAttribute("number", result.get("number"));
 		
-		session.setAttribute("sauto", "1");
-		String auto = (String)session.getAttribute("sauto");
-		if(auto.equals("1")){
+		String sauth = (String)session.getAttribute("sauth");
+		if(sauth.equals("1")){
 			return "bizMypage/bizTopicList";
 		}else {
 			return "userMypage/myTopicList";
@@ -118,8 +117,8 @@ public class MypageController {
 		model.addAttribute("count", result.get("count"));
 		model.addAttribute("number", result.get("number"));
 		
-		String auto = (String)session.getAttribute("sauto");
-		if(auto.equals("1")){
+		String sauth = (String)session.getAttribute("sauth");
+		if(sauth.equals("1")){
 			return "bizMypage/bizCommentsList";
 		}else {
 			return "userMypage/myCommentsList";
@@ -151,8 +150,8 @@ public class MypageController {
 		model.addAttribute("count", result.get("count"));
 		model.addAttribute("number", result.get("number"));
 		
-		String auto = (String)session.getAttribute("sauto");
-		if(auto.equals("1")){
+		String sauth = (String)session.getAttribute("sauth");
+		if(sauth.equals("1")){
 			return "bizMypage/bizCommentsPjList";
 		}else {
 			return "userMypage/myCommentsPjList";
@@ -254,10 +253,9 @@ public class MypageController {
 		model.addAttribute("dto", dto);
 		model.addAttribute("userId", userId);
 		
-		
-		session.setAttribute("sauto", "0");
-		String auto = (String)session.getAttribute("sauto");
-		if(auto.equals("1")){
+		String sauth = (String)session.getAttribute("sauth");
+		model.addAttribute("sauth", sauth);
+		if(sauth.equals("1")){
 			return "bizMypage/bizMypage";
 		}else {
 			return "userMypage/userMypage";
@@ -280,9 +278,8 @@ public class MypageController {
 		model.addAttribute("userId", userId);
 		
 		
-		session.setAttribute("sauto", "0");
-		String auto = (String)session.getAttribute("sauto");
-		if(auto.equals("1")){
+		String sauth = (String)session.getAttribute("sauth");
+		if(sauth.equals("1")){
 			return "bizMypage/bizModifyForm";
 		}else {
 			return "userMypage/userModifyForm";
@@ -304,9 +301,8 @@ public class MypageController {
 		
 		model.addAttribute("res", res);
 		
-		session.setAttribute("sauto", "0");
-		String auto = (String)session.getAttribute("sauto");
-		if(auto.equals("1")){
+		String sauth = (String)session.getAttribute("sauth");
+		if(sauth.equals("1")){
 			return "bizMypage/bizModifyPro";
 		}else {
 			return "userMypage/userModifyPro";
@@ -324,9 +320,8 @@ public class MypageController {
 		String userId = (String)session.getAttribute("sid");
 		String code = (String)session.getAttribute("scode");
 		
-		session.setAttribute("sauto", "0");
-		String auto = (String)session.getAttribute("sauto");
-		if(auto.equals("1")){
+		String sauth = (String)session.getAttribute("sauth");
+		if(sauth.equals("1")){
 			return "bizMypage/bizPwChangeForm";
 		}else {
 			return "userMypage/userPwChangeForm";
@@ -347,9 +342,8 @@ public class MypageController {
 		
 		model.addAttribute("res", res);
 		
-		session.setAttribute("sauto", "0");
-		String auto = (String)session.getAttribute("sauto");
-		if(auto.equals("1")){
+		String sauth = (String)session.getAttribute("sauth");
+		if(sauth.equals("1")){
 			return "bizMypage/bizPwChangePro";
 		}else {
 			return "userMypage/userPwChangePro";
@@ -367,9 +361,8 @@ public class MypageController {
 		String userId = (String)session.getAttribute("sid");
 		String code = (String)session.getAttribute("scode");
 		
-		session.setAttribute("sauto", "0");
-		String auto = (String)session.getAttribute("sauto");
-		if(auto.equals("1")){
+		String sauth = (String)session.getAttribute("sauth");
+		if(sauth.equals("1")){
 			return "bizMypage/bizDeleteForm";
 		}else {
 			return "userMypage/userDeleteForm";
@@ -390,9 +383,8 @@ public class MypageController {
 		int res = myService.deleteUser(userId, pw);
 		model.addAttribute("res", res);
 		
-		session.setAttribute("sauto", "0");
-		String auto = (String)session.getAttribute("sauto");
-		if(auto.equals("1")){
+		String sauth = (String)session.getAttribute("sauth");
+		if(sauth.equals("1")){
 			return "bizMypage/bizDeletePro";
 		}else {
 			return "userMypage/userDeletePro";

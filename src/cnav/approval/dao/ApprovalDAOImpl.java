@@ -24,15 +24,18 @@ public class ApprovalDAOImpl implements ApprovalDAO {
 		// 팀장이 데이터 주면서 db에 저장하라고 했어! -> 창고 관리자에게.. 
 		sqlSession.insert("approval.insertApp", dto);
 		
+		// id1 = name1 
 		HashMap map = new HashMap();
-		map.put("name1", dto.getName1());
-		String nick1 = sqlSession.selectOne("approval.getName", dto.getUserId()); //네임 뽑고 
-		map.put("nick1", nick1);
-		sqlSession.update("approval.name1", map);
+		map.put("id1", dto.getId1());
+		
+		String name1 = sqlSession.selectOne("approval.getId", dto.getId1()); //네임 뽑고 
+		map.put("name1", name1);
+		
+		sqlSession.update("approval.id1", map);
 		
 	}
 	
-	
+	// 내 userId에 해당하는 name 가져오기 
 	public String selectName(ApprovalDTO dto) throws SQLException{
 		String name= sqlSession.selectOne("approval.selectName", dto);
 		return name;
@@ -80,15 +83,15 @@ public class ApprovalDAOImpl implements ApprovalDAO {
 		}
 		// 검색 게시글 목록 가져오기 
 		@Override
-		public List<ApprovalDTO> sendSearchApprovals(String userId, String code, int start, int end, String sel, String search) throws SQLException {
+		public List<ApprovalDTO> sendSearchApprovals(int start, int end, String sel, String search, String userId, String code) throws SQLException {
 			
 			HashMap map = new HashMap();
-			map.put("userId", userId);
-			map.put("code", code);
 			map.put("start", start);
 			map.put("end", end);
 			map.put("sel", sel);
 			map.put("search", search);
+			map.put("userId", userId);
+			map.put("code", code);
 			
 			List<ApprovalDTO> sendAppList = sqlSession.selectList("approval.sendSearchApprovals", map);
 			
@@ -164,15 +167,15 @@ public class ApprovalDAOImpl implements ApprovalDAO {
 	}
 	// 검색 게시글 목록 가져오기 
 	@Override
-	public List<ApprovalDTO> takeSearchApprovals(String userId, String code, int start, int end, String sel, String search) throws SQLException {
+	public List<ApprovalDTO> takeSearchApprovals(int start, int end, String sel, String search, String userId, String code) throws SQLException {
 		
 		HashMap map = new HashMap();
-		map.put("userId", userId);
-		map.put("code", code);
 		map.put("start", start);
 		map.put("end", end);
 		map.put("sel", sel);
 		map.put("search", search);
+		map.put("userId", userId);
+		map.put("code", code);
 		
 		List<ApprovalDTO> takeAppList = sqlSession.selectList("approval.takeSearchApprovals", map);
 		
@@ -212,6 +215,15 @@ public class ApprovalDAOImpl implements ApprovalDAO {
 	public void insertAddTake(ApprovalDTO dto) throws SQLException {
 		sqlSession.update("approval.insertAddTake2", dto);
 		
+		// id2 = name2 
+				HashMap map = new HashMap();
+				map.put("id2", dto.getId2());
+				
+				String name2 = sqlSession.selectOne("approval.getId", dto.getId2()); //네임 뽑고 
+				map.put("name2", name2);
+				
+				sqlSession.update("approval.id2", map);
+		
 	}
 	
 	
@@ -235,6 +247,14 @@ public class ApprovalDAOImpl implements ApprovalDAO {
 	@Override
 	public void insertAddTake2(ApprovalDTO dto) throws SQLException {
 		sqlSession.update("approval.insertAddTake3", dto);
+		// id2 = name2 
+		HashMap map = new HashMap();
+		map.put("id3", dto.getId3());
+		
+		String name3 = sqlSession.selectOne("approval.getId", dto.getId3()); //네임 뽑고 
+		map.put("name3", name3);
+		
+		sqlSession.update("approval.id3", map);
 		
 	}
 	

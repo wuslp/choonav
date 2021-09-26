@@ -1,9 +1,11 @@
 package cnav.poll.service;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
 import cnav.main.dto.CategoryDTO;
+import cnav.poll.dto.PollCommentsDTO;
 import cnav.poll.dto.PollDTO;
 
 public interface PollService {
@@ -33,5 +35,12 @@ public interface PollService {
 	
 	//투표글 삭제
 	public void pollDelete(String pollNum) throws SQLException;
-
+	//투표댓글 등록
+	public int pollComment(PollCommentsDTO pdto) throws SQLException;
+	//댓글 불러오기
+	public List pollCommList(int pollNum) throws SQLException;
+	//댓글 작성자랑 세션Id 일치하는지 확인
+	public String CheckId(String pollComNum) throws SQLException;
+	//댓글 삭제
+	public void commDelete(String pollComNum) throws SQLException;
 }

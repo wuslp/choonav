@@ -16,8 +16,8 @@
 	<form action="/cnav/approval/rejectPro.cnav?pageNum=${pageNum}" method="post">
 	<input type="hidden" name="appNum" value="${appNum}" />
 	<input type="hidden" name="sign" value="${sign}" />
-		<h2> 반려 사유 </h2><br/>
-		<textarea rows="20" cols="60" name="reject"></textarea><br/><br/>
+		<h2> 반려 사유 </h2>
+		<textarea rows="10" cols="40" name="reject"></textarea><br/><br/>
 		<input type="submit" value="작성"/> 
 		<input type="button" value="취소" onclick="closePopup(); "/> 
 	</form>

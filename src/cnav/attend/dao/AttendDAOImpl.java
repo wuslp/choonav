@@ -113,6 +113,7 @@ public class AttendDAOImpl implements AttendDAO{
 
 		sqlSession.update("attend.worktime2",map);
 		sqlSession.update("attend.leaveAttendance",map);
+		sqlSession.update("attend.AttendanceSet",map);
 	}
 	//출근 기록 여부 체크 
 	@Override

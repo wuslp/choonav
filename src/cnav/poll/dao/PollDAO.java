@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import cnav.main.dto.CategoryDTO;
+import cnav.poll.dto.PollCommentsDTO;
 import cnav.poll.dto.PollDTO;
 
 public interface PollDAO {
@@ -38,5 +39,14 @@ public interface PollDAO {
 	
 	//투표글 삭제
 	public void pollDelete(String pollNum) throws SQLException;
-	
+	//투표글 댓글등록
+	public int pollComment(PollCommentsDTO pdto) throws SQLException;
+	//댓글 유무 로딩
+	public int countComment(String pollNum) throws SQLException;
+	//댓글 리스트 로딩
+	public List pollCommList(String pollNum) throws SQLException;
+	//댓글 작성자랑 접속중 아이디랑 일치하는지 여부
+	public String CheckId(String pollComNum, String userId) throws SQLException;
+	//댓글 삭제
+	public void commDelete(String pollComNum) throws SQLException;
 }

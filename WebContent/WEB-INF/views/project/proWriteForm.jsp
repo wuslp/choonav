@@ -44,7 +44,7 @@
 			<tr>
 				<td>
 					<select name="dept">
-						<option value='부서선택'>부서선택</option>
+<!-- 						<option value="">부서선택</option> -->
 						<option value='마케팅팀'>마케팅팀</option>
 						<option value='영업팀'>영업팀</option>
 						<option value='인사팀'>인사팀</option>

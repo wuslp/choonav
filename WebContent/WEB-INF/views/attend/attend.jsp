@@ -7,7 +7,16 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<meta charset="UTF-8">
 	<title>attend page</title>
+	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript">
  	$(document).ready(function(){
@@ -59,8 +68,8 @@
 	 						console.log(e);
 	 					}
 					})
-					alert("퇴근")
-					//location.reload();
+					alert("퇴근");
+					location.reload();
 				}
  		    })
  		    
@@ -145,161 +154,171 @@
 	</script>
 
 </head>
+<body class="sb-nav-fixed">
+	<jsp:include page="/include/top_nav_bar.jsp" />
+	<div id="layoutSidenav">
+		<jsp:include page="/include/left_nav_bar.jsp" />
+			<div id="layoutSidenav_content">
+				<div id="" class="">
+					<!--로그인된 세션이 없을경우 startPage 로 이동시켜주기  -->
+					<div id=""> 
+						<c:if test="${sessionScope.sid == null}">
+						<script>
+							alert("로그인후 이용할 수 있습니다");
+							//var link = "http://localhost:8080/cnav/main/startPage.cnav";
+				    		//window.location.href = link;
+				    		window.history.back();
+				    		</script>
+						</c:if>
+					</div>
+					<!--근태관리 페이지 본문 시작  -->
+					<div id="" class="">
+						<h1>근태관리</h1>
+						<!-- 실시간 날짜 -->
+						<h5><fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" /></h5>
+						<!--출근 퇴근 기록여부에따른 버튼 able  -->
+						<c:if test="${WTrecodeCheck =='1' }">
+							<input type="button" value="출근완료" id="button1">
+							<input type="datetime" id="worktime" value="${workTimeRecode }" disabled>
+						</c:if>
+						<c:if test="${WTrecodeCheck !='1' }">
+							<input type="button" value="출근" id="button1">
+							<input type="datetime" id="worktime" value="" pattern="\d{4}-\d{2}-\d{2}" disabled>
+						</c:if>
+						<c:if test="${LTrecodeCheck =='1' }">
+							<input type="button" value="퇴근완료" id="button2">
+							<input type="datetime" id="leavetime" value="${leaveTimeRecode }" disabled>
+						</c:if>			
+						<c:if test="${LTrecodeCheck !='1' }">			
+							<input type="button" value="퇴근" id="button2" >
+							<input type="datetime" id="leavetime" value="" disabled>
+						</c:if>
+					</div><br/><br/><br/><br/><br/>
+					
+					<div id="" class="">
+							<form action="/cnav/attend/attend.cnav" method="get" onsubmit="return check()">
+							<select id="attcategory" name="attcategory">
+								<option value="">-- 선택 --</option>
+								<option value="">전체</option>
+								<option value="정상출근">정상출근</option>
+								<option value="지각">지각</option>
+								<option value='조퇴'>조퇴</option>
+								<option value='휴가'>휴가</option>
+							</select>
+							<input type="date" min="2000-01-01" max=<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" /> id="search1" name="search1"/>
+							<strong>~</strong>
+							<input type="date" min="" max=<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" /> id="search2" name="search2"/>
+							<input id="datesearch" type="submit" value="검색" />
+							</form>
+					</div><br/><br/>
+									
+							
+					<div id="" class="">	
+						<table border="1">
+							<tr>
+								<td>날짜</td>
+								<td>근태</td>
+								<td>출근</td>
+								<td>퇴근</td>
+								<td>기타</td>
+							</tr>
+							
+							<c:if test="${userAttendList != null}">
+								<c:forEach var="List" items="${userAttendList }">
+								<tr id="">
+									<td><fmt:formatDate value="${List.attDate }" type="date"/></td>
+									<td>${List.attendance }</td>
+									<td><fmt:formatDate value="${List.workTime }" pattern="HH:mm" /></td>
+									<td><fmt:formatDate value="${List.leaveTime }" pattern="HH:mm" /></td>
+									<td>${List.reason }</td>
+								</tr>
+								</c:forEach>
+							</c:if>
+							<c:if test="${userAttendList == null}">
+								<tr>
+									<td>근태기록이 존재하지 않습니다</td>	
+								</tr>
+							</c:if>
+							
+						</table>
+					</div><br /> <br /> 
+					<div id="" class=""><%-- 페이지 번호 --%>
+					
+						<div align="center">
+						<c:if test="${count > 0}">
+							<c:set var="pageBlock" value="3" />
+							<fmt:parseNumber var="res" value="${count / pageSize}" integerOnly="true" />
+							<c:set var="pageCount" value="${res + (count % pageSize == 0 ? 0 : 1)}" />
+							<fmt:parseNumber var="result" value="${(currentPage-1)/pageBlock}" integerOnly="true" />
+							<fmt:parseNumber var="startPage" value="${result * pageBlock + 1}"/>
+							<fmt:parseNumber var="endPage" value="${startPage + pageBlock -1}" />
+							<c:if test="${endPage > pageCount}">
+								<c:set var="endPage" value="${pageCount}" /> 
+							</c:if>
+							<%-- 검색 안했을때 페이지번호들   --%> 
+							<c:if test="${category == null}">
+								<c:if test="${search1 == null }">
+									<c:if test="${search2 == null }">
+										<c:if test="${startPage > pageBlock}">
+											<a href="/cnav/attend/attend.cnav?pageNum=${startPage-pageBlock}" class="pageNums"> &lt; &nbsp;</a>
+										</c:if>
+										<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
+											<a href="/cnav/attend/attend.cnav?pageNum=${i}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
+										</c:forEach>
+										<c:if test="${endPage < pageCount}">
+											&nbsp; <a href="/cnav/attend/attend.cnav?pageNum=${startPage+pageBlock}" class="pageNums"> &gt; </a>
+										</c:if>
+									</c:if>
+								</c:if>
+							</c:if>	
+							
+							<%-- 카테고리 검색했을때 페이지번호들 --%>
+							<c:if test="${category != null}">
+								<c:if test="${search1 == null }">
+									<c:if test="${search2 == null }">
+										<c:if test="${startPage > pageBlock}">
+											<a href="/cnav/attend/attend.cnav?pageNum=${startPage-pageBlock}&attcategory=${category}" class="pageNums"> &lt; &nbsp;</a>
+										</c:if>
+										<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
+											<a href="/cnav/attend/attend.cnav?pageNum=${i}&attcategory=${category}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
+										</c:forEach>
+										<c:if test="${endPage < pageCount}">
+											&nbsp; <a href="/cnav/attend/attend.cnav?pageNum=${startPage+pageBlock}&attcategory=${category}" class="pageNums"> &gt; </a>
+										</c:if>
+									</c:if>
+								</c:if>
+							</c:if>
+							<%--날짜 검색했을때 페이지번호들 --%>
+							<c:if test="${category == null}">
+							<c:if test="${search1 != null}">
+								<c:if test="${search2 != null}">
+									<c:if test="${startPage > pageBlock}">
+										<a href="/cnav/attend/attend.cnav?pageNum=${startPage-pageBlock}&search1=${search1}&search2=${search2}" class="pageNums"> &lt; &nbsp;</a>
+									</c:if>
+									<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
+										<a href="/cnav/attend/attend.cnav?pageNum=${i}&search1=${search1}&search2=${search2}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
+									</c:forEach>
+									<c:if test="${endPage < pageCount}">
+										&nbsp; <a href="/cnav/attend/attend.cnav?pageNum=${startPage+pageBlock}&search1=${search1}&search2=${search2}" class="pageNums"> &gt; </a>
+									</c:if>
+								</c:if>
+							</c:if>
+							</c:if>
+						</c:if> <%-- end:count > 0 --%>
+						<h3 style="color:black"> current page : ${pageNum} </h3>
+						</div>
+					</div>
+				</div>
 
-<body>
-	
-	<div id="" class="">
-		<!--로그인된 세션이 없을경우 startPage 로 이동시켜주기  -->
-		<div id=""> 
-			<c:if test="${sessionScope.sid == null}">
-			<script>
-				alert("로그인후 이용할 수 있습니다");
-				var link = "http://localhost:8080/cnav/main/startPage.cnav";
-	    		window.location.href = link;
-	    		</script>
-			</c:if>
+			<jsp:include page="/include/footer.jsp" />
 		</div>
-		<div class="">
-				<h1><a href="/cnav/main/main.cnav">Choonav 메인으로</a></h1>
-		</div>
-		<!--근태관리 페이지 본문 시작  -->
-		<div id="" class="">
-			<h1>근태관리</h1>
-			<!-- 실시간 날짜 -->
-			<h5><fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" /></h5>
-			<!--출근 퇴근 기록여부에따른 버튼 able  -->
-			<c:if test="${WTrecodeCheck =='1' }">
-				<input type="button" value="출근완료" id="button1">
-				<input type="datetime" id="worktime" value="${workTimeRecode }" disabled>
-			</c:if>
-			<c:if test="${WTrecodeCheck !='1' }">
-				<input type="button" value="출근" id="button1">
-				<input type="datetime" id="worktime" value="" pattern="\d{4}-\d{2}-\d{2}" disabled>
-			</c:if>
-			<c:if test="${LTrecodeCheck =='1' }">
-				<input type="button" value="퇴근완료" id="button2">
-				<input type="datetime" id="leavetime" value="${leaveTimeRecode }" disabled>
-			</c:if>			
-			<c:if test="${LTrecodeCheck !='1' }">			
-				<input type="button" value="퇴근" id="button2" >
-				<input type="datetime" id="leavetime" value="" disabled>
-			</c:if>
-		</div><br/><br/><br/><br/><br/>
-		
-		<div id="" class="">
-				<form action="/cnav/attend/attend.cnav" method="get" onsubmit="return check()">
-				<select id="attcategory" name="attcategory">
-					<option value="">-- 선택 --</option>
-					<option value="">전체</option>
-					<option value="정상출근">정상출근</option>
-					<option value="지각">지각</option>
-					<option value='휴가'>휴가</option>
-				</select>
-				<input type="date" min="2000-01-01" max=<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" /> id="search1" name="search1"/>
-				<strong>~</strong>
-				<input type="date" min="" max=<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" /> id="search2" name="search2"/>
-				<input id="datesearch" type="submit" value="검색" />
-				</form>
-		</div><br/><br/>
-						
-				
-		<div id="" class="">	
-			<table border="1">
-				<tr>
-					<td>날짜</td>
-					<td>근태</td>
-					<td>출근</td>
-					<td>퇴근</td>
-					<td>사유</td>
-				</tr>
-				
-				<c:if test="${userAttendList != null}">
-					<c:forEach var="List" items="${userAttendList }">
-					<tr id="">
-						<td><fmt:formatDate value="${List.attDate }" type="date"/></td>
-						<td>${List.attendance }</td>
-						<td><fmt:formatDate value="${List.workTime }" pattern="HH:mm" /></td>
-						<td><fmt:formatDate value="${List.leaveTime }" pattern="HH:mm" /></td>
-						<td>${List.reason }</td>
-					</tr>
-					</c:forEach>
-				</c:if>
-				<c:if test="${userAttendList == null}">
-					<tr>
-						<td>근태기록이 존재하지 않습니다</td>	
-					</tr>
-				</c:if>
-				
-			</table>
-		</div><br /> <br /> 
-		<div id="" class=""><%-- 페이지 번호 --%>
-		
-			<div align="center">
-			<c:if test="${count > 0}">
-				<c:set var="pageBlock" value="3" />
-				<fmt:parseNumber var="res" value="${count / pageSize}" integerOnly="true" />
-				<c:set var="pageCount" value="${res + (count % pageSize == 0 ? 0 : 1)}" />
-				<fmt:parseNumber var="result" value="${(currentPage-1)/pageBlock}" integerOnly="true" />
-				<fmt:parseNumber var="startPage" value="${result * pageBlock + 1}"/>
-				<fmt:parseNumber var="endPage" value="${startPage + pageBlock -1}" />
-				<c:if test="${endPage > pageCount}">
-					<c:set var="endPage" value="${pageCount}" /> 
-				</c:if>
-				<%-- 검색 안했을때 페이지번호들   --%> 
-				<c:if test="${category == null}">
-					<c:if test="${search1 == null }">
-						<c:if test="${search2 == null }">
-							<c:if test="${startPage > pageBlock}">
-								<a href="/cnav/attend/attend.cnav?pageNum=${startPage-pageBlock}" class="pageNums"> &lt; &nbsp;</a>
-							</c:if>
-							<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
-								<a href="/cnav/attend/attend.cnav?pageNum=${i}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
-							</c:forEach>
-							<c:if test="${endPage < pageCount}">
-								&nbsp; <a href="/cnav/attend/attend.cnav?pageNum=${startPage+pageBlock}" class="pageNums"> &gt; </a>
-							</c:if>
-						</c:if>
-					</c:if>
-				</c:if>	
-				
-				<%-- 카테고리 검색했을때 페이지번호들 --%>
-				<c:if test="${category != null}">
-					<c:if test="${search1 == null }">
-						<c:if test="${search2 == null }">
-							<c:if test="${startPage > pageBlock}">
-								<a href="/cnav/attend/attend.cnav?pageNum=${startPage-pageBlock}&attcategory=${category}" class="pageNums"> &lt; &nbsp;</a>
-							</c:if>
-							<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
-								<a href="/cnav/attend/attend.cnav?pageNum=${i}&attcategory=${category}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
-							</c:forEach>
-							<c:if test="${endPage < pageCount}">
-								&nbsp; <a href="/cnav/attend/attend.cnav?pageNum=${startPage+pageBlock}&attcategory=${category}" class="pageNums"> &gt; </a>
-							</c:if>
-						</c:if>
-					</c:if>
-				</c:if>
-				<%--날짜 검색했을때 페이지번호들 --%>
-				<c:if test="${category == null}">
-				<c:if test="${search1 != null}">
-					<c:if test="${search2 != null}">
-						<c:if test="${startPage > pageBlock}">
-							<a href="/cnav/attend/attend.cnav?pageNum=${startPage-pageBlock}&search1=${search1}&search2=${search2}" class="pageNums"> &lt; &nbsp;</a>
-						</c:if>
-						<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
-							<a href="/cnav/attend/attend.cnav?pageNum=${i}&search1=${search1}&search2=${search2}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
-						</c:forEach>
-						<c:if test="${endPage < pageCount}">
-							&nbsp; <a href="/cnav/attend/attend.cnav?pageNum=${startPage+pageBlock}&search1=${search1}&search2=${search2}" class="pageNums"> &gt; </a>
-						</c:if>
-					</c:if>
-				</c:if>
-				</c:if>
-			</c:if> <%-- end:count > 0 --%>
-			<h3 style="color:black"> current page : ${pageNum} </h3>
-			</div>
-		</div>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+		<script src="<%=request.getContextPath()%>/resources/startbootstrap/js/scripts.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+		<script src="<%=request.getContextPath()%>/resources/startbootstrap/assets/demo/chart-area-demo.js"></script>
+		<script src="<%=request.getContextPath()%>/resources/startbootstrap/assets/demo/chart-bar-demo.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+		<script src="<%=request.getContextPath()%>/resource/startbootstrap/js/datatables-simple-demo.js"></script>
 	</div>
-
 </body>
-
 </html>
