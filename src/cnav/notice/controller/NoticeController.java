@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,14 +24,17 @@ public class NoticeController {
 	private NoticeServiceImpl noticeService = null;
 	
 	@RequestMapping("list.cnav") // list.cnav?pageNum=2 list.cnav -> 
-	public String list(String pageNum, String sel, String search, Model model) throws SQLException {
+	public String list(HttpSession session, String pageNum, String sel, String search, Model model) throws SQLException {
+		// code 회사 코드에 맞게 공지사항 글 가져오기
+		String scode =(String)session.getAttribute("scode");
+		
 		// 해당 페이지에 맞는 화면에 뿌려줄 게시글 가져와서 view 전달 
 		Map<String, Object> result = null;
 		// 전체 게시글 sel search == null (검색 안한 전체 글 보여주기) 
 		if(sel == null || search == null) {
-			result = noticeService.getArticleList(pageNum);
+			result = noticeService.getArticleList(pageNum,scode);
 		}else { // 검색 게시글 sel search != null
-			result = noticeService.getArticleSearch(pageNum, sel, search);
+			result = noticeService.getArticleSearch(pageNum, sel, search,scode);
 		}
 		
 		// view에 전달할 데이터 보내기 
@@ -52,14 +56,17 @@ public class NoticeController {
 	// 글작성 Form 페이지
 	@RequestMapping("writeForm.cnav")
 	public String writeForm() {
-		
 		return "notice/writeForm";		
 	}
 	
 	// 글 작성 처리 페이지
 	@RequestMapping("writePro.cnav")
-	public String writePro(NoticeDTO dto) throws SQLException {
-		noticeService.insertArticle(dto);
+	public String writePro(NoticeDTO dto, HttpSession session) throws SQLException {
+		// code 회사 코드에 맞게 공지사항 글 작성하기
+		String scode =(String)session.getAttribute("scode");
+		String sid =(String)session.getAttribute("sid");
+		
+		noticeService.insertArticle(dto, scode, sid);
 		
 		return "redirect:/notice/list.cnav"; //?notiNum="+ dto.getNotiNum();
 	}

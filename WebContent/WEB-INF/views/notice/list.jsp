@@ -29,7 +29,7 @@
 		<c:if test="${count == 0}">
 		<table>
 		<!-- 회사관계자만 글쓰기버튼 보이게 -->
-			<c:if test="${!article.userId == sessionScope.sid &&sessionScope.sauth=='1'}">
+			<c:if test="${sessionScope.sauth=='1'}">
 				<tr>
 					<td><button onclick="window.location='/cnav/notice/writeForm.cnav'"> 글쓰기 </button></td>
 				</tr>
@@ -46,7 +46,7 @@
 		<c:if test="${count != 0}">
 		<table>
 			<!-- 회사관계자만 글쓰기버튼 보이게 -->
-			<c:if test="${!article.userId == sessionScope.sid &&sessionScope.sauth=='1'}">
+			<c:if test="${sessionScope.sauth=='1'}">
 				<tr>
 					<td><button onclick="window.location='/cnav/notice/writeForm.cnav'"> 글쓰기 </button></td>
 				</tr>
@@ -137,7 +137,7 @@
 	<c:if test="${sel != null && search != null}">
 		<button onclick="window.location='/cnav/notice/list.cnav'"> 전체 게시글 보기 </button> <br />
 	</c:if>
-	<button onclick="window.location='/cnav/member/main.cnav'"> 메인으로 </button>
+	<button onclick="window.location='/cnav/main/main.cnav'"> 메인으로 </button>
 	</div>
 	
 </body>

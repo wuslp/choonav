@@ -3,29 +3,32 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="notice">
-
-	<select id="countAll" resultType="int">
-		select count(*) from notice
+	<!-- 검색x, 게시글개수 -->
+	<select id="countAll" parameterType="String" resultType="int">
+		select count(*) from notice where code=#{value}
 	</select>
 
+	<!-- 검색x, 게시글 가져오기 -->
 	<select id="getArticles" parameterType="hashmap" resultType="noticeDTO">
 		<![CDATA[
 		select B.*, r from 
 			(select A.*, rownum r from 
-				(select * from notice order by notiNum desc) A order by notiNum desc) B
+				(select * from notice where code=#{scode} order by notiNum desc) A order by notiNum desc) B
 		where r >= #{start} and r <= #{end}
 		]]>
 	</select>
 
+	<!-- 검색o, 게시글 수 -->
 	<select id="countSearch" parameterType="hashmap" resultType="int">
-		select count(*) from notice where ${sel} like '%'||#{search}||'%'
+		select count(*) from notice where code=#{scode} and ${sel} like '%'||#{search}||'%'
 	</select>
 
+	<!-- 검색o, 게시글 가져오기 -->
 	<select id="getSearchArticles" parameterType="hashmap" resultType="noticeDTO">
 		<![CDATA[
 		select B.*, r from 
 			(select A.*, rownum r from 
-				(select * from notice where ${sel} like '%'||#{search}||'%' order by notiNum desc) A order by notiNum desc) B
+				(select * from notice where code=#{scode} and ${sel} like '%'||#{search}||'%' order by notiNum desc) A order by notiNum desc) B
 		where r >= #{start} and r <= #{end}
 		]]>
 	</select>
@@ -39,18 +42,22 @@
 				VALUES (#{num}, #{writer}, #{title}, #{content}, sysdate, 0)
 	</insert>
 	 -->
+	 
+	 <!-- 게시글 저장 -->
 	<insert id="insertArticle" parameterType="noticeDTO">
 		<selectKey keyProperty="notiNum" order="BEFORE" resultType="int">
 			select "Topic_SEQ".nextVal from dual
 		</selectKey>
-		insert into notice(notiNum, notiTitle, notiContent, notiDate, userId, readcount) 
-		values(#{notiNum}, #{notiTitle}, #{notiContent}, sysdate, #{userId}, 0)
+		insert into notice(notiNum, notiTitle, notiContent, notiDate, userId, readcount, code) 
+		values(#{notiNum}, #{notiTitle}, #{notiContent}, sysdate, #{userId}, 0, #{code})
 	</insert>
 	
+	<!-- 글 한개 가져오기 -->
 	<select id="getOneArticle" parameterType="int" resultType="noticeDTO">
 		select * from notice where notiNum = #{value}
 	</select>
 	
+	<!-- 조회수 +1 -->
 	<update id="readcountUp" parameterType="int">
 		update notice set readcount = readcount+1 where notiNum = #{value}
 	</update> 
