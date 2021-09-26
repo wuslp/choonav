@@ -6,10 +6,10 @@
  
 	<!-- 프로젝트 저장 -->
 	<insert id="insertProject" parameterType="projectDTO">
-		<!-- <selectKey keyProperty="proNum" order="BEFORE" resultType="int">
+		<selectKey keyProperty="proNum" order="BEFORE" resultType="int">
 		 select project_seq.nextVal from dual
-		</selectKey> -->
-		insert into project values(project_seq.nextVal ,#{proName},#{proContent},#{userId},#{proStart},#{proEnd},#{dept},#{proState},#{code})	
+		</selectKey>
+		insert into project values(#{proNum} ,#{proName},#{proContent},#{userId},#{proStart},#{proEnd},#{dept},#{proState},#{code})	
 	</insert>
 	
 	
