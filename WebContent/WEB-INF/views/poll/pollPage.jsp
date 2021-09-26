@@ -188,7 +188,7 @@
 									<input type="button" value="마감된 투표" id="" disabled>
 									<input type="button" value="결과보기" onclick="window.location='/cnav/poll/pollResult.cnav?pollNum=${article.pollNum}'">
 							</c:if>
-							<input type="button" value="취소" id="" onClick="window.location='/cnav/poll/pollList.cnav'">
+							<input type="button" value="리스트로" id="" onClick="window.location='/cnav/poll/pollList.cnav'">
 							<!-- 투표글 작성자일경우만 삭제버튼 보이게 처리 -->
 							<c:if test="${article.userId == sessionScope.sid}">
 <%-- 								<input type="button" value="삭제" onclick="window.location='/cnav/poll/pollDelete.cnav?pollNum=${article.pollNum}'" id="">

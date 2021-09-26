@@ -68,8 +68,8 @@
 	 						console.log(e);
 	 					}
 					})
-					alert("퇴근")
-					//location.reload();
+					alert("퇴근");
+					location.reload();
 				}
  		    })
  		    
@@ -202,6 +202,7 @@
 								<option value="">전체</option>
 								<option value="정상출근">정상출근</option>
 								<option value="지각">지각</option>
+								<option value='조퇴'>조퇴</option>
 								<option value='휴가'>휴가</option>
 							</select>
 							<input type="date" min="2000-01-01" max=<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" /> id="search1" name="search1"/>
@@ -219,7 +220,7 @@
 								<td>근태</td>
 								<td>출근</td>
 								<td>퇴근</td>
-								<td>사유</td>
+								<td>기타</td>
 							</tr>
 							
 							<c:if test="${userAttendList != null}">
