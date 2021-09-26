@@ -19,7 +19,7 @@
 	<select id="getArticles" parameterType="hashmap" resultType="pollDTO">
 		<![CDATA[
 		  select B.*, r
-		   from (select A.*, rownum r from (select * from poll where code=#{code} order by stDate asc) A order by stDate asc) B
+		   from (select A.*, rownum r from (select * from poll where code=#{code} order by endDate desc) A order by endDate desc) B
 		   where r >= #{startRow} and r <= #{endRow}
 		  ]]>
 	</select>
@@ -27,13 +27,13 @@
 	<!-- 진행중 -->
 	<update id="updatest2" parameterType="string">
 		<![CDATA[
-		update poll set pollStatus='진행중' where (code=#{code}) and (to_char(stDate, 'yyyymmdd') <= to_char(sysdate, 'yyyymmdd'))
+		update poll set pollStatus='진행중' where (code=#{code}) and (to_char(stDate, 'yyyymmdd') <= to_char(sysdate, 'yyyymmdd')) and (to_char(endDate, 'yyyymmdd') >= to_char(sysdate, 'yyyymmdd'))
 		]]>
 	</update>
 	<!-- 완료 -->
 	<update id="updatest1" parameterType="string">
 		<![CDATA[
-		update poll set pollStatus='완료' where (code=#{code}) and (to_char(endDate, 'yyyymmdd') >= to_char(sysdate, 'yyyymmdd'))
+		update poll set pollStatus='완료' where (code=#{code}) and (to_char(endDate, 'yyyymmdd') <= to_char(sysdate, 'yyyymmdd')) and (to_char(stDate, 'yyyymmdd') <= to_char(sysdate, 'yyyymmdd'))
 		]]>
 	</update>
 	
@@ -44,7 +44,7 @@
 	<select id="getArticles2" parameterType="hashmap" resultType="pollDTO">
 		<![CDATA[
 	  	select B.*, r
-	   from (select A.*, rownum r from (select * from poll where (code=#{code}) and (${sel} like '%'||#{search}||'%') order by stDate asc) A order by stDate asc) B
+	   from (select A.*, rownum r from (select * from poll where (code=#{code}) and (${sel} like '%'||#{search}||'%') order by stDate desc) A order by stDate desc) B
 	   where r >= #{startRow} and r <= #{endRow}
 		]]>
 	</select>
@@ -55,7 +55,7 @@
 	<select id="getArticles3" parameterType="hashmap" resultType="pollDTO">
 		<![CDATA[
 	  	select B.*, r
-	   from (select A.*, rownum r from (select * from poll where code=#{code} and pollStatus=#{sort} order by stDate asc) A order by stDate asc) B
+	   from (select A.*, rownum r from (select * from poll where code=#{code} and pollStatus=#{sort} order by stDate desc) A order by stDate desc) B
 	   where r >= #{startRow} and r <= #{endRow}
 		]]>
 	</select>

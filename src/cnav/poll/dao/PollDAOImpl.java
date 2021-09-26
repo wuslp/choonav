@@ -32,8 +32,8 @@ public class PollDAOImpl implements PollDAO{
 	//전체 개수 가져오기
 	@Override
 	public int getArticleCount(String code) throws SQLException {
-		sqlSession.update("poll.updatest1",code);//날짜 지난것 완료로 업데이트
 		sqlSession.update("poll.updatest2",code);//진행중
+		sqlSession.update("poll.updatest1",code);//날짜 지난것 완료로 업데이트
 		int count = sqlSession.selectOne("poll.getArticleCount",code);
 		return count;
 	}
@@ -50,8 +50,8 @@ public class PollDAOImpl implements PollDAO{
 	//검색한글 개수
 	@Override
 	public int getArticleCount2(String sel, String search, String code) throws SQLException {
-		sqlSession.update("poll.updatest1",code);	//날짜 지난것 완료로 업데이트
 		sqlSession.update("poll.updatest2",code);
+		sqlSession.update("poll.updatest1",code);	//날짜 지난것 완료로 업데이트
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("sel", sel);
 		map.put("search", search);
@@ -73,8 +73,8 @@ public class PollDAOImpl implements PollDAO{
 	//진행중 완료만
 	@Override
 	public int getArticleCount3(String sort,String code) throws SQLException {
-		sqlSession.update("poll.updatest1",code);	//날짜 지난것 완료로 업데이트
 		sqlSession.update("poll.updatest2",code);
+		sqlSession.update("poll.updatest1",code);	//날짜 지난것 완료로 업데이트
 
 		Map<String,	Object> map = new HashMap<String, Object>();
 		map.put("sort", sort);
