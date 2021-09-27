@@ -59,7 +59,7 @@
 	<select id="getState" parameterType="hashmap" resultType="projectDTO">
 		<![CDATA[
 	  	select B.*, r
-	  	 from (select A.*, rownum r from (select * from project where code=#{code} and proState=#{sort} order by proStart asc) A order by proStart desc) B
+	   	from (select A.*, rownum r from (select * from project where code=#{code} and proState=#{sort} order by proStart desc) A order by proEnd desc) B
 	   		where r >= #{start} and r <= #{end}
 		]]>
 	</select>

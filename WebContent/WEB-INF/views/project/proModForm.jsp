@@ -32,7 +32,7 @@
 				<td colspan="2">
 					<input type="submit" value="수정"/>
 					<input type="reset" value="재작성"/>
-					<input type="button" value="취소" onclick="window.location='/cnav/project/proContent.cnav?proNum=${proNum}&pageNum=${pageNum}'"/>
+					<input type="button" value="취소" onclick="window.location='/cnav/project/proContent.cnav?proNum=${project.proNum}&pageNum=${pageNum}'"/>
 				
 				</td>	
 			</tr>

@@ -76,9 +76,8 @@ public class ProjectDAOImpl implements ProjectDAO {
 	public int getProjectState(String sort,String code) throws SQLException{
 		sqlSession.update("project.updat1",code);
 		sqlSession.update("project.updat2",code);		
-		
-		
-		HashMap map=new HashMap();
+			
+		Map<String,	Object> map = new HashMap<String, Object>();
 		map.put("sort",sort);
 		map.put("code",code);
 		int count=sqlSession.selectOne("project.getProjectState",map);
@@ -92,8 +91,7 @@ public class ProjectDAOImpl implements ProjectDAO {
 		map.put("endRow","endRow");
 		map.put("sort","sort");
 		map.put("code","code");
-		
-		
+			
 		List<ProjectDTO> projectList=sqlSession.selectList("project.getState",map);
 		return projectList;
 	}

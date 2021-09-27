@@ -18,8 +18,7 @@
 				<a href="/cnav/project/proList.cnav?sort=완료">완료</a> &nbsp;
 				<select id="" name="sel">
 					<option value="dept">부서</option>
-					<option value="proName">제목</option>
-					<option value="userId">담당자</option>
+					<option value="proName">프로젝트</option>
 				</select>
 						
 				<input type="text" id="" name="search"/>
