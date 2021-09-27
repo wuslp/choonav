@@ -32,13 +32,13 @@
 		<tr>
 			<td>이메일</td>
 			<td>
-				<input type="text" name="email" value="${dto.email}">
+				<input type="text" name="email" value="${dto.email}" required>
 			</td>
 		</tr>
 		<tr>
 			<td>휴대폰번호</td>
 			<td>
-				<input type="text" name="tel" value="${dto.tel}">
+				<input type="text" name="tel" value="${dto.tel}" required>
 			</td>
 		</tr>
 		<tr>
