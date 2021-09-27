@@ -86,21 +86,21 @@
 				<h3> 일정명 </h3>
 			</div>
 			<div>
-				<input type="text" name="calTitle"/>
+				<input type="text" name="calTitle" required/>
 			</div>
 			<div>
 				<h3> 날짜 </h3>
-				<input class ="date" id="startDate" type= text" name="calStart" autocomplete="off" />
+				<input class ="date" id="startDate" type= text" name="calStart" autocomplete="off" required/>
 				-
-				<input class="date" id ="endDate" type ="text" name="calEnd" autocomplete="off" />
+				<input class="date" id ="endDate" type ="text" name="calEnd" autocomplete="off" required/>
 			</div>
 			<div>
 				<h3> 내용 </h3>
 			</div>
 			<div>
-				<textarea class="memo" id ="calMemo" name ="calMemo" rows="5" cols ="20" placeholder="일정에 필요한 설명을 남기세요"></textarea> 
+				<textarea class="memo" id ="calMemo" name ="calMemo" rows="5" cols ="20" placeholder="일정에 필요한 설명을 남기세요" required></textarea> 
 			</div>
-			<button class = "ok-button" type="submit" >확인</button>
+			<button class = "ok-button" type="submit">확인</button>
 		</form>
 			<button class = "ok-button" type= "button" onclick="self.close();">취소</button>
 		</div>

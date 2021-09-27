@@ -90,19 +90,19 @@
 				<h3> 일정명 </h3>
 			</div>
 			<div>
-				<input type="text" name="calTitle" value="${dto.calTitle}" />
+				<input type="text" name="calTitle" value="${dto.calTitle}" required/>
 			</div>
 			<div>
 				<h3> 날짜 </h3>
-				<input class ="date" id="startDate" type= text" name="calStart" autocomplete="off" value="${dto.calStart}" />
+				<input class ="date" id="startDate" type= text" name="calStart" autocomplete="off" value="${dto.calStart}" required/>
 				-
-				<input class="date" id ="endDate" type ="text" name="calEnd" autocomplete="off" value="${dto.calEnd}" />
+				<input class="date" id ="endDate" type ="text" name="calEnd" autocomplete="off" value="${dto.calEnd}" required/>
 			</div>
 			<div>
 				<h3> 내용 </h3>
 			</div>
 			<div>
-				<textarea class="memo" id ="calMemo" name ="calMemo" rows="5" cols ="20" placeholder="일정에 필요한 설명을 남기세요">${dto.calMemo}</textarea> 
+				<textarea class="memo" id ="calMemo" name ="calMemo" rows="5" cols ="20" placeholder="일정에 필요한 설명을 남기세요" required>${dto.calMemo}</textarea> 
 			</div>
 			<button class = "ok-button" type="submit" >확인</button>
 		</form>
