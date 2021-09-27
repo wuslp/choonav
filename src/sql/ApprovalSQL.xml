@@ -80,19 +80,31 @@
 	</select>
 	
 	
-	<!--검색 -->
+	<!--보낸 결재함 검색 -->
 	<select id="countSearch" parameterType="hashmap" resultType="int">
-		select count(*) from approval where code = #{code} and ${sel} like '%'||#{search}||'%'
+		select count(*) from approval where code = #{code} and userId=#{userId} and ${sel} like '%'||#{search}||'%'
 	</select>
 
 	<select id="sendSearchApprovals" parameterType="hashmap" resultType="approvalDTO">
 		<![CDATA[
 		select * from (select rownum rnum, approval.* from 
-		(select * from approval where code = #{code} and ${sel} like '%'||#{search}||'%' order by appNum desc) approval) 
+		(select * from approval where code = #{code} and userId=#{userId} and ${sel} like '%'||#{search}||'%' order by appNum desc) approval) 
 				where rnum >= #{start} and rnum <=#{end}
 		]]>
 	</select>
 	
+	<!--받은 결재함 검색 -->
+	<select id="takeCountSearch" parameterType="hashmap" resultType="int">
+		select count(*) from approval where code = #{code} and (id1=#{userId} or id2=#{userId} or id3=#{userId}) and ${sel} like '%'||#{search}||'%'
+	</select>
+
+	<select id="takeSearchApprovals" parameterType="hashmap" resultType="approvalDTO">
+		<![CDATA[
+		select * from (select rownum rnum, approval.* from 
+		(select * from approval where code = #{code} and (id1=#{userId} or id2=#{userId} or id3=#{userId}) and ${sel} like '%'||#{search}||'%' order by appNum desc) approval) 
+				where rnum >= #{start} and rnum <=#{end}
+		]]>
+	</select>
 	
 	<!-- 글 상세 페이지 -->
 	<select id="takeOneApproval" parameterType="int" resultType="approvalDTO">
@@ -103,18 +115,6 @@
 		update approval set reject=#{reject} where appNum=#{appNum}
 	</update>
 	
-	<!--검색 -->
-	<select id="takeCountSearch" parameterType="hashmap" resultType="int">
-		select count(*) from approval where code = #{code} and ${sel} like '%'||#{search}||'%'
-	</select>
-
-	<select id="takeSearchApprovals" parameterType="hashmap" resultType="approvalDTO">
-		<![CDATA[
-		select * from (select rownum rnum, approval.* from 
-		(select * from approval where code = #{code} and ${sel} like '%'||#{search}||'%' order by appNum desc) approval) 
-				where rnum >= #{start} and rnum <=#{end}
-		]]>
-	</select>
 	
 	<!-- 승인 -->
 	<update id="updateState1"  parameterType="hashmap">
