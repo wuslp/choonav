@@ -44,8 +44,8 @@
                             <div class="collapse" id="mailLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="/cnav/mail/writeMailForm.cnav">메일 쓰기</a>
-                                    <a class="nav-link" href="/cnav/mail/sendMailList.cnav">보낸 메일함</a>
                                     <a class="nav-link" href="/cnav/mail/recMailList.cnav">받은 메일함</a>
+                                    <a class="nav-link" href="/cnav/mail/sendMailList.cnav">보낸 메일함</a>
                                 </nav>
                             </div>
                            </c:if>

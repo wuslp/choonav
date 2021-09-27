@@ -200,7 +200,7 @@
 	<%-- 보낸 사람/내용 검색 --%>
 	<form action="/cnav/mail/recMailList.cnav">
 		<select name="sel">
-			<option value="userId">보낸 사람</option>
+			<option value="userName">보낸 사람</option>
 			<option value="mailContent">내용</option>
 		</select>
 		<input type="text" name="search" />
