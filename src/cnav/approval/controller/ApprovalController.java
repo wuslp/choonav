@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import cnav.approval.dto.ApprovalDTO;
 import cnav.approval.service.ApprovalServiceImpl;
+import cnav.attend.dto.AttendDTO;
 
 // 모든 요청이 들어오는 곳. 페이지 매핑을 해주자 1번 !!! (해당 메서드)
 
@@ -249,11 +250,14 @@ public class ApprovalController {
 			}
 	
 			@RequestMapping("takeOk3.cnav")
-			public String takeOk3(Integer appNum, int sign, @ModelAttribute("pageNum") String pageNum, Model model) throws SQLException {
+			public String takeOk3(HttpSession session, ApprovalDTO dto, AttendDTO adto, Integer appNum, int sign, @ModelAttribute("pageNum") String pageNum, Model model) throws SQLException {
 				//ApprovalDTO dto = approvalService.takeAppCont(appNum);
 				approvalService.takeOk3(appNum, sign, 2);	
 				model.addAttribute("appNum", appNum); 
 				//model.addAttribute("approval", dto);
+				
+				
+				
 				return "approval/takeOk3";
 			}	
 			
