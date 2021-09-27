@@ -41,6 +41,11 @@ public class TopCommentsDAOImpl implements TopCommentsDAO{
 		sqlSession.delete("topComments.delete", topComNum);		
 	}
 
+	@Override
+	public void downRecnt(int topNum) throws SQLException {
+		sqlSession.update("topComments.downRecnt", topNum);
+	}
+
 
 
 	
