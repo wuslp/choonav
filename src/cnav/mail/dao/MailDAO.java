@@ -37,7 +37,7 @@ public interface MailDAO {
 	public int insertMail(MailDTO dto) throws SQLException;
 	
 	// 메일함 선택 삭제
-	public int delete(String no) throws SQLException;
+	public int delete(String no, String id) throws SQLException;
 	
 	// 받은 메일 읽었으면 result = 1로 바꿔주기
 	public void readResult(int num, String id) throws SQLException;
@@ -45,9 +45,11 @@ public interface MailDAO {
 	// 받은 메일 본문 확인
 	public MailDTO getMail(int num) throws SQLException;
 	
-	// 메일 본문에서 삭제
-	public int deleteMail(int num) throws SQLException;
+	// 메일 본문에서 삭제(받은 메일함)
+	public int deleteRecMail(int num, String id) throws SQLException;
+	// 메일 본문에서 삭제(보낸 메일함)
+	public int deleteSendMail(int num, String id) throws SQLException;
 	
 	// 보내기, 편지함용 유저 확인
-	public List<UserDTO> userList(String code) throws SQLException;
+	public List<UserDTO> userList(String code, String id) throws SQLException;
 }
