@@ -41,19 +41,26 @@
 		]]>
 	</select>
 	<!-- 진행중, 완료 상태 업데이트 -->
+	<!-- 진행전 -->
+	<update id="updat3" parameterType="string">
+		<![CDATA[
+			update project set proState='진행전' where (code=#{code}) and (to_char(proStart, 'yyyymmdd')) > to_char(sysdate, 'yyyymmdd')
+		]]>
+			
+	</update>
 	<!-- 프로젝트 진행중 -->
 	<update id="updat2" parameterType="string">
 		<![CDATA[
-			update project set proState='진행중' where (code=#{code}) and (to_char(proStart, 'yyyymmdd') <= to_char(sysdate, 'yyyymmdd')) and (to_char(proEnd, 'yyyymmdd') > to_char(sysdate, 'yyyymmdd'))
+			update project set proState='진행중' where (code=#{code}) and (to_char(proStart, 'yyyymmdd') <= to_char(sysdate, 'yyyymmdd')) and (to_char(proEnd, 'yyyymmdd') >= to_char(sysdate, 'yyyymmdd'))
 		]]>	
 	</update>
 	<!-- 완료 -->
 	<update id="updat1" parameterType="string">
 		<![CDATA[
-			update project set proState='완료' where (code=#{code}) and (to_char(proStart, 'yyyymmdd') < to_char(sysdate, 'yyyymmdd')) and (to_char(proEnd, 'yyyymmdd') < to_char(sysdate, 'yyyymmdd'))
+			update project set proState='완료' where (code=#{code}) and (to_char(proEnd, 'yyyymmdd') < to_char(sysdate, 'yyyymmdd')) and (to_char(proStart, 'yyyymmdd') <= to_char(sysdate, 'yyyymmdd'))
 		]]>
 	</update>
-	<!-- 진행중 완료 리스트 가져오기 -->
+	<!-- 진행중 완료 리스트 가져오기 -->	
 	<select id="getProjectState" resultType="int" parameterType="hashmap">
 		select count(*) from project where code=#{code} and proState like '%'||#{sort}||'%'
 	</select>
@@ -61,7 +68,7 @@
 		<![CDATA[
 	  	select B.*, r
 	   	from (select A.*, rownum r from (select * from project where code=#{code} and proState=#{sort} order by proStart desc) A order by proEnd desc) B
-	   		where r >= #{start} and r <= #{end}
+	   		where r >= #{startRow} and r <= #{endRow}
 		]]>
 	</select>
 	
