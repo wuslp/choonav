@@ -25,15 +25,22 @@ public class TopCommentsDAOImpl implements TopCommentsDAO{
 	@Override
 	public void insert(TopCommentsDTO dto)  throws SQLException {
 		sqlSession.insert("topComments.insert", dto);
+		
 	}
 
-
+	// 댓글 입력시 게시글의 recnt +1
+	@Override
+	public void upRecnt(int topNum) throws SQLException {
+		sqlSession.update("topComments.upRecnt", topNum);
+	}
+	
 
 	// 댓글 삭제
 	@Override
 	public void delete(int topComNum)  throws SQLException {
 		sqlSession.delete("topComments.delete", topComNum);		
-	} 
+	}
+
 
 
 	

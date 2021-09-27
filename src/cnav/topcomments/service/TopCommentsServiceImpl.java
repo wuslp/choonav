@@ -25,6 +25,8 @@ public class TopCommentsServiceImpl implements TopCommentsService {
 	@Override
 	public void insert(TopCommentsDTO dto) throws SQLException {
 		topCommentsDAO.insert(dto);
+		int topNum = dto.getTopNum();
+		topCommentsDAO.upRecnt(topNum);
 	}
 
 

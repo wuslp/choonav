@@ -48,8 +48,8 @@
 		<selectKey keyProperty="topNum" order="BEFORE" resultType="int">
 			select "Topic_SEQ".nextVal from dual
 		</selectKey>
-		insert into topic(topNum, topTitle, topContent, topDate, userId, readcount, code) 
-		values(#{topNum}, #{topTitle}, #{topContent}, sysdate, #{userId}, 0, #{code})
+		insert into topic(topNum, topTitle, topContent, topDate, userId, readcount, recnt , code) 
+		values(#{topNum}, #{topTitle}, #{topContent}, sysdate, #{userId}, 0, 0, #{code})
 	</insert>
 	
 	<!-- 글 한개 가져오기 -->
