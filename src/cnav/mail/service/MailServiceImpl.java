@@ -180,8 +180,8 @@ public class MailServiceImpl implements MailService {
 
 	// 메일 리스트에서 삭제
 	@Override
-	public int delete(String no) throws SQLException {
-		int result = MailDAO.delete(no);
+	public int delete(String no, String id) throws SQLException {
+		int result = MailDAO.delete(no, id);
 		return result;
 	}
 	
@@ -196,19 +196,25 @@ public class MailServiceImpl implements MailService {
 		return mail;
 	}
 	
-	// 메일 본문에서 삭제
-	@Override
-	public int deleteMail(int num) throws SQLException {
-		int result = MailDAO.deleteMail(num);
-		
-		return result;
-	}
 	// 메일함, 보내기용 유저 리스트
 	@Override
-	public List<UserDTO> userList(String code) throws SQLException {
-		List<UserDTO> userList = MailDAO.userList(code);
+	public List<UserDTO> userList(String code, String id) throws SQLException {
+		List<UserDTO> userList = MailDAO.userList(code, id);
 		
 		return userList;
+	}
+	
+	// 메일 본문에서 삭제 (받은 메일함)
+	@Override
+	public int deleteRecMail(int num, String id) throws SQLException {
+		int result = MailDAO.deleteRecMail(num, id);
+		return result;
+	}
+	// 메일 본문에서 삭제 (보낸 메일함)
+	@Override
+	public int deleteSendMail(int num, String id) throws SQLException {
+		int result = MailDAO.deleteSendMail(num, id);
+		return result;
 	}
 
 }
