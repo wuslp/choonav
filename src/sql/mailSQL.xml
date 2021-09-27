@@ -76,8 +76,8 @@
 		delete from mail where mailNum = #{no}
 	</delete>
 	 
-	 <update id="readResult" parameterType="int">
-	 	update mail set mailResult = '1' where mailNum = #{value}
+	 <update id="readResult" parameterType="Hashmap">
+	 	update mail set mailResult = '1' where mailNum = #{num} and mailRid = #{id}
 	 </update>
 	 
 	 <select id="getMail" parameterType="int" resultType="mailDTO">

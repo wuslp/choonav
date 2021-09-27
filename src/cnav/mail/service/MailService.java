@@ -25,7 +25,7 @@ public interface MailService {
 	public int delete(String no) throws SQLException;
 	
 	// 받은 메일 본문
-	public MailDTO getMail(int num) throws SQLException;
+	public MailDTO getMail(int num, String id) throws SQLException;
 	
 	// 메일 본문에서 삭제
 	public int deleteMail(int num) throws SQLException;

@@ -187,9 +187,9 @@ public class MailServiceImpl implements MailService {
 	
 	// 받은 메일 확인
 	@Override
-	public MailDTO getMail(int num) throws SQLException {
+	public MailDTO getMail(int num, String id) throws SQLException {
 		// 읽었으면 result 1로 바꿔주기
-		MailDAO.readResult(num);
+		MailDAO.readResult(num, id);
 		// 받은 메일 본문
 		MailDTO mail = MailDAO.getMail(num);
 		

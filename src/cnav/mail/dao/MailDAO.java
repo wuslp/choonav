@@ -40,7 +40,7 @@ public interface MailDAO {
 	public int delete(String no) throws SQLException;
 	
 	// 받은 메일 읽었으면 result = 1로 바꿔주기
-	public void readResult(int num) throws SQLException;
+	public void readResult(int num, String id) throws SQLException;
 	
 	// 받은 메일 본문 확인
 	public MailDTO getMail(int num) throws SQLException;

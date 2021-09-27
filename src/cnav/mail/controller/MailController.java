@@ -145,7 +145,7 @@ public class MailController {
 	@RequestMapping("mail.cnav")
 	public String recMail(@ModelAttribute("pageNum") String pageNum, Integer num, HttpSession session, Model model) throws SQLException{
 		String id = (String)session.getAttribute("sid");
-		MailDTO mail = MailService.getMail(num);
+		MailDTO mail = MailService.getMail(num, id);
 		model.addAttribute("mail", mail);
 		model.addAttribute("id", id);
 		
