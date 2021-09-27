@@ -31,7 +31,7 @@
 		<tr>
 			<td>이메일</td>
 			<td>
-				<input type="text" name="email" value="${dto.email}" required>
+				<input type="text" name="email" value="${dto.email}" required >
 			</td>
 		</tr>
 		<tr>

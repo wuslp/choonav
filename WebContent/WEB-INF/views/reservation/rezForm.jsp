@@ -25,7 +25,7 @@
 		<form action="/cnav/rez/addRez.cnav" method="post" name="rezForm">
 			<div>
 				<h3> 예약일시 </h3>
-				<input type="text" name="sDate" id="start" autocomplete="off"  required/>
+				<input type="text" name="sDate" id="start" autocomplete="off"  required />
 				-
 				<input type="text" name="eDate" id="end" autocomplete="off"  required/>
 			</div>
