@@ -45,7 +45,6 @@
 			<br />
 			<div>
 				<input type="button" value="삭제" onclick="del(${mail.mailNum})" />
-				<td><button onclick="window.location='/cnav/mail/recMailList.cnav'"> 목록 </button></td>
 				<c:if test="${mail.mailRid == id}">
 					<input type="button" value="목록" onclick="window.location='/cnav/mail/recMailList.cnav'"/>
 				</c:if>

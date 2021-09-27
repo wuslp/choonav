@@ -6,7 +6,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
 <title>보낸 메일함</title>
+<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script type="text/javascript">
 		$(function(){
@@ -62,19 +70,27 @@
 				if(chk == false){
 					alert("삭제 실패");
 				}
+			}
 		}
 	</script>
 </head>
-<body>
+<body class="sb-nav-fixed">
+	<jsp:include page="/include/top_nav_bar.jsp" />
+	<div id="layoutSidenav">
+
+		<jsp:include page="/include/left_nav_bar.jsp" />
+
+		<div id="layoutSidenav_content">
 	<br />
-	<!-- <div align="right"> 
+	<div id=""> 
 		<c:if test="${sessionScope.sid == null}">
-			<button onclick="window.location='/spring/member/loginForm.do'">로그인</button>
+		<script>
+			alert("로그인후 이용할 수 있습니다");
+			var link = "http://localhost:8080/cnav/main/startPage.cnav";
+	   		window.location.href = link;
+	   		</script>
 		</c:if>
-		<c:if test="${sessionScope.sid != null}">
-			<button onclick="window.location='/spring/member/logout.do'">로그아웃</button>
-		</c:if>
-	</div> -->
+	</div>
 	
 	<h1 align="center"> 보낸 메일함 </h1>
 	
@@ -183,7 +199,7 @@
 	<%-- 받은 사람/내용 검색 --%>
 	<form action="/cnav/mail/sendMailList.cnav">
 		<select name="sel">
-			<option value="mailRid">받는 사람</option>
+			<option value="ridName">받는 사람</option>
 			<option value="mailContent">내용</option>
 		</select>
 		<input type="text" name="search" />
@@ -196,6 +212,15 @@
 	</c:if>
 	</div>
 	
-
+	
+<jsp:include page="/include/footer.jsp" />
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+		<script src="<%=request.getContextPath()%>/resources/startbootstrap/js/scripts.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+		<script src="<%=request.getContextPath()%>/resources/startbootstrap/assets/demo/chart-area-demo.js"></script>
+		<script src="<%=request.getContextPath()%>/resources/startbootstrap/assets/demo/chart-bar-demo.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+		<script src="<%=request.getContextPath()%>/resource/startbootstrap/js/datatables-simple-demo.js"></script>
 </body>
 </html>
