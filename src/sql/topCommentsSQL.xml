@@ -33,5 +33,8 @@
 		delete from topcomments where topComNum = #{topComNum}
 	</delete>
 	
-	
+	<!-- 댓글 삭제시 게시글 댓글수 -1 -->
+	<update id="downRecnt" parameterType="int">
+		update topic set recnt = recnt-1 where topNum = #{value}
+	</update>
 </mapper>

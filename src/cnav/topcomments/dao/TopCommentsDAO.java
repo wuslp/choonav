@@ -20,5 +20,7 @@ public interface TopCommentsDAO {
 	// rno -> topComNum
 	public void delete(int topComNum) throws SQLException;
 
+	// 댓글 삭제시 게시글댓글수 -1
+	public void downRecnt(int topNum) throws SQLException;
 	
 }

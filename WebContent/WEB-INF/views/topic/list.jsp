@@ -73,6 +73,9 @@
 						<td align="left">
 							<c:set var="wid" value="0" />
 							<a href="/cnav/topic/content.cnav?topNum=${article.topNum}&pageNum=${pageNum}"> ${article.topTitle} </a>
+							<c:if test="${article.recnt != 0}">
+							 ${article.recnt}
+							 </c:if>
 						</td>
 						<td> ${article.userId} </td>
 						<td> ${article.topDate} </td>
