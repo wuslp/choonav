@@ -139,6 +139,10 @@ body {
     background-color: #1987544d;
 }
 
+#wrapAll h3{
+	font-size : x-large;
+}
+
 
 /* 결재 상세 (sendAppContent) */
 

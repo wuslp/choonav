@@ -11,7 +11,7 @@
 	<meta name="author" content="" />
 
 	<title>연습 페이지</title>
-
+	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -21,9 +21,9 @@
 	<div id="layoutSidenav">
 		<jsp:include page="/include/left_nav_bar.jsp" />
 		<div id="layoutSidenav_content">
+			<div id="wrapAll">	
 
-
-
+			h3으로 바꿔주세요 
 
 
 			*******여기에 본인이 작성한 페이지의 내용********
@@ -31,9 +31,10 @@
 
 
 
-
+			</div> <!-- wrapAll -->
 			<jsp:include page="/include/footer.jsp" />
 		</div><!-- layoutSidenav_content" -->
+	</div><!-- id="layoutSidenav" -->
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 		<script src="<%=request.getContextPath()%>/resources/startbootstrap/js/scripts.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
@@ -41,6 +42,5 @@
 		<script src="<%=request.getContextPath()%>/resources/startbootstrap/assets/demo/chart-bar-demo.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
 		<script src="<%=request.getContextPath()%>/resource/startbootstrap/js/datatables-simple-demo.js"></script>
-	</div><!-- id="layoutSidenav" -->
 </body>
 </html>
