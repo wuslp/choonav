@@ -19,7 +19,7 @@
 	<div id="layoutSidenav_content">
 	
 	<h3> 계정정보 수정 </h3>
-	<form action="/cnav/rez/addRez.cnav" method="post">
+	<form action="/cnav/my/modifyPro.cnav" method="post">
 	<table>
 		<tr>
 			<td>아이디</td>

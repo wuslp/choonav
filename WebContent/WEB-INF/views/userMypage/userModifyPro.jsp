@@ -11,7 +11,7 @@
 	<c:if test="${res == 1}">
 		<script>
 			alert("수정이 완료되었습니다.")
-			window.location="mypage.cnav";
+			window.location="modifyForm.cnav";
 		</script>
 	</c:if>
 	<c:if test="${res != 1}">
