@@ -12,6 +12,7 @@
 <body>
 	<script>
 		alert("프로젝트가 만들어졌습니다.");
+		window.location.href ="/cnav/project/proList.cnav"; 
 		
 	</script>
 

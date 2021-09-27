@@ -9,7 +9,7 @@
 </head>
 <body>
 	<script>
-		alert("프로젝트가 수정이 되었습니다.");
+		alert("프로젝트가 수정이 완료되었습니다");
 		window.location="/cnav/project/proList.cnav";
 	</script>
 	
