@@ -12,8 +12,9 @@
 	<meta name="author" content="" />
 	<meta charset="UTF-8">
 	<title>Main Page</title>
-		<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
+	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript">
@@ -36,37 +37,17 @@
 		    		</script>
 				</c:if>
 			</div><!--logincheck -->
-			<!--로그아웃  -->
-			<a href="/cnav/main/logout.cnav">로그아웃 </a><br/><br/><br/><br/><br/><br/>
-			<div id="main"><!-- 메인 content -->
-				<table>
-					<!-- 회사 공지사항 -->
-					<tr>
-						<table>
-							<c:if test="${count == 0}">
-								등록된 공지사항이 없습니다.
-							</c:if>
-							<c:if test="${count > 0}">
-							<tr>
-								<td> No. </td>
-								<td> 제목 </td>
-								<td> 작성일 </td>
-							</tr>
-							<c:forEach var="item" items="${articleList}">
-								<tr>
-									<td>${number}<c:set var="number" value="${number - 1}" /> </td>
-									<td>${item.notiTitle}</td>
-									<td>${item.notiDate}</td>
-								</tr>
-							</c:forEach>
-							</c:if>
-						</table>
-					</tr>
-					<tr>
-						<!-- 회사정보 -->
-						<td>
+		
+		<div id="wrapAll">	
+			<div class="main"><!-- 메인 content -->
+					<div class="bizclock">
+					
+					<div class="card mb-4">
+                     <div class="card-header">
+                                회사정보
+                     </div>
+                            <div class="card-body">
 							<table>
-								<tr>회사정보</tr>
 								<tr>
 									<td>회사명</td>
 									<td>${bizDTO.bizName}</td>
@@ -84,11 +65,12 @@
 									<td>${bizDTO.bizEmail}</td>
 								</tr>
 							</table>
-						</td>
+						</div>
+					</div>	
 						
 						<!-- 실시간 시계 -->
-						<td>
-							<a id="codepen-link" href='https://www.codepen.io/seanfree' target='_blank'></a>
+						
+<!-- 						<a id="codepen-link" href='https://www.codepen.io/seanfree' target='_blank'></a> -->
 							<div id="clock">
 							  <ul id="tick-marks"></ul>
 							  <div class="second ticker"></div>
@@ -96,11 +78,45 @@
 							  <div class="hour ticker"></div>
 							  <div id="time-output"></div>
 							</div>
-						</td>
-					</tr>
-				</table>
+						</div><br/>	
+
+				
+				 <div class="card mb-4">
+                     <div class="card-header">
+                           <i class="fas fa-table me-1"></i>
+                                공지사항
+                     </div>
+                            <div class="card-body">
+                            <table>
+							<c:if test="${count == 0}">
+								등록된 공지사항이 없습니다.
+							</c:if>
+							<c:if test="${count > 0}">
+							<tr>
+								<td> No. </td>
+								<td> 제목 </td>
+								<td> 작성일 </td>
+							</tr>
+							<c:forEach var="item" items="${articleList}">
+								<tr>
+									<td>${number}<c:set var="number" value="${number - 1}" /> </td>
+									<td>${item.notiTitle}</td>
+									<td>${item.notiDate}</td>
+								</tr>
+							</c:forEach>
+							</c:if>
+							</table>
+						</div>
+					</div>
+
+
+
+
 			</div><!-- main 메인 content -->
+		</div>	
+			
 		<jsp:include page="/include/footer.jsp" />
+		</div><!-- layoutSidenav_content" -->
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 		<script src="<%=request.getContextPath()%>/resources/startbootstrap/js/scripts.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
@@ -108,7 +124,6 @@
 		<script src="<%=request.getContextPath()%>/resources/startbootstrap/assets/demo/chart-bar-demo.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
 		<script src="<%=request.getContextPath()%>/resource/startbootstrap/js/datatables-simple-demo.js"></script>
-		</div><!-- id="layoutSidenav_content" -->
 	</div><!-- id="layoutSidenav" -->
 </body>
 </html>

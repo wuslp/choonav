@@ -119,12 +119,28 @@ body {
 	color:#000;
 }
 
+/*  */
+
+
+
+/* 메인페이지 */
+#wrapAll{
+	margin: 10px 30px 30px 30px;
+}
+.bizclock{
+	display: flex;
+}
+
 /* 보낸 결재함 sendAppList */
 .stateReject {
     background-color: #ff000070;
 }
 .stateOK {
     background-color: #1987544d;
+}
+
+#wrapAll h3{
+	font-size : x-large;
 }
 
 

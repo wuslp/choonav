@@ -8,6 +8,10 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
 	<title>보낸결재함</title>
 	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
@@ -16,22 +20,27 @@
 </head>
 
 <body class="sb-nav-fixed">
-<c:if test="${sessionScope.sid == null}">
-<script>
-	alert("로그인후 이용할 수 있습니다");
-	var link = "/cnav/main/startPage.cnav";
-  		window.location.href = link;
-</script>
-</c:if>
+	<!-- 로그인 테스트 -->
+	<c:if test="${sessionScope.sid == null}">
+	<script>
+		alert("로그인후 이용할 수 있습니다");
+		var link = "/cnav/main/startPage.cnav";
+	  		window.location.href = link;
+	</script>
+	</c:if>
+	
+	<!--  본문 시작 --> 
 	<jsp:include page="/include/top_nav_bar.jsp" />
 		<div id="layoutSidenav">
 			<jsp:include page="/include/left_nav_bar.jsp" />
 			<div id="layoutSidenav_content">
-				<div class="sendAppList">
+			
+				<div id="wrapAll">	
+					<div class="sendAppList">
 				
-					<h2> 보낸결재함 </h2>
+					<h3> 보낸결재함 </h3>
 						<%-- 작성자/내용 검색 --%>
-						<form action="/cnav/approval/sendAppList.cnav">
+						<form action="/cnav/approval/sendAppList.cnav" name="search">
 							<select name="sel">
 								<option value="appType">문서형식</option>
 								<option value="appTitle">기안제목</option>
@@ -128,8 +137,11 @@
 						</c:if> <%-- end:count > 0 --%>
 					</div>	
 				</div>	
+				
+			</div> <!-- wrapAll -->	
 	<jsp:include page="/include/footer.jsp" />
-		</div>
+		</div> <!-- layoutSidenav_content" -->
+		</div><!-- id="layoutSidenav" -->	
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 		<script src="<%=request.getContextPath()%>/resources/startbootstrap/js/scripts.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>

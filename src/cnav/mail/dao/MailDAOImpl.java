@@ -149,8 +149,11 @@ public class MailDAOImpl implements MailDAO {
 	
 	// 받은 편지 result = 1로 바꾸기
 	@Override
-	public void readResult(int num) throws SQLException {
-		sqlSession.update("mail.readResult", num);
+	public void readResult(int num, String id) throws SQLException {
+		HashMap map = new HashMap();
+		map.put("num", num);
+		map.put("id", id);
+		sqlSession.update("mail.readResult", map);
 		
 	}
 	// 본문 확인
