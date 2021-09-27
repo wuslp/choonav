@@ -34,6 +34,7 @@ public class PollDAOImpl implements PollDAO{
 	public int getArticleCount(String code) throws SQLException {
 		sqlSession.update("poll.updatest2",code);//진행중
 		sqlSession.update("poll.updatest1",code);//날짜 지난것 완료로 업데이트
+		sqlSession.update("poll.updatest3",code);//진행전
 		int count = sqlSession.selectOne("poll.getArticleCount",code);
 		return count;
 	}

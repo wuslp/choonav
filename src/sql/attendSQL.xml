@@ -17,7 +17,7 @@
 	</select>
 	<!-- 퇴근기록 Null일떄 reason에 입력 -->
 	<update id="setLeaveNull" parameterType="hashmap">
-		update attend set reason='퇴근체크 미입력' where (userId=#{userId}) and (leaveTime is null)
+		update attend set reason='퇴근체크 미입력' where (userId=#{userId}) and (leaveTime is null) and (workTime is not null)
 	</update>
   	
   	<!-- 필터링 -->
