@@ -21,25 +21,24 @@
 </head>
 
 <body class="sb-nav-fixed">
+	<!--로그인된 세션이 없을경우 startPage 로 이동시켜주기  -->
+	<c:if test="${sessionScope.sid == null}">
+		<script>
+			alert("로그인후 이용할 수 있습니다");
+			var link = "http://localhost:8080/cnav/main/startPage.cnav";
+	    	window.location.href = link;
+	    </script>
+	</c:if>
+	
+	<!-- 본문시작 -->
 	<jsp:include page="/include/top_nav_bar.jsp" />
 	<div id="layoutSidenav">
 		<jsp:include page="/include/left_nav_bar.jsp" />
 		<div id="layoutSidenav_content">
 			<div id="wrapAll">	
-	<!--로그인된 세션이 없을경우 startPage 로 이동시켜주기  -->
-	<div id=""> 
-		<c:if test="${sessionScope.sid == null}">
-		<script>
-			alert("로그인후 이용할 수 있습니다");
-			var link = "http://localhost:8080/cnav/main/startPage.cnav";
-	    	window.location.href = link;
-	    	</script>
-		</c:if>
-	</div>
-	<br />
 	
 	<h3> 공지사항 </h3>
-	<br />
+
 	<%-- 제목/내용 검색 --%>
 	<form action="/cnav/notice/list.cnav">
 		<select name="sel">
@@ -50,6 +49,7 @@
 		<input type="submit" value="검색" />
 	</form>  <%-- /spring/board/list.do?sel=writer&search=aaa --%>
 	<br />
+	
 	<!-- 공지사항에 글이 없을 경우 -->
 	<div>
 		<c:if test="${count == 0}">
@@ -68,10 +68,10 @@
 	</div>
 	
 	<!-- 게시판에 글 있는 경우 -->
-	<div>
+	<div class="sendList">
 		<c:if test="${count != 0}">
-		<table>			
-			<tr>
+		<table class="cnavTable">		
+			<tr class="cnavList-top">
 				<td>No.</td>
 				<td>제  목</td>
 				<td>작성자</td>
@@ -83,8 +83,7 @@
 					<td>${number}
 						<c:set var="number" value="${number - 1}" /> 
 					</td>
-					<td align="left">
-						<c:set var="wid" value="0" />
+					<td>
 						<a href="/cnav/notice/content.cnav?notiNum=${article.notiNum}&pageNum=${pageNum}"> ${article.notiTitle} </a>
 					</td>
 					<td> 관리자 </td>
@@ -92,13 +91,14 @@
 					<td> ${article.readcount} </td>
 				</tr>
 			</c:forEach>
-			<!-- 회사관계자만 글쓰기버튼 보이게 -->
-			<c:if test="${sessionScope.sauth=='1'}">
-				<tr>
-					<td><button onclick="window.location='/cnav/notice/writeForm.cnav'"> 글쓰기 </button></td>
-				</tr>
-			</c:if>
-		</table>
+		</table><br />
+		</c:if>
+	</div>
+	
+	<!-- 회사관계자만 글쓰기버튼 보이게 -->
+	<div class="sendAppList-btn">
+		<c:if test="${sessionScope.sauth=='1'}">
+			<button onclick="window.location='/cnav/notice/writeForm.cnav'"> 글쓰기 </button><br/><br/>
 		</c:if>
 	</div>
 	
