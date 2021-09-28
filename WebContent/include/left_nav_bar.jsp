@@ -93,12 +93,12 @@
                            </c:if>
                            <!-- 8.투표 -->
                            <c:if test="${sessionScope.cdto.poll==1}">
-                            <a class="nav-link collapsed" href="" data-bs-toggle="collapse" data-bs-target="#dayLayouts" aria-expanded="false" aria-controls="dayLayouts">
+                            <a class="nav-link collapsed" href="" data-bs-toggle="collapse" data-bs-target="#pollLayouts" aria-expanded="false" aria-controls="pollLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-check-circle"></i></div>
                                	 투표
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                            <div class="collapse" id="dayLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <div class="collapse" id="pollLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="/cnav/poll/pollList.cnav">투표 리스트</a>
                                     <a class="nav-link" href="/cnav/poll/pollForm.cnav">투표 만들기</a>
