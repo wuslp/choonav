@@ -138,3 +138,33 @@ body {
 .bizclock{
 	display: flex;
 }
+
+/* 테이블 */
+.cnavTable{
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  text-align-last: center;
+}
+.cnavTable td{
+	height:33px;
+	border-bottom: solid thin lightgrey;
+}
+.cnavList-top {
+    background-color: rgba(0, 0, 0, 0.125)
+} 
+.cnavTable td a {
+    text-decoration: none;
+    color: #212529;
+}
+
+.cnavTable td a:hover {
+    color: #741c7d;
+}   
+.cnavTable td a:focus {
+    color: #21252933;
+}   
+.cnavAllList form{
+	text-align-last : center;
+}

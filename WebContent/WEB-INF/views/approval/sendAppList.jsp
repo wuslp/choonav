@@ -38,7 +38,7 @@
 			
 				<div id="wrapAll">	
 					<h3> 보낸결재함 </h3>
-					<div class="sendAppList">
+					<div class="cnavAllList">
 						<%-- 작성자/내용 검색 --%>
 						<form action="/cnav/approval/sendAppList.cnav" name="search">
 							<select name="sel">
@@ -55,8 +55,8 @@
 						
 						 <c:if test="${count != 0}" >
 						 <div class="sendList">
-							<table class="sendTable">
-								<tr class="sendList-top">
+							<table class="cnavTable">
+								<tr class="cnavList-top">
 									<td>No.</td>
 									<td>기안제목</td>
 									<td>문서형식</td>
@@ -81,7 +81,7 @@
 									            <div class="stateOK">승인</div>
 									         </c:when>
 									         <c:otherwise>
-									            진행중
+									           <div class="roading">진행중</div>
 									         </c:otherwise>
 									      </c:choose>
 										</td>
