@@ -46,7 +46,7 @@
 								<option value="appTitle">기안제목</option>
 							</select>
 							<input type="text" name="search" />
-							<input type="submit" value="검색" />
+							<input type="submit" value="검색" class="sendAppSerch" />
 						</form><br/>  <%-- 이렇게 ! /spring/board/list.do?sel=writer&search=aaa --%>
 					
 						 <c:if test="${count==0}" >
@@ -54,8 +54,9 @@
 						</c:if>
 						
 						 <c:if test="${count != 0}" >
+						 <div class="sendList">
 							<table class="sendTable">
-								<tr>
+								<tr class="sendList-top">
 									<td>No.</td>
 									<td>기안제목</td>
 									<td>문서형식</td>
@@ -90,11 +91,14 @@
 								</c:forEach>	
 							</table><br/>
 						</c:if>
+						
+						<div class="sendAppList-btn">
 						<c:if test="${sel != null && search != null}">
 							<button onclick="window.location='/cnav/approval/sendAppList.cnav'">목록</button>
 						</c:if>
-						<button onclick="window.location='/cnav/approval/appForm.cnav'">문서 작성</button><br/><br/>
-						
+						<button onclick="window.location='/cnav/approval/appForm.cnav'">문서작성</button><br/><br/>
+						</div>
+							</div>
 						<%-- 페이지 번호 --%>
 						<div>
 						<c:if test="${count > 0}">

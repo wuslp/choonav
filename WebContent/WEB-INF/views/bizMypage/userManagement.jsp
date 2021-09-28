@@ -31,11 +31,23 @@
 		
 	</script>
 </head>
-<body>
+<body class="sb-nav-fixed">
 	<jsp:include page="/include/top_nav_bar.jsp" />
 	<div id="layoutSidenav">
-		<jsp:include page="/include/left_nav_bar_mypage.jsp" />
-	<div id="layoutSidenav_content">
+
+		<jsp:include page="/include/left_nav_bar.jsp" />
+
+		<div id="layoutSidenav_content">
+	<br />
+	<div id=""> 
+		<c:if test="${sessionScope.sid == null}">
+		<script>
+			alert("로그인후 이용할 수 있습니다");
+			var link = "http://localhost:8080/cnav/main/startPage.cnav";
+	   		window.location.href = link;
+	   		</script>
+		</c:if>
+	</div>
 	
 	<br />
 	
@@ -139,6 +151,7 @@
 		<button onclick="window.location='/cnav/my/userManagement.cnav'"> 목록 </button> <br />
 	</c:if>
 	</div>
+
 	<jsp:include page="/include/footer.jsp" />
 </body>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
