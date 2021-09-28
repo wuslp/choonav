@@ -119,9 +119,10 @@ body {
 	color:#000;
 }
 
-/*  */
-
-
+/* 비즈사인업폼 */
+.cate {
+    border-color: #f080dd99;
+}
 
 /* 메인페이지 */
 #wrapAll{
