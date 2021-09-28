@@ -32,7 +32,7 @@ public class MailController {
 	// 받은 메일함
 	@RequestMapping("recMailList.cnav")
 	public String recMailList(HttpSession session, String pageNum, String sel, String search, Model model) throws SQLException{
-
+		System.out.println("받은 mail list");
 		String id = (String)session.getAttribute("sid");
 		
 		
