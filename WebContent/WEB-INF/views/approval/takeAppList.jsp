@@ -14,6 +14,7 @@
 	<meta name="author" content="" />
 <title>받은결재함</title>
 	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
+	<link href="/cnav/resources/css/approval.css" rel="stylesheet" type="text/css">
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -31,9 +32,9 @@
 	<div id="layoutSidenav">
 		<jsp:include page="/include/left_nav_bar.jsp" />
 		<div id="layoutSidenav_content">
-
-<h2> 받은결재함 </h2>
-
+		<div id="wrapAll">
+		<h3> 받은결재함 </h3>
+		<div class="cnavAllList">
 	<%-- 작성자/내용 검색 --%>
 	<form action="/cnav/approval/takeAppList.cnav">
 		<select name="sel">
@@ -49,8 +50,9 @@
 	</c:if>
 	
 	 <c:if test="${count != 0}" >
-		<table>
-			<tr>
+	  <div class="sendList">
+		<table class="cnavTable">
+			<tr class="cnavList-top">
 				<td>No.</td>
 				<td>기안제목</td>
 				<td>기안자</td>
@@ -139,10 +141,12 @@
 		</table><br/>
 	</c:if>
 	
+	<div class="sendAppList-btn">
 	<c:if test="${sel != null && search != null}">
 		<button onclick="window.location='/cnav/approval/takeAppList.cnav'">목록</button>
 	</c:if>
-	
+	</div>
+</div>	
 	<%-- 페이지 번호 --%>
 	<div>
 	<c:if test="${count > 0}">
@@ -183,12 +187,13 @@
 		</c:if>	
 	
 	</c:if> <%-- end:count > 0 --%>
-	
-
 	</div>	
-<jsp:include page="/include/footer.jsp" />
-			
-		</div><!-- layoutSidenav_content" -->
+				</div>	<!-- cnavAllList -->
+				
+			</div> <!-- wrapAll -->	
+	<jsp:include page="/include/footer.jsp" />
+		</div> <!-- layoutSidenav_content" -->
+		</div><!-- id="layoutSidenav" -->	
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 		<script src="<%=request.getContextPath()%>/resources/startbootstrap/js/scripts.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
@@ -196,6 +201,6 @@
 		<script src="<%=request.getContextPath()%>/resources/startbootstrap/assets/demo/chart-bar-demo.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
 		<script src="<%=request.getContextPath()%>/resource/startbootstrap/js/datatables-simple-demo.js"></script>
-	</div><!-- id="layoutSidenav" -->
 </body>
 </html>
+
