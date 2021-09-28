@@ -13,6 +13,14 @@ public class TopicDTO {
 	private Integer recnt; // 게시글 댓글 수
 	private String code;
 	
+	private String name; // users테이블의 name가져오기
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public String getCode() {
 		return code;
 	}

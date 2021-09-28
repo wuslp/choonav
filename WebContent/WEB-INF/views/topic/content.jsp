@@ -46,7 +46,7 @@
 				<td colspan="2" height="100"> ${article.topContent} </td>
 			</tr>
 			<tr>
-				<td>posted by <b>${article.userId}</b>
+				<td>posted by <b>${article.name}</b>
 					at ${article.topDate}
 				</td>
 				<td> ${article.readcount} viewed </td>
@@ -88,7 +88,7 @@
 		<c:forEach items="${reply}" var="reply">
 	      	
 	        <p>
-	        작성자 : ${reply.userId}<br />
+	        작성자 : ${reply.name}<br />
 	        작성 날짜 :  <fmt:formatDate value="${reply.topReg}" pattern="yyyy-MM-dd" />
 	        </p>
 			
