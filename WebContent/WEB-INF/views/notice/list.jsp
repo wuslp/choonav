@@ -84,7 +84,7 @@
 						<a href="/cnav/notice/content.cnav?notiNum=${article.notiNum}&pageNum=${pageNum}"> ${article.notiTitle} </a>
 					</td>
 					<td> 관리자 </td>
-					<td> ${article.notiDate} </td>
+					<td><fmt:formatDate value="${article.notiDate}" pattern="yyyy-MM-dd" /> </td>
 					<td> ${article.readcount} </td>
 				</tr>
 			</c:forEach>
