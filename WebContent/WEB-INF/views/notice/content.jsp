@@ -45,8 +45,8 @@
 			<td colspan="2" height="100"> ${article.notiContent} </td>
 		</tr>
 		<tr>
-			<td>posted by <b>${article.userId}</b>
-				at ${article.notiDate}
+			<td>posted by 관리자
+				at <fmt:formatDate value="${article.notiDate}" pattern="yyyy-MM-dd" />
 			</td>
 			<td> ${article.readcount} viewed </td>
 		</tr>

@@ -29,7 +29,7 @@
 			<c:forEach var="item" items="${articleList}">
 			<div>
 				<div class="divTableCell" onclick="window.location='/cnav/topic/content.cnav?topNum=${item.topNum}'">${item.topComment}</div>
-				<div class="divTableCell" onclick="window.location='/cnav/topic/content.cnav?topNum=${item.topNum}'">${item.topReg}</div>
+				<div class="divTableCell" onclick="window.location='/cnav/topic/content.cnav?topNum=${item.topNum}'"><fmt:formatDate value="${item.topReg}" pattern="yy/MM/dd" /></div>
 				<div class="divTableCell" onclick="window.location='/cnav/topic/content.cnav?topNum=${item.topNum}'">[원문제목] ${item.topTitle}</div>
 			</div>
 			</c:forEach>

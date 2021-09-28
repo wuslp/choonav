@@ -75,6 +75,11 @@
 		window.open(url,name,option)
 	}
 </script>
+<style>
+#container {
+    width: 700px;
+}
+</style>
 <body>
 	<jsp:include page="/include/top_nav_bar.jsp" />
 	<div id="layoutSidenav">
@@ -82,7 +87,7 @@
 	<div id="layoutSidenav_content">
 	
 	<h3> 내 일정 </h3>
-	<div id='calendar'></div>
+	<div id='calendar' class='container'></div>
 	
 	<jsp:include page="/include/footer.jsp" />
 </body>

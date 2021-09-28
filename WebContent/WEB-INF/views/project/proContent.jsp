@@ -6,9 +6,24 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
 	<title>proContent</title>
+	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
+	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 </head>
-<body>
+
+<body class="sb-nav-fixed">
+	<jsp:include page="/include/top_nav_bar.jsp" />
+	<div id="layoutSidenav">
+		<jsp:include page="/include/left_nav_bar.jsp" />
+		<div id="layoutSidenav_content">
+			<div id="wrapAll">
 	<br/>
 	
 	<table>
@@ -19,7 +34,7 @@
 			<td>${project.dept}</td>
 		</tr>
 		<tr>
-			<td>${project.proStart}~${project.proEnd}</td>
+			<td>${project.proStart}~${project.proEnd}</td>	
 		</tr>
 		<tr>
 			<td colspan="2" height="100">${project.proContent}</td>
@@ -48,9 +63,10 @@
 	<!-- 댓글 리스트 -->
 	<c:forEach items="${comment}" var="comment">
 		
-		<p>${comment.userId}<br/>
+		<p>${comment.name}<br/>
 		<fmt:formatDate value="${comment.proReg}" pattern="yyyy-MM-dd" />
 		</p>
+	
 		
 		<p>${comment.proComment}</p>
 		<!-- 댓글작성자=로그인한사람 -->
@@ -74,6 +90,16 @@
 	
 	</script>
 	<!-- 세션에 아이디가 저장되었을 경우 (로그인한 경우)에만 댓글 작성 창이 출력되도록 코드를 작성함 -->
-    
+    </div> <!-- wrapAll -->
+			<jsp:include page="/include/footer.jsp" />
+		</div><!-- layoutSidenav_content" -->
+	</div><!-- id="layoutSidenav" -->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+		<script src="<%=request.getContextPath()%>/resources/startbootstrap/js/scripts.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+		<script src="<%=request.getContextPath()%>/resources/startbootstrap/assets/demo/chart-area-demo.js"></script>
+		<script src="<%=request.getContextPath()%>/resources/startbootstrap/assets/demo/chart-bar-demo.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+		<script src="<%=request.getContextPath()%>/resource/startbootstrap/js/datatables-simple-demo.js"></script>
 
 </html>

@@ -111,6 +111,12 @@ public class TopicDAOImpl implements TopicDAO{
 		int result = sqlSession.update("topic.updateArticle", dto); 
 		return result;
 	}
+	
+	// 게시글 1개에 대한 userId로 name 뽑기
+	@Override
+	public String getName(String userId) throws SQLException {
+		return sqlSession.selectOne("topic.getName", userId);
+	}
 
 	
 }

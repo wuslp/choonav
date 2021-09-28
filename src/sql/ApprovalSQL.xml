@@ -157,5 +157,17 @@
 	</select>
 	
 	
+	<select id="getApproval" parameterType="int" resultType="approvalDTO">
+		select * from approval where appNum=#{appNum}
+	</select>
+	
+	<!-- 시작일 -->
+	 <insert id="insertStart" parameterType="hashmap">
+		insert into attend(userId, attDate, reason, code, attendance) values(#{userId}, #{appStart}, '휴가시작일', #{code}, '휴가')
+	</insert> 
+	<!-- 종료일 -->
+	 <insert id="insertFinish" parameterType="hashmap">
+		insert into attend(userId, attDate, reason, code, attendance) values(#{userId}, #{appFinish}, '휴가종료일', #{code}, '휴가')
+	</insert> 
 	
 </mapper>

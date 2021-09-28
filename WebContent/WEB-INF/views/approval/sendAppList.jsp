@@ -14,6 +14,7 @@
 	<meta name="author" content="" />
 	<title>보낸결재함</title>
 	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
+	<link href="/cnav/resources/css/approval.css" rel="stylesheet" type="text/css">
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -36,9 +37,8 @@
 			<div id="layoutSidenav_content">
 			
 				<div id="wrapAll">	
-					<div class="sendAppList">
-				
 					<h3> 보낸결재함 </h3>
+					<div class="sendAppList">
 						<%-- 작성자/내용 검색 --%>
 						<form action="/cnav/approval/sendAppList.cnav" name="search">
 							<select name="sel">
@@ -54,7 +54,7 @@
 						</c:if>
 						
 						 <c:if test="${count != 0}" >
-							<table>
+							<table class="sendTable">
 								<tr>
 									<td>No.</td>
 									<td>기안제목</td>

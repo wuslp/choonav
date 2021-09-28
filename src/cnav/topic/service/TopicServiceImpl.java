@@ -115,6 +115,8 @@ public class TopicServiceImpl implements TopicService {
 	// 글 저장
 	@Override
 	public void insertArticle(TopicDTO dto, String scode, String sid) throws SQLException {
+		String name = topicDAO.getName(sid);
+		dto.setName(name);
 		topicDAO.insertArticle(dto, scode, sid);
 	} 
 	
@@ -123,6 +125,8 @@ public class TopicServiceImpl implements TopicService {
 	public TopicDTO getArticle(int topNum) throws SQLException {
 		topicDAO.readcountUp(topNum);
 		TopicDTO article = topicDAO.getArticle(topNum);
+		String name = topicDAO.getName(article.getUserId());
+		article.setName(name);
 		
 		return article;
 	}

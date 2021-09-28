@@ -22,7 +22,7 @@ public class ProjectDAOImpl implements ProjectDAO {
 	// 전체 프로젝트 수 가져오기 
 	@Override
 	public int getProjectCount(String userId,String code) throws SQLException {
-
+		sqlSession.update("project.updat3",code); // 진행전(준비중)
 		sqlSession.update("project.updat2",code); //진행중
 		sqlSession.update("project.updat1",code); // 날짜 지난것 완료로 업데이트 
 		// 프로젝트 전체글 개수 가져오기
@@ -73,12 +73,12 @@ public class ProjectDAOImpl implements ProjectDAO {
 
 	// 진행중 완료만
 	@Override
-	public int getProjectState(String sort,String code) throws SQLException{
+	public int getProjectState(String sort,String code) throws SQLException{	
+		sqlSession.update("project.updat2",code);
 		sqlSession.update("project.updat1",code);
-		sqlSession.update("project.updat2",code);		
 		
-		
-		HashMap map=new HashMap();
+			
+		Map<String,	Object> map = new HashMap<String, Object>();
 		map.put("sort",sort);
 		map.put("code",code);
 		int count=sqlSession.selectOne("project.getProjectState",map);
@@ -88,12 +88,11 @@ public class ProjectDAOImpl implements ProjectDAO {
 	@Override
 	public List<ProjectDTO> getState(int startRow, int endRow, String sort,String code) throws SQLException{
 		Map<String, Object> map=new HashMap<String, Object>();
-		map.put("startRow","startRow");
-		map.put("endRow","endRow");
-		map.put("sort","sort");
-		map.put("code","code");
-		
-		
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		map.put("sort", sort);
+		map.put("code", code);
+			
 		List<ProjectDTO> projectList=sqlSession.selectList("project.getState",map);
 		return projectList;
 	}
@@ -130,6 +129,11 @@ public class ProjectDAOImpl implements ProjectDAO {
 	@Override
 	public void deleteProject(String proNum) throws SQLException{
 		sqlSession.delete("project.deleteProject", proNum);
+	}
+	//유저아이디=이름
+	@Override
+	public String getName(String userId) throws SQLException {	
+		return sqlSession.selectOne("project.getName",userId);
 	}
 
 	

@@ -20,6 +20,11 @@ public class ProCommentsDAOImpl implements ProCommentsDAO {
 	public void create(ProCommentsDTO dto) throws SQLException{
 		sqlSession.insert("proComments.create",dto);
 	}
+	// 유저아이디=이름
+	@Override
+	public String getName(String userId) throws SQLException{
+		return sqlSession.selectOne("project.getName",userId);
+	}
 	// 댓글 목록
 	@Override
 	public List<ProCommentsDTO> comment(Integer proNum) throws SQLException {
