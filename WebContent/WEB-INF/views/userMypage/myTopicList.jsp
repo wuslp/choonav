@@ -28,7 +28,7 @@
 			<td>No.</td>
 			<td>제목</td>
 			<td>작성자</td>
-			<td>시간</td>
+			<td>작성일</td>
 			<td>조회수</td>
 			<td>수정</td>
 			<td>삭제</td>
@@ -37,8 +37,8 @@
 		<tr>
 			<td onclick="window.location='/cnav/topic/content.cnav?topNum=${item.topNum}'">${number}<c:set var="number" value="${number - 1}" /> </td>
 			<td onclick="window.location='/cnav/topic/content.cnav?topNum=${item.topNum}'" >${item.topTitle}</td>
-			<td onclick="window.location='/cnav/topic/content.cnav?topNum=${item.topNum}'" >${item.userId}</td>
-			<td onclick="window.location='/cnav/topic/content.cnav?topNum=${item.topNum}'" >${item.topDate}</td>
+			<td onclick="window.location='/cnav/topic/content.cnav?topNum=${item.topNum}'" >${item.name}</td>
+			<td onclick="window.location='/cnav/topic/content.cnav?topNum=${item.topNum}'" ><fmt:formatDate value="${item.topDate}" pattern="yy/MM/dd" /></td>
 			<td onclick="window.location='/cnav/topic/content.cnav?topNum=${item.topNum}'" >${item.readcount}</td>
 			<td><button onclick="window.location='/cnav/topic/modifyForm.cnav?topNum=${item.topNum}'" />수정</button></td>
 			<td><button onclick="deleteConfirm(${item.topNum})" />삭제</button></td>

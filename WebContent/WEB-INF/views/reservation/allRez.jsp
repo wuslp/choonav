@@ -71,9 +71,12 @@
     });
     calendar.render();
   });
-  
-
 </script>
+<style>
+#container {
+    width: 650px;
+}
+</style>
 <body>
 	<jsp:include page="/include/top_nav_bar.jsp" />
 	<div id="layoutSidenav">
@@ -81,7 +84,7 @@
 	<div id="layoutSidenav_content">
 	
 	<h3> 전체 예약 </h3>
-	<div id='calendar' class="center"></div>
+	<div id='calendar' class='container'></div>
 		
 	<jsp:include page="/include/footer.jsp" />
 </body>

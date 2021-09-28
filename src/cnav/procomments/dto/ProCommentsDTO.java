@@ -9,6 +9,7 @@ public class ProCommentsDTO {
 	private Timestamp proReg;	// 작성일자
 	private String proComment;	// 작성내용
 	private String code;		// 회사코드 
+	private String name;		// 담당자
 	
 	public Integer getProNum() {
 		return proNum;
@@ -45,6 +46,12 @@ public class ProCommentsDTO {
 	}
 	public void setCode(String code) {
 		this.code = code;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	

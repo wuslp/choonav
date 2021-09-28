@@ -82,7 +82,7 @@
  			if(attcategory == ""){
  				window.location.replace("/cnav/attend/attend.cnav");
 			 }else{
- 				 alert(attcategory+"리스트 필터링");
+ 				 //alert(attcategory+"리스트 필터링");
  				//ajax요청 
  				$.ajax({
  					url : "/cnav/attend/attend.cnav",

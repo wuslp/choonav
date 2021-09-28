@@ -8,7 +8,7 @@
     <!-- 댓글 목록 -->
     <select id="reply" resultType="topCommentsDTO">
     	SELECT
-    		  topNum,topComNum, topComment, userId, topReg
+    		  *
     	 FROM topcomments
     	WHERE topNum = #{topNum} ORDER BY topComNum desc
 	</select>	
@@ -18,9 +18,15 @@
     	<selectKey keyProperty="topComNum" order="BEFORE" resultType="int">
 			select "topcomments_SEQ".nextVal from dual
 		</selectKey>
-        INSERT INTO topcomments (topComNum, topNum, topComment, userId, topReg, code)
-        VALUES (#{topComNum}, #{topNum}, #{topComment}, #{userId}, sysdate, #{code})
+        INSERT INTO topcomments (topComNum, topNum, topComment, userId, topReg, code, name)
+        VALUES (#{topComNum}, #{topNum}, #{topComment}, #{userId}, sysdate, #{code}, #{name})
 	</insert>
+	
+	  <!-- 댓글입력 전 아이디 통해 이름 가져오기 -->
+    <select id="getName" parameterType="String" resultType="String">
+    	SELECT
+    		  name from users where userId=#{value}
+	</select>
 	
 	<!-- 댓글 작성시 해당게시글 댓글 수 +1 -->
 	<update id="upRecnt" parameterType="int">

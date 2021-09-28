@@ -15,4 +15,7 @@ public interface ProCommentsDAO  {
 	
 	//댓글 삭제
 	public void delcom(int proComNum) throws SQLException;
+
+	// 유저 아디=이름
+	public String getName(String userId) throws SQLException;
 }

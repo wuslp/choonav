@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.context.request.RequestContextHolder;
 
 import cnav.approval.dto.ApprovalDTO;
+import cnav.attend.dto.AttendDTO;
 
 // 3번 데이터 담당자 
 
@@ -271,6 +272,25 @@ public class ApprovalDAOImpl implements ApprovalDAO {
 			}else if(sign == 3) {
 				sqlSession.selectOne("approval.updateState3", map); 
 			}
+			
+			ApprovalDTO adto =  sqlSession.selectOne("approval.getApproval", appNum);
+			System.out.println(adto);
+			map.put("userId", adto.getUserId());
+			map.put("appStart", adto.getAppStart());
+			map.put("code", adto.getCode());
+			map.put("appFinish", adto.getAppFinish());
+			
+			
+			System.out.println(adto.getUserId());
+			System.out.println(adto.getAppStart());
+			System.out.println(adto.getCode());
+			
+			if(adto.getAppType().equals("휴가신청서")) {
+				sqlSession.insert("approval.insertStart", map);
+				sqlSession.insert("approval.insertFinish", map);
+				
+				System.out.println("타니?");
+			}
 		}
 
 	// 결재자에 넣을 같은회사 유저아이디들 가져오기
@@ -283,4 +303,10 @@ public class ApprovalDAOImpl implements ApprovalDAO {
 		
 		return list;
 	}
+	
+	public void insertAttend(AttendDTO adto) throws SQLException{
+		sqlSession.insert("attend.insertAttend", adto);
+		
+	}
+	
 }

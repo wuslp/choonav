@@ -48,14 +48,21 @@
 		<selectKey keyProperty="topNum" order="BEFORE" resultType="int">
 			select "Topic_SEQ".nextVal from dual
 		</selectKey>
-		insert into topic(topNum, topTitle, topContent, topDate, userId, readcount, recnt , code) 
-		values(#{topNum}, #{topTitle}, #{topContent}, sysdate, #{userId}, 0, 0, #{code})
+		insert into topic(topNum, topTitle, topContent, topDate, userId, readcount, recnt , code, name) 
+		values(#{topNum}, #{topTitle}, #{topContent}, sysdate, #{userId}, 0, 0, #{code}, #{name})
 	</insert>
+	
 	
 	<!-- 글 한개 가져오기 -->
 	<select id="getOneArticle" parameterType="int" resultType="topicDTO">
 		select * from topic where topNum = #{value}
 	</select>
+	
+	<!-- userId에 맞게 name 뽑기 -->
+	<select id="getName" parameterType="String" resultType="String">
+		select name from users where userId = #{value}
+	</select>
+	
 	
 	<!-- 조회수 +1 -->
 	<update id="readcountUp" parameterType="int">
