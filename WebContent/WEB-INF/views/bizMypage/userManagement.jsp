@@ -9,6 +9,8 @@
 	<title>사원 관리</title>
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
+	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
+	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript"></script>
@@ -35,10 +37,10 @@
 	<jsp:include page="/include/top_nav_bar.jsp" />
 	<div id="layoutSidenav">
 
-		<jsp:include page="/include/left_nav_bar.jsp" />
+		<jsp:include page="/include/left_nav_bar_mypage.jsp" />
 
 		<div id="layoutSidenav_content">
-	<br />
+		<div id="wrapAll">
 	<div id=""> 
 		<c:if test="${sessionScope.sid == null}">
 		<script>
@@ -48,8 +50,6 @@
 	   		</script>
 		</c:if>
 	</div>
-	
-	<br />
 	
 	<h3 align="left"> 사원 정보 수정</h3>
 	
@@ -62,35 +62,31 @@
 	</c:if>
 	
 	<c:if test="${count != 0}">
-	<div align="center">
-		<table>
-			<div>
-				<tr>
-					<td>No.</td>
-					<td>이름</td>
-					<td>부서명</td>
-					<td>직위</td>
-				</tr>
-			</div>
-			<div>
-				<c:forEach var="userList" items="${userList}">
-				<tr>
-					<td>
-						${number}
-						<c:set var="number" value="${number-1}"/>
-					</td>
-					<td>
-						${userList.name}
-					</td>
-					<td id = "dept" onclick = "deptClick('${userList.userId}')">
-						${userList.dept}
-					</td>
-					<td id = "position" onclick = "posiClick('${userList.userId}')">
-						${userList.position}
-					</td>
-				</c:forEach>
-				</tr>
-			</div>
+	<div class="sendList">
+		<table class="cnavTable">
+			<tr class="cnavList-top">
+				<td>No.</td>
+				<td>이름</td>
+				<td>부서명</td>
+				<td>직위</td>
+			</tr>
+			<c:forEach var="userList" items="${userList}">
+			<tr>
+				<td>
+					${number}
+					<c:set var="number" value="${number-1}"/>
+				</td>
+				<td>
+					${userList.name}
+				</td>
+				<td id = "dept" onclick = "deptClick('${userList.userId}')">
+					${userList.dept}
+				</td>
+				<td id = "position" onclick = "posiClick('${userList.userId}')">
+					${userList.position}
+				</td>
+			</tr>
+			</c:forEach>
 		</table>
 	</div>
 	</c:if>
@@ -151,7 +147,7 @@
 		<button onclick="window.location='/cnav/my/userManagement.cnav'"> 목록 </button> <br />
 	</c:if>
 	</div>
-
+	</div>
 	<jsp:include page="/include/footer.jsp" />
 </body>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

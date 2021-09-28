@@ -1,0 +1,62 @@
+
+/* 보낸 결재함 sendAppList */
+.stateReject {
+    background-color: #ff000070;
+    border-radius:20px;
+}
+.stateOK {
+    background-color: #1987544d;
+    border-radius:20px;
+}
+.roading {
+    background-color: #fff6004d;;
+    border-radius: 20px;
+}
+
+.sendAppList-btn button {
+    border: solid 1px #767676;
+    background-color: #efefef;
+    color: #000000;
+    border-radius: 3px;
+    float: right;
+}
+
+
+/* 결재 상세 (sendAppContent) */
+
+.appContentTitle{text-align: center; 
+	font-size: xx-large; 
+	font-weight: bold;
+}
+.appContentLeft {
+	float: left;
+}
+.appContentRight {
+	float: right;
+}
+.appConBtn {
+	text-align-last: center;
+}
+table.appContentRight td {
+	border: solid thin;
+	width: 50px;
+	height:25px;
+    text-align: center;	
+}
+.approvalWrap {
+    border: solid thin;
+}
+
+table.appCont1{
+	width:100%;
+}
+table.appCont1 td{
+	border: solid thin;
+}
+table.appCont2{
+	width:100%;
+	margin: 30px 0 30px 0;
+}
+table.appCont2 td{
+	border: solid thin;
+}
