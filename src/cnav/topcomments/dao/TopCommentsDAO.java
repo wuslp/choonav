@@ -12,6 +12,8 @@ public interface TopCommentsDAO {
 	
 	// 댓글입력
 	public void insert(TopCommentsDTO dto) throws SQLException;
+	// 댓글입력전 이름 가져오기
+	public String getName(String userId) throws SQLException;
 
 	// 댓글입력시 게시글댓글수 +1
 	public void upRecnt(int topNum) throws SQLException;

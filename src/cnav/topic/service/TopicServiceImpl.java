@@ -123,6 +123,8 @@ public class TopicServiceImpl implements TopicService {
 	public TopicDTO getArticle(int topNum) throws SQLException {
 		topicDAO.readcountUp(topNum);
 		TopicDTO article = topicDAO.getArticle(topNum);
+		String name = topicDAO.getName(article.getUserId());
+		article.setName(name);
 		
 		return article;
 	}
