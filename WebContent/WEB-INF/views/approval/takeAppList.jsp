@@ -1,9 +1,9 @@
 <%@page import="java.util.List"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +12,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<meta name="description" content="" />
 	<meta name="author" content="" />
-<title>받은결재함</title>
+	<title>받은결재함</title>
 	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
 	<link href="/cnav/resources/css/approval.css" rel="stylesheet" type="text/css">
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
@@ -45,12 +45,14 @@
 		<input type="submit" value="검색" />
 	</form><br/>  <%-- 이렇게 ! /spring/board/list.do?sel=writer&search=aaa --%>
 	
+	<div class="cnavNone">
 	 <c:if test="${count==0}" >
 		<h4 align="center">받은 결재가 없습니다.</h4>
 	</c:if>
+	</div>
 	
-	 <c:if test="${count != 0}" >
 	  <div class="sendList">
+	 <c:if test="${count != 0}" >
 		<table class="cnavTable">
 			<tr class="cnavList-top">
 				<td>No.</td>
@@ -86,13 +88,13 @@
 					<td>${approval.name1}</td>
 					<td>
 						<c:if test="${approval.state1 == 1}">
-								반려
+								<div class="stateReject">반려</div>
 						</c:if>
 						<c:if test="${approval.state1 == 2}">
-								승인
+								<div class="stateOK">승인</div>
 						</c:if>
 						<c:if test="${approval.state1 == 0}">
-								진행중
+								<div class="roading">진행중</div>
 						</c:if>
 					</td>
 					
@@ -100,13 +102,13 @@
 						<c:if test='${approval.id2 != null}'> 
 					<td>
 						<c:if test="${approval.state2 == 1}">
-								반려
+								<div class="stateReject">반려</div>
 						</c:if>
 						<c:if test="${approval.state2 == 2}">
-								승인
+								<div class="stateOK">승인</div>
 						</c:if>
 						<c:if test="${approval.state2 == 0}">
-								진행중
+								<div class="roading">진행중</div>
 						</c:if>
 					</td>
 					</c:if>
@@ -119,13 +121,13 @@
 					<c:if test='${approval.id3 != null}'>
 					<td>
 						<c:if test="${approval.state3 == 1}">
-								반려
+								<div class="stateReject">반려</div>
 						</c:if>
 						<c:if test="${approval.state3 == 2}">
-								승인
+								<div class="stateOK">승인</div>
 						</c:if>
 						<c:if test="${approval.state3 == 0}">
-								진행중
+								<div class="roading">진행중</div>
 						</c:if>
 					</td>
 					</c:if>
@@ -134,7 +136,16 @@
 						</td>
 					</c:if>
 					<td><fmt:formatDate value="${approval.appDate}" pattern="yyyy.MM.dd"/></td>
-					<td>${approval.reject}</td>
+					<td>
+						<c:choose>
+					 	<c:when test="${fn:length(approval.reject) gt 7}">
+					    	<c:out value="${fn:substring(approval.reject, 0, 6)}"></c:out>....</a>
+					    </c:when>
+					    <c:otherwise>
+					    	<c:out value="${approval.reject}"></c:out></a>
+					    </c:otherwise>
+						</c:choose>
+					</td>
 				</tr>
 			</c:forEach>	
 			
@@ -148,7 +159,8 @@
 	</div>
 </div>	
 	<%-- 페이지 번호 --%>
-	<div>
+	<div class="pageNums-all">
+
 	<c:if test="${count > 0}">
 		<c:set var="pageBlock" value="3" />
 		<fmt:parseNumber var="res" value="${count / pageSize}" integerOnly="true" />
