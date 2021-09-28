@@ -11,6 +11,7 @@
 	<meta name="author" content="" />
 	<title>결재 문서 작성</title>
 	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
+	<link href="/cnav/resources/css/approval.css" rel="stylesheet" type="text/css">
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -58,8 +59,8 @@
 	<div id="layoutSidenav">
 		<jsp:include page="/include/left_nav_bar.jsp" />
 		<div id="layoutSidenav_content">
-			
-	<h2> 결재 문서 작성 </h2>
+		<div id="wrapAll">	
+	<h3> 결재 문서 작성 </h3>
 	<form action="/cnav/approval/appPro.cnav" method="post"  name="inputForm"  onsubmit="return check()">
 		<input type="hidden" name="appNum" value="${appNum}"/>
 		문서형식 
@@ -105,13 +106,18 @@
 				<td><input type="text" name="appRequest"></td>
 			</tr>
 		</table>
-	
-		<input type="submit" value="등록"/>
-		<input type="button" value="취소" onclick="window.location='/cnav/approval/sendAppList.cnav'"/>
+		
+			<div class="appConBtn">
+				<input type="submit" value="등록"/>
+				<input type="button" value="취소" onclick="window.location='/cnav/approval/sendAppList.cnav'"/>
+			</div>
 	</form>	
-<jsp:include page="/include/footer.jsp" />
-			
-		</div><!-- layoutSidenav_content" -->
+	
+	
+			</div> <!-- wrapAll -->	
+	<jsp:include page="/include/footer.jsp" />
+		</div> <!-- layoutSidenav_content" -->
+		</div><!-- id="layoutSidenav" -->	
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 		<script src="<%=request.getContextPath()%>/resources/startbootstrap/js/scripts.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
@@ -119,6 +125,5 @@
 		<script src="<%=request.getContextPath()%>/resources/startbootstrap/assets/demo/chart-bar-demo.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
 		<script src="<%=request.getContextPath()%>/resource/startbootstrap/js/datatables-simple-demo.js"></script>
-	</div><!-- id="layoutSidenav" -->
 </body>
 </html>
