@@ -1,3 +1,4 @@
+
 /* 보낸 결재함 sendAppList */
 .stateReject {
     background-color: #ff000070;
@@ -8,9 +9,9 @@
     border-radius:20px;
 }
 
-#wrapAll h3{
-	font-size : x-large;
-}
+
+
+
 
 
 /* 결재 상세 (sendAppContent) */

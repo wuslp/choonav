@@ -37,9 +37,8 @@
 			<div id="layoutSidenav_content">
 			
 				<div id="wrapAll">	
-					<div class="sendAppList">
-				
 					<h3> 보낸결재함 </h3>
+					<div class="sendAppList">
 						<%-- 작성자/내용 검색 --%>
 						<form action="/cnav/approval/sendAppList.cnav" name="search">
 							<select name="sel">
@@ -55,7 +54,7 @@
 						</c:if>
 						
 						 <c:if test="${count != 0}" >
-							<table>
+							<table class="sendTable">
 								<tr>
 									<td>No.</td>
 									<td>기안제목</td>
