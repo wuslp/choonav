@@ -4,9 +4,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>에러</title>
+<script>
+	function error(){
+		history.go(-1);
+	}
+</script>
 </head>
 <body>
-	error입니다..나가주세요..
+	<div align="center">
+	<br/><br/><br/>
+	<input type="button" onclick="error()" value="뒤로 가기" /><br/>
+	<img src="../resources/imgs/error.jpg"/>
+	</div>
+
 </body>
+
 </html>
