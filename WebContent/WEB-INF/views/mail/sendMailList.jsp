@@ -12,6 +12,7 @@
 	<meta name="description" content="" />
 	<meta name="author" content="" />
 <title>보낸 메일함</title>
+	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -81,7 +82,8 @@
 		<jsp:include page="/include/left_nav_bar.jsp" />
 
 		<div id="layoutSidenav_content">
-	<br />
+		<div id="wrapAll">
+	
 	<div id=""> 
 		<c:if test="${sessionScope.sid == null}">
 		<script>
@@ -92,14 +94,10 @@
 		</c:if>
 	</div>
 	
-	<h1 align="center"> 보낸 메일함 </h1>
+	<h3> 보낸 메일함 </h3>
 	
 	<c:if test="${count == 0}">
-	<table style="margin-left: auto; margin-right: auto;">
-		<tr>
-			<td><button onclick="window.location='/cnav/mail/writeMailForm.cnav'"> 메일 보내기 </button></td>
-			<td><button onclick="window.location='/cnav/mail/recMailList.cnav'"> 보낸 메일함 </button></td>
-		</tr>
+	<table>
 		<tr>
 			<td align="center"> 보낸 메일이 없습니다. </td>
 		</tr>
@@ -107,12 +105,8 @@
 	</c:if>
 	
 	<c:if test="${count != 0}">
-	<div align="center">
+	<div>
 		<table>
-			<div>
-				<td><button onclick="window.location='/cnav/mail/writeMailForm.cnav'"> 메일 보내기 </button></td>
-				<td><button onclick="window.location='/cnav/mail/recMailList.cnav'"> 받은 메일함 </button></td>
-			</div>
 			<div>
 				<tr>
 					<td>
@@ -157,7 +151,7 @@
 	
 		<br /> <br /> 
 	<%-- 페이지 번호 --%>
-	<div align="center">
+	<div>
 	<c:if test="${count > 0}">
 		<c:set var="pageBlock" value="3" />
 		<fmt:parseNumber var="res" value="${count / pageSize}" integerOnly="true" />
@@ -213,8 +207,10 @@
 	</div>
 	
 	
-<jsp:include page="/include/footer.jsp" />
-		</div>
+</div> <!-- wrapAll -->
+			<jsp:include page="/include/footer.jsp" />
+		</div><!-- layoutSidenav_content" -->
+	</div><!-- id="layoutSidenav" -->
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 		<script src="<%=request.getContextPath()%>/resources/startbootstrap/js/scripts.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
