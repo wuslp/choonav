@@ -9,9 +9,13 @@
 		<selectKey keyProperty="proNum" order="BEFORE" resultType="int">
 		 select project_seq.nextVal from dual
 		</selectKey>
-		insert into project values(#{proNum} ,#{proName},#{proContent},#{userId},#{proStart},#{proEnd},#{dept},#{proState},#{code})	
+		insert into project values(#{proNum} ,#{proName},#{proContent},#{userId},#{proStart},#{proEnd},#{dept},#{proState},#{code},#{name})	
 	</insert>
 	
+	<!-- 유저아이디=이름 -->
+	<select id="getName" parameterType="string" resultType="string">
+		select name from Users where userId=#{value}
+	</select>
 	
 	<!-- 전체 프로젝트 수 불러오기 -->
 	<select id="countAll" resultType="int" parameterType="string">
