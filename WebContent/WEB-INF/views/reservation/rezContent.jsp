@@ -25,7 +25,7 @@
 		<div>예약자 ${dto.userId}</div>
 		<div>목적 ${dto.content}</div>
 		<div>등록일 ${dto.reg}</div>
-		<input type="button" onclick="window.location='/cnav/rez/allRez.cnav'" value="목록으로"/>
+		<input type="button" onclick="a()" value="목록으로"/>
 		<c:if test="${dto.userId == sid}">
 			<input type="button" onclick="deleteConfirm(${dto.rezNum})" value="삭제"/>
 			<input type="button" onclick="rez/allRez3.cnav" value="수정"/>
@@ -41,8 +41,12 @@
 			}else{
 				return;
 			}
-			
 		}
+		
+		function a(){
+			history.go(-1);
+		}
+		
 	</script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 	<script src="<%=request.getContextPath()%>/resources/startbootstrap/js/scripts.js"></script>
