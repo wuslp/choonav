@@ -41,9 +41,16 @@ public class TopCommentsDAOImpl implements TopCommentsDAO{
 		sqlSession.delete("topComments.delete", topComNum);		
 	}
 
+	// 댓글 삭제시 게시글 댓글수 -1
 	@Override
 	public void downRecnt(int topNum) throws SQLException {
 		sqlSession.update("topComments.downRecnt", topNum);
+	}
+
+	// 댓글 입력전 이름 가져오기
+	@Override
+	public String getName(String userId) throws SQLException {
+		return sqlSession.selectOne("topComments.getName", userId);
 	}
 
 

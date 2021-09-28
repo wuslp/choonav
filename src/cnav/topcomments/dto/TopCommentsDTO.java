@@ -4,12 +4,21 @@ import java.sql.Timestamp;
 
 public class TopCommentsDTO {
 	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	private Integer topComNum; // 댓글번호 re_no
 	private Integer topNum;// 글번호 num
 	private String userId;// 작성자 id
 	private Timestamp topReg;// 작성일 reg
 	private String topComment;// 내용 recontent
 	private String code;// 회사 코드
+	
+	private String name; // users테이블의 이름
 	
 	public String getCode() {
 		return code;
