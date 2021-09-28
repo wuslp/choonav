@@ -33,10 +33,13 @@
 		<div id="layoutSidenav_content">
 			<div id="wrapAll">
 			<h3> 보낸결재함 </h3>
-				<div class="approvalWrap">
 			
+			<div id="printA">
+			<div class="appAllWrap" >
+				<div class="approvalWrap">
+				<div class="approvalWrap-in">
 				<div class="appContentTitle">
-				<h3>${approval.appType}</h3>
+					<h4>${approval.appType}</h4>
 				</div>
 				
 				<div class="appContentLeft">
@@ -100,37 +103,41 @@
 				<br/><br/><br/><br/><br/><br/>
 				<table class="appCont1">
 					<tr>
-						<td>요청부서</td>
+						<td width="70px" class="dd">요청부서</td>
 						<td>${approval.dept}</td>
 					</tr>
 					<tr>
-						<td>일시</td>
+						<td width="70px" class="dd">일시</td>
 						<td>${approval.appStart} ~ ${approval.appFinish}</td>
 					</tr>
 				</table>
 				
 				<table class="appCont2">
 					<tr>
-						<td>제목</td>
+						<td width="70px" class="dd">제목</td>
 						<td>${approval.appTitle}</td>
 					</tr>
 					<tr>
-						<td>내용</td>
-						<td>${approval.appContent}</td>
+						<td align="center" colspan="2" class="dd">내용</td>
 					</tr>
 					<tr>
-						<td>요청사항</td>
+						<td colspan="2" class="ff">${approval.appContent}</td>
+					</tr>
+					<tr>
+						<td class="dd">요청사항</td>
 						<td>${approval.appRequest}</td>
 					</tr>
 				</table>
-				
+				</div>
 			</div><!-- approvalWrap -->
-			
+			</div>
+			</div> <!-- 프린트 -->
 				<div class="appConBtn">
 					<c:if test='${!(approval.state1 == "1" || approval.state1 == "2")}'>
 						<button onclick="window.location='/cnav/approval/modifyApp.cnav?appNum=${approval.appNum}&pageNum=${pageNum}'">수정</button> 
 						<button onclick="window.location='/cnav/approval/deleteApp.cnav?appNum=${approval.appNum}&pageNum=${pageNum}'">삭제</button>
 					</c:if>	
+						<button onclick="window.print()">인쇄</button>
 						<button onclick="window.location='/cnav/approval/sendAppList.cnav'">목록</button> 
 				</div>
 			

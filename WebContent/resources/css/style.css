@@ -165,6 +165,15 @@ body {
 .cnavTable td a:focus {
     color: #21252933;
 }   
-.cnavAllList form{
+.cnavAllList{
 	text-align-last : center;
+}
+
+/* 페이징 */
+.pageNums-all {
+    text-align: -webkit-center;
+}
+.pageNums{
+	text-decoration: none;
+    color: #000;
 }

@@ -1,9 +1,9 @@
 <%@page import="java.util.List"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,26 +35,27 @@
 		<div id="layoutSidenav">
 			<jsp:include page="/include/left_nav_bar.jsp" />
 			<div id="layoutSidenav_content">
-			
 				<div id="wrapAll">	
 					<h3> 보낸결재함 </h3>
-					<div class="cnavAllList">
+						<div class="cnavAllList">
 						<%-- 작성자/내용 검색 --%>
-						<form action="/cnav/approval/sendAppList.cnav" name="search">
-							<select name="sel">
-								<option value="appType">문서형식</option>
-								<option value="appTitle">기안제목</option>
-							</select>
-							<input type="text" name="search" />
-							<input type="submit" value="검색" class="sendAppSerch" />
-						</form><br/>  <%-- 이렇게 ! /spring/board/list.do?sel=writer&search=aaa --%>
+							<form action="/cnav/approval/sendAppList.cnav" name="search">
+								<select name="sel">
+									<option value="appType">문서형식</option>
+									<option value="appTitle">기안제목</option>
+								</select>
+								<input type="text" name="search" />
+								<input type="submit" value="검색" class="sendAppSerch" />
+							</form><br/>  <%-- 이렇게 ! /spring/board/list.do?sel=writer&search=aaa --%>
 					
 						 <c:if test="${count==0}" >
+						 	<div class="cnavNone">
 							<h4 align="center">보낸 결재가 없습니다.</h4>
+							</div>
 						</c:if>
 						
-						 <c:if test="${count != 0}" >
 						 <div class="sendList">
+						 <c:if test="${count != 0}" >
 							<table class="cnavTable">
 								<tr class="cnavList-top">
 									<td>No.</td>
@@ -86,7 +87,16 @@
 									      </c:choose>
 										</td>
 										<td><fmt:formatDate value="${approval.appDate}" pattern="yyyy.MM.dd"/></td>
-										<td>${approval.reject}</td>
+										<td>
+											<c:choose>
+										 	<c:when test="${fn:length(approval.reject) gt 7}">
+										    	<c:out value="${fn:substring(approval.reject, 0, 6)}"></c:out>....</a>
+										    </c:when>
+										    <c:otherwise>
+										    	<c:out value="${approval.reject}"></c:out></a>
+										    </c:otherwise>
+											</c:choose>
+										</td>
 									</tr>
 								</c:forEach>	
 							</table><br/>
@@ -99,9 +109,9 @@
 							<button onclick="window.location='/cnav/approval/appForm.cnav'">문서작성</button><br/><br/>
 						</div>
 						
-				</div>
+				
 						<%-- 페이지 번호 --%>
-						<div>
+						<div class="pageNums-all">
 						<c:if test="${count > 0}">
 							<c:set var="pageBlock" value="3" />
 							<fmt:parseNumber var="res" value="${count / pageSize}" integerOnly="true" />
@@ -138,11 +148,12 @@
 									&nbsp; <a href="/cnav/approval/sendAppList.cnav?pageNum=${startPage+pageBlock}" class="pageNums"> &gt; </a>
 								</c:if>
 							</c:if>	
-						
 						</c:if> <%-- end:count > 0 --%>
+						</div>
+						
+						
 					</div>	
 				</div>	<!-- cnavAllList -->
-				
 			</div> <!-- wrapAll -->	
 	<jsp:include page="/include/footer.jsp" />
 		</div> <!-- layoutSidenav_content" -->
