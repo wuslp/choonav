@@ -8,33 +8,9 @@
     background-color: #1987544d;
     border-radius:20px;
 }
-.sendTable{
-  width: 100%;
-  background-color: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  border-radius: 0.25rem;
-  text-align-last: center;
-}
-.sendTable td{
-	height:33px;
-	border-bottom: solid thin lightgrey;
-}
-.sendList-top {
-    background-color: rgba(0, 0, 0, 0.125)
-} 
-.sendTable td a {
-    text-decoration: none;
-    color: #212529;
-}
-
-.sendTable td a:hover {
-    color: #741c7d;
-}   
-.sendTable td a:focus {
-    color: #21252933;
-}   
-.sendAppList form{
-	text-align-last : center;
+.roading {
+    background-color: #fff6004d;;
+    border-radius: 20px;
 }
 
 .sendAppList-btn button {
