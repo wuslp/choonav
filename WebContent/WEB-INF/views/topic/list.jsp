@@ -77,8 +77,8 @@
 							 ${article.recnt}
 							 </c:if>
 						</td>
-						<td> ${article.userId} </td>
-						<td> ${article.topDate} </td>
+						<td> ${article.name} </td>
+						<td> <fmt:formatDate value="${article.topDate}" pattern="yyyy-MM-dd" /> </td>
 						<td> ${article.readcount} </td>
 					</tr>
 				</c:forEach>
@@ -132,7 +132,7 @@
 	<%-- 작성자/내용 검색 --%>
 	<form action="/cnav/topic/list.cnav">
 		<select name="sel">
-			<option value="userId">작성자</option>
+			<option value="name">작성자</option>
 			<option value="topTitle">제목</option>
 			<option value="topContent">내용</option>
 		</select>
