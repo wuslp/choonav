@@ -45,7 +45,7 @@
 			<td colspan="2" height="100"> ${article.notiContent} </td>
 		</tr>
 		<tr>
-			<td>posted by <b>${article.userId}</b>
+			<td>posted by 관리자
 				at ${article.notiDate}
 			</td>
 			<td> ${article.readcount} viewed </td>
