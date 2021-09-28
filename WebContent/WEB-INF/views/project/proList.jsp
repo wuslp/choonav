@@ -12,6 +12,7 @@
 	<meta name="author" content="" />
 	<title>프로젝트 목록</title>
 	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
+	<link href="/cnav/resources/css/project.css" rel="stylesheet" type="text/css">
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -30,19 +31,18 @@
 			<jsp:include page="/include/left_nav_bar.jsp" />
 			<div id="layoutSidenav_content">
 	
-		<h3>프로젝트 목록</h3>   
-		
+		<div id="wrapAll">
+		<h3>프로젝트</h3>   
+		<div class="cnavAllList">
 		<%--프로젝트제목/부서 검색 --%>
-		<div>
 			<form action="/cnav/project/proList.cnav">
 				<a href="/cnav/project/proList.cnav?sort=진행중">진행중</a>
 				<a href="/cnav/project/proList.cnav?sort=완료">완료</a> &nbsp;
 				<select id="" name="sel">
 					<option value="dept">부서</option>	
 					<option value="name">담당자</option>			
-					<option value="proName">프로젝트</option>
-				</select>
-						
+					<option value="proName">제목</option>
+				</select>					
 				<input type="text" id="" name="search"/>
 				<input type="submit" value="검색">
 				<input type="button" value="만들기" onclick="window.location='/cnav/project/proWriteForm.cnav'">
@@ -51,19 +51,15 @@
 		<br/>
 	
 	<!-- 리스트 보여주기 -->	
-	<div>
 	<c:if test="${count==0}">
-		<table>
-			<tr>
-				<td>프로젝트가 존재하지 않습니다.</td>
-			</tr>
-		</table>		
+		<h4 align="center">프로젝트가 없습니다.</h4>		
 	</c:if>	
 	<c:if test="${count !=0}">
-		<table border="1">
-			<tr>
+	<div class="proList">
+		<table class="cnavTable">
+			<tr class="cnavList-top">
 				<td>No.</td>
-				<td>프로젝트</td>
+				<td>제목</td>
 				<td>부서</td>
 				<td>기간</td>			
 				<td>진행상태</td>
@@ -77,11 +73,24 @@
 				<td align="left"><a href="/cnav/project/proContent.cnav?proNum=${project.proNum}&pageNum=${pageNum}">${project.proName}</a></td>
 				<td>${project.dept}</td>
 				<td>${project.proStart}~${project.proEnd}</td>
-				<td>${project.proState}</td>
+				
+				<td>
+					<c:if test="${project.proState=='진행전'}">
+					<div class="stateReject">진행전</div>
+					</c:if>
+					<c:if test="${project.proState=='진행중'}">
+					<div class="roading">진행중</div>
+					</c:if>
+					<c:if test="${project.proState=='완료'}">
+					<div class="stateOK">완료</div>
+					</c:if>
+				</td>
+				
 				<td>${project.name}</td>		
 			</tr>
 		</c:forEach>	
 	</table>
+		
 	</c:if>
 	<c:if test="${sel !=null && search !=null}">
 		<button onclick="window.location='/cnav/project/proList.cnav'">전체 목록</button> <br/>		
@@ -143,7 +152,8 @@
 				&nbsp; <a href="/cnav/project/proList.cnav?pageNum=${startPage+pageBlock}&sort=${sort}" class="pageNums"> &gt; </a>
 			</c:if>
 		</c:if>		
-	</div>	
+	</div>
+</div>	
 	<jsp:include page="/include/footer.jsp" />
 		</div> <!-- layoutSidenav_content" -->
 		</div><!-- id="layoutSidenav" -->	

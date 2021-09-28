@@ -1,0 +1,21 @@
+/*진행상태*/
+.stateReject {
+    background-color: #ff000070;
+    border-radius:20px;
+}
+.stateOK {
+    background-color: #1987544d;
+    border-radius:20px;
+}
+.roading {
+    background-color: #fff6004d;;
+    border-radius: 20px;
+}
+
+.sendAppList-btn button {
+    border: solid 1px #767676;
+    background-color: #efefef;
+    color: #000000;
+    border-radius: 3px;
+    float: right;
+}
