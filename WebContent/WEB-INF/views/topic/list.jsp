@@ -19,24 +19,24 @@
 </head>
 
 <body class="sb-nav-fixed">
+	<!--로그인된 세션이 없을경우 startPage 로 이동시켜주기  -->
+	<c:if test="${sessionScope.sid == null}">
+		<script>
+			alert("로그인후 이용할 수 있습니다");
+			var link = "http://localhost:8080/cnav/main/startPage.cnav";
+	    	window.location.href = link;
+	    </script>
+	</c:if>
+	
+	<!-- 본문시작 -->
 	<jsp:include page="/include/top_nav_bar.jsp" />
 	<div id="layoutSidenav">
 		<jsp:include page="/include/left_nav_bar.jsp" />
 		<div id="layoutSidenav_content">
 			<div id="wrapAll">
-	<!--로그인된 세션이 없을경우 startPage 로 이동시켜주기  -->
-	<%-- <div id=""> 
-		<c:if test="${sessionScope.sid == null}">
-		<script>
-			alert("로그인후 이용할 수 있습니다");
-			var link = "http://localhost:8080/cnav/main/startPage.cnav";
-	    	window.location.href = link;
-	    	</script>
-		</c:if>
-	</div> --%>
-	<br />
+			
 	<h3> 자유게시판 </h3>
-	<br />
+	
 	<%-- 작성자/내용 검색 --%>
 	<form action="/cnav/topic/list.cnav">
 		<select name="sel">
@@ -48,6 +48,7 @@
 		<input type="submit" value="검색" />
 	</form>  <%-- /spring/board/list.do?sel=writer&search=aaa --%>
 	<br />
+	
 	<!-- 게시판에 글이 없을 경우 -->
 	<div>
 		<c:if test="${count == 0}">
@@ -63,10 +64,10 @@
 	</div>
 	
 	<!-- 게시판에 글 있는 경우 -->
-	<div>
+	<div class="sendList">
 		<c:if test="${count != 0}">
-			<table>
-				<tr>
+			<table class="cnavTable">
+				<tr class="cnavList-top">
 					<td>No.</td>
 					<td>제  목</td>
 					<td>작성자</td>
@@ -78,8 +79,7 @@
 						<td>${number}
 							<c:set var="number" value="${number - 1}" /> 
 						</td>
-						<td align="left">
-							<c:set var="wid" value="0" />
+						<td>
 							<a href="/cnav/topic/content.cnav?topNum=${article.topNum}&pageNum=${pageNum}"> ${article.topTitle} </a>
 							<c:if test="${article.recnt != 0}">
 							 ${article.recnt}
@@ -90,12 +90,14 @@
 						<td> ${article.readcount} </td>
 					</tr>
 				</c:forEach>
-				<tr>
-					<td colspan="5"><button onclick="window.location='/cnav/topic/writeForm.cnav'"> 글쓰기 </button></td>
-				</tr>
-			</table>
+			</table><br/>
 		</c:if>
 	</div>
+	
+	<div class="sendAppList-btn">
+		<button onclick="window.location='/cnav/topic/writeForm.cnav'"> 글쓰기 </button><br/><br/>
+	</div>
+	
 	<br /> <br /> 
 	<%-- 페이지 번호 --%>
 	<div align="center">
