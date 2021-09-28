@@ -16,6 +16,6 @@ public interface TopCommentsService {
 	
 	// 댓글 삭제
 	// rno -> topComNum
-	public void delete(int topComNum) throws SQLException;
+	public void delete(int topComNum, int topNum) throws SQLException;
 
 }

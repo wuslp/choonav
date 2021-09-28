@@ -36,6 +36,12 @@
 		update poll set pollStatus='완료' where (code=#{code}) and (to_char(endDate, 'yyyymmdd') < to_char(sysdate, 'yyyymmdd')) and (to_char(stDate, 'yyyymmdd') <= to_char(sysdate, 'yyyymmdd'))
 		]]>
 	</update>
+	<!-- 진행전 -->
+	<update id="updatest3">
+		<![CDATA[
+		update poll set pollStatus='진행전' where (code=#{code}) and (to_char(stDate, 'yyyymmdd') > to_char(sysdate, 'yyyymmdd'))
+		]]>
+	</update>
 	
 	<!-- 검색 리스트 가져오기 -->
 	<select id="getArticleCount2" parameterType="hashmap" resultType="int">

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import cnav.approval.dao.ApprovalDAOImpl;
 import cnav.approval.dto.ApprovalDTO;
+import cnav.attend.dto.AttendDTO;
 import cnav.main.dto.UserDTO;
 
 // 비즈니스 로직 처리 
@@ -270,6 +271,7 @@ public class ApprovalServiceImpl implements ApprovalService{
 	public void takeOk3(Integer appNum, int sign, int newState) throws SQLException{
 		//	품의서번호, 사인자번호, 승인상태값 
 		approvalDAO.updateAppState3(appNum,sign,newState);
+		
 	}
 
 	// 결재자에 넣을 같은회사 유저아이디들 가져오기
@@ -279,5 +281,8 @@ public class ApprovalServiceImpl implements ApprovalService{
 		return list;
 	}
 	
-
+//	public void insertAttend(AttendDTO adto) throws SQLException{
+//		ApprovalDAO.insertAttend(adto);
+//	}
+	
 }

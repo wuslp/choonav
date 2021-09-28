@@ -141,8 +141,22 @@ public class MailDAOImpl implements MailDAO {
 
 	// 편지함 삭제
 	@Override
-	public int delete(String no) throws SQLException {
-		int result = sqlSession.delete("mail.deleteMail", no);
+	public int delete(String no, String id) throws SQLException {
+		HashMap map = new HashMap();
+		map.put("no", no);
+		map.put("id", id);
+		
+		int result = 0;
+		
+		if(result == 0) {
+			result = sqlSession.update("mail.delRecMail", map);			
+			System.out.println("========아아악!!!! REC 1번 =======");			
+		}
+		if(result == 0) {
+			result = sqlSession.update("mail.delSendMail", map);
+			System.out.println("========아아악!!!! Send 2번 =======");
+		}
+		
 		return result;
 		
 	}
@@ -164,17 +178,34 @@ public class MailDAOImpl implements MailDAO {
 		return mail;
 	}
 	
-	// 본문에서 삭제
-	@Override
-	public int deleteMail(int num) throws SQLException {
-		int result = sqlSession.delete("mail.delete", num);
-		return result;
-	}
 	// 보내기, 편지함용 유저 리스트
 	@Override
-	public List<UserDTO> userList(String code) throws SQLException {
-		List<UserDTO> userList = sqlSession.selectList("mail.userList", code);
+	public List<UserDTO> userList(String code, String id) throws SQLException {
+		HashMap map = new HashMap();
+		map.put("code", code);
+		map.put("id", id);
+		List<UserDTO> userList = sqlSession.selectList("mail.userList", map);
 		return userList;
+	}
+	// 메일 본문에서 삭제 (받은 메일함)
+	@Override
+	public int deleteRecMail(int num, String id) throws SQLException {
+		HashMap map = new HashMap();
+		map.put("num", num);
+		map.put("id", id);
+		
+		int result = sqlSession.update("mail.deleteRec", map);
+		return result;
+	}
+	// 메일 본문에서 삭제 (보낸 메일함)
+	@Override
+	public int deleteSendMail(int num, String id) throws SQLException {
+		HashMap map = new HashMap();
+		map.put("num", num);
+		map.put("id", id);
+		
+		int result = sqlSession.update("mail.deleteSend", map);
+		return result;
 	}
 
 }

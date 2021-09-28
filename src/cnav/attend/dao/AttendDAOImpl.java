@@ -38,8 +38,10 @@ public class AttendDAOImpl implements AttendDAO{
 		map.put("code", code);
 				
 		List<AttendDTO> attList= sqlSession.selectList("attend.getList",map);
-		int result =sqlSession.update("attend.setLeaveNull",map);
-		System.out.println("90번 퇴근체크안된기록 있는지 : "+result);
+		/*
+		 * int result =sqlSession.update("attend.setLeaveNull",map);
+		 * System.out.println("90번 퇴근체크안된기록 있는지 : "+result);
+		 */
 		return attList;
 	}
 	//category 선택 개수

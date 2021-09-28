@@ -92,6 +92,7 @@ public class ReservationController {
 			dto = rezService.getRezContent(dto);
 			dto.setsDate(dto.getsDate().split(" ")[0]+" "+dto.getsTime());
 			dto.seteDate(dto.geteDate().split(" ")[0]+" "+dto.geteTime());
+			dto.setReg(dto.getReg().substring(0, 16));
 			model.addAttribute("dto", dto);
 			model.addAttribute("sid",session.getAttribute("sid"));
 			

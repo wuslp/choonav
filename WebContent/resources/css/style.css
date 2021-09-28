@@ -119,54 +119,21 @@ body {
 	color:#000;
 }
 
-/*  */
-
-
+/* 비즈사인업폼 */
+.cate {
+    border-color: #f080dd99;
+}
 
 /* 메인페이지 */
 #wrapAll{
 	margin: 10px 30px 30px 30px;
 }
-.bizclock{
-	display: flex;
-}
-
-/* 보낸 결재함 sendAppList */
-.stateReject {
-    background-color: #ff000070;
-}
-.stateOK {
-    background-color: #1987544d;
-}
-
 #wrapAll h3{
 	font-size : x-large;
 }
 
+/* 메인페이지 */
 
-/* 결재 상세 (sendAppContent) */
-
-.approvalWrap {
-    width: 700px;
-}
-.appContentTitle{text-align: center; 
-	font-size: xx-large; 
-	font-weight: bold;
-}
-.appContentLeft {
-	float: left;
-}
-.appContentRight {
-	float: right;
-}
-.appConBtn {
-	text-align-last: center;
-}
-table.appContentRight {
-	border: solid 1px black; 
-	border-collapse: collapse; 
-	text-align: center;
-}
-table.appContentRight td {
-	border: solid thin;
+.bizclock{
+	display: flex;
 }

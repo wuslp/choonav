@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cnav.topcomments.dao.TopCommentsDAOImpl;
 import cnav.topic.dao.TopicDAO;
 import cnav.topic.dao.TopicDAOImpl;
 import cnav.topic.dto.TopicDTO;
@@ -18,6 +19,9 @@ public class TopicServiceImpl implements TopicService {
 
 	@Autowired
 	private TopicDAOImpl topicDAO = null;
+	
+	@Autowired
+	private TopCommentsDAOImpl topCommentsDAO = null;
 	
 	// 게시글 목록 가져오기 (list) 
 	@Override
@@ -49,6 +53,7 @@ public class TopicServiceImpl implements TopicService {
 		}
 		number = count - (currentPage-1) * pageSize; 	// 게시판 목록에 뿌려줄 가상의 글 번호  
 
+		
 		// Controller에게 전달해야되는 데이터가 많으니 HashMap에 넘겨줄 데이터를 저장해서 한번에 전달 
 		Map<String, Object> result = new HashMap<>(); 
 		result.put("pageSize", pageSize);
@@ -110,6 +115,8 @@ public class TopicServiceImpl implements TopicService {
 	// 글 저장
 	@Override
 	public void insertArticle(TopicDTO dto, String scode, String sid) throws SQLException {
+		String name = topicDAO.getName(sid);
+		dto.setName(name);
 		topicDAO.insertArticle(dto, scode, sid);
 	} 
 	
@@ -118,6 +125,8 @@ public class TopicServiceImpl implements TopicService {
 	public TopicDTO getArticle(int topNum) throws SQLException {
 		topicDAO.readcountUp(topNum);
 		TopicDTO article = topicDAO.getArticle(topNum);
+		String name = topicDAO.getName(article.getUserId());
+		article.setName(name);
 		
 		return article;
 	}

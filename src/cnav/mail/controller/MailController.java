@@ -98,7 +98,8 @@ public class MailController {
 	@RequestMapping("writeMailForm.cnav")
 	public String writeMailForm(HttpSession session, Model model) throws SQLException {
 		String code = (String)session.getAttribute("scode");
-		List<UserDTO> userList = MailService.userList(code);
+		String id = (String)session.getAttribute("sid");
+		List<UserDTO> userList = MailService.userList(code, id);
 		model.addAttribute("userList", userList);
 		System.out.println("userList name" + userList);
 		
@@ -121,24 +122,38 @@ public class MailController {
 	// 편지함 선택해서 게시물 삭제
 	@RequestMapping("/deleteMailForm")
 	@ResponseBody
-	public String ajaxTest(HttpServletRequest request) throws SQLException {
+	public String ajaxTest(HttpServletRequest request, HttpSession session) throws SQLException {
+		String id = (String)session.getAttribute("sid");
 		
 		String[] ajaxMsg = request.getParameterValues("valueArr");
 		int size = ajaxMsg.length;
 		String result = null;
 		System.out.println("size" + size);
 		for(int i = 0; i<size; i++) {
-			result = String.valueOf(MailService.delete(ajaxMsg[i]));
+			result = String.valueOf(MailService.delete(ajaxMsg[i], id));
 		}
 		return result;
 	}
 	
 	// 편지 내용에서 삭제
 	@RequestMapping("/deleteForm")
-	public String delete(@RequestParam("num")int num) throws SQLException {
-		MailService.deleteMail(num);
+	public String delete(@RequestParam("num")int num, HttpSession session) throws SQLException {
+		String id = (String)session.getAttribute("sid");
+		int count1 = MailService.deleteRecMail(num, id);
+		int count2 = MailService.deleteSendMail(num, id);
+		String page = "";
 		
-		return "redirect:/mail/recMailList.cnav";
+		if(count1 == 1) {
+			page = "redirect:/mail/recMailList.cnav";
+			System.out.println("count1 됨");
+		}else if(count2 == 1) {
+			page = "redirect:/mail/sendMailList.cnav";
+			System.out.println("count2 됨");
+		}else {
+			System.out.println("삭제 안됨");
+		}
+		
+		return page;
 	}
 	
 	// 받은 편지 보기

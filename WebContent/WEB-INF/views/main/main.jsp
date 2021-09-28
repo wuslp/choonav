@@ -99,9 +99,9 @@
 							</tr>
 							<c:forEach var="item" items="${articleList}">
 								<tr>
-									<td>${number}<c:set var="number" value="${number - 1}" /> </td>
-									<td>${item.notiTitle}</td>
-									<td>${item.notiDate}</td>
+									<td onclick="window.location='/cnav/notice/content.cnav?notiNum=${item.notiNum}'">${number}<c:set var="number" value="${number - 1}" /> </td>
+									<td onclick="window.location='/cnav/notice/content.cnav?notiNum=${item.notiNum}'">${item.notiTitle}</td>
+									<td onclick="window.location='/cnav/notice/content.cnav?notiNum=${item.notiNum}'">${item.notiDate}</td>
 								</tr>
 							</c:forEach>
 							</c:if>

@@ -6,10 +6,25 @@
 <html>
 <head> 
 	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	
 	<title>공지사항</title>
+	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
+	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body class="sb-nav-fixed">
+	<jsp:include page="/include/top_nav_bar.jsp" />
+	<div id="layoutSidenav">
+		<jsp:include page="/include/left_nav_bar.jsp" />
+		<div id="layoutSidenav_content">
+			<div id="wrapAll">	
 	<!--로그인된 세션이 없을경우 startPage 로 이동시켜주기  -->
 	<div id=""> 
 		<c:if test="${sessionScope.sid == null}">
@@ -22,7 +37,7 @@
 	</div>
 	<br />
 	
-	<h1 align="center"> 공지사항 </h1>
+	<h3> 공지사항 </h3>
 	
 	<!-- 공지사항에 글이 없을 경우 -->
 	<div>
@@ -68,8 +83,8 @@
 						<c:set var="wid" value="0" />
 						<a href="/cnav/notice/content.cnav?notiNum=${article.notiNum}&pageNum=${pageNum}"> ${article.notiTitle} </a>
 					</td>
-					<td> ${article.userId} </td>
-					<td> ${article.notiDate} </td>
+					<td> 관리자 </td>
+					<td><fmt:formatDate value="${article.notiDate}" pattern="yyyy-MM-dd" /> </td>
 					<td> ${article.readcount} </td>
 				</tr>
 			</c:forEach>
@@ -137,8 +152,18 @@
 	<c:if test="${sel != null && search != null}">
 		<button onclick="window.location='/cnav/notice/list.cnav'"> 전체 게시글 보기 </button> <br />
 	</c:if>
-	<button onclick="window.location='/cnav/main/main.cnav'"> 메인으로 </button>
 	</div>
 	
+	</div> <!-- wrapAll -->
+			<jsp:include page="/include/footer.jsp" />
+		</div><!-- layoutSidenav_content" -->
+	</div><!-- id="layoutSidenav" -->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+		<script src="<%=request.getContextPath()%>/resources/startbootstrap/js/scripts.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+		<script src="<%=request.getContextPath()%>/resources/startbootstrap/assets/demo/chart-area-demo.js"></script>
+		<script src="<%=request.getContextPath()%>/resources/startbootstrap/assets/demo/chart-bar-demo.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+		<script src="<%=request.getContextPath()%>/resource/startbootstrap/js/datatables-simple-demo.js"></script>
 </body>
 </html>

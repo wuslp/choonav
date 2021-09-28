@@ -22,6 +22,8 @@ public interface TopicDAO {
 	
 	// 게시글 한개 정보 가져오기
 	public TopicDTO getArticle(int topNum) throws SQLException;
+	// userId에 맞게 name가져오기
+	public String getName(String userId) throws SQLException;
 	
 	// 조회수 +1 
 	public void readcountUp(int topNum) throws SQLException;

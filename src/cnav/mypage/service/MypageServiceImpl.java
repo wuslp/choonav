@@ -54,8 +54,12 @@ public class MypageServiceImpl implements MypageService {
 		if(count > 0){
 			articleList = myDAO.getMypjList(userId, code, startRow, endRow);
 			System.out.println("articleList" +articleList);
+			for( int i = 0; i < articleList.size(); i++) {
+				articleList.get(i).setProStart(articleList.get(i).getProStart().split(" ")[0]);
+				articleList.get(i).setProEnd(articleList.get(i).getProEnd().split(" ")[0]);
+			}
 		}
-		number = count - (currentPage-1) * pageSize; 	// 게시판 목록에 뿌려줄 가상의 글 번호  
+		number = count - (currentPage-1) * pageSize; 	// 게시판 목록에 뿌려줄 가상의 글 번호
 	
 		// Controller에게 전달해야되는 데이터가 많으니 HashMap에 넘겨줄 데이터를 저장해서 한번에 전달 
 		Map<String, Object> result = new HashMap<>(); 
@@ -98,7 +102,6 @@ public class MypageServiceImpl implements MypageService {
 		// 글이 하나라도 있으면 글들을 다시 가져오기 
 		if(count > 0){
 			articleList = myDAO.getMytopicList(userId, code, startRow, endRow);
-			System.out.println("articleList" +articleList);
 		}
 		number = count - (currentPage-1) * pageSize; 	// 게시판 목록에 뿌려줄 가상의 글 번호  
 	
