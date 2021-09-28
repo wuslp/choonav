@@ -11,7 +11,7 @@ public class ProjectDTO {
 	private String dept;		// 부서
 	private String proState;	// 진행상태
 	private String code;		// 회사코드
-	private String name;
+	private String name;		// 담당자
 	
 	public Integer getProNum() {
 		return proNum;

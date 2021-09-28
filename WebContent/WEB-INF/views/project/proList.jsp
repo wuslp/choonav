@@ -39,7 +39,7 @@
 				<a href="/cnav/project/proList.cnav?sort=완료">완료</a> &nbsp;
 				<select id="" name="sel">
 					<option value="dept">부서</option>	
-					<option value="name">이름</option>			
+					<option value="name">담당자</option>			
 					<option value="proName">프로젝트</option>
 				</select>
 						
@@ -76,9 +76,6 @@
 				</td> 
 				<td align="left"><a href="/cnav/project/proContent.cnav?proNum=${project.proNum}&pageNum=${pageNum}">${project.proName}</a></td>
 				<td>${project.dept}</td>
-				<td>
-				<fmt:parseDate value="${project.proStart}" pattern="yyyy-MM-dd"/>~<fmt:parseDate value="${project.proEnd}" pattern="yyyy-MM-dd"/>
-				</td>
 				<td>${project.proStart}~${project.proEnd}</td>
 				<td>${project.proState}</td>
 				<td>${project.name}</td>		
