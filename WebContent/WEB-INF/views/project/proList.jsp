@@ -81,7 +81,7 @@
 				</td>
 				<td>${project.proStart}~${project.proEnd}</td>
 				<td>${project.proState}</td>
-				 <td>${project.name}</td>		
+				<td>${project.name}</td>		
 			</tr>
 		</c:forEach>	
 	</table>

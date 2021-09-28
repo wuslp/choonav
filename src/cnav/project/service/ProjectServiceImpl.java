@@ -176,12 +176,10 @@ public class ProjectServiceImpl implements ProjectService{
 	// 프로젝트 저장
 	@Override
 	public void insertProject(ProjectDTO dto) throws SQLException{
-		projectDAO.insertProject(dto);
 		//유저아이디=담당자
-		String name=projectDAO.getName("dto.getUserId()");
+		String name=projectDAO.getName(dto.getUserId());
 		dto.setName(name);
-		System.out.println("***********name*********");
-		System.out.println(name);
+		projectDAO.insertProject(dto);
 	}
 	
 	// 프로젝트 1개 정보 가져오기
