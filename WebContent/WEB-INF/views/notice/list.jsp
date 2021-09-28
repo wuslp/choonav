@@ -83,7 +83,7 @@
 						<c:set var="wid" value="0" />
 						<a href="/cnav/notice/content.cnav?notiNum=${article.notiNum}&pageNum=${pageNum}"> ${article.notiTitle} </a>
 					</td>
-					<td> ${article.userId} </td>
+					<td> 관리자 </td>
 					<td> ${article.notiDate} </td>
 					<td> ${article.readcount} </td>
 				</tr>

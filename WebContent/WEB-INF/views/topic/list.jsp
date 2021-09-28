@@ -77,7 +77,7 @@
 							 ${article.recnt}
 							 </c:if>
 						</td>
-						<td> ${article.userId} </td>
+						<td> ${article.name} </td>
 						<td> ${article.topDate} </td>
 						<td> ${article.readcount} </td>
 					</tr>
@@ -133,6 +133,7 @@
 	<form action="/cnav/topic/list.cnav">
 		<select name="sel">
 			<option value="userId">작성자</option>
+			<option value="name">이름</option>
 			<option value="topTitle">제목</option>
 			<option value="topContent">내용</option>
 		</select>
