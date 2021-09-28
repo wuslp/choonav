@@ -46,6 +46,7 @@
 		/WEB-INF/cnav/admin-context.xml
 		/WEB-INF/cnav/project-context.xml
 		/WEB-INF/cnav/proComments-context.xml
+		/WEB-INF/cnav/error-context.xml		
  		</param-value>
   	</init-param>
   </servlet>
@@ -57,6 +58,21 @@
   	<session-config>
   		<session-timeout>100</session-timeout>
   	</session-config>
+  	
+  	<!-- Error -->
+	<error-page>
+		<error-code>404</error-code>
+		<location>/error/404.cnav</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>500</error-code>
+		<location>/error/500.cnav</location>
+	</error-page>
+	
+	<error-page>
+		<location>/error</location>
+	</error-page>
 
 
    
