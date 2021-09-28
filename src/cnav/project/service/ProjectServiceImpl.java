@@ -167,7 +167,7 @@ public class ProjectServiceImpl implements ProjectService{
 			if(count > 0){
 				projectList = projectDAO.getState(startRow, endRow, sort,code); 
 			}
-			
+			 
 			number = count - (currentPage-1) * pageSize; 	// 게시판 목록에 뿌려줄 가상의 글 번호  
 			
 			for(int i = 0; i < projectList.size(); i++) {
