@@ -6,3 +6,15 @@
     margin: 0 350px;
     border-radius: 20px;
 }
+.stateOk {
+    background-color: #1987544d;
+    border-radius:20px;
+}
+.stateNow {
+    background-color: #ff000070;
+    border-radius:20px;
+}
+.stateRoading {
+    background-color: #fff6004d;;
+    border-radius: 20px;
+}
