@@ -47,7 +47,7 @@
 			</tr>
 			<tr>
 				<td>posted by <b>${article.name}</b>
-					at ${article.topDate}
+					at <fmt:formatDate value="${article.topDate}" pattern="yyyy-MM-dd" />
 				</td>
 				<td> ${article.readcount} viewed </td>
 			</tr>
