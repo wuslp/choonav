@@ -30,7 +30,7 @@
 			<jsp:include page="/include/left_nav_bar.jsp" />
 			<div id="layoutSidenav_content">
 	
-		<h2 align="center">프로젝트 목록</h2>
+		<h3>프로젝트 목록</h3>   
 		
 		<%--프로젝트제목/부서 검색 --%>
 		<div>
