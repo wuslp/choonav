@@ -13,8 +13,13 @@
   	<selectKey keyProperty="proComNum" order="BEFORE" resultType="int">
   		select procomments_seq.nextVal from dual
   	</selectKey>
-  	insert into procomments values(#{proComNum},#{proNum},#{userId},sysdate,#{proComment},#{code})
+  	insert into procomments values(#{proComNum},#{proNum},#{userId},sysdate,#{proComment},#{code},#{name})
   	</insert>
+  	
+  	<!-- 댓글작성자=유저아이디 -->
+  	<select id="getName" parameterType="string" resultType="string">
+  		select name from Users where userId=#{value}
+  	</select>
   	
   	<!-- 댓글 삭제 -->
   	<delete id="delete" parameterType="proCommentsDTO">

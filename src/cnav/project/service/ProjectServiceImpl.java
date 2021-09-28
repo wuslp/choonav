@@ -52,6 +52,12 @@ public class ProjectServiceImpl implements ProjectService{
 		}
 		
 		number=count-(currentPage-1)*pageSize; // 프로젝트 목록에 뿌려줄 가상의 글번호들
+	
+		for(int i = 0; i < projectList.size(); i++) {
+			projectList.get(i).setProStart(projectList.get(i).getProStart().split(" ")[0]);
+			projectList.get(i).setProEnd(projectList.get(i).getProEnd().split(" ")[0]);
+		}
+
 		
 		
 		
@@ -176,19 +182,21 @@ public class ProjectServiceImpl implements ProjectService{
 	// 프로젝트 저장
 	@Override
 	public void insertProject(ProjectDTO dto) throws SQLException{
-		projectDAO.insertProject(dto);
 		//유저아이디=담당자
-		String name=projectDAO.getName("dto.getUserId()");
+		String name=projectDAO.getName(dto.getUserId());
 		dto.setName(name);
-		System.out.println("***********name*********");
-		System.out.println(name);
+		
+		projectDAO.insertProject(dto);		
 	}
 	
 	// 프로젝트 1개 정보 가져오기
 	@Override
 	public ProjectDTO getProject(int proNum) throws SQLException {
 		// 해당 정보 가져오기
-		ProjectDTO project=projectDAO.getProject(proNum);	
+		ProjectDTO project=projectDAO.getProject(proNum);
+		project.setProStart(project.getProStart().split(" ")[0]);
+		project.setProEnd(project.getProEnd().split(" ")[0]);
+		
 		return project;
 	}
 	

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import cnav.procomments.dao.ProCommentsDAOImpl;
 import cnav.procomments.dto.ProCommentsDTO;
+import cnav.project.dao.ProjectDAO;
 
 @Service
 public class ProCommentsServiceImpl implements ProCommentsService {
@@ -25,6 +26,9 @@ public class ProCommentsServiceImpl implements ProCommentsService {
 	//댓글 등록
 	@Override
 	public void create(ProCommentsDTO dto) throws SQLException{
+		//유저아이디=담당자 
+		String name=proCommentsDAO.getName(dto.getUserId());
+		dto.setName(name);
 		proCommentsDAO.create(dto);
 	}
 	// 댓글 삭제 

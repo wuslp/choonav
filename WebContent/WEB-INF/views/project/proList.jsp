@@ -76,12 +76,9 @@
 				</td> 
 				<td align="left"><a href="/cnav/project/proContent.cnav?proNum=${project.proNum}&pageNum=${pageNum}">${project.proName}</a></td>
 				<td>${project.dept}</td>
-				<td>
-					<fmt:parseDate value="${project.proStart}" var="proStart" pattern="yyyy-MM-dd"/>~<fmt:parseDate value="${project.proEnd}" var="proEnd" pattern="yyyy-MM-dd"/>			
-				</td>
 				<td>${project.proStart}~${project.proEnd}</td>
 				<td>${project.proState}</td>
-				 <td>${project.name}</td>		
+				<td>${project.name}</td>		
 			</tr>
 		</c:forEach>	
 	</table>

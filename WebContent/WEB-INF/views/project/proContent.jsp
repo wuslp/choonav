@@ -34,7 +34,7 @@
 			<td>${project.dept}</td>
 		</tr>
 		<tr>
-			<td>${project.proStart}~${project.proEnd}</td>
+			<td>${project.proStart}~${project.proEnd}</td>	
 		</tr>
 		<tr>
 			<td colspan="2" height="100">${project.proContent}</td>
@@ -63,9 +63,10 @@
 	<!-- 댓글 리스트 -->
 	<c:forEach items="${comment}" var="comment">
 		
-		<p>${comment.userId}<br/>
+		<p>${comment.name}<br/>
 		<fmt:formatDate value="${comment.proReg}" pattern="yyyy-MM-dd" />
 		</p>
+	
 		
 		<p>${comment.proComment}</p>
 		<!-- 댓글작성자=로그인한사람 -->
