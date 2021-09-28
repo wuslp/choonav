@@ -32,7 +32,4 @@ public interface NoticeDAO {
 	// 게시물 수정
 	public NoticeDTO getUpdateArticle(int notiNum) throws SQLException;
 	public int updateArticle(NoticeDTO dto) throws SQLException;
-
-
-
 }
