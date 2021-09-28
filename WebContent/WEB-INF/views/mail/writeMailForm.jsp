@@ -11,6 +11,7 @@
 	<meta name="description" content="" />
 	<meta name="author" content="" />
 	<title>메일 보내기</title>
+	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -40,7 +41,8 @@
 		<jsp:include page="/include/left_nav_bar.jsp" />
 
 		<div id="layoutSidenav_content">
-	<br />
+		<div id="wrapAll">
+	
 	<div id=""> 
 		<c:if test="${sessionScope.sid == null}">
 		<script>
@@ -51,11 +53,12 @@
 		</c:if>
 	</div>
 	
-	<br />
-	<h1 align="center"> 메일 보내기 </h1>
+	
+	<h3> 메일 보내기 </h3>
 	<form action="/cnav/mail/writeMailPro.cnav" method="post" style="center;" onsubmit="return check()">
-		<div style="text-align: center;">
+		<div>
 			<div>
+				받는 사람 :
 				<select name="mailRid" id="mailRid">
 				<option value="">선택</option>
 				<c:forEach var="userList" items="${userList}">
@@ -64,13 +67,11 @@
 				</select>
 			</div>
 			<div>
-				첨부파일 : <input type="button" name="mailFile" value="pc에서 등록" />
+				제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목 :
+				<input type="text" name="mailSub" id="mailSub"/>
 			</div>
 			<div>
-				<input type="text" name="mailSub" placeholder="제목" id="mailSub"/>
-			</div>
-			<div>
-				<textarea rows="40" cols="100" name="mailContent" placeholder="내용을 작성해 주세요"></textarea>
+				<textarea rows="18" cols="100" name="mailContent" placeholder="내용을 작성해 주세요"></textarea>
 			</div>
 			<div>
 				<input type="submit" value="보내기" />
@@ -78,9 +79,10 @@
 			</div>
 		</div>
 	</form>
-	
-<jsp:include page="/include/footer.jsp" />
-		</div>
+</div> <!-- wrapAll -->
+			<jsp:include page="/include/footer.jsp" />
+		</div><!-- layoutSidenav_content" -->
+	</div><!-- id="layoutSidenav" -->
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 		<script src="<%=request.getContextPath()%>/resources/startbootstrap/js/scripts.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
