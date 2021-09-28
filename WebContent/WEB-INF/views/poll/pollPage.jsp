@@ -12,10 +12,11 @@
 	<meta name="description" content="" />
 	<meta name="author" content="" />
 	<title>pollForm page</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function(){//댓글등록
 				
@@ -154,7 +155,7 @@
 				</div>
 				<!--투표페이지 본문 시작  -->
 				<div id="">
-					<h1> 투표 </h1>
+					<h3> 투표 </h3>
 						<input type="hidden" value="${article.pollNum}" id="pollN"/>
 						<input type="hidden" value="${result}" id="result"/>
 						<div id="">
