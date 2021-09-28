@@ -7,7 +7,6 @@ import cnav.mail.dto.MailDTO;
 import cnav.main.dto.UserDTO;
 
 public interface MailDAO {
-	//public List<MailDTO> recMailList(String id) throws SQLException;
 	// 받은 편지함 count
 	public int recMailCount(String id) throws SQLException;
 	
@@ -19,7 +18,6 @@ public interface MailDAO {
 	
 	// 한 페이지 받은 편지함 검색 목록
 	public List<MailDTO> recMailSearch(int start, int end, String sel, String search, String id) throws SQLException;
-	
 	
 	// 보낸 편지함 count
 	public int sendMailCount(String id) throws SQLException;
