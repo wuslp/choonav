@@ -26,22 +26,23 @@
 			<div id="wrapAll">
 	<br/>
 	
-	<table>
+	<div id="wrapAll">
+	<table class="dept1">
 		<tr>
-			<td colspan="2"><b>${project.proName}</b></td>
-		</tr>
-		<tr>
-			<td>${project.dept}</td>
-		</tr>
-		<tr>
+			<td colspan="2"><b>${project.proName}</b></td>	
+			<td></td><td></td><td></td><td></td>	
 			<td>${project.proStart}~${project.proEnd}</td>	
 		</tr>
+
+		<tr class="dept">
+			<td><b>부서 : ${project.dept}</b></td>
+		</tr>	
 		<tr>
 			<td colspan="2" height="100">${project.proContent}</td>
 		</tr>
 		
 		
-		<!-- 담당자만 수정/삭제 보이게 -->
+		<!-- 담당자만 수정/삭제 보이게 -->	
 		<c:if test="${project.userId==sessionScope.sid}">
 			<td colspan="2">
 				<button onclick="window.location='/cnav/project/proModForm.cnav?proNum=${project.proNum}&pageNum=${pageNum}'">수정</button>
@@ -49,7 +50,7 @@
 			</td>		
 		</c:if>
 	</table>	
-
+	</div>
 	<!-- 댓글작성 -->
 	<form action="/cnav/proComments/create.cnav" method="post">
 		 	<input type="text" id="proComment" name="proComment">
