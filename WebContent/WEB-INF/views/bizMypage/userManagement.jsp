@@ -151,6 +151,7 @@
 		<button onclick="window.location='/cnav/my/userManagement.cnav'"> 목록 </button> <br />
 	</c:if>
 	</div>
+
 	<jsp:include page="/include/footer.jsp" />
 </body>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

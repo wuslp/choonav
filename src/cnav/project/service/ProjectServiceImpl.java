@@ -186,7 +186,7 @@ public class ProjectServiceImpl implements ProjectService{
 		String name=projectDAO.getName(dto.getUserId());
 		dto.setName(name);
 		projectDAO.insertProject(dto);
-
+	}
 	
 	// 프로젝트 1개 정보 가져오기
 	@Override
