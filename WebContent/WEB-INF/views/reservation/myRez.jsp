@@ -9,28 +9,18 @@
 	<title>myRez</title>
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
+	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
+	<link href="/cnav/resources/css/rez.css" rel="stylesheet" type="text/css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript"></script>
 </head>
-<style>
-.divTable{ display: table; width: 100%; loat: center; }
-.divTableRow { display: table-row; }
-.divTableHeading { background-color: #EEE; display: table-header-group; }
-.divTableCell, .divTableHead { border: 1px solid #999999; display: table-cell; padding: 3px 10px; }
-.divTableHeading { background-color: #EEE; display: table-header-group; font-weight: bold; }
-.divTableFoot { background-color: #EEE; display: table-footer-group; font-weight: bold; }
-.divTableBody { display: table-row-group; }
-.left {
-	float: left;
-}
-</style>
 <body>
 	<jsp:include page="/include/top_nav_bar.jsp" />
 	<div id="layoutSidenav">
 		<jsp:include page="/include/left_nav_bar.jsp" />
 	<div id="layoutSidenav_content">
-	
+	<div id="wrapAll">
 	<div id='calendar' class="center"></div>
 	
 	<h3> 내 예약 </h3>
@@ -41,23 +31,24 @@
 	</c:if>
 	
 	<c:if test="${count > 0}">
-	<div class="divTable" style="width: 40%;"> 
-		<div class="divTableBody"> 
-			<div class="divTableRow">
-				<div class="divTableCell">No.</div>
-				<div class="divTableCell">예약 항목</div>
-				<div class="divTableCell">예약 시간</div>
-				<div class="divTableCell">예약 취소</div>
-			</div>
+	<div class="sendList"> 
+		<table class="cnavTable">
+			<tr class="cnavList-top">
+				<td>No.</td>
+				<td>예약 항목</td>
+				<td>예약 시간</td>
+				<td>예약 취소</td>
+			</tr>
 			<c:forEach var="item" items="${articleList}">
-			<div class="divTableRow">
-				<div class="divTableCell" onclick="window.location='/cnav/rez/rezContent.cnav?rezNum=${item.rezNum}'" >${number}<c:set var="number" value="${number - 1}" /> </div>
-				<div class="divTableCell" onclick="window.location='/cnav/rez/rezContent.cnav?rezNum=${item.rezNum}'">${item.category}</div>
-				<div class="divTableCell" onclick="window.location='/cnav/rez/rezContent.cnav?rezNum=${item.rezNum}'">${item.sDate} ~ ${item.eDate}</div>
-				<div class="divTableCell" ><button onclick="deleteConfirm(${item.rezNum})" >취소</button></div>
-			</div>
+			<tr>
+				<td onclick="window.location='/cnav/rez/rezContent.cnav?rezNum=${item.rezNum}'" >${number}<c:set var="number" value="${number - 1}" /> </td>
+				<td onclick="window.location='/cnav/rez/rezContent.cnav?rezNum=${item.rezNum}'">${item.category}</td>
+				<td onclick="window.location='/cnav/rez/rezContent.cnav?rezNum=${item.rezNum}'">${item.sDate} ~ ${item.eDate}</td>
+				<td><button onclick="deleteConfirm(${item.rezNum})" >취소</button></td>
+			</tr>
 			</c:forEach>
-		</div>
+		</table>
+	</div>
 		<%-- 페이지 번호 --%>
 		<div align="center">
 		<c:if test="${count > 0}">
@@ -85,10 +76,13 @@
 		</c:if> <%-- end:count > 0 --%>
 		</div> <%-- page번호 div 끝 --%>
 		
-	</div>
-	</c:if>
-	<jsp:include page="/include/footer.jsp" />
 	
+	</c:if>
+	
+		</div> <!-- wrapAll -->
+			<jsp:include page="/include/footer.jsp" />
+		</div><!-- layoutSidenav_content" -->
+	</div><!-- id="layoutSidenav" -->
 </body>
 	<script>
 		function deleteConfirm(rezNum){
