@@ -111,6 +111,13 @@ public class ProjectServiceImpl implements ProjectService{
 			}
 					
 			number = count - (currentPage-1) * pageSize; 	// 게시판 목록에 뿌려줄 가상의 글 번호  
+			
+			for(int i = 0; i < projectList.size(); i++) {
+				projectList.get(i).setProStart(projectList.get(i).getProStart().split(" ")[0]);
+				projectList.get(i).setProEnd(projectList.get(i).getProEnd().split(" ")[0]);
+			}
+
+			
 			//controller에게 전달해야되는 데이터가 많으니 HashMap 에 넘겨줄 데이터를 저장해서 한번에 전달
 			Map<String, Object> result = new HashMap<String, Object>();
 			result.put("pageSize", pageSize);
@@ -161,7 +168,13 @@ public class ProjectServiceImpl implements ProjectService{
 				projectList = projectDAO.getState(startRow, endRow, sort,code); 
 			}
 			
-			number = count - (currentPage-1) * pageSize; 	// 게시판 목록에 뿌려줄 가상의 글 번호  
+			number = count - (currentPage-1) * pageSize; 	// 게시판 목록에 뿌려줄 가상의 글 번호
+			
+			for(int i = 0; i < projectList.size(); i++) {
+				projectList.get(i).setProStart(projectList.get(i).getProStart().split(" ")[0]);
+				projectList.get(i).setProEnd(projectList.get(i).getProEnd().split(" ")[0]);
+			}
+
 			//controller에게 전달해야되는 데이터가 많으니 HashMap 에 넘겨줄 데이터를 저장해서 한번에 전달
 			Map<String, Object> result = new HashMap<String, Object>();
 			result.put("pageSize", pageSize);
@@ -235,5 +248,4 @@ public class ProjectServiceImpl implements ProjectService{
 		
 		
 
-	
 	
