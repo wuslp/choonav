@@ -217,8 +217,8 @@
 											
 									
 							<div id="" >	
-								<table class="attendTable" border="1">
-									<tr>
+								<table class="cnavTable">
+									<tr class="cnavList-top">
 										<td>날짜</td>
 										<td>&nbsp;근태</td>
 										<td>&nbsp;출근</td>
