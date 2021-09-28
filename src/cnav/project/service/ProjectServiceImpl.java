@@ -53,6 +53,8 @@ public class ProjectServiceImpl implements ProjectService{
 		
 		number=count-(currentPage-1)*pageSize; // 프로젝트 목록에 뿌려줄 가상의 글번호들
 		
+		
+		
 		// Controller에게 전달해야되는 데이터가 많으니 HashMap에 넘겨줄 데이터를 저장
 		Map<String, Object> result=new HashMap<>();
 		result.put("pageSize", pageSize);
@@ -175,6 +177,11 @@ public class ProjectServiceImpl implements ProjectService{
 	@Override
 	public void insertProject(ProjectDTO dto) throws SQLException{
 		projectDAO.insertProject(dto);
+		//유저아이디=담당자
+		String name=projectDAO.getName("dto.getUserId()");
+		dto.setName(name);
+		System.out.println("***********name*********");
+		System.out.println(name);
 	}
 	
 	// 프로젝트 1개 정보 가져오기

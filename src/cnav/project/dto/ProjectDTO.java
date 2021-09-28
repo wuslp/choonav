@@ -11,6 +11,7 @@ public class ProjectDTO {
 	private String dept;		// 부서
 	private String proState;	// 진행상태
 	private String code;		// 회사코드
+	private String name;
 	
 	public Integer getProNum() {
 		return proNum;
@@ -65,6 +66,12 @@ public class ProjectDTO {
 	}
 	public void setCode(String code) {
 		this.code = code;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	

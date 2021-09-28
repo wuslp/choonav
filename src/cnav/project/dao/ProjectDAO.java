@@ -26,6 +26,8 @@ public interface ProjectDAO {
 
 	// 프로젝트 저장
 	public void insertProject(ProjectDTO dto) throws SQLException;
+	// 유저아이디=이름
+	public String getName(String userId) throws SQLException;
 	// 프로젝트 1개 가져오기 
 	public ProjectDTO getProject(int proNum) throws SQLException;
 	// 유저아이디 확인
