@@ -20,6 +20,7 @@
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 	<script type="text/javascript">
+
 	</script>
 </head>
 <body class="sb-nav-fixed">
@@ -40,7 +41,6 @@
 				</div>
 				<!-- 투표 리스트 본문-->
 				<div id="wrapAll">	
-				
 					<div>
 						<h3>투표 리스트</h3>
 					</div><br/><br/>
@@ -52,11 +52,11 @@
 								<option value="pollTitle" >제목</option>
 								<option value="pollCon" >내용</option>
 							</select>
-							<div>
+							
 								<input type="text" id="" name="search"/>
 								<input type="submit" value="검색">
 								<input type="button" value="만들기" onClick="window.location='/cnav/poll/pollForm.cnav'">
-							</div>
+							
 						</form>
 					</div><br/><br/><br/><!-- 상단 버튼들 -->
 					<div>
