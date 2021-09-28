@@ -51,10 +51,10 @@
 			</div>
 			<c:forEach var="item" items="${articleList}">
 			<div class="divTableRow">
-				<div class="divTableCell">${number}<c:set var="number" value="${number - 1}" /> </div>
-				<div class="divTableCell">${item.category}</div>
-				<div class="divTableCell">${item.sDate} ~ ${item.eDate}</div>
-				<div class="divTableCell"><button onclick="deleteConfirm(${item.rezNum})" >취소</button></div>
+				<div class="divTableCell" onclick="window.location='/cnav/rez/rezContent.cnav?rezNum=${item.rezNum}'" >${number}<c:set var="number" value="${number - 1}" /> </div>
+				<div class="divTableCell" onclick="window.location='/cnav/rez/rezContent.cnav?rezNum=${item.rezNum}'">${item.category}</div>
+				<div class="divTableCell" onclick="window.location='/cnav/rez/rezContent.cnav?rezNum=${item.rezNum}'">${item.sDate} ~ ${item.eDate}</div>
+				<div class="divTableCell" ><button onclick="deleteConfirm(${item.rezNum})" >취소</button></div>
 			</div>
 			</c:forEach>
 		</div>
