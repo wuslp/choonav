@@ -39,7 +39,7 @@ public class PollServiceImpl implements PollService{
 		String auth = (String)RequestContextHolder.getRequestAttributes().getAttribute("sauth", RequestAttributes.SCOPE_SESSION);//권한
 		
 		// 한페이지에 보여줄 게시글의 수 
-		int pageSize = 3; 
+		int pageSize = 4; 
 		// 현재 페이지 번호
 		if(pageNum == null){ //pageNum 파라미터 안넘어왔을때.
 			pageNum = "1";
@@ -88,7 +88,7 @@ public class PollServiceImpl implements PollService{
 		String auth = (String)RequestContextHolder.getRequestAttributes().getAttribute("sauth", RequestAttributes.SCOPE_SESSION);//권한
 
 		// 한페이지에 보여줄 게시글의 수 
-		int pageSize = 3; 
+		int pageSize = 4; 
 		// 현재 페이지 번호
 		if(pageNum == null){ //pageNum 파라미터 안넘어왔을때.
 			pageNum = "1";
@@ -140,7 +140,7 @@ public class PollServiceImpl implements PollService{
 		String auth = (String)RequestContextHolder.getRequestAttributes().getAttribute("sauth", RequestAttributes.SCOPE_SESSION);//권한
 				
 		// 한페이지에 보여줄 게시글의 수 
-		int pageSize = 3; 
+		int pageSize = 4; 
 		// 현재 페이지 번호
 		if(pageNum == null){ //pageNum 파라미터 안넘어왔을때.
 			pageNum = "1";
