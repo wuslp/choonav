@@ -130,6 +130,11 @@ public class ProjectDAOImpl implements ProjectDAO {
 	public void deleteProject(String proNum) throws SQLException{
 		sqlSession.delete("project.deleteProject", proNum);
 	}
+	//유저아이디=이름
+	@Override
+	public String getName(String userId) throws SQLException {	
+		return sqlSession.selectOne("project.getName",userId);
+	}
 
 	
 
