@@ -14,6 +14,7 @@
 	<meta name="author" content="" />
 	<title>pollList Page</title>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
  	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>

@@ -12,10 +12,11 @@
 	<meta name="description" content="" />
 	<meta name="author" content="" />
 	<title>pollForm page</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript">
 	//필수항목 유효성 검사
 	function check(){
@@ -95,7 +96,7 @@
 				</div>
 				<!--투표폼 본문  -->
 				<div id="">
-				<h2>투표 만들기</h2><br/><br/><br/>
+				<h3>투표 만들기</h3><br/><br/><br/>
 					<form action="/cnav/poll/pollPro.cnav" onsubmit="return check()" name="pF">
 						<div id="">
 						투표기간(필수) <input type="date" id="stDate" name="stDate" min=<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" /> > <strong>~</strong> <input type="date" id="endDate" name="endDate" ><br/>

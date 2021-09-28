@@ -1,0 +1,8 @@
+.attendLine {
+    text-align: -webkit-center;
+}
+.attendLine h6 {
+    background-color: #ccb6d47a;
+    margin: 0 350px;
+    border-radius: 20px;
+}
