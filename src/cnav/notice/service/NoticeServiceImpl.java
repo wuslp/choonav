@@ -103,33 +103,25 @@ public class NoticeServiceImpl implements NoticeService {
 		result.put("articleList", articleList);
 		result.put("count", count);
 		result.put("number", number);
-		
-		
 		return result;
 	}
-	
 	// 글 저장
 	@Override
 	public void insertArticle(NoticeDTO dto, String scode, String sid) throws SQLException {
 		noticeDAO.insertArticle(dto, scode, sid);
 	} 
-	
 	// 글 가져오기
 	@Override
 	public NoticeDTO getArticle(int notiNum) throws SQLException {
 		noticeDAO.readcountUp(notiNum);
 		NoticeDTO article = noticeDAO.getArticle(notiNum);
-		
 		return article;
 	}
-	
-	
 	// 게시물 삭제
 	@Override
 	public void deleteArticle(int notiNum) throws SQLException {
 		noticeDAO.deleteArticle(notiNum); 
 	}
-
 	// 게시물 수정폼
 	@Override
 	public NoticeDTO getUpdateArticle(int notiNum) throws SQLException {
@@ -142,6 +134,4 @@ public class NoticeServiceImpl implements NoticeService {
 		int result = noticeDAO.updateArticle(dto);
 		return result;
 	}
-
-	
 }

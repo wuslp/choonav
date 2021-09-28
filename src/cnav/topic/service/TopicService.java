@@ -28,8 +28,4 @@ public interface TopicService {
 	// 게시글 수정프로 (modifyPro)
 	public int updateArticle(TopicDTO dto) throws SQLException;
 	
-	/*
-	
-	
-	*/
 }

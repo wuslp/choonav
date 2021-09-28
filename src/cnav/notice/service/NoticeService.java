@@ -27,9 +27,5 @@ public interface NoticeService {
 	public NoticeDTO getUpdateArticle(int notiNum) throws SQLException;
 	// 게시글 수정프로 (modifyPro)
 	public int updateArticle(NoticeDTO dto) throws SQLException;
-	
-	/*
-	
-	
-	*/
+
 }
