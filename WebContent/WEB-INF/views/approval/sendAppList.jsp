@@ -93,12 +93,13 @@
 						</c:if>
 						
 						<div class="sendAppList-btn">
-						<c:if test="${sel != null && search != null}">
-							<button onclick="window.location='/cnav/approval/sendAppList.cnav'">목록</button>
-						</c:if>
-						<button onclick="window.location='/cnav/approval/appForm.cnav'">문서작성</button><br/><br/>
+							<c:if test="${sel != null && search != null}">
+								<button onclick="window.location='/cnav/approval/sendAppList.cnav'">목록</button>
+							</c:if>
+							<button onclick="window.location='/cnav/approval/appForm.cnav'">문서작성</button><br/><br/>
 						</div>
-							</div>
+						
+				</div>
 						<%-- 페이지 번호 --%>
 						<div>
 						<c:if test="${count > 0}">
@@ -140,7 +141,7 @@
 						
 						</c:if> <%-- end:count > 0 --%>
 					</div>	
-				</div>	
+				</div>	<!-- cnavAllList -->
 				
 			</div> <!-- wrapAll -->	
 	<jsp:include page="/include/footer.jsp" />
