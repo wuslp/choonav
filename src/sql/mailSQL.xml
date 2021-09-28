@@ -5,58 +5,57 @@
 <mapper namespace="mail">
 	
 	<select id="recCount" resultType="int" parameterType="String">
-		select count(*) from mail where mailRid = #{id}
+		select count(*) from mail where mailRid = #{id} and riddel != '1'
 	</select>
 	
 	<select id="recMailList" parameterType="hashmap" resultType="mailDTO">
 		<![CDATA[
 		select B.*, r from
 			(select rownum r, A.* from
-				(select * from mail where mailRid = #{id} order by mailreg desc)A 
+				(select * from mail where mailRid = #{id} and riddel != '1' order by mailreg desc)A 
 			order by mailReg desc) B 
 		where r >= #{start} and r <= #{end}
 		]]>
 	</select>
 	
 	<select id="recSearchCount" parameterType="hashmap" resultType="int">
-		select count(*) from mail where ${sel} like '%'||#{search}||'%' and mailRid = #{id}
+		select count(*) from mail where ${sel} like '%'||#{search}||'%' and mailRid = #{id} and riddel != '1'
 	</select>
 	
 	<select id="recMailSearch" parameterType="hashmap" resultType="mailDTO">
 		<![CDATA[
 		select B.*, r from
 			(select rownum r, A.* from
-				(select * from mail where ${sel} like '%'||#{search}||'%' and mailRid = #{id}
+				(select * from mail where ${sel} like '%'||#{search}||'%' and mailRid = #{id} and riddel != '1'
 				order by mailreg desc)A 
 			order by mailReg desc) B 
 		where r >= #{start} and r <= #{end}
 		]]>
 	</select>
 	
-	
 	<select id="sendCount" resultType="int" parameterType="String">
-		select count(*) from mail where userId = #{id}
+		select count(*) from mail where userId = #{id} and userDel != '1'
 	</select>
 	
 	<select id="sendMailList" parameterType="hashmap" resultType="mailDTO">
 		<![CDATA[
 		select B.*, r from
 			(select rownum r, A.* from
-				(select * from mail where userId = #{id} order by mailreg desc)A 
+				(select * from mail where userId = #{id} and userDel != '1' order by mailreg desc)A 
 			order by mailReg desc) B 
 		where r >= #{start} and r <= #{end}
 		]]>
 	</select>
 	
 	<select id="sendSearchCount" parameterType="hashmap" resultType="int">
-		select count(*) from mail where ${sel} like '%'||#{search}||'%' and userId = #{id}
+		select count(*) from mail where ${sel} like '%'||#{search}||'%' and userId = #{id} and userDel != '1'
 	</select>
 	
 	<select id="sendMailSearch" parameterType="hashmap" resultType="mailDTO">
 		<![CDATA[
 		select B.*, r from
 			(select rownum r, A.* from
-				(select * from mail where ${sel} like '%'||#{search}||'%' and userId = #{id}
+				(select * from mail where ${sel} like '%'||#{search}||'%' and userId = #{id} and userDel != '1'
 				order by mailreg desc)A 
 			order by mailReg desc) B 
 		where r >= #{start} and r <= #{end}
@@ -72,9 +71,12 @@
 		values(#{mailNum}, #{userId}, #{mailRid}, #{mailSub}, #{mailContent}, #{mailFile}, sysdate, '0')
 	</insert>
 	
-	<delete id="deleteMail" parameterType="String">
-		delete from mail where mailNum = #{no}
-	</delete>
+	<update id="delRecMail" parameterType="HashMap">
+		update mail set riddel = '1' where mailNum = #{no} and mailRid = #{id}
+	</update>
+	<update id="delSendMail" parameterType="HashMap">
+		update mail set userDel = '1' where mailNum = #{no} and userid = #{id}
+	</update>
 	 
 	 <update id="readResult" parameterType="Hashmap">
 	 	update mail set mailResult = '1' where mailNum = #{num} and mailRid = #{id}
@@ -84,13 +86,8 @@
 	 	select * from mail where mailNum = #{value}
 	 </select>
 	 
-	 <delete id="delete" parameterType="int">
-	 	delete from mail where mailNum = #{value}
-	 </delete>
-	 
-	 
 	 <select id="userList" parameterType="String" resultType="userDTO">
-	 	select * from users where code = #{code}
+	 	select * from users where code = #{code} and userId != #{id}
 	 </select>
 	 
 	 <select id="getUserName" parameterType="String" resultType="String">
@@ -107,6 +104,14 @@
 	 
 	 <update id="updateRidName" parameterType="Hashmap">
 	 	update mail set ridName = #{ridName} where mailRid = #{rid}
+	 </update>
+	 
+	 <update id="deleteRec" parameterType="Hashmap">
+	 	update mail set riddel = '1' where mailNum = #{num} and mailRid = #{id}
+	 </update>
+	 
+	 <update id="deleteSend" parameterType="Hashmap">
+	 	update mail set userDel = '1' where mailNum = #{num} and userId = #{id}
 	 </update>
 
 </mapper>

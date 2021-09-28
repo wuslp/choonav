@@ -14,6 +14,23 @@
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript">
+		function check() {
+			var mailRid=$("#mailRid").val();
+			if(mailRid==""){
+				alert("받는 사람을 선택하세요.");
+				$("#mailRid").focus();
+				return false;
+			}
+			var mailSub=$("#mailSub").val();
+			if(mailSub==""){
+				alert("제목을 입력하세요.");
+				$("#mailSub").focus();
+				return false;
+			}
+		}
+	</script>
 </head>
 
 <body class="sb-nav-fixed">
@@ -36,10 +53,10 @@
 	
 	<br />
 	<h1 align="center"> 메일 보내기 </h1>
-	<form action="/cnav/mail/writeMailPro.cnav" method="post" style="center;">
+	<form action="/cnav/mail/writeMailPro.cnav" method="post" style="center;" onsubmit="return check()">
 		<div style="text-align: center;">
 			<div>
-				<select name="mailRid">
+				<select name="mailRid" id="mailRid">
 				<option value="">선택</option>
 				<c:forEach var="userList" items="${userList}">
 					<option value="${userList.userId}">${userList.name} ${userList.position}</option>
@@ -47,10 +64,10 @@
 				</select>
 			</div>
 			<div>
-				첨부파일 : <input type="button" name="mailFile" value="pc에서 등록"/>
+				첨부파일 : <input type="button" name="mailFile" value="pc에서 등록" />
 			</div>
 			<div>
-				<input type="text" name="mailSub" placeholder="제목" />
+				<input type="text" name="mailSub" placeholder="제목" id="mailSub"/>
 			</div>
 			<div>
 				<textarea rows="40" cols="100" name="mailContent" placeholder="내용을 작성해 주세요"></textarea>

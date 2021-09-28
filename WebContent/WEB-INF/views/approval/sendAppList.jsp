@@ -14,6 +14,7 @@
 	<meta name="author" content="" />
 	<title>보낸결재함</title>
 	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
+	<link href="/cnav/resources/css/approval.css" rel="stylesheet" type="text/css">
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -36,9 +37,8 @@
 			<div id="layoutSidenav_content">
 			
 				<div id="wrapAll">	
-					<div class="sendAppList">
-				
 					<h3> 보낸결재함 </h3>
+					<div class="sendAppList">
 						<%-- 작성자/내용 검색 --%>
 						<form action="/cnav/approval/sendAppList.cnav" name="search">
 							<select name="sel">
@@ -46,7 +46,7 @@
 								<option value="appTitle">기안제목</option>
 							</select>
 							<input type="text" name="search" />
-							<input type="submit" value="검색" />
+							<input type="submit" value="검색" class="sendAppSerch" />
 						</form><br/>  <%-- 이렇게 ! /spring/board/list.do?sel=writer&search=aaa --%>
 					
 						 <c:if test="${count==0}" >
@@ -54,8 +54,9 @@
 						</c:if>
 						
 						 <c:if test="${count != 0}" >
-							<table>
-								<tr>
+						 <div class="sendList">
+							<table class="sendTable">
+								<tr class="sendList-top">
 									<td>No.</td>
 									<td>기안제목</td>
 									<td>문서형식</td>
@@ -90,11 +91,14 @@
 								</c:forEach>	
 							</table><br/>
 						</c:if>
+						
+						<div class="sendAppList-btn">
 						<c:if test="${sel != null && search != null}">
 							<button onclick="window.location='/cnav/approval/sendAppList.cnav'">목록</button>
 						</c:if>
-						<button onclick="window.location='/cnav/approval/appForm.cnav'">문서 작성</button><br/><br/>
-						
+						<button onclick="window.location='/cnav/approval/appForm.cnav'">문서작성</button><br/><br/>
+						</div>
+							</div>
 						<%-- 페이지 번호 --%>
 						<div>
 						<c:if test="${count > 0}">

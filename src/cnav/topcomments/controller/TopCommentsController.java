@@ -42,8 +42,8 @@ public class TopCommentsController { // replyController -> TopcommentController
     
     // 댓글 삭제
 	@RequestMapping("delete.cnav")
-	public String delete( @RequestParam int topComNum, @RequestParam int topNum,Model model) throws SQLException{
-		topCommentsService.delete(topComNum);
+	public String delete( @RequestParam int topComNum, @RequestParam int topNum, Model model) throws SQLException{
+		topCommentsService.delete(topComNum, topNum);
 		model.addAttribute("topNum",topNum);
 		
 		return "topic/replydelete";

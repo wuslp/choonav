@@ -13,6 +13,7 @@
 	<meta name="author" content="" />
 	<title>보낸 결재 상세</title>
 	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
+	<link href="/cnav/resources/css/approval.css" rel="stylesheet" type="text/css">
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -30,7 +31,10 @@
 	<div id="layoutSidenav">
 		<jsp:include page="/include/left_nav_bar.jsp" />
 		<div id="layoutSidenav_content">
-			<div class="approvalWrap">
+			<div id="wrapAll">
+			<h3> 보낸결재함 </h3>
+				<div class="approvalWrap">
+			
 				<div class="appContentTitle">
 				<h3>${approval.appType}</h3>
 				</div>
@@ -58,6 +62,11 @@
 				</div>
 				
 				<table class="appContentRight">
+					<tr> <!-- 이름 -->
+						<td>${approval.name1} </td> 
+						<td>${approval.name2} </td>
+						<td>${approval.name3} </td>
+					</tr>
 					<tr>
 						<td>
 							<c:if test="${approval.state1 == 2}">
@@ -85,11 +94,7 @@
 						</td>
 						
 					</tr>
-					<tr> <!-- 이름 -->
-						<td>${approval.name1} </td> 
-						<td>${approval.name2} </td>
-						<td>${approval.name3} </td>
-					</tr>
+					
 				
 				</table>
 				<br/><br/><br/><br/><br/><br/>
@@ -119,6 +124,8 @@
 					</tr>
 				</table>
 				
+			</div><!-- approvalWrap -->
+			
 				<div class="appConBtn">
 					<c:if test='${!(approval.state1 == "1" || approval.state1 == "2")}'>
 						<button onclick="window.location='/cnav/approval/modifyApp.cnav?appNum=${approval.appNum}&pageNum=${pageNum}'">수정</button> 
@@ -126,10 +133,11 @@
 					</c:if>	
 						<button onclick="window.location='/cnav/approval/sendAppList.cnav'">목록</button> 
 				</div>
-			</div><!-- approvalWrap -->
-<jsp:include page="/include/footer.jsp" />
 			
+			</div> <!-- wrapAll -->
+			<jsp:include page="/include/footer.jsp" />
 		</div><!-- layoutSidenav_content" -->
+	</div><!-- id="layoutSidenav" -->
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 		<script src="<%=request.getContextPath()%>/resources/startbootstrap/js/scripts.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
@@ -137,6 +145,5 @@
 		<script src="<%=request.getContextPath()%>/resources/startbootstrap/assets/demo/chart-bar-demo.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
 		<script src="<%=request.getContextPath()%>/resource/startbootstrap/js/datatables-simple-demo.js"></script>
-	</div><!-- id="layoutSidenav" -->
 </body>
 </html>

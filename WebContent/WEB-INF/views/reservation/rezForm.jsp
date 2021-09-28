@@ -25,9 +25,9 @@
 		<form action="/cnav/rez/addRez.cnav" method="post" name="rezForm">
 			<div>
 				<h3> 예약일시 </h3>
-				<input type="text" name="sDate" id="start" autocomplete="off"  />
+				<input type="text" name="sDate" id="start" autocomplete="off"  required />
 				-
-				<input type="text" name="eDate" id="end" autocomplete="off"  />
+				<input type="text" name="eDate" id="end" autocomplete="off"  required/>
 			</div>
 			<div>
 				<h3> 예약자 </h3>
@@ -39,13 +39,13 @@
 				<h3> 예약항목 </h3>
 			</div>
 			<div>
-				<input type="text" name="category" />
+				<input type="text" name="category" required/>
 			</div>
 			<div>
 				<h3> 목적 </h3>
 			</div>
 			<div>
-				<textarea class = "memo" id = "memo" name = "content" rows = "5" cols = "20" placeholder="100글자까지 입력 가능합니다"></textarea> 
+				<textarea class = "memo" id = "memo" name = "content" rows = "5" cols = "20" placeholder="100글자까지 입력 가능합니다" required></textarea> 
 			</div>
 			<button class = "ok-button" type="submit" >확인</button>
 		</form>

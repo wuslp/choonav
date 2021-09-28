@@ -1,0 +1,86 @@
+
+/* 보낸 결재함 sendAppList */
+.stateReject {
+    background-color: #ff000070;
+    border-radius:20px;
+}
+.stateOK {
+    background-color: #1987544d;
+    border-radius:20px;
+}
+.sendTable{
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  text-align-last: center;
+}
+.sendTable td{
+	height:33px;
+	border-bottom: solid thin lightgrey;
+}
+.sendList-top {
+    background-color: rgba(0, 0, 0, 0.125)
+} 
+.sendTable td a {
+    text-decoration: none;
+    color: #212529;
+}
+
+.sendTable td a:hover {
+    color: #741c7d;
+}   
+.sendTable td a:focus {
+    color: #21252933;
+}   
+.sendAppList form{
+	text-align-last : center;
+}
+
+.sendAppList-btn button {
+    border: solid 1px #767676;
+    background-color: #efefef;
+    color: #000000;
+    border-radius: 3px;
+    float: right;
+}
+
+
+/* 결재 상세 (sendAppContent) */
+
+.appContentTitle{text-align: center; 
+	font-size: xx-large; 
+	font-weight: bold;
+}
+.appContentLeft {
+	float: left;
+}
+.appContentRight {
+	float: right;
+}
+.appConBtn {
+	text-align-last: center;
+}
+table.appContentRight td {
+	border: solid thin;
+	width: 50px;
+	height:25px;
+    text-align: center;	
+}
+.approvalWrap {
+    border: solid thin;
+}
+
+table.appCont1{
+	width:100%;
+}
+table.appCont1 td{
+	border: solid thin;
+}
+table.appCont2{
+	width:100%;
+	margin: 30px 0 30px 0;
+}
+table.appCont2 td{
+	border: solid thin;
+}

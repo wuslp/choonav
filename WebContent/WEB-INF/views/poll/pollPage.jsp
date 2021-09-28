@@ -179,6 +179,7 @@
 									 <input type="button" value="투표" id="" onclick="check()"> 
 								</c:if>
 							</c:if>	
+							
 							<!-- 투표대상이 해당하지 않을때 -->
 							<c:if test="${!(userIdDept==article.target || article.target=='전체')}">
 								<input type="button" value="투표대상이 아닙니다" disabled> 

@@ -24,15 +24,20 @@ public class TopCommentsServiceImpl implements TopCommentsService {
 	// 댓글 입력
 	@Override
 	public void insert(TopCommentsDTO dto) throws SQLException {
+		String name = topCommentsDAO.getName(dto.getUserId());
+		dto.setName(name);
 		topCommentsDAO.insert(dto);
+		int topNum = dto.getTopNum();
+		topCommentsDAO.upRecnt(topNum);
 	}
 
 
 
 	// 댓글 삭제
 	@Override
-	public void delete(int topComNum) throws SQLException {
+	public void delete(int topComNum, int topNum) throws SQLException {
 		topCommentsDAO.delete(topComNum);
+		topCommentsDAO.downRecnt(topNum);
 	}
 
 	

@@ -7,10 +7,24 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
 	<title>공지사항</title>
+	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
+	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body class="sb-nav-fixed">
+	<jsp:include page="/include/top_nav_bar.jsp" />
+	<div id="layoutSidenav">
+		<jsp:include page="/include/left_nav_bar.jsp" />
+		<div id="layoutSidenav_content">
+			<div id="wrapAll">	
 	<!--로그인된 세션이 없을경우 startPage 로 이동시켜주기  -->
 	<%-- <div id=""> 
 		<c:if test="${sessionScope.sid == null}">
@@ -22,7 +36,7 @@
 		</c:if>
 	</div> --%>
 	<br />
-	<h1 align="center"> 공지사항 </h1>
+	<h3> 공지사항 </h3>
 	<table>
 		<tr>
 			<td colspan="2"> <b>${article.notiTitle}</b> </td>
@@ -31,35 +45,29 @@
 			<td colspan="2" height="100"> ${article.notiContent} </td>
 		</tr>
 		<tr>
-			<td>posted by <b>${article.userId}</b>
-				at ${article.notiDate}
+			<td>posted by 관리자
+				at <fmt:formatDate value="${article.notiDate}" pattern="yyyy-MM-dd" />
 			</td>
 			<td> ${article.readcount} viewed </td>
 		</tr>
 		
-		<!--회사 관리자일경우 수정,삭제보이게  -->
-			<c:if test="${sessionScope.sauth=='1'}">
-<%-- 		<c:if test="${!article.userId == sessionScope.sid &&sessionScope.sauth=='1'}"> --%>
-				<tr>
-					<td colspan="2"> 
+		<tr>
+			<td colspan="2"> 
+				<!--회사 관리자일경우 수정,삭제보이게  -->
+				<c:if test="${sessionScope.sauth=='1'}">
 						<button onclick="window.location='/cnav/notice/modifyForm.cnav?notiNum=${article.notiNum}&pageNum=${pageNum}'">수 정</button>
 						<input type="button" value="삭제" onclick="del(${article.notiNum})">
 						<button onclick="window.location='/cnav/notice/list.cnav'">리스트</button>
-					</td>
-				</tr>
-			</c:if>
-			
-		<!-- 로그인한 사람은 목록버튼만 보이게 -->
-			<c:if test="${article.userId != sessionScope.sid}">
-				<tr>
-					<td colspan="2"> 
+				</c:if>
+				
+				<!-- 로그인한 사람은 목록버튼만 보이게 -->
+				<c:if test="${article.userId != sessionScope.sid}">
 						<button onclick="window.location='/cnav/notice/list.cnav'">리스트</button>
-					</td>
-				</tr>
-			</c:if>
+				</c:if>
+			</td>
+		</tr>
 	</table>
 
-</body>
 <script>
 	function del(notiNum) {
 		var chk = confirm("정말 삭제하시겠습니까?");
@@ -68,4 +76,16 @@
 		}
 	}	
 </script>
+</div> <!-- wrapAll -->
+			<jsp:include page="/include/footer.jsp" />
+		</div><!-- layoutSidenav_content" -->
+	</div><!-- id="layoutSidenav" -->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+		<script src="<%=request.getContextPath()%>/resources/startbootstrap/js/scripts.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+		<script src="<%=request.getContextPath()%>/resources/startbootstrap/assets/demo/chart-area-demo.js"></script>
+		<script src="<%=request.getContextPath()%>/resources/startbootstrap/assets/demo/chart-bar-demo.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+		<script src="<%=request.getContextPath()%>/resource/startbootstrap/js/datatables-simple-demo.js"></script>
+</body>
 </html>

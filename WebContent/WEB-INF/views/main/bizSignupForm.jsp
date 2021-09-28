@@ -5,6 +5,11 @@
 <head>
 	<meta charset="UTF-8">
 	<title>bizSignupForm</title>
+	<!-- 로고 글씨체 -->
+	<link rel="preconnect" href="https://fonts.googleapis.com"> 
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+	<link href="https://fonts.googleapis.com/css2?family=Charm&family=Playball&display=swap" rel="stylesheet">
+	
 	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript">
@@ -101,31 +106,84 @@
 	<div class="signup">	
 		<!-- 유효성 중복체크 추가 -->
 		<!-- 회사코드 입력 안된경우에 비즈니스계정 만들기페이지로 자동이동-->
-			<h1>비즈니스 계정으로 신청</h1>
+			<h1>비즈니스 계정 신청</h1>
 			<form action="/cnav/main/bizSignupPro.cnav" onsubmit="return check()" name="biz">
 			<!-- userId를 signupForm에서 넘겨줌 -->
-			<input type="hidden" name="userId" value="${signupId }"/>
-				회사코드(숫자만가능)(필수) : <input type="text" name="code" id="code" onblur="check_input()" autofocus/><br/>
-				<div id="codeCheckRes"></div><br/>
-				회사명(필수) : <input type="text" name="bizName" id="bizName"/><br/>
-				대표자명(필수) : <input type="text" name="bizCEO" id="bizCEO" placeholder="유재석"/><br/>
-				사업자 번호(필수) : <input type="text" name="bizNumber" id="bizNumber"/><br/>
-				전화번호(필수) : <input type="text" name="bizTel" id="bizTel" placeholder="027865678"/><br/>
-				이메일 : <input type="text" name="bizEmail" id="bizEmail"/><br/>
-				체크박스 : 
-				<fieldset>
+			<input type="hidden" name="userId" value="${signupId}"/>
+				<table align="center">
+					<tr>
+						<td>
+							회사코드(숫자만가능)(*)		
+						</td>
+						<td>
+							<input type="text" name="code" id="code" onblur="check_input()" autofocus/><br/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+						</td>
+						<td>
+							<div id="codeCheckRes"></div>					
+						</td>
+					</tr>
+					<tr>
+						<td>
+							회사명(*)
+						</td>
+						<td>
+							<input type="text" name="bizName" id="bizName"/><br/>						
+						</td>
+					</tr>
+					<tr>
+						<td>
+							대표자명(*)
+						</td>
+						<td>
+							<input type="text" name="bizCEO" id="bizCEO" placeholder="유재석"/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							사업자번호(*)
+						</td>
+						<td>
+							<input type="text" name="bizNumber" id="bizNumber"/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							전화번호(*)
+						</td>
+						<td>
+							<input type="text" name="bizTel" id="bizTel" placeholder="027865678"/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							이메일
+						</td>
+						<td>
+							<input type="text" name="bizEmail" id="bizEmail"/>
+						</td>
+					</tr>
+				</table><br/>
+					* 사용하실 기능을 선택해주세요 *
+				<fieldset class="cate">
 					<label><input type="checkbox" name="approval" value="1" checked/>결재</label>
 					<label><input type="checkbox" name="mail" value="1" />메일</label>
 					<label><input type="checkbox" name="attend" value="1" />근태</label>
 					<label><input type="checkbox" name="project" value="1" />프로젝트</label>
-					<label><input type="checkbox" name="calendar" value="1" />스케쥴</label>
+					<label><input type="checkbox" name="calendar" value="1" />일정</label>
 					<label><input type="checkbox" name="reservation" value="1" />예약</label>
 					<label><input type="checkbox" name="topic" value="1" />자유게시판</label>
 					<label><input type="checkbox" name="poll" value="1" />투표</label>
-				</fieldset><br/><br/>
-				<input type="submit" value="신청"/>
-				<input type="reset" value="재작성"/>
-				<input type="button" onclick="history.back();" value="취소"/>
+				</fieldset><br/>
+				
+				<div class="sign-button">
+					<input type="submit" value="신청"/>
+					<input type="reset" value="재작성"/>
+					<input type="button" onclick="history.back();" value="취소"/>
+				</div>
 			</form>
 	</div>
 </div>
