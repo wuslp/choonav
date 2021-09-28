@@ -14,6 +14,7 @@
 	
 	<title>공지사항</title>
 	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
+	<link href="/cnav/resources/css/notice.css" rel="stylesheet" type="text/css">
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -38,20 +39,30 @@
 	<br />
 	
 	<h3> 공지사항 </h3>
-	
+	<br />
+	<%-- 제목/내용 검색 --%>
+	<form action="/cnav/notice/list.cnav">
+		<select name="sel">
+			<option value="notiTitle">제목</option>
+			<option value="notiContent">내용</option>
+		</select>
+		<input type="text" name="search" />
+		<input type="submit" value="검색" />
+	</form>  <%-- /spring/board/list.do?sel=writer&search=aaa --%>
+	<br />
 	<!-- 공지사항에 글이 없을 경우 -->
 	<div>
 		<c:if test="${count == 0}">
 		<table>
-		<!-- 회사관계자만 글쓰기버튼 보이게 -->
+			<tr>
+				<td align="center">공지사항이 없습니다.</td>
+			</tr>
+			<!-- 회사관계자만 글쓰기버튼 보이게 -->
 			<c:if test="${sessionScope.sauth=='1'}">
 				<tr>
 					<td><button onclick="window.location='/cnav/notice/writeForm.cnav'"> 글쓰기 </button></td>
 				</tr>
 			</c:if>
-			<tr>
-				<td align="center">공지사항이 없습니다.</td>
-			</tr>
 		</table>
 		</c:if>
 	</div>
@@ -59,14 +70,7 @@
 	<!-- 게시판에 글 있는 경우 -->
 	<div>
 		<c:if test="${count != 0}">
-		<table>
-			<!-- 회사관계자만 글쓰기버튼 보이게 -->
-			<c:if test="${sessionScope.sauth=='1'}">
-				<tr>
-					<td><button onclick="window.location='/cnav/notice/writeForm.cnav'"> 글쓰기 </button></td>
-				</tr>
-			</c:if>
-			
+		<table>			
 			<tr>
 				<td>No.</td>
 				<td>제  목</td>
@@ -88,6 +92,12 @@
 					<td> ${article.readcount} </td>
 				</tr>
 			</c:forEach>
+			<!-- 회사관계자만 글쓰기버튼 보이게 -->
+			<c:if test="${sessionScope.sauth=='1'}">
+				<tr>
+					<td><button onclick="window.location='/cnav/notice/writeForm.cnav'"> 글쓰기 </button></td>
+				</tr>
+			</c:if>
 		</table>
 		</c:if>
 	</div>
@@ -133,21 +143,8 @@
 		</c:if>
 		
 	</c:if> <%-- end:count > 0 --%>
-	
-	
-	<br /> <br />
-	<%-- 제목/내용 검색 --%>
-	<form action="/cnav/notice/list.cnav">
-		<select name="sel">
-			<option value="notiTitle">제목</option>
-			<option value="notiContent">내용</option>
-		</select>
-		<input type="text" name="search" />
-		<input type="submit" value="검색" />
-	</form>  <%-- /spring/board/list.do?sel=writer&search=aaa --%>
 	<br />
 	
-	<h3 style="color:grey"> 현재페이지 : ${pageNum} </h3>
 	<br /> 
 	<c:if test="${sel != null && search != null}">
 		<button onclick="window.location='/cnav/notice/list.cnav'"> 전체 게시글 보기 </button> <br />
