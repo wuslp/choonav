@@ -40,6 +40,7 @@
 .notiBtn{
 	float:right;
 	margin-top : 10px;
+	margin-bottom: 10px;
 }
 	/* 게시글 본문 위치 변경 */
 #notiWrapAll{
@@ -72,4 +73,35 @@
 }
 #topComment {
    white-space:pre;
+}
+.topComWrite{
+	margin: 30px 10px 0px;
+}
+input#subBtn {
+    content-visibility: auto;
+    font-size: smaller;
+    margin: 15px;
+}
+.topComments{
+	margin: 10px 35px 0px 15px;
+}
+.commentName{
+	font-size: 13px;
+    font-weight: 700;
+}
+.comment{
+	line-height: 17px;
+	margin: 5px 0px 5px 15px;
+}
+.commentPre{
+	display: block;
+    margin-top: 0;
+    margin-bottom: 0;
+    overflow: auto;
+    font-size: 0.875em;
+}
+.commentReg{
+	font-size: 12px;
+    color: gray;
+    border-bottom: 1px solid #d9d9d9d6;
 }
