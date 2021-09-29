@@ -80,7 +80,8 @@
 	<div>
         <br>
        <form action="/cnav/topComments/insert.cnav" method="post">
-		 	<input type="text" id="topComment" name="topComment">
+       		<textarea id="topComment" name="topComment" cols="50" rows="10"></textarea>
+		 	<!-- <input type="text" id="topComment" name="topComment"> -->
 		 	<input type="hidden" id="userId" name="userId" value="${sessionScope.sid}">
 		 	<input type="hidden" id="topNum" name="topNum" value="${article.topNum}">
 		 	<input type="hidden" id="code" name="code" value="${sessionScope.scode}">
