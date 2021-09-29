@@ -82,6 +82,12 @@
 	<tr>
 		<td>		
 		<p>${comment.name}
+		<em class="delComm">
+		<c:if test="${sessionScope.sid==comment.userId}">
+			<input type="button" value="삭제" onclick="window.location='/cnav/proComments/delcom.cnav?proComNum=${comment.proComNum}&proNum=${project.proNum}'"/>		
+		</c:if>	
+		</em>
+		</p>
 		<p>${comment.proComment}</p>
 		
 		<fmt:formatDate value="${comment.proReg}" pattern="yyyy.MM.dd" />
