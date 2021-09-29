@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-<html>
 <html>
 <head>
 	<meta charset="UTF-8">
@@ -61,7 +61,11 @@
 						</tr>
 						</c:forEach>
 					</table>
+					</div>
 					
+					<br/>
+					<br/>
+			
 					<%-- 페이지 번호 --%>
 					<div align="center">
 						<c:if test="${count > 0}">
@@ -78,16 +82,15 @@
 				
 						<%-- 검색 안했을때 페이지번호들   --%> 
 						<c:if test="${startPage > pageBlock}">
-							<a href="/cnav/my/bizPjList.cnav?pageNum=${startPage-pageBlock}" class="pageNums"> &lt; &nbsp;</a>
+							<a href="/cnav/my/myTopicList.cnav?pageNum=${startPage-pageBlock}" class="pageNums"> &lt; &nbsp;</a>
 						</c:if>
 						<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
-							<a href="/cnav/my/bizPjList.cnav?pageNum=${i}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
+							<a href="/cnav/my/myTopicList.cnav?pageNum=${i}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
 						</c:forEach>
 						<c:if test="${endPage < pageCount}">
-							&nbsp; <a href="/cnav/my/bizPjList.cnav?pageNum=${startPage+pageBlock}" class="pageNums"> &gt; </a>
+							&nbsp; <a href="/cnav/my/myTopicList.cnav?pageNum=${startPage+pageBlock}" class="pageNums"> &gt; </a>
 						</c:if>
 					</div> <%-- page번호 div 끝 --%>
-				</div>
 			</c:if> <%-- end:count > 0 --%>
 		</c:if>
 	</div>

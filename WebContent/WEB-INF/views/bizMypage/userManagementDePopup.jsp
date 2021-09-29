@@ -32,6 +32,10 @@
 	</script>
 </head>
 <body>
+	<br />
+    <br />
+    
+    <div align="center">
     <form>
         <input type = "hidden" id = "id" name = "id">
         <label>이름 : </label>
@@ -39,7 +43,7 @@
         <br>
         <label>부서명 : </label>
         	<select id="dept" name="dept">
-				<option value="영업팀">마케팅팀</option>
+				<option value="마케팅팀">마케팅팀</option>
 				<option value="영업팀">영업팀</option>
 				<option value="인사팀">인사팀</option>
 				<option value="총무팀">총무팀</option>
@@ -49,7 +53,12 @@
 			</select>
         <br>
     </form>
-    <input type="button" value="수정하기" onclick="updateDeptBtn();"/>
+    </div>
+    <br />
+    <div align="center">
+	    <input type="button" value="수정하기" onclick="updateDeptBtn();"/>
+	    <input type="button" value="닫기" onclick="self.close();"/>
+	</div>
 
 
 </body>

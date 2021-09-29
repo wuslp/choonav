@@ -13,11 +13,12 @@
     border-radius: 20px;
 }
 
-.my-btn button {
+.sendAppList-btn button {
     border: solid 1px #767676;
     background-color: #efefef;
     color: #000000;
     border-radius: 3px;
+    float: right;
 }
 
 .tdd{
@@ -64,42 +65,33 @@ table.appCont2 td{
 }
 
 /* 테이블 */
-.myTable{
-  width: 45%;
+.cnavTable{
+  width: 100%;
   background-color: #fff;
   box-shadow: 0 0 0 2px #e3e3e3;
   border-radius: 0.25rem;
-  text-align: center;
 }
 
-.myTable td{
+.cnavTable td{
 	height:33px;
 	border-bottom: solid thin lightgrey;
 }
-.myList-top {
+.cnavList-top {
     background-color: rgba(0, 0, 0, 0.125)
 } 
-.myTable td a {
+.cnavTable td a {
     text-decoration: none;
     color: #212529;
 }
 
-.myTable td a:hover {
+.cnavTable td a:hover {
     color: #741c7d;
 }   
-.myTable td a:focus {
+.cnavTable td a:focus {
     color: #21252933;
 }   
-
-.myList {
-    text-align: -webkit-center;
-}
-
-td.aa {
-    border-right: solid 1px lightgrey;
-    background-color: #d3d3d342;
-    width: 250px;
-    line-height: 50px;
+.cnavAllList{
+	text-align-last : center;
 }
 
 /* 페이징 */
@@ -119,3 +111,15 @@ td.aa {
 	font-size : x-large;
 	color: #741c7d;
 }
+
+.aa a:hover {
+    text-decoration: none; border: #dfdfdf solid; border-width: 0 0 6px 0;
+} 
+
+.aa a:visited {
+    text-decoration:none; color:#000000;
+} 
+
+.aa a:link {
+    text-decoration:none; color:#000000;
+} 

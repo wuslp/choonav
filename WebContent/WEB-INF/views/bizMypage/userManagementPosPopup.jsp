@@ -32,7 +32,11 @@
 	</script>
 </head>
 <body>
+	<br />
+    <br />
+    	
     <form>
+    	<div align="center">
         <input type = "hidden" id = "id" name = "id">
         <label>이름 : </label>
         	${dto.name}
@@ -49,9 +53,13 @@
 				<option value="사원">사원</option>
 				<option value="인턴">인턴</option>
 			</select>
+		</div>
     </form>
-    <input type="button" value="수정하기" onclick="updatePosBtn();"/>
-
+    	<br />
+    	<div align="center">
+		    <input type="button" value="수정하기" onclick="updatePosBtn();"/>
+		    <input type="button" value="닫기" onclick="self.close();"/>
+    	</div>
 
 </body>
 </html>

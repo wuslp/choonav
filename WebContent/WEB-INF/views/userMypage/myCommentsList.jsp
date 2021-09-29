@@ -9,8 +9,7 @@
 	<title>userCommentsList</title>
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
-	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
-	<link href="/cnav/resources/css/my.css" rel="stylesheet" type="text/css">
+	<link href="/cnav/resources/css/my_comm.css" rel="stylesheet" type="text/css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript"></script>
@@ -22,23 +21,36 @@
 	<div id="layoutSidenav_content">
 	<div id="wrapAll">
 		<h3> 자유게시판 댓글 </h3>
-			<a href="/cnav/my/myCommentsList.cnav?">자유게시판 댓글</a>
-			<a href="/cnav/my/myPjCommentsList.cnav?type=pj">프로젝트 댓글</a>
+			<div class='aa'>
+				<a href="/cnav/my/myCommentsList.cnav?">자유게시판 댓글</a>
+				<a href="/cnav/my/myPjCommentsList.cnav?type=pj">프로젝트 댓글</a>
+			</div>
 			
+			<br/>
 		<c:if test="${count == 0}">
 			<div>작성한 댓글이 없습니다.</div>
 		</c:if>
 		
 		<c:if test="${count > 0}">
-			<div>
-			<c:forEach var="item" items="${articleList}">
-				<div>
-					<div class="divTableCell" onclick="window.location='/cnav/topic/content.cnav?topNum=${item.topNum}'">${item.topComment}</div>
-					<div class="divTableCell" onclick="window.location='/cnav/topic/content.cnav?topNum=${item.topNum}'"><fmt:formatDate value="${item.topReg}" pattern="yy/MM/dd" /></div>
-					<div class="divTableCell" onclick="window.location='/cnav/topic/content.cnav?topNum=${item.topNum}'">[원문제목] ${item.topTitle}</div>
-				</div>
-			</c:forEach>
+			<div class="sendList"> 
+				<table class="cnavTable">
+					<tr class="cnavList-top">
+						<td align="center">댓글</td>
+					</tr>
+					<c:forEach var="item" items="${articleList}">
+					<tr>
+						<td onclick="window.location='/cnav/topic/content.cnav?topNum=${item.topNum}'">
+							${item.topComment}</br>
+							<fmt:formatDate value="${item.topReg}" pattern="yy/MM/dd" /></br>
+							[원문제목] ${item.topTitle}
+						</td>
+					</tr>
+					</c:forEach>
+				</table>
 			</div>
+			
+			<br/>
+			<br/>
 			
 			<%-- 페이지 번호 --%>
 			<div align="center">

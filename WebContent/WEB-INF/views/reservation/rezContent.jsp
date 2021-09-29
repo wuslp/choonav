@@ -28,7 +28,6 @@
 		<input type="button" onclick="a()" value="목록으로"/>
 		<c:if test="${dto.userId == sid}">
 			<input type="button" onclick="deleteConfirm(${dto.rezNum})" value="삭제"/>
-			<input type="button" onclick="rez/allRez3.cnav" value="수정"/>
 		</c:if>
 	</div>
 	

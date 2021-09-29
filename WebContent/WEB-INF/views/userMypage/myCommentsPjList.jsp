@@ -9,8 +9,7 @@
 	<title>userCommentsPjList</title>
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
-	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
-	<link href="/cnav/resources/css/my.css" rel="stylesheet" type="text/css">
+	<link href="/cnav/resources/css/my_comm.css" rel="stylesheet" type="text/css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript"></script>
@@ -23,24 +22,37 @@
 	
 	<div id="wrapAll">
 		<h3> 프로젝트 댓글 </h3>
-			<div class='a'>
+			<div class='aa'>
 				<a href="/cnav/my/myCommentsList.cnav?">자유게시판 댓글</a>
 				<a href="/cnav/my/myPjCommentsList.cnav?type=pj">프로젝트 댓글</a>
 			</div>
+			</br>
 			
 		<c:if test="${count == 0}">
 			<div>작성한 댓글이 없습니다.</div>
 		</c:if>
 		
 		<c:if test="${count > 0}">
-			<c:forEach var="item" items="${articleList}">
-				<div>
-					<div class="divTableCell" onclick="window.location='/cnav/project/proContent.cnav?proNum=${item.proNum}'">${item.proComment}</div>
-					<div class="divTableCell" onclick="window.location='/cnav/project/proContent.cnav?proNum=${item.proNum}'">${item.proReg}</div>
-					<div class="divTableCell" onclick="window.location='/cnav/project/proContent.cnav?proNum=${item.proNum}'">[원문제목] ${item.proName}</div>
-				</div>
-			</c:forEach>
-	
+			<div class="sendList"> 
+				<table class="cnavTable">
+					<tr class="cnavList-top">
+						<td align="center">댓글</td>
+					</tr>
+					<c:forEach var="item" items="${articleList}">
+						<tr>
+							<td onclick="window.location='/cnav/project/proContent.cnav?proNum=${item.proNum}'">
+								${item.proComment}</br>
+								${item.proReg}</br>
+								[원문제목] ${item.proName}</br>
+							</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
+			
+			<br/>
+			<br/>
+			
 			<%-- 페이지 번호 --%>
 			<div align="center">
 				<c:if test="${count > 0}">
@@ -56,13 +68,13 @@
 				
 					<%-- 검색 안했을때 페이지번호들   --%> 
 					<c:if test="${startPage > pageBlock}">
-						<a href="/cnav/my/myCommentsList.cnav?pageNum=${startPage-pageBlock}" class="pageNums"> &lt; &nbsp;</a>
+						<a href="/cnav/my/myPjCommentsList.cnav?pageNum=${startPage-pageBlock}" class="pageNums"> &lt; &nbsp;</a>
 					</c:if>
 					<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
-						<a href="/cnav/my/myCommentsList.cnav?pageNum=${i}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
+						<a href="/cnav/my/myPjCommentsList.cnav?pageNum=${i}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
 					</c:forEach>
 					<c:if test="${endPage < pageCount}">
-						&nbsp; <a href="/cnav/my/myCommentsList.cnav?pageNum=${startPage+pageBlock}" class="pageNums"> &gt; </a>
+						&nbsp; <a href="/cnav/my/myPjCommentsList.cnav?pageNum=${startPage+pageBlock}" class="pageNums"> &gt; </a>
 					</c:if>
 				</c:if> <%-- end:count > 0 --%>
 			</div> <%-- page번호 div 끝 --%>

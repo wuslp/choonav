@@ -59,6 +59,10 @@
 						</tr>
 						</c:forEach>
 					</table>
+					</div>
+					
+					</br>
+					</br>
 				
 				<%-- 페이지 번호 --%>
 				<div align="center">
@@ -75,19 +79,18 @@
 				
 						<%-- 검색 안했을때 페이지번호들   --%> 
 						<c:if test="${startPage > pageBlock}">
-							<a href="/cnav/my/bizPjList.cnav?pageNum=${startPage-pageBlock}" class="pageNums"> &lt; &nbsp;</a>
+							<a href="/cnav/my/myPjList.cnav?pageNum=${startPage-pageBlock}" class="pageNums"> &lt; &nbsp;</a>
 						</c:if>
 						<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
-							<a href="/cnav/my/bizPjList.cnav?pageNum=${i}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
+							<a href="/cnav/my/myPjList.cnav?pageNum=${i}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
 						</c:forEach>
 						<c:if test="${endPage < pageCount}">
-							&nbsp; <a href="/cnav/my/bizPjList.cnav?pageNum=${startPage+pageBlock}" class="pageNums"> &gt; </a>
+							&nbsp; <a href="/cnav/my/myPjList.cnav?pageNum=${startPage+pageBlock}" class="pageNums"> &gt; </a>
 						</c:if>
 					</c:if> <%-- page번호 c:if 끝 --%>
 				</div> <%-- page번호 div 끝 --%>
 			</c:if> <%-- end:count > 0 --%>
 		</div> <%--wrapAll end --%>
-	</div>
 	<jsp:include page="/include/footer.jsp" />
 </body>
 	<script>
