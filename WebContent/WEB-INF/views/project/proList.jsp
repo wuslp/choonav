@@ -85,7 +85,7 @@
 					<c:if test="${project.proState=='완료'}">
 					<div class="stateOK">완료</div>
 					</c:if>
-				</td>
+				</td> 
 				
 				<td>${project.name}</td>		
 			</tr>
