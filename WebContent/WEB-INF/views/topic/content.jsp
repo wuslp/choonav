@@ -13,19 +13,14 @@
 	<meta name="author" content="" />
 	<title>자유게시판</title>
 	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
+	<link href="/cnav/resources/css/notice.css" rel="stylesheet" type="text/css">
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 </head>
 
 <body class="sb-nav-fixed">
-	<jsp:include page="/include/top_nav_bar.jsp" />
-	<div id="layoutSidenav">
-		<jsp:include page="/include/left_nav_bar.jsp" />
-		<div id="layoutSidenav_content">
-			<div id="wrapAll">	
-<!--로그인된 세션이 없을경우 startPage 로 이동시켜주기  -->
-	<%-- <div id=""> 
+	<!--로그인된 세션이 없을경우 startPage 로 이동시켜주기  -->
 		<c:if test="${sessionScope.sid == null}">
 		<script>
 			alert("로그인후 이용할 수 있습니다");
@@ -33,43 +28,54 @@
 	    	window.location.href = link;
 	    	</script>
 		</c:if>
-	</div> --%>
-	<br />
-	<h3> 자유게시판 </h3>
+		
+	<jsp:include page="/include/top_nav_bar.jsp" />
+	<div id="layoutSidenav">
+		<jsp:include page="/include/left_nav_bar.jsp" />
+		<div id="layoutSidenav_content">
+			<div id="notiWrapAll">	
+
+
 	<!-- 게시글 본문 보여주기 제목, 내용, 작성자, 날짜 -->
-	<div>
-		<table>
+	<div class="notiContent">
+		<table class="notiTable">
 			<tr>
-				<td colspan="2"> <b>${article.topTitle}</b> </td>
+				<td><a href="/cnav/topic/list.cnav?pageNum=${pageNum}"> 자유게시판> </a></td>
 			</tr>
 			<tr>
-				<td colspan="2" height="100"> ${article.topContent} </td>
+				<td class="notiTitle">${article.topTitle} </td>
 			</tr>
 			<tr>
-				<td>posted by <b>${article.name}</b>
-					at <fmt:formatDate value="${article.topDate}" pattern="yyyy-MM-dd" />
+				<td class="writer">${article.name}</td>
+			</tr>
+			<tr>
+				<td class="date">
+					<fmt:formatDate value="${article.topDate}" pattern="yyyy-MM-dd HH:mm" />
+					조회 ${article.readcount}
 				</td>
-				<td> ${article.readcount} viewed </td>
 			</tr>
 			<tr>
-				<td colspan="2"> 
-					<!-- 작성자만 수정 보이게 -->
-					<c:if test="${article.userId == sessionScope.sid}">
-							<button onclick="window.location='/cnav/topic/modifyForm.cnav?topNum=${article.topNum}&pageNum=${pageNum}'">수 정</button>
-					</c:if>
-					<!--회사 관리자, 작성자 만 삭제보이게  -->
-					<c:if test="${sessionScope.sauth=='1' || article.userId == sessionScope.sid}">
-							<input type="button" value="삭제" onclick="del(${article.topNum})">
-							<button onclick="window.location='/cnav/topic/list.cnav'">리스트</button>
-					</c:if>
-					<!-- 로그인한사람은 목록만 보이게 -->
-					<c:if test="${article.userId != sessionScope.sid && sessionScope.sauth == '0'}">
-							<button onclick="window.location='/cnav/topic/list.cnav'">리스트</button>
-					</c:if>
-				</td>
+				<td height="100"> ${article.topContent} </td>
 			</tr>
 		</table>
 	</div>
+	
+	<div class="notiBtn">
+		<!-- 작성자만 수정 보이게 -->
+		<c:if test="${article.userId == sessionScope.sid}">
+			<button onclick="window.location='/cnav/topic/modifyForm.cnav?topNum=${article.topNum}&pageNum=${pageNum}'">수 정</button>
+		</c:if>
+		<!--회사 관리자, 작성자 만 삭제보이게  -->
+		<c:if test="${sessionScope.sauth=='1' || article.userId == sessionScope.sid}">
+			<input type="button" value="삭제" onclick="del(${article.topNum})">
+			<button onclick="window.location='/cnav/topic/list.cnav'">리스트</button>
+		</c:if>
+		<!-- 로그인한사람은 목록만 보이게 -->
+		<c:if test="${article.userId != sessionScope.sid && sessionScope.sauth == '0'}">
+			<button onclick="window.location='/cnav/topic/list.cnav'">리스트</button>
+		</c:if>
+	</div>
+	
 	<!-- 댓글 작성 -->
 	<div>
         <br>

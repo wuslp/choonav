@@ -53,7 +53,10 @@ public class TopCommentsDAOImpl implements TopCommentsDAO{
 		return sqlSession.selectOne("topComments.getName", userId);
 	}
 
-
-
+	// 게시글 삭제시 해당게시글 댓글 모두 삭제
+	public void delComments(int topNum) throws SQLException {
+		sqlSession.update("topComments.delComments", topNum);
+	}
+	
 	
 }

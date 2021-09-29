@@ -71,6 +71,7 @@
 				<button onclick="window.location='/cnav/notice/list.cnav'">목록</button>
 		</c:if>
 	</div>
+	
 </div> <!-- wrapAll -->
 			<jsp:include page="/include/footer.jsp" />
 		</div><!-- layoutSidenav_content" -->
