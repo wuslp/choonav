@@ -13,6 +13,7 @@
 	<meta name="author" content="" />
 <title>보낸 메일함</title>
 	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
+	<link href="/cnav/resources/css/mail.css" rel="stylesheet" type="text/css">
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -96,6 +97,21 @@
 	
 	<h3> 보낸 메일함 </h3>
 	
+	<%-- 받은 사람/내용 검색 --%>
+	<div class="searchMail">
+		<form action="/cnav/mail/sendMailList.cnav">
+			<select name="sel">
+				<option value="ridName">받는 사람</option>
+				<option value="mailContent">내용</option>
+			</select>
+			<input type="text" name="search" />
+			<input type="submit" value="검색" />
+		</form>
+	</div>
+	<c:if test="${sel != null && search != null}">
+		<button onclick="window.location='/cnav/mail/sendMailList.cnav'"> 보낸 메일함 </button> <br />
+	</c:if>
+	
 	<c:if test="${count == 0}">
 	<table>
 		<tr>
@@ -106,18 +122,16 @@
 	
 	<c:if test="${count != 0}">
 	<div>
-		<table>
-			<div>
-				<tr>
-					<td>
-						<input type="checkbox" name="allCheck" id="allCheck"/>
-					</td>
-					<td>받는 사람</td>
-					<td>제  목</td>
-					<td>시  간</td>
-					<td>읽음 여부</td>
-				</tr>
-			</div>
+		<table class="cnavTable">
+			<tr class="cnavList-top">
+				<td>
+					<input type="checkbox" name="allCheck" id="allCheck"/>
+				</td>
+				<td>받는 사람</td>
+				<td>제  목</td>
+				<td>시  간</td>
+				<td>읽음 여부</td>
+			</tr>
 			<div>
 				<c:forEach var="sendMailList" items="${sendMailList}">
 				<tr>
@@ -139,17 +153,15 @@
 					<c:if test="${sendMailList.mailResult == 0}">
 						<td align="center"> X </td>
 					</c:if>
-				</c:forEach>
 				</tr>
+				</c:forEach>
 			</div>
+		</table>
 			<div class="delete">
 				<td><input type="button" value="선택삭제" class="del-btn" onclick="deleteValue();" /></td>
 			</div>
-		</table>
 	</div>
 	</c:if>
-	
-		<br /> <br /> 
 	<%-- 페이지 번호 --%>
 	<div>
 	<c:if test="${count > 0}">
@@ -190,23 +202,9 @@
 		</c:if>
 	</c:if>
 	
-	<%-- 받은 사람/내용 검색 --%>
-	<form action="/cnav/mail/sendMailList.cnav">
-		<select name="sel">
-			<option value="ridName">받는 사람</option>
-			<option value="mailContent">내용</option>
-		</select>
-		<input type="text" name="search" />
-		<input type="submit" value="검색" />
-	</form>
-	<br />
-	<br /> 
-	<c:if test="${sel != null && search != null}">
-		<button onclick="window.location='/cnav/mail/sendMailList.cnav'"> 보낸 메일함 </button> <br />
-	</c:if>
+
+
 	</div>
-	
-	
 </div> <!-- wrapAll -->
 			<jsp:include page="/include/footer.jsp" />
 		</div><!-- layoutSidenav_content" -->
