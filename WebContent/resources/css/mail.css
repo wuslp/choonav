@@ -1,3 +1,58 @@
 .searchMail form{
 	text-align-last : center;
 }
+/* 받은 메일함 */
+.recMailList-btn button {
+    border: solid 1px #767676;
+    background-color: #efefef;
+    color: #000000;
+    border-radius: 3px;
+    float: right;
+}
+
+.recMailList-btn button:hover {
+	border: solid 1px #767676;
+    background-color: #d2ced2a8;
+    color: #000000;
+    border-radius: 3px;
+    float: right;
+}
+
+/* 보낸 메일함 */
+.sendMailList-btn button {
+    border: solid 1px #767676;
+    background-color: #efefef;
+    color: #000000;
+    border-radius: 3px;
+    float: right;
+}
+.sendMailList-btn button:hover {
+	border: solid 1px #767676;
+    background-color: #d2ced2a8;
+    color: #000000;
+    border-radius: 3px;
+    float: right;
+}
+
+.delete .del-btn {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border: solid 1px #767676;
+    background-color: #efefef;
+    color: #000000;
+    border-radius: 3px;
+}
+
+/*메일 내용 보기...하트*/
+.mailConDiv {
+	float: center;
+}
+
+
+
+.mailConDiv .mailCon {
+	border: 1px solid;
+	padding: 10px; 
+	width: 33%;
+	display: center;
+}
