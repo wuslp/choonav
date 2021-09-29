@@ -106,11 +106,13 @@
 			</select>
 			<input type="text" name="search" />
 			<input type="submit" value="검색" />
-		</form>
-	</div>	
-	<c:if test="${sel != null && search != null}">
-		<button onclick="window.location='/cnav/mail/recMailList.cnav'"> 받은 메일함 </button> <br />
-	</c:if>
+		</form><br/>
+	</div>
+	<div class="recMailList-btn">
+		<c:if test="${sel != null && search != null}">
+			<button onclick="window.location='/cnav/mail/recMailList.cnav'"> 받은 메일함 </button> <br />
+		</c:if>
+	</div>
 
 	
 	<c:if test="${count == 0}">

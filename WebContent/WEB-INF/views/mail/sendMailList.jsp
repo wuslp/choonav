@@ -108,12 +108,14 @@
 			<input type="submit" value="검색" />
 		</form>
 	</div>
-	<c:if test="${sel != null && search != null}">
-		<button onclick="window.location='/cnav/mail/sendMailList.cnav'"> 보낸 메일함 </button> <br />
-	</c:if>
+	<div class="sendMailList-btn">
+		<c:if test="${sel != null && search != null}">
+			<button onclick="window.location='/cnav/mail/sendMailList.cnav'"> 보낸 메일함 </button> <br />
+		</c:if>
+	</div>
 	
 	<c:if test="${count == 0}">
-	<table>
+	<table class="cnavTable">
 		<tr>
 			<td align="center"> 보낸 메일이 없습니다. </td>
 		</tr>
@@ -121,46 +123,46 @@
 	</c:if>
 	
 	<c:if test="${count != 0}">
-	<div>
-		<table class="cnavTable">
-			<tr class="cnavList-top">
-				<td>
-					<input type="checkbox" name="allCheck" id="allCheck"/>
-				</td>
-				<td>받는 사람</td>
-				<td>제  목</td>
-				<td>시  간</td>
-				<td>읽음 여부</td>
-			</tr>
-			<div>
-				<c:forEach var="sendMailList" items="${sendMailList}">
-				<tr>
-					<td class="checkBox">
-						<input type="checkbox" name="RowCheck" class="chBox" value="${sendMailList.mailNum}" />
-					</td>
+		<div>
+			<table class="cnavTable">
+				<tr class="cnavList-top">
 					<td>
-						${sendMailList.ridName}
+						<input type="checkbox" name="allCheck" id="allCheck"/>
 					</td>
-					<td>
-						<a href="/cnav/mail/mail.cnav?num=${sendMailList.mailNum}&pageNum=${pageNum}"> ${sendMailList.mailSub} </a>
-					</td>
-					<td>
-						${sendMailList.mailReg}
-					</td>
-					<c:if test="${sendMailList.mailResult != 0}">
-						<td align="center"> O </td>
-					</c:if>
-					<c:if test="${sendMailList.mailResult == 0}">
-						<td align="center"> X </td>
-					</c:if>
+					<td>받는 사람</td>
+					<td>제  목</td>
+					<td>시  간</td>
+					<td>읽음 여부</td>
 				</tr>
-				</c:forEach>
-			</div>
-		</table>
-			<div class="delete">
-				<td><input type="button" value="선택삭제" class="del-btn" onclick="deleteValue();" /></td>
-			</div>
-	</div>
+				<div>
+					<c:forEach var="sendMailList" items="${sendMailList}">
+					<tr>
+						<td class="checkBox">
+							<input type="checkbox" name="RowCheck" class="chBox" value="${sendMailList.mailNum}" />
+						</td>
+						<td>
+							${sendMailList.ridName}
+						</td>
+						<td>
+							<a href="/cnav/mail/mail.cnav?num=${sendMailList.mailNum}&pageNum=${pageNum}"> ${sendMailList.mailSub} </a>
+						</td>
+						<td>
+							${sendMailList.mailReg}
+						</td>
+						<c:if test="${sendMailList.mailResult != 0}">
+							<td align="center"> O </td>
+						</c:if>
+						<c:if test="${sendMailList.mailResult == 0}">
+							<td align="center"> X </td>
+						</c:if>
+					</tr>
+					</c:forEach>
+				</div>
+			</table>
+				<div class="delete">
+					<input type="button" value="선택삭제" class="del-btn" onclick="deleteValue();" />
+				</div>
+		</div>
 	</c:if>
 	<%-- 페이지 번호 --%>
 	<div>

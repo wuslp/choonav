@@ -12,6 +12,7 @@
 	<meta name="author" content="" />
 	<title>메일 본문 확인</title>
 		<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
+		<link href="/cnav/resources/css/mail.css" rel="stylesheet" type="text/css">
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -43,11 +44,12 @@
 	   		</script>
 		</c:if>
 	</div>
-		<div>
-			<div>
-				<h4>제목 :  ${mail.mailSub} </h4>
+		<h3> 메일 내용 보기 </h3>
+		<div class="mailConDiv">
+			<div class="mailConleft">
+				<h4> 제목 :  ${mail.mailSub} </h4>
 			</div>
-			<div>
+			<div class="mailConleft">
 				<c:if test="${mail.mailRid == id}">
 					보낸 사람 : ${mail.userId}
 				</c:if>
@@ -55,12 +57,12 @@
 					받는 사람 : ${mail.mailRid}
 				</c:if>
 			</div>
-			<div>
-				${mail.mailReg}
+			<div class="mailConleft">
+				시간 : ${mail.mailReg}
 			</div>
 			<br />
 			<br />
-			<div style="border: 1px solid; float: center; padding: 10px; width: 33%;">
+			<div class="mailCon">
 				${mail.mailContent}
 			</div>
 			<br />
