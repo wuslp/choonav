@@ -120,12 +120,12 @@
 								1(필수) : <input type="text" name="ans1" id="ans1"/><br/>
 								2(필수) : <input type="text" name="ans2" id="ans2"/><br/>
 								3(옵션) : <input type="text" name="ans3"/><br/>
-								4(옵션) : <input type="text" name="ans4"/><br/><br/><br/>
+								4(옵션) : <input type="text" name="ans4"/><br/><br/>
 									<!-- 유효성 검사 추가 -->
-							</form>
-						</div><br/><!-- pollconWrap -->
 									<input type="submit" value="만들기" id="" >
 									<input type="button" value="취소" id="" onClick="window.location='/cnav/poll/pollList.cnav'">
+							</form>
+						</div><br/><!-- pollconWrap -->
 								
 					</div><!-- pollWrap -->
 				</div>
