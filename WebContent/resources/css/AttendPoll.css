@@ -18,3 +18,12 @@
     background-color: #fff6004d;;
     border-radius: 20px;
 }
+.makePoll table input{
+	background : #8a909463;
+	border:2px solid #f080dd99;
+	color:white;
+	padding:8px 20px;
+	border-radius:20px;
+	margin-top:5px;
+	outline :none;
+}

@@ -14,6 +14,7 @@
 	<title>pollForm page</title>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
+	<link href="/cnav/resources/css/AttendPoll.css" rel="stylesheet" type="text/css">
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -94,9 +95,9 @@
 			    		</script>
 					</c:if>
 				</div>
-				<!--투표폼 본문  -->
+				<!--투표폼 본문 -->
 				<div id="wrapAll">
-					<div id="">
+					<div class="makePoll">
 					<h3>투표 만들기</h3><br/><br/><br/>
 						<form action="/cnav/poll/pollPro.cnav" onsubmit="return check()" name="pF">
 							<div id="">
@@ -124,7 +125,7 @@
 								<input type="button" value="취소" id="" onClick="window.location='/cnav/poll/pollList.cnav'">
 							</div>
 						</form>
-					</div>
+					</div><!-- makePoll -->
 				</div>
 			</div>
 			<jsp:include page="/include/footer.jsp" />
