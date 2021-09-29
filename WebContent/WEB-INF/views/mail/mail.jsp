@@ -50,10 +50,10 @@
 				<h4> 제목 :  ${mail.mailSub} </h4>
 
 				<c:if test="${mail.mailRid == id}">
-					보낸 사람 : ${mail.userId}
+					보낸 사람 : ${mail.userName}
 				</c:if>
 				<c:if test="${mail.userId == id}">
-					받는 사람 : ${mail.mailRid}
+					받는 사람 : ${mail.ridName}
 				</c:if><br/>
 				
 				시간 : ${mail.mailReg}
@@ -62,7 +62,7 @@
 			<br />
 			<div class="mailbox">
 			<div class="mailCon">
-				${mail.mailContent}
+				<pre>${mail.mailContent}</pre>
 			</div>
 			</div>
 			<br />

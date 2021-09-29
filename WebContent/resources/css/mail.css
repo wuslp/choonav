@@ -1,5 +1,6 @@
 .searchMail form{
 	text-align-last : center;
+	margin-bottom: 10px;
 }
 /* 받은 메일함 */
 .recMailList-btn button {
@@ -41,21 +42,49 @@
     background-color: #efefef;
     color: #000000;
     border-radius: 3px;
+    font-size: 15px;
 }
 
 /*메일 내용 보기...하트*/
 .mailConDiv {
 	width:100%;
+	margin-top: 20px;
 }
 .mailbox {
+	border-top: 1px solid;
     text-align: -webkit-center;
 }
 .mailCon {
-	border: 1px solid;
 	padding: 10px; 
-	width: 60%;
 	height:100px;
 }
 .mailBtn {
+	margin-top: 250px;
     text-align-last: center;
+    font-size: small;
 }
+
+/*메일 보내기*/
+.writeMailDiv {
+	margin-top: 15px;
+	font-size: 15px;
+}
+
+.wriSele {
+	border-radius:15px;
+	font-size: 15px;
+}
+
+.wrIn {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.wrIn input{
+   border-radius:15px;
+}
+
+#mailContent {
+	white-space:pre;
+}
+
