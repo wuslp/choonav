@@ -14,6 +14,7 @@
 	<title>pollForm page</title>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
+	<link href="/cnav/resources/css/AttendPoll.css" rel="stylesheet" type="text/css">
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -94,35 +95,39 @@
 			    		</script>
 					</c:if>
 				</div>
-				<!--투표폼 본문  -->
-				<div id="">
-				<h3>투표 만들기</h3><br/><br/><br/>
-					<form action="/cnav/poll/pollPro.cnav" onsubmit="return check()" name="pF">
-						<div id="">
-						투표기간(필수) <input type="date" id="stDate" name="stDate" min=<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" /> > <strong>~</strong> <input type="date" id="endDate" name="endDate" ><br/>
-						제목(필수) <input type="text" id="pollTitle" name="pollTitle"/><br/>
-						대상(필수) &nbsp;
-							<select id="target" name="target" id="target">
-								<option value="전체" selected>전체</option>
-								<option value="영업팀">마케팅팀</option>
-								<option value="영업팀">영업팀</option>
-								<option value="인사팀">인사팀</option>
-								<option value="총무팀">총무팀</option>
-								<option value="디자인팀">디자인팀</option>
-								<option value="개발팀">개발팀</option>
-								<option value="기획팀">기획팀</option>
-							</select><br/>
-						내용 <input type="text" id="pollCon" name="pollCon"/><br/>
-						항목<br/>
-						1(필수) :<input type="text" name="ans1" id="ans1"/><br/>
-						2(필수) :<input type="text" name="ans2" id="ans2"/><br/>
-						3 		:<input type="text" name="ans3"/><br/>
-						4 		:<input type="text" name="ans4"/><br/><br/><br/>
-							<!-- 유효성 검사 추가 -->
-							<input type="submit" value="만들기" id="" >
-							<input type="button" value="취소" id="" onClick="window.location='/cnav/poll/pollList.cnav'">
-						</div>
-					</form>
+				<!--투표폼 본문 -->
+				<div id="wrapAll">
+					<h3>투표 만들기</h3><br/><br/><br/>
+					<div class="pollWrap">
+						<div class="pollconWrap">
+							<form action="/cnav/poll/pollPro.cnav" onsubmit="return check()" name="pF">
+								<br/><br/>
+								투표기간(필수) : <input type="date" id="stDate" name="stDate" min=<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" /> > <strong>~</strong> <input type="date" id="endDate" name="endDate" ><br/>
+								제목(필수) : <input type="text" id="pollTitle" name="pollTitle"/><br/>
+								대상(필수) &nbsp;:
+									<select id="target" name="target" id="target">
+										<option value="전체" selected>전체</option>
+										<option value="영업팀">마케팅팀</option>
+										<option value="영업팀">영업팀</option>
+										<option value="인사팀">인사팀</option>
+										<option value="총무팀">총무팀</option>
+										<option value="디자인팀">디자인팀</option>
+										<option value="개발팀">개발팀</option>
+										<option value="기획팀">기획팀</option>
+									</select><br/>
+								내용 : <input type="text" id="pollCon" name="pollCon"/><br/><br/>
+								항목<br/>
+								1(필수) : <input type="text" name="ans1" id="ans1"/><br/>
+								2(필수) : <input type="text" name="ans2" id="ans2"/><br/>
+								3(옵션) : <input type="text" name="ans3"/><br/>
+								4(옵션) : <input type="text" name="ans4"/><br/><br/><br/>
+									<!-- 유효성 검사 추가 -->
+							</form>
+						</div><br/><!-- pollconWrap -->
+									<input type="submit" value="만들기" id="" >
+									<input type="button" value="취소" id="" onClick="window.location='/cnav/poll/pollList.cnav'">
+								
+					</div><!-- pollWrap -->
 				</div>
 			</div>
 			<jsp:include page="/include/footer.jsp" />

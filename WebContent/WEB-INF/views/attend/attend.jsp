@@ -21,7 +21,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 	<script type="text/javascript">
  	$(document).ready(function(){
-
  		//여기서부터		
  		  $("#button1").on("click", function() {
 				//#button1'값 가져오기
@@ -106,6 +105,28 @@
  		 })
  	})//ready
  	
+ 	$('#print').on('click', function(){
+
+ 		 window.print();  // 클릭액션 : 버튼클릭시 인쇄창팝업
+
+ 	  });
+
+
+
+ 	  $('#print').mouseover(function(){
+
+ 		  $(this).css("color",'#cdee1d');  // 마우스오버액션 : 커서가 올라갈 경우 다른색상으로 변경 
+
+ 	  });
+
+
+
+ 	  $('#print').mouseleave(function(){
+
+ 		  $(this).css("color",'#0c4276');  // 마우스릴리즈액션 : 커서가 밖에 위치할 경우 기존색상으로 변경 
+
+ 	  });
+
 	function check(){
 		var search1 = $("#search1").val();
 		//조회 시작일 필수
@@ -176,7 +197,7 @@
 						<!--근태관리 페이지 본문 시작  -->
 						<h3>근태관리</h3>
 						<!-- 실시간 날짜 -->
-						<div class="attendLine">
+						<div class="attendLine"><br/>
 							<h6>Today : <fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" /></h6>
 							<div id="" class="attendButton">
 								<!--출근 퇴근 기록여부에따른 버튼 able  -->
@@ -197,7 +218,6 @@
 									<input type="datetime" id="leavetime" value="" disabled>
 								</c:if>
 							</div><br/><br/><br/><br/><br/>
-							
 							<div id="" class="">
 									<form action="/cnav/attend/attend.cnav" method="get" onsubmit="return check()">
 									<select id="attcategory" name="attcategory">
@@ -213,12 +233,13 @@
 									<input type="date" min="" max=<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" /> id="search2" name="search2"/>
 									<input id="datesearch" type="submit" value="검색" />
 									</form>
-							</div><br/><br/>
+							</div>
 											
 									
 							<div id="" >	
-								<table class="attendTable" border="1">
-									<tr>
+								<div align="right"><i id="print" style="cursor: pointer; color:#000000 " class="fa fa-print print-button fa-1x"  onclick="window.print()"></i><font size="1em" style="font-weight: bold; ">인쇄하기</font></div>
+								<table class="cnavTable">
+									<tr class="cnavList-top">
 										<td>날짜</td>
 										<td>&nbsp;근태</td>
 										<td>&nbsp;출근</td>
@@ -230,7 +251,23 @@
 										<c:forEach var="List" items="${userAttendList }">
 										<tr id="">
 											<td>&nbsp;<fmt:formatDate value="${List.attDate }" type="date"/></td>
-											<td>&emsp;${List.attendance }</td>
+											<td>
+												<div class="stateOk" >
+													<c:if test="${List.attendance=='정상출근' }">
+														정상출근
+													</c:if>
+												</div>
+												<div class="stateNow" >
+													<c:if test="${List.attendance=='지각' }">
+														지각
+													</c:if>
+												</div>
+												<div class="stateRoading" >
+													<c:if test="${List.attendance=='휴가' }">
+														휴가
+													</c:if>
+												</div>
+											</td>
 											<td>&emsp;<fmt:formatDate value="${List.workTime }" pattern="HH:mm" /></td>
 											<td>&emsp;<fmt:formatDate value="${List.leaveTime }" pattern="HH:mm" /></td>
 											<td>${List.reason }</td>
@@ -242,7 +279,6 @@
 											<td>근태기록이 존재하지 않습니다</td>	
 										</tr>
 									</c:if>
-									
 								</table>
 							</div><br /> <br /> 
 						</div><!-- attendLine -->

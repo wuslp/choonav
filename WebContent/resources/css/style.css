@@ -83,7 +83,6 @@ body {
     transform: translate(-50%,-50%);
     color: white;
     text-align: center;
-    font-family: cursive;
 }
 .signup table input{
 	background : #8a909463;
@@ -96,7 +95,7 @@ body {
 }
 
 .signup table select{
-    background: none;
+    background: #8a909463;
     border: 2px solid #f080dd99;
     color: white;
     padding: 8px 30px;
@@ -143,7 +142,7 @@ body {
 .cnavTable{
   width: 100%;
   background-color: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.125);
+  box-shadow: 0 0 0 2px #e3e3e3;
   border-radius: 0.25rem;
   text-align-last: center;
 }
@@ -165,6 +164,15 @@ body {
 .cnavTable td a:focus {
     color: #21252933;
 }   
-.cnavAllList form{
+.cnavAllList{
 	text-align-last : center;
+}
+
+/* 페이징 */
+.pageNums-all {
+    text-align: -webkit-center;
+}
+.pageNums{
+	text-decoration: none;
+    color: #000;
 }

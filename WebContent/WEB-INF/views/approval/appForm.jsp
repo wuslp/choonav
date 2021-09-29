@@ -11,6 +11,7 @@
 	<meta name="author" content="" />
 	<title>결재 문서 작성</title>
 	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
+	<link href="/cnav/resources/css/approval.css" rel="stylesheet" type="text/css">
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -58,40 +59,74 @@
 	<div id="layoutSidenav">
 		<jsp:include page="/include/left_nav_bar.jsp" />
 		<div id="layoutSidenav_content">
-			
-	<h2> 결재 문서 작성 </h2>
+		<div id="wrapAll">	
+	<h3> 결재 문서 작성 </h3>
+	<div class="appForm">
 	<form action="/cnav/approval/appPro.cnav" method="post"  name="inputForm"  onsubmit="return check()">
 		<input type="hidden" name="appNum" value="${appNum}"/>
-		문서형식 
-		<select name="appType">
-			<option value="품의서">품의서</option> 
-			<option value="보고서">보고서</option> 
-			<option value="휴가신청서">휴가신청서</option>  
-		</select>
-		요청부서 	
-		<select name="dept"> 
-			<option value="마케팅">마케팅팀</option> 
-			<option value="영업">영업팀</option> 
-			<option value="기획">인사팀</option> 
-			<option value="개발">총무팀</option> 
-			<option value="개발">디자인팀</option> 
-			<option value="개발">개발팀</option> 
-			<option value="개발">기획팀</option> 
-		</select><br/>
-		결재자
-		<select name="id1">
-			<option value="">선택</option>
-				<c:forEach var="users" items="${list}">
-					<option value="${users.userId}">${users.name} ${users.position}</option>
-				</c:forEach> 	
-		</select><br/>
-		
-		일시
-		시작일 <input type="date" name="appStart"/>
-		종료일 <input type="date" name="appFinish"/>
-		<br/>
-		
 		<table>
+			<tr>
+				<td>
+					문서형식
+				</td>
+				<td>
+					<select name="appType">
+						<option value="품의서">품의서</option> 
+						<option value="보고서">보고서</option> 
+						<option value="휴가신청서">휴가신청서</option>  
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					요청부서
+				</td>
+				<td>
+					<select name="dept"> 
+						<option value="마케팅">마케팅팀</option> 
+						<option value="영업">영업팀</option> 
+						<option value="기획">인사팀</option> 
+						<option value="개발">총무팀</option> 
+						<option value="개발">디자인팀</option> 
+						<option value="개발">개발팀</option> 
+						<option value="개발">기획팀</option> 
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					결재자
+				</td>
+				<td>
+					<select name="id1">
+						<option value="">선택</option>
+							<c:forEach var="users" items="${list}">
+								<option value="${users.userId}">${users.name} ${users.position}</option>
+							</c:forEach> 	
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					시작일 
+				</td>
+				<td>
+					<input type="date" name="appStart"/>
+				</td>
+			</tr>
+			<tr>	
+				<td>
+					종료일 
+				</td>
+				<td>
+					<input type="date" name="appFinish"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				
+				</td>
+			</tr>
 			<tr>
 				<td> 제목 </td>
 				<td><input type="text" name="appTitle" id="appTitle"></td>
@@ -105,13 +140,18 @@
 				<td><input type="text" name="appRequest"></td>
 			</tr>
 		</table>
-	
-		<input type="submit" value="등록"/>
-		<input type="button" value="취소" onclick="window.location='/cnav/approval/sendAppList.cnav'"/>
+		
+			<div class="appConBtn">
+				<input type="submit" value="등록"/>
+				<input type="button" value="취소" onclick="window.location='/cnav/approval/sendAppList.cnav'"/>
+			</div>
 	</form>	
-<jsp:include page="/include/footer.jsp" />
-			
-		</div><!-- layoutSidenav_content" -->
+	</div> <!-- appForm -->
+	
+			</div> <!-- wrapAll -->	
+	<jsp:include page="/include/footer.jsp" />
+		</div> <!-- layoutSidenav_content" -->
+		</div><!-- id="layoutSidenav" -->	
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 		<script src="<%=request.getContextPath()%>/resources/startbootstrap/js/scripts.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
@@ -119,6 +159,5 @@
 		<script src="<%=request.getContextPath()%>/resources/startbootstrap/assets/demo/chart-bar-demo.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
 		<script src="<%=request.getContextPath()%>/resource/startbootstrap/js/datatables-simple-demo.js"></script>
-	</div><!-- id="layoutSidenav" -->
 </body>
 </html>
