@@ -97,7 +97,7 @@
 				</div>
 				<!--투표폼 본문 -->
 				<div id="wrapAll">
-					<h3>투표 만들기</h3><br/><br/><br/>
+					<h3>투표 만들기</h3><br/>
 					<div class="pollWrap">
 						<div class="pollconWrap">
 							<form action="/cnav/poll/pollPro.cnav" onsubmit="return check()" name="pF" class="pollFormWrap">

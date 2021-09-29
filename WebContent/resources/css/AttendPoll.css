@@ -94,17 +94,19 @@
 }
 .pollResWrap {
     text-align: -webkit-center;
-    padding: 10px;
     font-weight: 500;
     margin-top: 50px;
     font-size: 25px;
 }
 .pollconResWrap {
-    background-color: #e6d8e6a1;
-    margin: 50px;
-    background-size: 200px;
-    width: 400px;
     border-radius:20px;border: solid thin;
     width: 580px;
-    height: 450px;
+    height: 60%;
+}
+
+.cssBar {
+    text-align: -webkit-center;
+    border-radius: 20px;
+    background-color: #e6d8e6a1;
+    margin: 0 20px 20px;
 }
