@@ -43,4 +43,10 @@
 	<update id="downRecnt" parameterType="int">
 		update topic set recnt = recnt-1 where topNum = #{value}
 	</update>
+	
+	<!-- 게시물 삭제시 해당 게시물 댓글 모두 삭제 -->
+	<delete id="delComments" parameterType="int">
+		delete from topComments where topNum=#{value}
+	</delete>
+	
 </mapper>

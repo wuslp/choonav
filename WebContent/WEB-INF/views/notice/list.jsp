@@ -40,6 +40,7 @@
 	<h3> 공지사항 </h3>
 
 	<%-- 제목/내용 검색 --%>
+	<div class="cnavAllList">
 	<form action="/cnav/notice/list.cnav">
 		<select name="sel">
 			<option value="notiTitle">제목</option>
@@ -48,16 +49,13 @@
 		<input type="text" name="search" />
 		<input type="submit" value="검색" />
 	</form>  <%-- /spring/board/list.do?sel=writer&search=aaa --%>
+	</div>
 	<br />
 	
 	<!-- 공지사항에 글이 없을 경우 -->
 	<div>
 		<c:if test="${count == 0}">
-		<table>
-			<tr>
-				<td align="center">공지사항이 없습니다.</td>
-			</tr>
-		</table>
+			<h4 align="center">공지사항이 없습니다.</h4>
 		</c:if>
 	</div>
 	
@@ -69,7 +67,7 @@
 				<td>No.</td>
 				<td>제  목</td>
 				<td>작성자</td>
-				<td>시  간</td>
+				<td>작성일</td>
 				<td>조회수</td>
 			</tr>
 			<c:forEach var="article" items="${articleList}">
@@ -90,7 +88,7 @@
 	</div>
 	
 	<!-- 회사관계자만 글쓰기버튼 보이게 -->
-	<div class="sendAppList-btn">
+	<div class="notiBtn">
 		<c:if test="${sessionScope.sauth=='1'}">
 			<button onclick="window.location='/cnav/notice/writeForm.cnav'"> 글쓰기 </button><br/><br/>
 		</c:if>

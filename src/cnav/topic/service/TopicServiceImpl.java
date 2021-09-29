@@ -136,6 +136,7 @@ public class TopicServiceImpl implements TopicService {
 	@Override
 	public void deleteArticle(int topNum) throws SQLException {
 		topicDAO.deleteArticle(topNum); 
+		topCommentsDAO.delComments(topNum);
 	}
 
 	// 게시물 수정폼
