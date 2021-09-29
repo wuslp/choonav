@@ -40,7 +40,7 @@ ul {
 
 .group-head {
 	height : 50px;
-	border-bottom : 1px solid #34aadc;
+	border-bottom : 2px solid #cfc9cf;
 	position : relative;
 	background-color : white;
 }
@@ -60,14 +60,12 @@ ul {
 .ok-button {
 	width: 70px;
 	height: 27px;
-	float: right;
     margin-right: 20px;
     border: 0;
-    background: #34aadc;
+    background: #cfc9cf;
     margin-top: 30px;
     font-size: 15px;
-    cursor: pointer;
-    color: white;
+    color: black;
     border-radius: 6px;
 }
 .group-body {
@@ -97,7 +95,7 @@ ul {
 	text-align: center;
     background: white;
     border-radius: 5px;
-    border: 1px solid #34aadc;
+    border: 2px solid #cfc9cf;
     width: 150px;
     height: 25px;
 }
@@ -106,7 +104,23 @@ ul {
 	width : 500px;
 	resize : none;
 	border-radius : 5px;
-	border : 1px solid #34aadc;
+	border : 2px solid #cfc9cf;
+}
+
+.text1 {
+	width : 180px;
+	height : 20px;
+	resize : none;
+	border-radius : 5px;
+	border : 2px solid #cfc9cf;
+}
+
+.text2 {
+	width : 180px;
+	height : 30px;
+	resize : none;
+	border-radius : 5px;
+	border : 2px solid #cfc9cf;
 }
 
 .ui-datepicker-trigger {
@@ -131,4 +145,9 @@ ul {
 	resize : none;
 	border-radius : 5px;
 	border : 1px solid;
+}
+
+h2{
+	font-size : x-large;
+	color: #741c7d;
 }

@@ -106,6 +106,7 @@ public class CalendarController {
 		
 		dto = calService.getCalContent(dto);
 		model.addAttribute("dto", dto);
+		model.addAttribute("sauth",session.getAttribute("sauth"));
 		
 		return "calendar/calContent";
 	}

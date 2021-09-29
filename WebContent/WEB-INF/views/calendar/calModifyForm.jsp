@@ -69,7 +69,7 @@
 <body>
 	<div id = "popupGroup">	
 		<div class = "group-head">
-			<h1 class = "zTree-h1"> 일정 수정 </h1>
+			<h2> 일정 수정 </h2>
 		</div>
 		<div class = "group-body">
 		<form action="/cnav/cal/calModifyPro.cnav" method="post">
@@ -104,9 +104,11 @@
 			<div>
 				<textarea class="memo" id ="calMemo" name ="calMemo" rows="5" cols ="20" placeholder="일정에 필요한 설명을 남기세요" required>${dto.calMemo}</textarea> 
 			</div>
-			<button class = "ok-button" type="submit" >확인</button>
+			<div align="center">
+				<button class = "ok-button" type="submit" >수정</button>
+				<button class = "ok-button" type= "button" onclick="self.close();">취소</button>
+			</div>
 		</form>
-			<button class = "ok-button" type= "button" onclick="self.close();">취소</button>
 		</div>
 	</div>
 </body>

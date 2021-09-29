@@ -31,13 +31,12 @@
 
   document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
-    var rezNum = 0
     var calendar = new FullCalendar.Calendar(calendarEl, {
-      headerToolbar: {
-        left: 'prev,next,today',
-        center: 'title',
-        right: 'custom1 dayGridMonth,timeGridWeek,timeGridDay,listMonth'
-      },
+        headerToolbar: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'custom1 dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+        },
       customButtons: {
           custom1: {
             text: '예약 하기',
@@ -74,8 +73,9 @@
   });
 </script>
 <style>
-#container {
-    width: 650px;
+.container {
+    width: 1000px;
+   	height: 700px;
 }
 </style>
 <body>
