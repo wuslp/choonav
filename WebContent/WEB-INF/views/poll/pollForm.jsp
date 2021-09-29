@@ -100,7 +100,7 @@
 					<h3>투표 만들기</h3><br/><br/><br/>
 					<div class="pollWrap">
 						<div class="pollconWrap">
-							<form action="/cnav/poll/pollPro.cnav" onsubmit="return check()" name="pF">
+							<form action="/cnav/poll/pollPro.cnav" onsubmit="return check()" name="pF" class="pollFormWrap">
 								<br/><br/>
 								투표기간(필수) : <input type="date" id="stDate" name="stDate" min=<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" /> > <strong>~</strong> <input type="date" id="endDate" name="endDate" ><br/>
 								제목(필수) : <input type="text" id="pollTitle" name="pollTitle"/><br/>
