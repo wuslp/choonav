@@ -8,40 +8,51 @@
 	<title>calContent</title>
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
+	<link href="/cnav/resources/css/my.css" rel="stylesheet" type="text/css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript"></script>
 </head>
-<style>
-.left {
-	float: left;
-}
-.center {
-	float: center;
-}
-</style>
 <body>
 	<jsp:include page="/include/top_nav_bar.jsp" />
 	<div id="layoutSidenav">
 		<jsp:include page="/include/left_nav_bar.jsp" />
 	<div id="layoutSidenav_content">
-	
-	<div class="center">
-		<div><h1> 일정확인 </h1></div>
-		<div>일정명 ${dto.calTitle}</div>
-		<div>날짜 ${dto.calStart} ~ ${dto.calEnd} </div>
-		<div>내용 ${dto.calMemo}</div>
-		<c:if test="${dto.calType eq 'all'}">
-		<input type="button" onclick="window.location='/cnav/cal/calendar.cnav'" value="목록으로"/>
-		</c:if>
-		<c:if test="${dto.calType eq 'me'}">
-		<input type="button" onclick="window.location='/cnav/cal/myCalendar.cnav'" value="목록으로"/>
-		</c:if>
-		<c:if test="${dto.userId == sid}">
-			<input type="button" onclick="deleteConfirm(${dto.calNum}, ${dto.code})" value="삭제"/>
-			<input type="button" onclick="modifyConfirm(${dto.calNum}, ${dto.code})" value="수정"/>
-		</c:if>
-	</div>
+	<div id="wrapAll">
+		<h3> 일정확인 </h3>
+			<div class="myList"> 
+				<table class="myTable">
+					<tr>
+						<td class='aa' >일정명 </td>
+						<td>${dto.calTitle}</td>
+					</tr>
+					<tr>
+						<td class='aa' >날짜</td>
+						<td>${dto.calStart} ~ ${dto.calEnd}</td>
+					</tr>
+					<tr>
+						<td class='aa' >내용</td>
+						<td>${dto.calMemo}</td>
+					</tr>
+				</table>
+			</div>
+			
+			<br />
+			<br />
+			
+			<div align="center">
+				<c:if test="${dto.calType eq 'all'}">
+					<input type="button" onclick="window.location='/cnav/cal/calendar.cnav'" value="목록으로"/>
+				</c:if>
+				<c:if test="${dto.calType eq 'me'}">
+					<input type="button" onclick="window.location='/cnav/cal/myCalendar.cnav'" value="목록으로"/>
+				</c:if>
+				<c:if test="${dto.userId == sid}">
+					<input type="button" onclick="deleteConfirm(${dto.calNum}, ${dto.code})" value="삭제"/>
+					<input type="button" onclick="modifyConfirm(${dto.calNum}, ${dto.code})" value="수정"/>
+				</c:if>
+			</div>
+		</div>
 	<jsp:include page="/include/footer.jsp" />
 </body>
 	<script>
