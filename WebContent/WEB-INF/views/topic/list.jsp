@@ -13,6 +13,7 @@
 	<meta name="author" content="" />
 	<title>자유게시판</title>
 	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
+	<link href="/cnav/resources/css/notice.css" rel="stylesheet" type="text/css">
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -38,6 +39,7 @@
 	<h3> 자유게시판 </h3>
 	
 	<%-- 작성자/내용 검색 --%>
+	<div class="cnavAllList">
 	<form action="/cnav/topic/list.cnav">
 		<select name="sel">
 			<option value="name">작성자</option>
@@ -47,19 +49,13 @@
 		<input type="text" name="search" />
 		<input type="submit" value="검색" />
 	</form>  <%-- /spring/board/list.do?sel=writer&search=aaa --%>
+	</div>
 	<br />
 	
 	<!-- 게시판에 글이 없을 경우 -->
 	<div>
 		<c:if test="${count == 0}">
-			<table>
-				<tr>
-					<td align="center">게시글이 없습니다.</td>
-				</tr>
-				<tr>
-					<td><button onclick="window.location='/cnav/topic/writeForm.cnav'"> 글쓰기 </button></td>
-				</tr>
-			</table>
+			<h4 align="center">게시글이 없습니다.</h4>
 		</c:if>
 	</div>
 	
@@ -71,7 +67,7 @@
 					<td>No.</td>
 					<td>제  목</td>
 					<td>작성자</td>
-					<td>시  간</td>
+					<td>작성일</td>
 					<td>조회수</td>
 				</tr>
 				<c:forEach var="article" items="${articleList}">
@@ -81,9 +77,11 @@
 						</td>
 						<td>
 							<a href="/cnav/topic/content.cnav?topNum=${article.topNum}&pageNum=${pageNum}"> ${article.topTitle} </a>
-							<c:if test="${article.recnt != 0}">
-							 ${article.recnt}
-							 </c:if>
+							<em class="recnt">
+								<c:if test="${article.recnt != 0}">
+								 [${article.recnt}]
+								 </c:if>
+							 </em>
 						</td>
 						<td> ${article.name} </td>
 						<td> <fmt:formatDate value="${article.topDate}" pattern="yyyy-MM-dd" /> </td>
@@ -94,7 +92,7 @@
 		</c:if>
 	</div>
 	
-	<div class="sendAppList-btn">
+	<div class="notiBtn">
 		<button onclick="window.location='/cnav/topic/writeForm.cnav'"> 글쓰기 </button><br/><br/>
 	</div>
 	

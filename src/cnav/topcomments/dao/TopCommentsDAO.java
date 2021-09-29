@@ -25,4 +25,6 @@ public interface TopCommentsDAO {
 	// 댓글 삭제시 게시글댓글수 -1
 	public void downRecnt(int topNum) throws SQLException;
 	
+	// 게시글 삭제시 해당게시글 댓글 모두 삭제
+	public void	delComments(int topNum) throws SQLException;
 }
