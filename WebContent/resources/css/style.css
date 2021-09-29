@@ -118,6 +118,10 @@ body {
 	color:#000;
 }
 
+.signup table select:hover {
+    color: #000;
+}
+
 /* 비즈사인업폼 */
 .cate {
     border-color: #f080dd99;
