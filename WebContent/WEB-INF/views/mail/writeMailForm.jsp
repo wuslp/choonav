@@ -12,6 +12,7 @@
 	<meta name="author" content="" />
 	<title>메일 보내기</title>
 	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
+	<link href="/cnav/resources/css/mail.css" rel="stylesheet" type="text/css">
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -56,22 +57,22 @@
 	
 	<h3> 메일 보내기 </h3>
 	<form action="/cnav/mail/writeMailPro.cnav" method="post" style="center;" onsubmit="return check()">
-		<div>
+		<div class="writeMailDiv">
 			<div>
 				받는 사람 :
-				<select name="mailRid" id="mailRid">
+				<select name="mailRid" id="mailRid" class="wriSele">
 				<option value="">선택</option>
 				<c:forEach var="userList" items="${userList}">
 					<option value="${userList.userId}">${userList.name} ${userList.position}</option>
 				</c:forEach>
 				</select>
 			</div>
-			<div>
+			<div class="wrIn">
 				제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목 :
 				<input type="text" name="mailSub" id="mailSub"/>
 			</div>
 			<div>
-				<textarea rows="18" cols="100" name="mailContent" placeholder="내용을 작성해 주세요"></textarea>
+				<textarea rows="18" cols="100" name="mailContent" id="mailContent" placeholder="내용을 작성해 주세요"></textarea>
 			</div>
 			<div>
 				<input type="submit" value="보내기" />

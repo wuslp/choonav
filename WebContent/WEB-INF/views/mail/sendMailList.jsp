@@ -165,7 +165,7 @@
 		</div>
 	</c:if>
 	<%-- 페이지 번호 --%>
-	<div>
+	<div class="pageNums-all">
 	<c:if test="${count > 0}">
 		<c:set var="pageBlock" value="3" />
 		<fmt:parseNumber var="res" value="${count / pageSize}" integerOnly="true" />
