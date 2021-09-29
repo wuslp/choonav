@@ -46,6 +46,7 @@
 					<div id="" class="attendLine">
 						<div>
 							<form action="/cnav/poll/pollList.cnav">
+								<a href="/cnav/poll/pollList.cnav">전체</a> 
 								<a href="/cnav/poll/pollList.cnav?sort=진행중">진행중</a> 
 								<a href="/cnav/poll/pollList.cnav?sort=완료">완료</a> &nbsp;
 								<select id="" name="sel">

@@ -38,6 +38,7 @@
 			<form action="/cnav/project/proList.cnav">
 				<a href="/cnav/project/proList.cnav?sort=진행중">진행중</a>
 				<a href="/cnav/project/proList.cnav?sort=완료">완료</a> &nbsp;
+
 				<select id="" name="sel">
 					<option value="dept">부서</option>	
 					<option value="name">담당자</option>			
@@ -84,17 +85,18 @@
 					<c:if test="${project.proState=='완료'}">
 					<div class="stateOK">완료</div>
 					</c:if>
-				</td>
+				</td> 
 				
-				<td>${project.name}</td>		
+				<td>${project.name}</td> 		 
 			</tr>
 		</c:forEach>	
 	</table>
 		
 	</c:if>
-	<c:if test="${sel !=null && search !=null}">
+	<c:if test="${!(project.proState=='진행중'|| project.proState=='완료')}">
 		<button onclick="window.location='/cnav/project/proList.cnav'">전체 목록</button> <br/>		
 	</c:if>
+	
 </div>	
 	
 	<br/><br/>
