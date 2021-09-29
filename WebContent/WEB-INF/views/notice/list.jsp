@@ -57,12 +57,6 @@
 			<tr>
 				<td align="center">공지사항이 없습니다.</td>
 			</tr>
-			<!-- 회사관계자만 글쓰기버튼 보이게 -->
-			<c:if test="${sessionScope.sauth=='1'}">
-				<tr>
-					<td><button onclick="window.location='/cnav/notice/writeForm.cnav'"> 글쓰기 </button></td>
-				</tr>
-			</c:if>
 		</table>
 		</c:if>
 	</div>
