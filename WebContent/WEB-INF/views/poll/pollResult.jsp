@@ -134,18 +134,14 @@
 
 			<div id="wrapAll">
 			<h3><strong>투표 결과</strong></h3>
-				<div class="pollPageWrap">
-				<div class="pollconPageWrap">
-					    	<div id="">
+				<div class="pollResWrap">
 									<i class="far fa-calendar-check"></i> 투표기간	<fmt:formatDate value="${article.stDate}" pattern="yyyy-MM-dd"/><strong>~</strong><fmt:formatDate value="${article.endDate}" pattern="yyyy-MM-dd"/><br/>
 									제목		 : ${article.pollTitle}<br/>
 									대상		 : ${article.target}<br/>
 									내용		 : ${article.pollCon}<br/>
-							</div><!--  -->
-					</div>
-				</div>
+				<div class="pollconResWrap">
 				<div class="resBar">
-					    <div class="zt-span6 last">
+					    <div class="zt-span6 last"><!--막대기css  -->
 									<div class="">
 									<strong>&nbsp;&nbsp; 총 투표수 : ${article.total}</strong> <br/>
 									<i class="fas fa-poll-h"></i> 항목 <br/>
@@ -168,9 +164,11 @@
 										<div class="zt-skill-bar"><div data-width="<fmt:formatNumber value = "${article.res4/article.total*100}"/>" style=";">${article.ans4}<span><fmt:formatNumber value="${article.res4/article.total}" type="percent"/></span></div></div>
 									</c:if><br/>
 									</div>
+					</div>
+				</div>
 									<input type="button" value="리스트로" id="" onClick="window.location='/cnav/poll/pollList.cnav'">
 						</div><!-- class="zt-span6 last" -->
-					</div>
+				</div><!-- pollResWrap -->
 			</div>
 			<jsp:include page="/include/footer.jsp" />
 		</div><!-- <div id="layoutSidenav_content"> -->
