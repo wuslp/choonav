@@ -214,7 +214,7 @@ public class ProjectServiceImpl implements ProjectService{
 	
 	// 수정된 프로젝트 1개 정보 가져오기 
 	@Override
-	public ProjectDTO getUpdateProject(int proNum) throws SQLException {
+	public ProjectDTO getUpdateProject(int proNum) throws SQLException {	
 			return projectDAO.getProject(proNum);
 	}
 	// 프로젝트 수정
@@ -223,7 +223,7 @@ public class ProjectServiceImpl implements ProjectService{
 
 	@Override
 	public int updateProject(ProjectDTO dto) throws SQLException {
-		projectDAO.updateProject(dto);
+		projectDAO.updateProject(dto);		
 		return 0;
 	}
 	// 프로젝트 삭제

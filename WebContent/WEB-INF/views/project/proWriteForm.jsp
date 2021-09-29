@@ -12,6 +12,7 @@
 	<meta name="author" content="" />
 	<title>WriteForm </title>
 	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
+	<link href="/cnav/resources/css/project.css" rel="stylesheet" type="text/css">
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -70,18 +71,21 @@
 		<jsp:include page="/include/left_nav_bar.jsp" />
 		<div id="layoutSidenav_content">
 
-
-	<br/>
+		<div id="wrapAll">
+	<h3>프로젝트</h3>
 	<h1 align="center">프로젝트 작성</h1>
+	<div class="proForm">
 	<form action="/cnav/project/proWritePro.cnav" method="post" name="inputForm" onsubmit="return check()">
 		<table>
 			<tr>		
-				<td align="center">
+				<td align="center"></td>
+				<td>
 					<input type="text" name="proName" placeholder="프로젝트이름"/></td>
 			</tr>
 			<tr>		
-				<td align="center">
-					<input type="text" name="proContent" placeholder="내용을 입력해주세요"/>
+				<td align="center"></td>
+				<td>
+					<textarea rows="10" cols="50" name="proContent" placeholder="내용을 작성해주세요"></textarea>
 				</td>			
 			</tr>
 		</table>	
@@ -90,8 +94,13 @@
 				<td>기간 : </td>
 				<td>시작일<input type="date" name="proStart"/>~</td>
 				<td>종료일<input type="date" name="proEnd"/></td>		
-			</tr>	
+			</tr>
 			<tr>
+			</tr>
+			
+			
+			<tr>
+				<td>부서</td>	
 				<td>
 					<select name="dept">
  						<option value="">부서선택</option> 
@@ -105,15 +114,18 @@
 					</select>
 				</td>
 			</tr>
-			<tr>
-				<td>	
+		</table>		
+			<div class="proConBtn">
 					<input type="submit" value="작성" />
 					<input type="reset" value="재작성" />
 					<input type="button" value="취소" onclick="window.location='/cnav/project/proList.cnav'" />
-				</td>
-			</tr>		
-		</table>
+			</div>		
+		
 	</form>
+
+	</div> <!-- proForm -->
+		</div> <!-- wrapAll -->
+		
 	<jsp:include page="/include/footer.jsp" />
 		</div>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
@@ -123,6 +135,5 @@
 		<script src="<%=request.getContextPath()%>/resources/startbootstrap/assets/demo/chart-bar-demo.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
 		<script src="<%=request.getContextPath()%>/resource/startbootstrap/js/datatables-simple-demo.js"></script>
-	</div>
 </body>
 </html>

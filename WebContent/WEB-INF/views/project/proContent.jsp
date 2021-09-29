@@ -13,6 +13,7 @@
 	<meta name="author" content="" />
 	<title>proContent</title>
 	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
+	<link href="/cnav/resources/css/project.css" rel="stylesheet" type="text/css">
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -24,60 +25,81 @@
 		<jsp:include page="/include/left_nav_bar.jsp" />
 		<div id="layoutSidenav_content">
 			<div id="wrapAll">
-	<br/>
-	
-	<div id="wrapAll">
-	<table class="dept1">
-		<tr>
-			<td colspan="2"><b>${project.proName}</b></td>	
-			<td></td><td></td><td></td><td></td>	
-			<td>${project.proStart}~${project.proEnd}</td>	
-		</tr>
+			
+		<div class="projectWrap">		
 
-		<tr class="dept">
-			<td><b>부서 : ${project.dept}</b></td>
-		</tr>	
-		<tr>
-			<td colspan="2" height="100">${project.proContent}</td>
-		</tr>
+		<div class="proContentTitle">
+		<h3>${project.proName}</h3>
+		</div>
 		
-		
-		<!-- 담당자만 수정/삭제 보이게 -->	
-		<c:if test="${project.userId==sessionScope.sid}">
-			<td colspan="2">
+		<div class="proContentRight">
+			<table>
+				<tr>
+					<td><b>담당자</b></td><br/>
+					<td>&nbsp;&nbsp;${project.name}</td>
+				</tr>
+				<tr>
+					<td><b>부서</b></td>
+					<td>&nbsp;${project.dept}</td>
+				</tr>
+				<tr>	
+					<td><b>기간</b></td>					
+					<td>${project.proStart}~${project.proEnd}</td>
+				</tr>
+			<br/><br/>			 	
+			</table>
+			<!-- 담당자만 수정/삭제 보이게 -->	
+		<div class="proConBtn">
+			<c:if test="${project.userId==sessionScope.sid}">
 				<button onclick="window.location='/cnav/project/proModForm.cnav?proNum=${project.proNum}&pageNum=${pageNum}'">수정</button>
 				<button onclick="window.location='/cnav/project/proDelForm.cnav?proNum=${project.proNum}&pageNum=${pageNum}'">삭제</button>
-			</td>		
-		</c:if>
-	</table>	
-	</div>
+			</c:if>
+		</div> <!-- 수정/삭제 -->
+		</div>	
+		<br/><br/>
+		<div class="proContentCenter">	
+			<table>	
+				<tr>
+					<td>${project.proContent}</td>
+				</tr>
+			</table>
+		</div>	
+	</div><!-- projectWrap -->
+	<div class="comment">
 	<!-- 댓글작성 -->
 	<form action="/cnav/proComments/create.cnav" method="post">
 		 	<input type="text" id="proComment" name="proComment">
 		 	<input type="hidden" id="userId" name="userId" value="${sessionScope.sid}">
 		 	<input type="hidden" id="proNum" name="proNum" value="${project.proNum}">
-		 	<input type="hidden" id="code" name="code" value="${sessionScope.scode}">
-		 	
-		  	<input id="subBtn" type="button" value="댓글 달기"  onclick="proCom(this.form)"/>
+		 	<input type="hidden" id="code" name="code" value="${sessionScope.scode}">	 	
+		  	<input id="subBtn" type="button" value="댓글 작성" onclick="proCom(this.form)"/>
 	</form>
 
 	<!-- 댓글 리스트 -->
+	<div>
+	<table class="commLeft">
 	<c:forEach items="${comment}" var="comment">
-		
-		<p>${comment.name}<br/>
-		<fmt:formatDate value="${comment.proReg}" pattern="yyyy-MM-dd" />
-		</p>
-	
-		
+	<tr>
+		<td>		
+		<p>${comment.name}
 		<p>${comment.proComment}</p>
+		
+		<fmt:formatDate value="${comment.proReg}" pattern="yyyy.MM.dd" />
+		</td>
+	</tr>
+	
 		<!-- 댓글작성자=로그인한사람 -->
 		<c:if test="${sessionScope.sid==comment.userId}">
 			<input type="button" value="삭제" onclick="window.location='/cnav/proComments/delcom.cnav?proComNum=${comment.proComNum}&proNum=${project.proNum}'"/>		
-		</c:if>
-	
+		</c:if>	
 	</c:forEach>
-
-</body>
+	</table>
+	</div>
+	
+	</div>
+	</div>
+	</div>
+</div>
 	<script>
 	function proCom(frm){
 		var proComment=frm.proComment.value;
@@ -90,8 +112,10 @@
 	}
 	
 	</script>
+		</div>
+	
 	<!-- 세션에 아이디가 저장되었을 경우 (로그인한 경우)에만 댓글 작성 창이 출력되도록 코드를 작성함 -->
-    </div> <!-- wrapAll -->
+   		</div> <!-- wrapAll -->
 			<jsp:include page="/include/footer.jsp" />
 		</div><!-- layoutSidenav_content" -->
 	</div><!-- id="layoutSidenav" -->
@@ -102,5 +126,5 @@
 		<script src="<%=request.getContextPath()%>/resources/startbootstrap/assets/demo/chart-bar-demo.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
 		<script src="<%=request.getContextPath()%>/resource/startbootstrap/js/datatables-simple-demo.js"></script>
-
+</body>
 </html>
