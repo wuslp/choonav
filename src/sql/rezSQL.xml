@@ -37,4 +37,9 @@
 		where r >= #{start} and r <= #{end}
 		]]>
 	</select>
+	
+	<!-- 계정정보 -->
+	<select id="selectUserInfo" parameterType="hashmap" resultType="userInfoDTO">
+		select b.bizName, u.name, u.email, u.tel, u.dept, u.position from business b, users u where b.code = u.code and u.userId=#{userId} and u.code=#{code}
+	</select>
 </mapper> 

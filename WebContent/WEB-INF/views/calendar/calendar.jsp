@@ -13,10 +13,11 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript"></script>
 </head>
+	<link href='../resources/css/main.css' rel='stylesheet' />
 	<!-- jquery CDN -->
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<!-- fullcalendar CDN -->
-	<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />
+	<!-- fullcalendar CDN 
+	<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />-->
 	<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
 	<!-- fullcalendar 언어 CDN -->
 	<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
@@ -77,8 +78,9 @@
 	}
 </script>
 <style>
-#container {
-    width: 700px;
+.container {
+    width: 1000px;
+   	height: 700px;
 }
 </style>
 <body>

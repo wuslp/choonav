@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import cnav.mypage.dto.UserInfoDTO;
 import cnav.reservation.dto.ReservationDTO;
 
 @Repository
@@ -79,4 +80,14 @@ public class ReservationDAOImpl implements ReservationDAO{
 		return sqlSession.selectOne("rez.countMy", rezDTO);
 	}
 
+	// 계정정보
+	@Override
+	public UserInfoDTO getUserInfo(String userId, String code) throws SQLException {
+		HashMap map = new HashMap();
+		map.put("userId", userId);
+		map.put("code", code);
+		
+		UserInfoDTO dto = sqlSession.selectOne("rez.selectUserInfo", map);
+		return dto;
+	}
 }

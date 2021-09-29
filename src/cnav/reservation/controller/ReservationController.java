@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cnav.calendar.dto.CalendarDTO;
+import cnav.mypage.dto.UserInfoDTO;
+import cnav.mypage.service.MypageServiceImpl;
 import cnav.reservation.dto.ReservationDTO;
 import cnav.reservation.service.ReservationServiceImpl;
 
@@ -44,13 +46,20 @@ public class ReservationController {
 	
 	// 예약 form 페이지
 	@RequestMapping("rezForm.cnav")
-	public String rezForm(HttpSession session, Model model) {
+	public String rezForm(HttpSession session, Model model) throws SQLException {
 		
 		if(session.getAttribute("sid") == null) {
 			return "main/loginForm";
 		}
 		
+		String userId = (String)session.getAttribute("sid");
+		String code = (String)session.getAttribute("scode");
+		UserInfoDTO dto = rezService.getUserInfo(userId, code);
+		
+		System.out.println(dto.getName());
+		
 		model.addAttribute("sid", session.getAttribute("sid"));
+		model.addAttribute("dto", dto);
 		
 		return "reservation/rezForm";
 	}
@@ -95,6 +104,7 @@ public class ReservationController {
 			dto.setReg(dto.getReg().substring(0, 16));
 			model.addAttribute("dto", dto);
 			model.addAttribute("sid",session.getAttribute("sid"));
+			model.addAttribute("sauth",session.getAttribute("sauth"));
 			
 			return "reservation/rezContent";
 		}

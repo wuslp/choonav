@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+import cnav.mypage.dto.UserInfoDTO;
 import cnav.reservation.dto.ReservationDTO;
 
 public interface ReservationService {
@@ -17,4 +18,6 @@ public interface ReservationService {
 	public int rezDelete(int rezNum) throws SQLException;
 	// 내예약정보 list 가져오기
 	public Map<String, Object> getMyrezList(ReservationDTO rezDTO, String pageNum) throws SQLException;
+	// 계정정보
+	public UserInfoDTO getUserInfo(String userId, String code) throws SQLException;
 }
