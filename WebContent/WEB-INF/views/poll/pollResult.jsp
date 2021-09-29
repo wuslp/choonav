@@ -137,6 +137,7 @@
 			<h3><strong>투표 결과</strong></h3>
 				<div class="pollResWrap">
 				<div class="pollconResWrap">
+>
 									<i class="far fa-calendar-check"></i> 투표기간	<fmt:formatDate value="${article.stDate}" pattern="yyyy-MM-dd"/><strong>~</strong><fmt:formatDate value="${article.endDate}" pattern="yyyy-MM-dd"/><br/>
 									제목		 : ${article.pollTitle}<br/>
 									대상		 : ${article.target}<br/>
