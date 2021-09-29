@@ -162,8 +162,9 @@
 							<div class="pollconPageWrap">
 								<input type="hidden" value="${article.pollNum}" id="pollN"/>
 								<input type="hidden" value="${result}" id="result"/>
-								<div id=""><br/>
-									<i class="far fa-calendar-check"></i> 투표기간	: <fmt:formatDate value="${article.stDate}" pattern="yyyy-MM-dd"/><strong>~</strong><fmt:formatDate value="${article.endDate}" pattern="yyyy-MM-dd"/><br/>
+								
+								<div id="">
+									<br/><br/><i class="far fa-calendar-check"></i> 투표기간	: <fmt:formatDate value="${article.stDate}" pattern="yyyy-MM-dd"/><strong>~</strong><fmt:formatDate value="${article.endDate}" pattern="yyyy-MM-dd"/><br/>
 									제목		 : ${article.pollTitle}<br/>
 									대상		 : ${article.target}<br/>
 									내용		 : ${article.pollCon}<br/>
@@ -229,7 +230,7 @@
 								<strong><c:out value="${ComList.userId}"></c:out></strong>&emsp;&emsp;
 								<c:out value="${ComList.pollReg}"></c:out>
 								<br/>
-								<c:out value="${ComList.pollComment}"></c:out>&emsp;
+								<pre><c:out value="${ComList.pollComment}"></c:out></pre>&emsp;
 								<c:if test="${ComList.userId==sessionScope.sid}">
 								<!-- <input type="button" value="삭제" id="deleteCom" name="deleteCom" /> -->
 								<input type="button" value="삭제" onclick="window.location='/cnav/poll/commDelete.cnav?pollComNum='+${ComList.pollComNum }+'&pollNum='+${ComList.pollNum}"/>
