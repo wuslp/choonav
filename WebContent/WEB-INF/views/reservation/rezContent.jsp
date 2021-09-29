@@ -8,6 +8,7 @@
 	<title>rezContent</title>
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
+	<link href="/cnav/resources/css/my.css" rel="stylesheet" type="text/css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript"></script>
@@ -17,20 +18,43 @@
 	<div id="layoutSidenav">
 		<jsp:include page="/include/left_nav_bar.jsp" />
 	<div id="layoutSidenav_content">
-	
-	<div>
-		<div><h1> 예약확인 </h1></div>
-		<div>예약일시 ${dto.sDate} ~ ${dto.eDate} </div>
-		<div>예약항목 ${dto.category}</div>
-		<div>예약자 ${dto.userId}</div>
-		<div>목적 ${dto.content}</div>
-		<div>등록일 ${dto.reg}</div>
-		<input type="button" onclick="a()" value="목록으로"/>
-		<c:if test="${dto.userId == sid}">
-			<input type="button" onclick="deleteConfirm(${dto.rezNum})" value="삭제"/>
-		</c:if>
-	</div>
-	
+	<div id="wrapAll">
+		<h3> 예약확인 </h3>
+			<div class="myList"> 
+				<table class="myTable">
+					<tr>
+						<td class='aa' >예약일시</td>
+						<td>${dto.sDate} ~ ${dto.eDate}</td>
+					</tr>
+					<tr>
+						<td class='aa' >예약항목</td>
+						<td>${dto.category}</td>
+					</tr>
+					<tr>
+						<td class='aa' >예약자</td>
+						<td>${dto.userId}</td>
+					</tr>
+					<tr>
+						<td class='aa' >목적</td>
+						<td>${dto.content}</td>
+					</tr>
+					<tr>
+						<td class='aa' >등록일</td>
+						<td>${dto.reg}</td>
+					</tr>
+				</table>
+			</div>
+			
+			<br />
+			<br />
+			
+			<div align="center">
+				<input type="button" onclick="a()" value="목록으로"/>
+				<c:if test="${dto.userId == sid}">
+					<input type="button" onclick="deleteConfirm(${dto.rezNum})" value="삭제"/>
+				</c:if>
+			</div>
+		</div>
 	<jsp:include page="/include/footer.jsp" />
 </body>
 	<script>
