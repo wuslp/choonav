@@ -12,10 +12,44 @@
     border-radius: 20px;
 }
 
-.sendAppList-btn button {
+.proList-btn button {
     border: solid 1px #767676;
     background-color: #efefef;
     color: #000000;
     border-radius: 3px;
     float: right;
+}
+
+/*프로젝트 상세(proContent)*/
+
+.proContentTitle{text-align: center;
+	font-size: xx-Large;
+	font-weight: bold;
+}
+.proContentRight {
+	float: right;
+}
+.proContentCenter{text-align: left;
+	font-size: xx-Large;
+	font-weight: bold;	
+}
+.proConBtn button {
+	text-align-last: right;
+	border: solid 1px #767676;
+	color: #000000;
+}
+.comment{text-align: left;
+	
+}
+.commLeft {
+	text-align: left;
+}
+.comLeft{
+	text-align: left;
+}
+
+/*프로젝트 작성,수정 */
+.proForm{
+	text-align: -webkit-center;
+	margin: 30px;
 }

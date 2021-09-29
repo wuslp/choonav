@@ -11,6 +11,7 @@
 	<meta name="author" content="" />
 	<title>프로젝트 수정</title>
 	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
+	<link href="/cnav/resources/css/project.css" rel="stylesheet" type="text/css">
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -23,16 +24,24 @@
 		<div id="layoutSidenav_content">
 			<div id="wrapAll">	
 	<h1 align="center">프로젝트 수정</h1>
+	<div class="proForm">
 	<form action="/cnav/project/proModPro.cnav?pageNum=${pageNum}" method="post">
 	<!-- 고유번호 값 전송 -->
 		<input type="hidden" name="proNum" value="${project.proNum}" />
 		<table>
 			<tr>
-				<td align="center"><input type="text" name="proName" value="${project.proName}"/></td>
+				<td align="center"></td>
+				<td>
+					<input type="text" name="proName" value="${project.proName}"/>
+				</td>
 			</tr>
 			<tr>
-				<td align="center"><input type="text" name="proContent" value="${project.proContent}"/></td>
+				<td align="center"></td>
+				<td>		
+					<input type="text" name="proContent" value="${project.proContent}"/>
+				</td>
 			</tr>
+			<tr></tr>
 			<tr>
 				<td>기간</td>
 				<td>${project.proStart}~${project.proEnd}</td>
@@ -41,16 +50,15 @@
 				<td>부서</td>
 				<td align="left">${project.dept}</td>
 			</tr>
-			<tr>
-				<td colspan="2">
+		</table>
+			<div class="proConBtn">
 					<input type="submit" value="수정"/>
 					<input type="reset" value="재작성"/>
 					<input type="button" value="취소" onclick="window.location='/cnav/project/proContent.cnav?proNum=${project.proNum}&pageNum=${pageNum}'"/>
-				
-				</td>	
-			</tr>
-		</table>	
+			</div>	
+
 	</form>
+	</div> <!-- proForm -->
 	</div> <!-- wrapAll -->
 			<jsp:include page="/include/footer.jsp" />
 		</div><!-- layoutSidenav_content" -->
