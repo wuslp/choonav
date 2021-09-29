@@ -135,6 +135,7 @@
 			<div id="wrapAll">
 			<h3><strong>투표 결과</strong></h3>
 				<div class="pollResWrap">
+
 									<i class="far fa-calendar-check"></i> 투표기간	<fmt:formatDate value="${article.stDate}" pattern="yyyy-MM-dd"/><strong>~</strong><fmt:formatDate value="${article.endDate}" pattern="yyyy-MM-dd"/><br/>
 									제목		 : ${article.pollTitle}<br/>
 									대상		 : ${article.target}<br/>
@@ -153,14 +154,12 @@
 					
 									<c:if test="${article.ans3 != null}">
 									3 :&emsp;${article.ans3}<br/>
-									</c:if>
-									<c:if test="${article.res3 ne '0'}">
+									
 										<div class="zt-skill-bar"><div data-width="<fmt:formatNumber value = "${article.res3/article.total*100}"/>" style=";">${article.ans3}<span><fmt:formatNumber value="${article.res3/article.total}" type="percent"/></span></div></div>
 									</c:if>
 									<c:if test="${article.ans4 != null}">
 									4 :&emsp;${article.ans4}<br/>
-									</c:if>
-									<c:if test="${article.res4 ne '0'}">
+									
 										<div class="zt-skill-bar"><div data-width="<fmt:formatNumber value = "${article.res4/article.total*100}"/>" style=";">${article.ans4}<span><fmt:formatNumber value="${article.res4/article.total}" type="percent"/></span></div></div>
 									</c:if><br/>
 									</div>
