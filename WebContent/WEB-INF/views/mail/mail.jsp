@@ -48,26 +48,26 @@
 		<div class="mailConDiv">
 			<div class="mailConleft">
 				<h4> 제목 :  ${mail.mailSub} </h4>
-			</div>
-			<div class="mailConleft">
+
 				<c:if test="${mail.mailRid == id}">
 					보낸 사람 : ${mail.userId}
 				</c:if>
 				<c:if test="${mail.userId == id}">
 					받는 사람 : ${mail.mailRid}
-				</c:if>
-			</div>
-			<div class="mailConleft">
+				</c:if><br/>
+				
 				시간 : ${mail.mailReg}
 			</div>
+	
 			<br />
-			<br />
+			<div class="mailbox">
 			<div class="mailCon">
 				${mail.mailContent}
 			</div>
+			</div>
 			<br />
 			<br />
-			<div>
+			<div class="mailBtn">
 				<input type="button" value="삭제" onclick="del(${mail.mailNum})" />
 				<c:if test="${mail.mailRid == id}">
 					<input type="button" value="목록" onclick="window.location='/cnav/mail/recMailList.cnav'"/>

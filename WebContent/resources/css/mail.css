@@ -45,14 +45,17 @@
 
 /*메일 내용 보기...하트*/
 .mailConDiv {
-	float: center;
+	width:100%;
 }
-
-
-
-.mailConDiv .mailCon {
+.mailbox {
+    text-align: -webkit-center;
+}
+.mailCon {
 	border: 1px solid;
 	padding: 10px; 
-	width: 33%;
-	display: center;
+	width: 60%;
+	height:100px;
+}
+.mailBtn {
+    text-align-last: center;
 }
