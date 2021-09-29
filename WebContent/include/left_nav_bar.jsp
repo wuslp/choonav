@@ -29,6 +29,7 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="/cnav/approval/appForm.cnav">새 결재</a>
                                     <a class="nav-link" href="/cnav/approval/sendAppList.cnav">보낸 결재함</a>
                                     <a class="nav-link" href="/cnav/approval/takeAppList.cnav">받은 결재함</a>
                                 </nav>
@@ -78,12 +79,20 @@
                             </div>
                             </c:if>
 							<!--6. 프로젝트  -->
-							<c:if test="${sessionScope.cdto.project==1}">
-                            <a class="nav-link" href="/cnav/project/proList.cnav">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                	프로젝트
+							<c:if test="${sessionScope.cdto.project==1}">         
+                            <a class="nav-link collapsed" href="" data-bs-toggle="collapse" data-bs-target="#proLayouts" aria-expanded="false" aria-controls="proLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-calendar-alt"></i></div>
+                              	 	프로젝트
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
+                            <div class="collapse" id="proLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="/cnav/project/proWriteForm.cnav">프로젝트 만들기</a>
+                                    <a class="nav-link" href="/cnav/project/proList.cnav">프로젝트 목록</a>
+                                </nav>
+                            </div>
                             </c:if>
+                            
                             <!-- 7. 자유 게시판 -->
                            <c:if test="${sessionScope.cdto.topic==1}"> 
                             <a class="nav-link" href="/cnav/topic/list.cnav">

@@ -97,3 +97,9 @@ table.appCont2{
 table.appCont2 td{
 	border: solid thin;
 }
+
+/* 결재 문서 작성 */
+.appForm {
+    text-align: -webkit-center;
+    margin: 30px;
+}
