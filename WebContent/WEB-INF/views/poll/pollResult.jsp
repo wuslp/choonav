@@ -132,41 +132,43 @@
 			</div>
 
 			<div id="wrapAll">
-			    <div class="zt-span6 last">
-			    	<div id="">
-					<h3><strong>투표 결과</strong></h3>
-					<p>&nbsp;</p>
-					<p>&nbsp;</p>
-						<div id="">
-							투표기간	<fmt:formatDate value="${article.stDate}" pattern="yyyy-MM-dd"/><strong>~</strong><fmt:formatDate value="${article.endDate}" pattern="yyyy-MM-dd"/><br/><br/>
-							제목		 : ${article.pollTitle}<br/><br/>
-							대상		 : ${article.target}<br/><br/>
-							내용		 : ${article.pollCon}<br/><br/>
-							<strong>&nbsp;&nbsp; 총 투표수 : ${article.total}</strong> <br/>
-							항목 <br/>
-							1 :&emsp;${article.ans1}<br/>
-								<div class="zt-skill-bar"><div data-width="<fmt:formatNumber value = "${(article.res1/article.total)*100}"/>" style="">${article.ans1}<c:out value="${name}" /><span>결과비율 : <fmt:formatNumber value="${article.res1/article.total}" type="percent"/></span></div></div>
-			
-							2 :&emsp;${article.ans2}<br/>
-								<div class="zt-skill-bar"><div data-width="<fmt:formatNumber value = "${article.res2/article.total*100}"/>" style="">${article.ans2}<span><fmt:formatNumber value="${article.res2/article.total}" type="percent"/></span></div></div>
-			
-							<c:if test="${article.ans3 != null}">
-							3 :&emsp;${article.ans3}<br/>
-							</c:if>
-							<c:if test="${article.res3 ne '0'}">
-								<div class="zt-skill-bar"><div data-width="<fmt:formatNumber value = "${article.res3/article.total*100}"/>" style=";">${article.ans3}<span><fmt:formatNumber value="${article.res3/article.total}" type="percent"/></span></div></div>
-							</c:if>
-							<c:if test="${article.ans4 != null}">
-							4 :&emsp;${article.ans4}<br/>
-							</c:if>
-							<c:if test="${article.res4 ne '0'}">
-								<div class="zt-skill-bar"><div data-width="<fmt:formatNumber value = "${article.res4/article.total*100}"/>" style=";">${article.ans4}<span><fmt:formatNumber value="${article.res4/article.total}" type="percent"/></span></div></div>
-							</c:if><br/><br/>
-							<input type="button" value="리스트로" id="" onClick="window.location='/cnav/poll/pollList.cnav'">
-						
-						</div>
-					</div><!--  -->
-				</div><!-- class="zt-span6 last" -->
+				<div class="resllWrap">
+				    <div class="zt-span6 last">
+				    	<div id="">
+						<h3><strong>투표 결과</strong></h3>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+							<div id="">
+								투표기간	<fmt:formatDate value="${article.stDate}" pattern="yyyy-MM-dd"/><strong>~</strong><fmt:formatDate value="${article.endDate}" pattern="yyyy-MM-dd"/><br/><br/>
+								제목		 : ${article.pollTitle}<br/><br/>
+								대상		 : ${article.target}<br/><br/>
+								내용		 : ${article.pollCon}<br/><br/>
+								<strong>&nbsp;&nbsp; 총 투표수 : ${article.total}</strong> <br/>
+								항목 <br/>
+								1 :&emsp;${article.ans1}<br/>
+									<div class="zt-skill-bar"><div data-width="<fmt:formatNumber value = "${(article.res1/article.total)*100}"/>" style="">${article.ans1}<c:out value="${name}" /><span>결과비율 : <fmt:formatNumber value="${article.res1/article.total}" type="percent"/></span></div></div>
+				
+								2 :&emsp;${article.ans2}<br/>
+									<div class="zt-skill-bar"><div data-width="<fmt:formatNumber value = "${article.res2/article.total*100}"/>" style="">${article.ans2}<span><fmt:formatNumber value="${article.res2/article.total}" type="percent"/></span></div></div>
+				
+								<c:if test="${article.ans3 != null}">
+								3 :&emsp;${article.ans3}<br/>
+								</c:if>
+								<c:if test="${article.res3 ne '0'}">
+									<div class="zt-skill-bar"><div data-width="<fmt:formatNumber value = "${article.res3/article.total*100}"/>" style=";">${article.ans3}<span><fmt:formatNumber value="${article.res3/article.total}" type="percent"/></span></div></div>
+								</c:if>
+								<c:if test="${article.ans4 != null}">
+								4 :&emsp;${article.ans4}<br/>
+								</c:if>
+								<c:if test="${article.res4 ne '0'}">
+									<div class="zt-skill-bar"><div data-width="<fmt:formatNumber value = "${article.res4/article.total*100}"/>" style=";">${article.ans4}<span><fmt:formatNumber value="${article.res4/article.total}" type="percent"/></span></div></div>
+								</c:if><br/><br/>
+								<input type="button" value="리스트로" id="" onClick="window.location='/cnav/poll/pollList.cnav'">
+							
+							</div>
+						</div><!--  -->
+					</div><!-- class="zt-span6 last" -->
+				</div>
 			</div>
 			<jsp:include page="/include/footer.jsp" />
 		</div><!-- <div id="layoutSidenav_content"> -->
