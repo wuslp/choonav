@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body align="center">
 
 다음 승인자를 선택해주세요.
 	

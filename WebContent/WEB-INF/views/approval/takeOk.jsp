@@ -9,7 +9,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 	
-<body>
+<body align="center">
 
 
 	다음 승인자를 선택해주세요.
@@ -17,8 +17,7 @@
 <form action="/cnav/approval/addTake.cnav?appNum=${appNum}" method="post">
 	<input type="hidden" name="appNum" value="${appNum}" />
 		<select name="id2">
-				<option value="">선택</option>
-				<option value="">없음</option>				
+				<option value="">선택</option>			
 				<c:forEach var="users" items="${list}">
 					<option value="${users.userId}">${users.name} ${users.position}</option>
 				</c:forEach> 
