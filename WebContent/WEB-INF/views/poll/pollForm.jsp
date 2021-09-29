@@ -100,7 +100,7 @@
 					<h3>투표 만들기</h3><br/><br/><br/>
 					<div class="pollWrap">
 						<div class="pollconWrap">
-							<form action="/cnav/poll/pollPro.cnav" onsubmit="return check()" name="pF">
+							<form action="/cnav/poll/pollPro.cnav" onsubmit="return check()" name="pF" class="pollFormWrap">
 								<br/><br/>
 								투표기간(필수) : <input type="date" id="stDate" name="stDate" min=<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" /> > <strong>~</strong> <input type="date" id="endDate" name="endDate" ><br/>
 								제목(필수) : <input type="text" id="pollTitle" name="pollTitle"/><br/>
@@ -120,13 +120,12 @@
 								1(필수) : <input type="text" name="ans1" id="ans1"/><br/>
 								2(필수) : <input type="text" name="ans2" id="ans2"/><br/>
 								3(옵션) : <input type="text" name="ans3"/><br/>
-								4(옵션) : <input type="text" name="ans4"/><br/><br/><br/>
+								4(옵션) : <input type="text" name="ans4"/><br/><br/>
 									<!-- 유효성 검사 추가 -->
-							</form>
-						</div><br/><!-- pollconWrap -->
 									<input type="submit" value="만들기" id="" >
 									<input type="button" value="취소" id="" onClick="window.location='/cnav/poll/pollList.cnav'">
-								
+							</form>
+						</div><br/><!-- pollconWrap -->
 					</div><!-- pollWrap -->
 				</div>
 			</div>

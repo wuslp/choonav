@@ -19,17 +19,17 @@
     border-radius: 20px;
 }
 .pollconWrap input{
-	background : #8a909463;
+	background : #8a909440;
 	border:2px solid #dab1da;
 	color:#741c7d;
 	padding:3px 10px;
 	border-radius:20px;
-	margin-top:5px;
+	margin-top:4px;
 	outline :none;
 }
 
 .pollconWrap select{
-	background : #8a909463;
+	background : #8a909440;
 	border:2px solid #dab1da;
 	color:#741c7d;
 	padding:3px 10px;
@@ -41,12 +41,55 @@
     text-align: -webkit-center;
     padding: 10px;
     font-size: small;
+    font-weight: 700;
 }
 .pollconWrap {
     border: solid thin;
-    width: 550px;
-    height: 500px;
+    width: 580px;
+    height: 450px;
 }
 .pollinner {
     margin: 13px;
 }  
+.pollPageWrap{
+    text-align: -webkit-center;
+    padding: 10px;
+    font-weight: 500;
+    margin-top: 50px;
+    font-size: 25px;
+}
+.pollconPageWrap {
+    border: solid thin;
+    width: 580px;
+    height: 450px;
+    border-radius:20px;
+}
+.pollinner {
+    margin: 13px;
+}  
+.pollChoise {
+     background-color: #e6d8e6a1;
+    /* padding: 20px; */
+    margin: 50px;
+    /* padding-right: 50px; */
+    background-size: 100px;
+    width: 250px;
+    border-radius:20px;
+}
+.pollChoiseRes
+{
+     background-color: #e6d8e6a1;
+    /* padding: 20px; */
+    margin: 50px;
+    /* padding-right: 50px; */
+    background-size: 200px;
+    width: 400px;
+    border-radius:20px;
+}
+.resBar{
+	text-align: center;
+}
+.input ans{
+	display: inline-block;
+}
+
