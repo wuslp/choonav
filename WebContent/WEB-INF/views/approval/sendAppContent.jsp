@@ -32,7 +32,7 @@
 		<jsp:include page="/include/left_nav_bar.jsp" />
 		<div id="layoutSidenav_content">
 			<div id="wrapAll">
-			<h3> 보낸결재함 </h3>
+			<h3> 보낸 결재 상세 </h3>
 			
 			<div id="printA">
 			<div class="appAllWrap" >
