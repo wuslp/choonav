@@ -80,8 +80,7 @@
 	<div>
         <br>
        <form action="/cnav/topComments/insert.cnav" method="post">
-       		<textarea id="topComment" name="topComment" cols="50" rows="10"></textarea>
-		 	<!-- <input type="text" id="topComment" name="topComment"> -->
+       		<textarea id="topComment" name="topComment" rows="4" cols="80" placeholder="내용을 작성해 주세요"></textarea>
 		 	<input type="hidden" id="userId" name="userId" value="${sessionScope.sid}">
 		 	<input type="hidden" id="topNum" name="topNum" value="${article.topNum}">
 		 	<input type="hidden" id="code" name="code" value="${sessionScope.scode}">
@@ -99,7 +98,7 @@
 	        작성 날짜 :  <fmt:formatDate value="${reply.topReg}" pattern="yyyy-MM-dd" />
 	        </p>
 			
-	        <p>${reply.topComment}</p>
+	        <pre>${reply.topComment}</pre>
 	        <!-- 로그인한사람이 댓글쓴사람이랑 같을경우 삭제버튼 보이게 -->
 	 		<c:if test="${sessionScope.sid == reply.userId || sessionScope.sauth == '1'}">
 		       <input type="button" value="삭제" onclick="window.location='/cnav/topComments/delete.cnav?topComNum=${reply.topComNum}&topNum=${article.topNum}'">
