@@ -51,4 +51,26 @@
 .pollinner {
     margin: 13px;
 }  
-
+.pollPageWrap{
+    text-align: -webkit-center;
+    padding: 10px;
+    font-weight: 500;
+    margin-top: 50px;
+    font-size: 25px;
+}
+.pollconPageWrap {
+    border: solid thin;
+    width: 580px;
+    height: 450px;
+}
+.pollinner {
+    margin: 13px;
+}  
+.pollChoise {
+     background-color: #e6d8e6a1;
+    /* padding: 20px; */
+    margin: 50px;
+    /* padding-right: 50px; */
+    background-size: 100px;
+    width: 250px;
+}

@@ -158,54 +158,61 @@
 				<div id="wrapAll">
 					<div id="">
 						<h3> 투표 </h3>
-							<input type="hidden" value="${article.pollNum}" id="pollN"/>
-							<input type="hidden" value="${result}" id="result"/>
-							<div id="">
-								투표기간	<fmt:formatDate value="${article.stDate}" pattern="yyyy-MM-dd"/><strong>~</strong><fmt:formatDate value="${article.endDate}" pattern="yyyy-MM-dd"/><br/>
-								제목		 : ${article.pollTitle}<br/>
-								대상		 : ${article.target}<br/>
-								내용		 : ${article.pollCon}<br/>
-								항목 <br/>
-								1 :&emsp;<label><input type="radio" id="ans1" name="ans1" value="1"/>&nbsp; ${article.ans1}</label><br/>
-								2 :&emsp;<label><input type="radio" id="ans2" name="ans1" value="2"/>&nbsp; ${article.ans2}</label><br/>
-								<c:if test="${article.ans3 != null}">
-								3 :&emsp;<label><input type="radio" id="ans3" name="ans1" value="3">&nbsp; ${article.ans3}</label><br/>
-								</c:if>
-								<c:if test="${article.ans4 != null}">
-								4 :&emsp;<label><input type="radio" id="ans4" name="ans1" value="4">&nbsp; ${article.ans4}</label><br/><br/><br/>
-								</c:if>
-								<!-- 투표대상이 전체이거나 해당할때 -->
-								<c:if test="${userIdDept==article.target || article.target=='전체'}">
-									<!-- 해당 id가 투표기록이 있는지 확인 result -->
-									<c:set value="${result }" var="result"/>
-									<c:if test="${article.pollStatus eq '진행중' }">
-										 <input type="button" value="투표" id="" onclick="check()"> 
-									</c:if>
-								</c:if>	
-								
-								<!-- 투표대상이 해당하지 않을때 -->
-								<c:if test="${!(userIdDept==article.target || article.target=='전체')}">
-									<input type="button" value="투표대상이 아닙니다" disabled> 
-								</c:if>
-								<!-- 마감된 투표일때 -->
-								<c:if test="${article.pollStatus eq '완료' }">
-										<input type="button" value="마감된 투표" id="" disabled>
-										<input type="button" value="결과보기" onclick="window.location='/cnav/poll/pollResult.cnav?pollNum=${article.pollNum}'">
-								</c:if>
-								<input type="button" value="리스트로" id="" onClick="window.location='/cnav/poll/pollList.cnav'">
-								<!-- 투표글 작성자일경우만 삭제버튼 보이게 처리 -->
-								<c:if test="${article.userId == sessionScope.sid}">
-	<%-- 								<input type="button" value="삭제" onclick="window.location='/cnav/poll/pollDelete.cnav?pollNum=${article.pollNum}'" id="">
-	 --%>								<input type="button" value="삭제" onclick="DelPoll()" id="">
-								</c:if>
-								<!--회사 관리자일경우 삭제보이게  -->
-								<c:if test="${article.userId != sessionScope.sid &&sessionScope.sauth=='1'}">
-									<c:if test="${sessionScope.sauth == '1'}">
-	<%-- 									<input type="button" value="삭제" onclick="window.location='/cnav/poll/pollDelete.cnav?pollNum=${article.pollNum}'" id="">
-	 --%>									<input type="button" value="삭제" onclick="DelPoll()" id="">
-									</c:if>
-								</c:if>
+						<div class="pollPageWrap">
+							<div class="pollconPageWrap">
+								<input type="hidden" value="${article.pollNum}" id="pollN"/>
+								<input type="hidden" value="${result}" id="result"/>
+								<div id=""><br/>
+									<i class="far fa-calendar-check"></i> 투표기간	: <fmt:formatDate value="${article.stDate}" pattern="yyyy-MM-dd"/><strong>~</strong><fmt:formatDate value="${article.endDate}" pattern="yyyy-MM-dd"/><br/>
+									제목		 : ${article.pollTitle}<br/>
+									대상		 : ${article.target}<br/>
+									내용		 : ${article.pollCon}<br/>
+									<div class="pollChoise">
+										<i class="fas fa-poll-h"></i>
+										항목 <br/>
+										1 :&emsp;<label><input type="radio" id="ans1" name="ans1" value="1"/>&nbsp; ${article.ans1}</label><br/>
+										2 :&emsp;<label><input type="radio" id="ans2" name="ans1" value="2"/>&nbsp; ${article.ans2}</label><br/>
+										<c:if test="${article.ans3 != null}">
+										3 :&emsp;<label><input type="radio" id="ans3" name="ans1" value="3">&nbsp; ${article.ans3}</label><br/>
+										</c:if>
+										<c:if test="${article.ans4 != null}">
+										4 :&emsp;<label><input type="radio" id="ans4" name="ans1" value="4">&nbsp; ${article.ans4}</label>
+										</c:if>
+									</div>
 							</div>
+						</div><br/>
+									<!-- 투표대상이 전체이거나 해당할때 -->
+									<c:if test="${userIdDept==article.target || article.target=='전체'}">
+										<!-- 해당 id가 투표기록이 있는지 확인 result -->
+										<c:set value="${result }" var="result"/>
+										<c:if test="${article.pollStatus eq '진행중' }">
+											 <input type="button" value="투표" id="" onclick="check()"> 
+										</c:if>
+									</c:if>	
+									
+									<!-- 투표대상이 해당하지 않을때 -->
+									<c:if test="${!(userIdDept==article.target || article.target=='전체')}">
+										<input type="button" value="투표대상이 아닙니다" disabled> 
+									</c:if>
+									<!-- 마감된 투표일때 -->
+									<c:if test="${article.pollStatus eq '완료' }">
+											<input type="button" value="마감된 투표" id="" disabled>
+											<input type="button" value="결과보기" onclick="window.location='/cnav/poll/pollResult.cnav?pollNum=${article.pollNum}'">
+									</c:if>
+									<input type="button" value="리스트로" id="" onClick="window.location='/cnav/poll/pollList.cnav'">
+									<!-- 투표글 작성자일경우만 삭제버튼 보이게 처리 -->
+									<c:if test="${article.userId == sessionScope.sid}">
+		<%-- 								<input type="button" value="삭제" onclick="window.location='/cnav/poll/pollDelete.cnav?pollNum=${article.pollNum}'" id="">
+		 --%>								<input type="button" value="삭제" onclick="DelPoll()" id="">
+									</c:if>
+									<!--회사 관리자일경우 삭제보이게  -->
+									<c:if test="${article.userId != sessionScope.sid &&sessionScope.sauth=='1'}">
+										<c:if test="${sessionScope.sauth == '1'}">
+		<%-- 									<input type="button" value="삭제" onclick="window.location='/cnav/poll/pollDelete.cnav?pollNum=${article.pollNum}'" id="">
+		 --%>									<input type="button" value="삭제" onclick="DelPoll()" id="">
+										</c:if>
+									</c:if>
+								</div>
 					</div><!--투표페이지 본문 끝  --><br/><br/><br/>
 					
 					<div><!-- 투표페이지 댓글 -->

@@ -126,7 +126,6 @@
 									<input type="button" value="취소" id="" onClick="window.location='/cnav/poll/pollList.cnav'">
 							</form>
 						</div><br/><!-- pollconWrap -->
-								
 					</div><!-- pollWrap -->
 				</div>
 			</div>
