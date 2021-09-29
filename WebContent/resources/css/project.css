@@ -53,3 +53,23 @@
 	text-align: -webkit-center;
 	margin: 30px;
 }
+/*댓글 삭제*/
+.delComm{
+	font-style: normal;	
+	float:right;
+  	margin-top : 10px;	
+}
+
+.delComm button {
+   border: solid 1px #767676;
+    background-color: #efefef;
+    color: #000000;
+    border-radius: 3px;
+}
+.delComm button:hover {
+   border: solid 1px #767676;
+    background-color: #d2ced2a8;
+    color: #000000;
+    border-radius: 3px;
+}
+

@@ -95,6 +95,9 @@
 	<c:if test="${sel !=null && search !=null}">
 		<button onclick="window.location='/cnav/project/proList.cnav'">전체 목록</button> <br/>		
 	</c:if>
+	<c:if test="${!(project.proState=='진행중'|| project.proState=='완료')}">
+		<button onclick="window.location='/cnav/project/proList.cnav'">전체 목록</button>
+	</c:if>
 </div>	
 	
 	<br/><br/>
