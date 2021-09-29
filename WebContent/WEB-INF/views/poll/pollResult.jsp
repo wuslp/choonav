@@ -130,15 +130,7 @@
 			    		</script>
 					</c:if>
 			</div>
-			<!--pollNum 없을경우  
-			<div id=""> 
-					<c:if test="${RespollNum == null}">
-					<script>
-						alert("접근할 수 없습니다");
-						window.history.back();
-			    		</script>
-					</c:if>
-			</div> -->
+
 			<div id="wrapAll">
 			    <div class="zt-span6 last">
 			    	<div id="">

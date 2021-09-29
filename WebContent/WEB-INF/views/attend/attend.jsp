@@ -237,7 +237,7 @@
 											
 									
 							<div id="" >	
-								<div align="right"><i id="print" style="cursor: pointer; color:#741c8e " class="fa fa-print print-button fa-2x"  onclick="window.print()"></i><font size="1em" style="font-weight: bold; ">인쇄하기</font></div>
+								<div align="right"><i id="print" style="cursor: pointer; color:#000000 " class="fa fa-print print-button fa-1x"  onclick="window.print()"></i><font size="1em" style="font-weight: bold; ">인쇄하기</font></div>
 								<table class="cnavTable">
 									<tr class="cnavList-top">
 										<td>날짜</td>
@@ -251,7 +251,23 @@
 										<c:forEach var="List" items="${userAttendList }">
 										<tr id="">
 											<td>&nbsp;<fmt:formatDate value="${List.attDate }" type="date"/></td>
-											<td>&emsp;${List.attendance }</td>
+											<td>
+												<div class="stateOk" >
+													<c:if test="${List.attendance=='정상출근' }">
+														정상출근
+													</c:if>
+												</div>
+												<div class="stateNow" >
+													<c:if test="${List.attendance=='지각' }">
+														지각
+													</c:if>
+												</div>
+												<div class="stateRoading" >
+													<c:if test="${List.attendance=='휴가' }">
+														휴가
+													</c:if>
+												</div>
+											</td>
 											<td>&emsp;<fmt:formatDate value="${List.workTime }" pattern="HH:mm" /></td>
 											<td>&emsp;<fmt:formatDate value="${List.leaveTime }" pattern="HH:mm" /></td>
 											<td>${List.reason }</td>
