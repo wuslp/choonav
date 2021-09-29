@@ -63,7 +63,7 @@
 				<option value="">선택</option>
 				<c:forEach var="userList" items="${userList}">
 					<option value="${userList.userId}">${userList.name} ${userList.position}</option>
-				</c:forEach> 	
+				</c:forEach>
 				</select>
 			</div>
 			<div>
