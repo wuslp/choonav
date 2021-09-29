@@ -170,7 +170,7 @@
 									<div class="pollChoise">
 										<i class="fas fa-poll-h"></i>
 										항목 <br/>
-										1 :&emsp;<label><input type="radio" id="ans1" name="ans1" value="1"/>&nbsp; ${article.ans1}</label><br/>
+										1 :&emsp;<label><input type="radio" id="ans1" name="ans1" value="1" class="ans"/>&nbsp; ${article.ans1}</label><br/>
 										2 :&emsp;<label><input type="radio" id="ans2" name="ans1" value="2"/>&nbsp; ${article.ans2}</label><br/>
 										<c:if test="${article.ans3 != null}">
 										3 :&emsp;<label><input type="radio" id="ans3" name="ans1" value="3">&nbsp; ${article.ans3}</label><br/>

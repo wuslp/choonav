@@ -14,6 +14,7 @@
 	<title>pollResult page</title>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
+	<link href="/cnav/resources/css/AttendPoll.css" rel="stylesheet" type="text/css">
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -52,7 +53,7 @@
         line-height: 25px;
         height: 25px;
         margin-bottom: 5px;
-        width: 60%;
+        width: 80%;
 
         background-color: rgba(0,0,0,0.1);
 
@@ -132,43 +133,44 @@
 			</div>
 
 			<div id="wrapAll">
-				<div class="resllWrap">
-				    <div class="zt-span6 last">
-				    	<div id="">
-						<h3><strong>투표 결과</strong></h3>
-						<p>&nbsp;</p>
-						<p>&nbsp;</p>
-							<div id="">
-								투표기간	<fmt:formatDate value="${article.stDate}" pattern="yyyy-MM-dd"/><strong>~</strong><fmt:formatDate value="${article.endDate}" pattern="yyyy-MM-dd"/><br/><br/>
-								제목		 : ${article.pollTitle}<br/><br/>
-								대상		 : ${article.target}<br/><br/>
-								내용		 : ${article.pollCon}<br/><br/>
-								<strong>&nbsp;&nbsp; 총 투표수 : ${article.total}</strong> <br/>
-								항목 <br/>
-								1 :&emsp;${article.ans1}<br/>
-									<div class="zt-skill-bar"><div data-width="<fmt:formatNumber value = "${(article.res1/article.total)*100}"/>" style="">${article.ans1}<c:out value="${name}" /><span>결과비율 : <fmt:formatNumber value="${article.res1/article.total}" type="percent"/></span></div></div>
-				
-								2 :&emsp;${article.ans2}<br/>
-									<div class="zt-skill-bar"><div data-width="<fmt:formatNumber value = "${article.res2/article.total*100}"/>" style="">${article.ans2}<span><fmt:formatNumber value="${article.res2/article.total}" type="percent"/></span></div></div>
-				
-								<c:if test="${article.ans3 != null}">
-								3 :&emsp;${article.ans3}<br/>
-								</c:if>
-								<c:if test="${article.res3 ne '0'}">
-									<div class="zt-skill-bar"><div data-width="<fmt:formatNumber value = "${article.res3/article.total*100}"/>" style=";">${article.ans3}<span><fmt:formatNumber value="${article.res3/article.total}" type="percent"/></span></div></div>
-								</c:if>
-								<c:if test="${article.ans4 != null}">
-								4 :&emsp;${article.ans4}<br/>
-								</c:if>
-								<c:if test="${article.res4 ne '0'}">
-									<div class="zt-skill-bar"><div data-width="<fmt:formatNumber value = "${article.res4/article.total*100}"/>" style=";">${article.ans4}<span><fmt:formatNumber value="${article.res4/article.total}" type="percent"/></span></div></div>
-								</c:if><br/><br/>
-								<input type="button" value="리스트로" id="" onClick="window.location='/cnav/poll/pollList.cnav'">
-							
-							</div>
-						</div><!--  -->
-					</div><!-- class="zt-span6 last" -->
+			<h3><strong>투표 결과</strong></h3>
+				<div class="pollPageWrap">
+				<div class="pollconPageWrap">
+					    	<div id="">
+									<i class="far fa-calendar-check"></i> 투표기간	<fmt:formatDate value="${article.stDate}" pattern="yyyy-MM-dd"/><strong>~</strong><fmt:formatDate value="${article.endDate}" pattern="yyyy-MM-dd"/><br/>
+									제목		 : ${article.pollTitle}<br/>
+									대상		 : ${article.target}<br/>
+									내용		 : ${article.pollCon}<br/>
+							</div><!--  -->
+					</div>
 				</div>
+				<div class="resBar">
+					    <div class="zt-span6 last">
+									<div class="">
+									<strong>&nbsp;&nbsp; 총 투표수 : ${article.total}</strong> <br/>
+									<i class="fas fa-poll-h"></i> 항목 <br/>
+									1 :&emsp;${article.ans1}<br/>
+										<div class="zt-skill-bar"><div data-width="<fmt:formatNumber value = "${(article.res1/article.total)*100}"/>" style="">${article.ans1}<c:out value="${name}" /><span>결과비율 : <fmt:formatNumber value="${article.res1/article.total}" type="percent"/></span></div></div>
+					
+									2 :&emsp;${article.ans2}<br/>
+										<div class="zt-skill-bar"><div data-width="<fmt:formatNumber value = "${article.res2/article.total*100}"/>" style="">${article.ans2}<span><fmt:formatNumber value="${article.res2/article.total}" type="percent"/></span></div></div>
+					
+									<c:if test="${article.ans3 != null}">
+									3 :&emsp;${article.ans3}<br/>
+									</c:if>
+									<c:if test="${article.res3 ne '0'}">
+										<div class="zt-skill-bar"><div data-width="<fmt:formatNumber value = "${article.res3/article.total*100}"/>" style=";">${article.ans3}<span><fmt:formatNumber value="${article.res3/article.total}" type="percent"/></span></div></div>
+									</c:if>
+									<c:if test="${article.ans4 != null}">
+									4 :&emsp;${article.ans4}<br/>
+									</c:if>
+									<c:if test="${article.res4 ne '0'}">
+										<div class="zt-skill-bar"><div data-width="<fmt:formatNumber value = "${article.res4/article.total*100}"/>" style=";">${article.ans4}<span><fmt:formatNumber value="${article.res4/article.total}" type="percent"/></span></div></div>
+									</c:if><br/>
+									</div>
+									<input type="button" value="리스트로" id="" onClick="window.location='/cnav/poll/pollList.cnav'">
+						</div><!-- class="zt-span6 last" -->
+					</div>
 			</div>
 			<jsp:include page="/include/footer.jsp" />
 		</div><!-- <div id="layoutSidenav_content"> -->

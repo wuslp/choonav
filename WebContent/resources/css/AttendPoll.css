@@ -62,6 +62,7 @@
     border: solid thin;
     width: 580px;
     height: 450px;
+    border-radius:20px;
 }
 .pollinner {
     margin: 13px;
@@ -73,4 +74,22 @@
     /* padding-right: 50px; */
     background-size: 100px;
     width: 250px;
+    border-radius:20px;
 }
+.pollChoiseRes
+{
+     background-color: #e6d8e6a1;
+    /* padding: 20px; */
+    margin: 50px;
+    /* padding-right: 50px; */
+    background-size: 200px;
+    width: 400px;
+    border-radius:20px;
+}
+.resBar{
+	text-align: center;
+}
+.input ans{
+	display: inline-block;
+}
+
