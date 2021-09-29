@@ -87,7 +87,7 @@
 					</c:if>
 				</td> 
 				
-				<td>${project.name}</td>		
+				<td>${project.name}</td>		 
 			</tr>
 		</c:forEach>	
 	</table>
