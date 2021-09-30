@@ -267,6 +267,11 @@
 														휴가
 													</c:if>
 												</div>
+												<div class="stateRoading" >
+													<c:if test="${List.attendance=='조퇴' }">
+														조퇴
+													</c:if>
+												</div>
 											</td>
 											<td>&emsp;<fmt:formatDate value="${List.workTime }" pattern="HH:mm" /></td>
 											<td>&emsp;<fmt:formatDate value="${List.leaveTime }" pattern="HH:mm" /></td>

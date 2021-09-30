@@ -65,7 +65,7 @@
   	</update>
   	<update id="AttendanceSet" parameterType="hashmap">
  	 <![CDATA[
-  		update attend set attendance='조퇴' where ((to_char(attdate, 'HH24MI') < 900) and (to_char(leavetime, 'HH24MI') < 1801) and (to_char(attdate, 'yyyymmdd') = to_char(sysdate, 'yyyymmdd')) and (userId=#{userId}) and (code=#{code}))
+  		update attend set attendance='조퇴' where ((to_char(worktime, 'HH24MI') < 900) and (to_char(leavetime, 'HH24MI') < 1801) and (userId=#{userId}) and (code=#{code}))
   		]]>
   	</update>
 	<!--출근 기록 체크  -->
