@@ -22,6 +22,7 @@
 	
 	<title>자유게시판 글쓰기</title>
 	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
+	<link href="/cnav/resources/css/notice.css" rel="stylesheet" type="text/css">
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -94,14 +95,17 @@ function goWrite(frm) {
 		<div id="layoutSidenav_content">
 			<div id="wrapAll">	
 			
-<h3>글 작성</h3><br><br><br>
+<h3>자유게시판 글 작성</h3><br><br><br>
 <div style="width: 90%; margin: auto;">
 	<form method="post" action="/cnav/topic/writePro.cnav">
 		<input type="text" name="topTitle" style="width: 100%;" placeholder="제목"/>
 		<br><br> 
 		<textarea id="summernote" name="topContent"></textarea>
 		<br />
-		<input id="subBtn" type="button" value="글 작성" style="float: right;" onclick="goWrite(this.form)"/>
+		<div class="notiBtn">
+			<input type="button" onclick="window.location='/cnav/topic/list.cnav'" value="목록" />
+			<input type="button" value="글 작성"  onclick="goWrite(this.form)"/>
+		</div>
 	</form>
 </div>
 
