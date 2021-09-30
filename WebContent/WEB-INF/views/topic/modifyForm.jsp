@@ -21,6 +21,7 @@
 	<script src="/resources/js/summernote-ko-KR.js"></script>
 	<title>자유게시판 수정</title>
 	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
+	<link href="/cnav/resources/css/notice.css" rel="stylesheet" type="text/css">
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -78,15 +79,19 @@ $(document).ready(function() {
 		<div id="layoutSidenav_content">
 			<div id="wrapAll">	
 			
-<h3>게시글 수정</h3><br><br><br>
+<h3>자유게시판 글 수정</h3><br><br><br>
 	<!-- 게시글 수정 써머노트 -->
-	<div style="width: 60%; margin: auto;">
+	<div style="width: 90%; margin: auto;">
 		<form action="/cnav/topic/modifyPro.cnav" > 
 			<input type="hidden" name="topNum" value="${article.topNum}">
-			<input type="text" name="topTitle" style="width: 40%;" placeholder="제목" value="${article.topTitle}"/>
+			<input type="text" name="topTitle" style="width: 100%;" placeholder="제목" value="${article.topTitle}"/>
 			<br><br> 
-			<textarea id="summernote" name="topContent"></textarea>
-			<input id="subBtn" type="button" value="글 수정" style="float: right;" onclick="goModify(this.form)"/>
+			<textarea id="summernote" name="topContent" >${article.topContent}</textarea>
+			<br />
+			<div class="notiBtn">
+				<input type="button" onclick="window.location='/cnav/topic/list.cnav'" value="목록" />
+				<input type="button" value="글 수정"  onclick="goModify(this.form)"/>
+			</div>
 		</form>
 	</div>
 	</div> <!-- wrapAll -->
