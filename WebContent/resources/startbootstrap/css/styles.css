@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
 /*!
 * Start Bootstrap - SB Admin v7.0.3 (https://startbootstrap.com/template/sb-admin)
 * Copyright 2013-2021 Start Bootstrap
@@ -11378,6 +11379,7 @@ body {
 }
 .sb-nav-fixed #layoutSidenav #layoutSidenav_nav .sb-sidenav .sb-sidenav-menu {
   overflow-y: auto;
+  font-family: 'Gowun Dodum', sans-serif;
 }
 .sb-nav-fixed #layoutSidenav #layoutSidenav_content {
   padding-left: 225px;
@@ -11686,4 +11688,5 @@ body {
   width: 20px !important;
   font-size: 0.75rem;
   border-radius: 0.25rem !important;
+
 }

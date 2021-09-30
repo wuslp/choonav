@@ -24,6 +24,7 @@
 	<div id="layoutSidenav">
 		<jsp:include page="/include/left_nav_bar.jsp" />
 		<div id="layoutSidenav_content">
+			<div id="wrapAll">
 			<div id="prowrapAll">
 			<h3>프로젝트 상세</h3>
 			
@@ -124,6 +125,7 @@
 	</script>
 	
 	<!-- 세션에 아이디가 저장되었을 경우 (로그인한 경우)에만 댓글 작성 창이 출력되도록 코드를 작성함 -->
+		</div>
    		</div> <!-- wrapAll -->
 			<jsp:include page="/include/footer.jsp" />
 		</div><!-- layoutSidenav_content" -->

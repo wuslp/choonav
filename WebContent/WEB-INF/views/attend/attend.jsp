@@ -195,7 +195,7 @@
 							</c:if>
 						</div>
 						<!--근태관리 페이지 본문 시작  -->
-						<h3>근태관리</h3>
+						<h3>근태 관리</h3>
 						<!-- 실시간 날짜 -->
 						<div class="attendLine"><br/>
 							<h6>Today : <fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd" /></h6>
