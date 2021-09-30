@@ -216,8 +216,8 @@
 								</div>
 					</div><!--투표페이지 본문 끝  --><br/><br/><br/>
 					
-					<div><!-- 투표페이지 댓글 -->
-						<strong>댓글로의견을 나눠보세요</strong> <br/><textarea rows = "4" cols = "80" id = "pContent" name = "pContent" placeholder="여기에 내용을 써보세요"></textarea>
+					<div class="commCenter"><!-- 투표페이지 댓글 -->
+						<strong>댓글로 의견을 나눠보세요</strong> <br/><textarea rows = "2" cols = "80" id = "pContent" name = "pContent" placeholder="여기에 내용을 써보세요"></textarea>
 	    				<input type="button" id="comSubmit" name="comSubmit" value="댓글등록">
 	    				<br>
 					</div>
