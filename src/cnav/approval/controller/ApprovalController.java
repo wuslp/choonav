@@ -31,8 +31,6 @@ public class ApprovalController {
 	@RequestMapping("appForm.cnav")
 	public String appForm(HttpServletRequest request, Model model, HttpSession session) throws SQLException{
 		
-	//	session.setAttribute("sid", "apple"); // 나중에 로그인쪽 코드 완료되면 지우기, 임시로 여기서 아이디세션 저장
-	//	session.setAttribute("code", "1005"); // 나중에 로그인쪽 코드 완료되면 지우기, 임시로 여기서 코드세션 저장
 		// 로그인된 아이디 세션 꺼내기
 		String userId = (String)session.getAttribute("sid");
 		// 로그인된 아이디 코드 꺼내기
