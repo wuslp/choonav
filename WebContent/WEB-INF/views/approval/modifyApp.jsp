@@ -87,7 +87,7 @@
 		<tr>
 			<td align="center" colspan="2" class="dd">내용</td>
 		</tr>
-		<tr>	
+		<tr>
 			<td colspan="2"><input type="text" width="90%" name="appContent" value="${approval.appContent}"/></td>
 		</tr>
 		<tr>
