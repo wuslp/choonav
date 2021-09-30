@@ -93,7 +93,7 @@ function goWrite(frm) {
 		<jsp:include page="/include/left_nav_bar.jsp" />
 		<div id="layoutSidenav_content">
 			<div id="wrapAll">	
-<h3>글 작성</h3><br><br><br>
+<h3>공지사항 작성</h3><br><br><br>
 <div style="width: 90%; margin: auto;">
 	<form method="post" action="/cnav/notice/writePro.cnav">
 		<input type="text" name="notiTitle" style="width: 100%;" placeholder="제목"/>
