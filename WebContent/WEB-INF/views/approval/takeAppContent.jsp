@@ -132,7 +132,7 @@
 		<td align="center" colspan="2" class="dd">내용</td>
 	</tr>
 	<tr>	
-		<td colspan="2" class="ff">${approval.appContent}</td>
+		<td colspan="2" class="ff"><pre>${approval.appContent}</pre></td>
 	</tr>
 	<tr>
 		<td class="dd">요청사항</td>
