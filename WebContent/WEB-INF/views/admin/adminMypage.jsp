@@ -14,6 +14,7 @@
 	<meta name="author" content="" />
 	<meta charset="UTF-8">
 	<title>전체관리자 마이페이지</title>
+	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -29,6 +30,7 @@
 	<div id="layoutSidenav">
 		<jsp:include page="/include/left_nav_bar.jsp" />
 		<div id="layoutSidenav_content">
+		<div id="wrapAll">
 			<!--로그인된 세션이 없을경우 startPage 로 이동시켜주기  -->
 			<div id="logincheck">
 				<c:if test="${sessionScope.sid == null}">
@@ -48,9 +50,7 @@
 		    		</script>
 				</c:if>
 			</div><!--logincheck -->
-			<div>
-			 관리자 권한
-			</div>
+		<h3>관리자 권한</h3>
 			
 			<!-- business테이블에 레코드 없을 경우 -->
 			<div> 
@@ -64,10 +64,10 @@
 			</div>
 			
 			<!-- business테이블에 레코드 있을 경우 -->
-			<div>
+			<div class="adminAll">
 				<c:if test="${count != 0}">
-					<table>
-						<tr>
+					<table class="cnavTable">
+						<tr class="cnavList-top">
 							<td>No.</td>
 							<td>회사명</td>
 							<td>아이디</td>
@@ -106,7 +106,7 @@
 			<br /> <br /> 
 			
 			<%-- 페이지 번호 --%>
-			<div align="center">
+			<div class="pageNums-all">
 				<c:if test="${count > 0}">
 					<c:set var="pageBlock" value="3" />
 					<fmt:parseNumber var="res" value="${count / pageSize}" integerOnly="true" />
@@ -129,15 +129,13 @@
 						&nbsp; <a href="/cnav/admin/adminMypage.cnav?pageNum=${startPage+pageBlock}" class="pageNums"> &gt; </a>
 					</c:if>
 				</c:if> <%-- end:count > 0 --%>
-			
-				<br />
-			
-				<h3 style="color:grey"> 현재페이지 : ${pageNum} </h3>
-				<br /> 
-				<button onclick="window.location='/cnav/main/main.cnav'"> 메인으로 </button>
+
 			</div>
 			
+		</div> <!-- wrapAll -->
 		<jsp:include page="/include/footer.jsp" />
+		</div><!-- id="layoutSidenav_content" -->
+	</div><!-- id="layoutSidenav" -->
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 		<script src="<%=request.getContextPath()%>/resources/startbootstrap/js/scripts.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
@@ -145,8 +143,7 @@
 		<script src="<%=request.getContextPath()%>/resources/startbootstrap/assets/demo/chart-bar-demo.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
 		<script src="<%=request.getContextPath()%>/resource/startbootstrap/js/datatables-simple-demo.js"></script>
-		</div><!-- id="layoutSidenav_content" -->
-	</div><!-- id="layoutSidenav" -->
+		
 </body>
 <script>
 	function auth0(userId) {

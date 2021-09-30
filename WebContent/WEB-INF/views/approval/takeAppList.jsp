@@ -33,7 +33,7 @@
 		<jsp:include page="/include/left_nav_bar.jsp" />
 		<div id="layoutSidenav_content">
 		<div id="wrapAll">
-		<h3> 받은결재함 </h3>
+		<h3> 받은 결재함 </h3>
 		<div class="cnavAllList">
 	<%-- 작성자/내용 검색 --%>
 	<form action="/cnav/approval/takeAppList.cnav">

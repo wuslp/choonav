@@ -163,10 +163,7 @@ public class MypageController {
 	// 관리자 -> 회원 정보 수정
 	@RequestMapping("userManagement.cnav")
 	public String recMailList(HttpSession session, String pageNum, String sel, String search, Model model) throws SQLException{
-		session.setAttribute("sid", "test01");
-		session.setAttribute("scode", "1234");
-		
-		
+
 		String id = (String)session.getAttribute("sid");
 		String code = (String)session.getAttribute("scode");
 		
