@@ -140,7 +140,13 @@
 	</tr>
 </table>
 </div>
+
+
+
 			</div><!-- approvalWrap -->
+				<c:if test="${approval.reject != null }">			
+				반려 사유 : ${approval.reject}
+				</c:if>
 			</div>
 			</div> <!-- 프린트 -->
 <div class="appConBtn">
