@@ -10,6 +10,7 @@ public interface ProjectDAO {
 	
 	// 모든 프로젝트 개수 가져오기 
 	public int getProjectCount(String userId,String code) throws SQLException;
+	//public int getProjectCount() throws SQLException;
 	
 	// 모든 프로젝트 목록 불러오기 
 	public List<ProjectDTO> getProjects(int start, int end,String code) throws SQLException;

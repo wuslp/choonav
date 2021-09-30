@@ -30,15 +30,16 @@
 		<input type="hidden" name="proNum" value="${project.proNum}" />
 		<table>
 			<tr>
-				<td align="center"></td>
-				<td>
+				
+				<td colspan="2">
 					<input type="text" name="proName" value="${project.proName}"/>
 				</td>
 			</tr>
 			<tr>
-				<td align="center"></td>
-				<td>		
-					<input type="text" name="proContent" value="${project.proContent}"/>
+				
+				<td colspan="2">		
+					<textarea rows="10" cols="50" name="proContent">${project.proContent}</textarea>
+					<%-- <input type="text" name="proContent" value="${project.proContent}"/> --%>
 				</td>
 			</tr>
 			<tr></tr>

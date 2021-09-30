@@ -18,4 +18,7 @@ public interface ProCommentsDAO  {
 
 	// 유저 아디=이름
 	public String getName(String userId) throws SQLException;
+
+	// 게시글 삭제시, 해당 프로젝트 댓글 전체 삭제 
+	public void delComs(String proNum) throws SQLException;
 }

@@ -26,6 +26,11 @@
   		delete from procomments where proComNum=#{proComNum}
   	</delete>
   	
+  	<!-- 댓글 삭제 -->
+  	<delete id="delComs" parameterType="string">
+  		delete from procomments where proNum=#{proNum}
+  	</delete>
+  	
   	
   </mapper>
   

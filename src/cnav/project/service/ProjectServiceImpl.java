@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 
+import cnav.procomments.dao.ProCommentsDAOImpl;
 import cnav.project.dao.ProjectDAOImpl;
 import cnav.project.dto.ProjectDTO;
 
@@ -19,6 +20,9 @@ public class ProjectServiceImpl implements ProjectService{
 	
 	@Autowired
 	private ProjectDAOImpl projectDAO=null; // 객체 생성 
+	
+	@Autowired
+	private ProCommentsDAOImpl proCommentsDAO=null; // 객체 생성 
 	
 	// 모든 프로젝트 가져오기(proList)
 	@Override
@@ -44,19 +48,20 @@ public class ProjectServiceImpl implements ProjectService{
 		  
 		// 해당 회사코드에 프로젝트 갯수가 있는지
 		// 전체 프로젝트 개수 가져오기 
-		count=projectDAO.getProjectCount(userId,code); // DB에 저장되어있는 전체 글의 개수를 가져와 담기 
+		count=projectDAO.getProjectCount(userId, code); // DB에 저장되어있는 전체 글의 개수를 가져와 담기 
 		System.out.println("count : "+count);
 		// 하나라도 있으면 프로젝트들을 다시 가져오기 
 		if(count >0) {
 			projectList=projectDAO.getProjects(startRow, endRow,code);
+			
+			for(int i = 0; i < projectList.size(); i++) {
+				projectList.get(i).setProStart(projectList.get(i).getProStart().split(" ")[0]);
+				projectList.get(i).setProEnd(projectList.get(i).getProEnd().split(" ")[0]);
+			}
 		}
 		
 		number=count-(currentPage-1)*pageSize; // 프로젝트 목록에 뿌려줄 가상의 글번호들
 	
-		for(int i = 0; i < projectList.size(); i++) {
-			projectList.get(i).setProStart(projectList.get(i).getProStart().split(" ")[0]);
-			projectList.get(i).setProEnd(projectList.get(i).getProEnd().split(" ")[0]);
-		}
 
 		
 		
@@ -108,14 +113,15 @@ public class ProjectServiceImpl implements ProjectService{
 			//있으면 리스트 불러오기
 			if(count > 0){
 				projectList = projectDAO.getSearchProjects(startRow, endRow, sel, search,code); 
+				
+				for(int i = 0; i < projectList.size(); i++) {
+					projectList.get(i).setProStart(projectList.get(i).getProStart().split(" ")[0]);
+					projectList.get(i).setProEnd(projectList.get(i).getProEnd().split(" ")[0]);
+				}
 			}
 					
 			number = count - (currentPage-1) * pageSize; 	// 게시판 목록에 뿌려줄 가상의 글 번호  
 			
-			for(int i = 0; i < projectList.size(); i++) {
-				projectList.get(i).setProStart(projectList.get(i).getProStart().split(" ")[0]);
-				projectList.get(i).setProEnd(projectList.get(i).getProEnd().split(" ")[0]);
-			}
 
 			
 			//controller에게 전달해야되는 데이터가 많으니 HashMap 에 넘겨줄 데이터를 저장해서 한번에 전달
@@ -166,14 +172,15 @@ public class ProjectServiceImpl implements ProjectService{
 			//있으면 리스트 불러오기
 			if(count > 0){
 				projectList = projectDAO.getState(startRow, endRow, sort,code); 
+				
+				for(int i = 0; i < projectList.size(); i++) {
+					projectList.get(i).setProStart(projectList.get(i).getProStart().split(" ")[0]);
+					projectList.get(i).setProEnd(projectList.get(i).getProEnd().split(" ")[0]);
+				}
 			}
 			
 			number = count - (currentPage-1) * pageSize; 	// 게시판 목록에 뿌려줄 가상의 글 번호
 			
-			for(int i = 0; i < projectList.size(); i++) {
-				projectList.get(i).setProStart(projectList.get(i).getProStart().split(" ")[0]);
-				projectList.get(i).setProEnd(projectList.get(i).getProEnd().split(" ")[0]);
-			}
 
 			//controller에게 전달해야되는 데이터가 많으니 HashMap 에 넘겨줄 데이터를 저장해서 한번에 전달
 			Map<String, Object> result = new HashMap<String, Object>();
@@ -215,7 +222,10 @@ public class ProjectServiceImpl implements ProjectService{
 	// 수정된 프로젝트 1개 정보 가져오기 
 	@Override
 	public ProjectDTO getUpdateProject(int proNum) throws SQLException {	
-			return projectDAO.getProject(proNum);
+		ProjectDTO project=projectDAO.getProject(proNum);
+		project.setProStart(project.getProStart().split(" ")[0]);
+		project.setProEnd(project.getProEnd().split(" ")[0]);
+		return project;
 	}
 	// 프로젝트 수정
 	// 수정할때와 삭제할때 그냥 삭제 가능하게 둘건지 
@@ -230,6 +240,7 @@ public class ProjectServiceImpl implements ProjectService{
 	@Override
 	public void deleteProject(String proNum) throws SQLException{
 		projectDAO.deleteProject(proNum);
+		proCommentsDAO.delComs(proNum);
 	}
 	
 	
