@@ -25,14 +25,16 @@
 		<jsp:include page="/include/left_nav_bar.jsp" />
 		<div id="layoutSidenav_content">
 			<div id="wrapAll">
+			<h3>프로젝트 상세</h3>
 			
+	<div class="proAll">		
 		<div class="projectWrap">		
 
 		<div class="proContentTitle">
-		<h3>${project.proName}</h3>
+		<h4>${project.proName}</h4>
 		</div>
 		
-		<div class="proContentRight">
+		<div class="proContent">
 			<table>
 				<tr>
 					<td><b>담당자</b></td><br/>
@@ -45,18 +47,13 @@
 				<tr>	
 					<td><b>기간</b></td>					
 					<td>${project.proStart}~${project.proEnd}</td>
-				</tr>
-			<br/><br/>			 	
+				</tr>		 	
 			</table>
-			<!-- 담당자만 수정/삭제 보이게 -->	
-		<div class="proConBtn">
-			<c:if test="${project.userId==sessionScope.sid}">
-				<button onclick="window.location='/cnav/project/proModForm.cnav?proNum=${project.proNum}&pageNum=${pageNum}'">수정</button>
-				<button onclick="window.location='/cnav/project/proDelForm.cnav?proNum=${project.proNum}&pageNum=${pageNum}'">삭제</button>
-			</c:if>
-		</div> <!-- 수정/삭제 -->
+				
+		
+		
 		</div>	
-		<br/><br/>
+
 		<div class="proContentCenter">	
 			<table>	
 				<tr>
@@ -64,7 +61,14 @@
 				</tr>
 			</table>
 		</div>	
-	</div><!-- projectWrap -->
+		<!-- 담당자만 수정/삭제 보이게 -->
+		<div class="proConBtn">
+			<c:if test="${project.userId==sessionScope.sid}">
+				<button onclick="window.location='/cnav/project/proModForm.cnav?proNum=${project.proNum}&pageNum=${pageNum}'">수정</button>
+				<button onclick="window.location='/cnav/project/proDelForm.cnav?proNum=${project.proNum}&pageNum=${pageNum}'">삭제</button>
+			</c:if>
+		</div> <!-- 수정/삭제 -->
+	
 	<div class="comment">
 	<!-- 댓글작성 -->
 	<form action="/cnav/proComments/create.cnav" method="post">
@@ -101,11 +105,10 @@
 	</c:forEach>
 	</table>
 	</div>
-	
 	</div>
-	</div>
-	</div>
-</div>
+	</div><!-- projectWrap -->
+	</div> <!--  proAll -->
+
 	<script>
 	function proCom(frm){
 		var proComment=frm.proComment.value;
@@ -118,7 +121,6 @@
 	}
 	
 	</script>
-		</div>
 	
 	<!-- 세션에 아이디가 저장되었을 경우 (로그인한 경우)에만 댓글 작성 창이 출력되도록 코드를 작성함 -->
    		</div> <!-- wrapAll -->
