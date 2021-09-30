@@ -24,7 +24,7 @@
 	<div id="layoutSidenav">
 		<jsp:include page="/include/left_nav_bar.jsp" />
 		<div id="layoutSidenav_content">
-			<div id="wrapAll">
+			<div id="prowrapAll">
 			<h3>프로젝트 상세</h3>
 			
 	<div class="proAll">		
