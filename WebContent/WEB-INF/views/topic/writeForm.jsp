@@ -95,11 +95,12 @@ function goWrite(frm) {
 			<div id="wrapAll">	
 			
 <h3>글 작성</h3><br><br><br>
-<div style="width: 60%; margin: auto;">
+<div style="width: 90%; margin: auto;">
 	<form method="post" action="/cnav/topic/writePro.cnav">
-		<input type="text" name="topTitle" style="width: 40%;" placeholder="제목"/>
+		<input type="text" name="topTitle" style="width: 100%;" placeholder="제목"/>
 		<br><br> 
 		<textarea id="summernote" name="topContent"></textarea>
+		<br />
 		<input id="subBtn" type="button" value="글 작성" style="float: right;" onclick="goWrite(this.form)"/>
 	</form>
 </div>

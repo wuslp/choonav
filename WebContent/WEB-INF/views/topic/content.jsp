@@ -83,7 +83,7 @@
 	<!-- 댓글 작성 -->
 	<div class="topComWrite">
        <form action="/cnav/topComments/insert.cnav" method="post">
-       		<textarea id="topComment" name="topComment" rows="2" cols="80" placeholder="내용을 작성해 주세요"></textarea>
+       		<textarea id="topComment" name="topComment" rows="2"  placeholder="내용을 작성해 주세요"></textarea>
 		 	<input type="hidden" id="userId" name="userId" value="${sessionScope.sid}">
 		 	<input type="hidden" id="topNum" name="topNum" value="${article.topNum}">
 		 	<input type="hidden" id="code" name="code" value="${sessionScope.scode}">
