@@ -54,6 +54,7 @@
 		
 		</div>	
 
+		<div class="proCont-All">
 		<div class="proContentCenter">	
 			<table>	
 				<tr>
@@ -72,7 +73,7 @@
 	<div class="comment">
 	<!-- 댓글작성 -->
 	<form action="/cnav/proComments/create.cnav" method="post">
-		 	<input type="text" id="proComment" name="proComment">
+		 	<input class="proCom-text" type="text" id="proComment" name="proComment">
 		 	<input type="hidden" id="userId" name="userId" value="${sessionScope.sid}">
 		 	<input type="hidden" id="proNum" name="proNum" value="${project.proNum}">
 		 	<input type="hidden" id="code" name="code" value="${sessionScope.scode}">	 	
@@ -80,7 +81,6 @@
 	</form>
 
 	<!-- 댓글 리스트 -->
-	<div>
 	<table class="commLeft">
 	<c:forEach items="${comment}" var="comment">
 	<tr>
@@ -106,6 +106,8 @@
 	</table>
 	</div>
 	</div>
+	
+	</div> <!-- proCont-All -->
 	</div><!-- projectWrap -->
 	</div> <!--  proAll -->
 
