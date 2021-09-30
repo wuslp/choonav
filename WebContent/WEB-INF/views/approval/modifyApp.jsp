@@ -11,6 +11,7 @@
 	<meta name="author" content="" />
 	<title>결재 문서 수정</title>
 	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
+	<link href="/cnav/resources/css/approval.css" rel="stylesheet" type="text/css">
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -21,13 +22,18 @@
 		<jsp:include page="/include/left_nav_bar.jsp" />
 		<div id="layoutSidenav_content">
 			<div id="wrapAll">	
+			<h3>결재 문서 수정</h3>
+			
 <form action="/cnav/approval/modifyAppPro.cnav?pageNum=${pageNum}" method="post">
 	<%-- 숨겨서 글 고유번호 값 전송 --%>
 	<input type="hidden" name="appNum" value="${approval.appNum}" />
-	<br/>
+	
+			<div class="appAllWrap" >
+				<div class="approvalWrap">
+				<div class="approvalWrap-in">
 	
 	<div class="appContentTitle">
-	<h3>${approval.appType}</h3>
+		<h4>${approval.appType}</h4>
 	</div>
 	
 	<div class="appContentLeft">
@@ -60,6 +66,7 @@
 		</tr>
 	
 	</table>
+	
 	<br/><br/><br/><br/><br/><br/>
 	<table class="appCont1">
 		<tr>
@@ -74,23 +81,27 @@
 	
 	<table class="appCont2">
 		<tr>
-			<td>제목</td>
+			<td width="70px" class="dd">제목</td>
 			<td><input type="text" name="appTitle" value="${approval.appTitle}"/></td>
 		</tr>
 		<tr>
-			<td>내용</td>
-			<td><input type="text" name="appContent" value="${approval.appContent}"/></td>
+			<td align="center" colspan="2" class="dd">내용</td>
+		</tr>
+		<tr>	
+			<td colspan="2"><input type="text" width="90%" name="appContent" value="${approval.appContent}"/></td>
 		</tr>
 		<tr>
-			<td>요청사항</td>
+			<td class="dd">요청사항</td>
 			<td><input type="text" name="appRequest" value="${approval.appRequest}"/></td>
 		</tr>
 	</table>
-	
-	<div class="appConBtn">
-		<input type="submit" value="등록"/>
-		<input type="button" value="취소" onclick="window.location='/cnav/approval/sendAppList.cnav'"/>
 	</div>
+	</div><!-- approvalWrap -->
+	</div>
+		<div class="appConBtn">
+			<input type="submit" value="등록"/>
+			<input type="button" value="취소" onclick="window.location='/cnav/approval/sendAppList.cnav'"/>
+		</div>
 </form>
 
 </div> <!-- wrapAll -->

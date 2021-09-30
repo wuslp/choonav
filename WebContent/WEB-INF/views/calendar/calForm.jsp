@@ -72,7 +72,7 @@
 <body>
 	<div id = "popupGroup">	
 		<div class = "group-head">
-			<h1 class = "zTree-h1"> 일정 등록 </h1>
+			<h2> 일정 등록 </h2>
 		</div>
 		<div class = "group-body">
 		<form action="/cnav/cal/calPro.cnav" method="post" name="rezForm">
@@ -85,7 +85,7 @@
 				<h3> 일정명 </h3>
 			</div>
 			<div>
-				<input type="text" name="calTitle" required/>
+				<input type="text" class="text1" name="calTitle" required/>
 			</div>
 			<div>
 				<h3> 날짜 </h3>
@@ -99,9 +99,14 @@
 			<div>
 				<textarea class="memo" id ="calMemo" name ="calMemo" rows="5" cols ="20" placeholder="일정에 필요한 설명을 남기세요" required></textarea> 
 			</div>
-			<button class = "ok-button" type="submit">확인</button>
+			
+			<br/>
+			
+			<div align="center">
+				<button class="ok-button" type="submit">등록</button>
+				<button class="ok-button"  type= "button" onclick="self.close();">취소</button>
+			</div>
 		</form>
-			<button class = "ok-button" type= "button" onclick="self.close();">취소</button>
 		</div>
 	</div>
 

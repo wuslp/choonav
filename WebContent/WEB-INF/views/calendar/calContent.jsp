@@ -47,7 +47,7 @@
 				<c:if test="${dto.calType eq 'me'}">
 					<input type="button" onclick="window.location='/cnav/cal/myCalendar.cnav'" value="목록으로"/>
 				</c:if>
-				<c:if test="${dto.userId == sid}">
+				<c:if test="${dto.userId == sid || sauth == 1}" >
 					<input type="button" onclick="deleteConfirm(${dto.calNum}, ${dto.code})" value="삭제"/>
 					<input type="button" onclick="modifyConfirm(${dto.calNum}, ${dto.code})" value="수정"/>
 				</c:if>

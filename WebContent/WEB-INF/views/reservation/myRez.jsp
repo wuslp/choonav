@@ -44,7 +44,7 @@
 				<td onclick="window.location='/cnav/rez/rezContent.cnav?rezNum=${item.rezNum}'" >${number}<c:set var="number" value="${number - 1}" /> </td>
 				<td onclick="window.location='/cnav/rez/rezContent.cnav?rezNum=${item.rezNum}'">${item.category}</td>
 				<td onclick="window.location='/cnav/rez/rezContent.cnav?rezNum=${item.rezNum}'">${item.sDate} ~ ${item.eDate}</td>
-				<td><button onclick="deleteConfirm(${item.rezNum})" >취소</button></td>
+				<td><div class="sendAppList-btn" ><button style="margin-right: 40%;" onclick="deleteConfirm(${item.rezNum})" >취소</button></div></td>
 			</tr>
 			</c:forEach>
 		</table>

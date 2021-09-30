@@ -57,53 +57,59 @@
 			<tr>
 				<td height="100"> ${article.topContent} </td>
 			</tr>
+			<tr>
+				<td>
+				<div class="notiBtn">
+					<!-- 작성자만 수정 보이게 -->
+					<c:if test="${article.userId == sessionScope.sid}">
+						<button onclick="window.location='/cnav/topic/modifyForm.cnav?topNum=${article.topNum}&pageNum=${pageNum}'">수 정</button>
+					</c:if>
+					<!--회사 관리자, 작성자 만 삭제보이게  -->
+					<c:if test="${sessionScope.sauth=='1' || article.userId == sessionScope.sid}">
+						<input type="button" value="삭제" onclick="del(${article.topNum})">
+						<button onclick="window.location='/cnav/topic/list.cnav'">목록</button>
+					</c:if>
+					<!-- 로그인한사람은 목록만 보이게 -->
+					<c:if test="${article.userId != sessionScope.sid && sessionScope.sauth == '0'}">
+						<button onclick="window.location='/cnav/topic/list.cnav'">목록</button>
+					</c:if>
+				</div>
+				</td>
+			</tr>
 		</table>
 	</div>
 	
-	<div class="notiBtn">
-		<!-- 작성자만 수정 보이게 -->
-		<c:if test="${article.userId == sessionScope.sid}">
-			<button onclick="window.location='/cnav/topic/modifyForm.cnav?topNum=${article.topNum}&pageNum=${pageNum}'">수 정</button>
-		</c:if>
-		<!--회사 관리자, 작성자 만 삭제보이게  -->
-		<c:if test="${sessionScope.sauth=='1' || article.userId == sessionScope.sid}">
-			<input type="button" value="삭제" onclick="del(${article.topNum})">
-			<button onclick="window.location='/cnav/topic/list.cnav'">리스트</button>
-		</c:if>
-		<!-- 로그인한사람은 목록만 보이게 -->
-		<c:if test="${article.userId != sessionScope.sid && sessionScope.sauth == '0'}">
-			<button onclick="window.location='/cnav/topic/list.cnav'">리스트</button>
-		</c:if>
-	</div>
 	
 	<!-- 댓글 작성 -->
-	<div>
-        <br>
+	<div class="topComWrite">
        <form action="/cnav/topComments/insert.cnav" method="post">
-		 	<input type="text" id="topComment" name="topComment">
+       		<textarea id="topComment" name="topComment" rows="2" cols="80" placeholder="내용을 작성해 주세요"></textarea>
 		 	<input type="hidden" id="userId" name="userId" value="${sessionScope.sid}">
 		 	<input type="hidden" id="topNum" name="topNum" value="${article.topNum}">
 		 	<input type="hidden" id="code" name="code" value="${sessionScope.scode}">
-		 	
 		  	<input id="subBtn" type="button" value="댓글 달기"  onclick="topCom(this.form)"/>
 		</form>
     </div>
     
     <!-- 댓글 보여주기 -->
-    <div>
+    <div class="topComments">
 		<c:forEach items="${reply}" var="reply">
-	      	
-	        <p>
-	        작성자 : ${reply.name}<br />
-	        작성 날짜 :  <fmt:formatDate value="${reply.topReg}" pattern="yyyy-MM-dd" />
-	        </p>
-			
-	        <p>${reply.topComment}</p>
-	        <!-- 로그인한사람이 댓글쓴사람이랑 같을경우 삭제버튼 보이게 -->
-	 		<c:if test="${sessionScope.sid == reply.userId || sessionScope.sauth == '1'}">
-		       <input type="button" value="삭제" onclick="window.location='/cnav/topComments/delete.cnav?topComNum=${reply.topComNum}&topNum=${article.topNum}'">
-			</c:if>   
-	        
+	      	<div class="commentName">
+	        ${reply.name}
+		        <!-- 로그인한사람이 댓글쓴사람이랑 같을경우 삭제버튼 보이게 -->
+		        <div class="notiBtn">
+			 		<c:if test="${sessionScope.sid == reply.userId || sessionScope.sauth == '1'}">
+				       <input type="button" value="삭제" onclick="window.location='/cnav/topComments/delete.cnav?topComNum=${reply.topComNum}&topNum=${article.topNum}'">
+					</c:if>   
+				</div>
+	        </div>
+	        <div class="comment">
+	        <pre class="commentPre">${reply.topComment}</pre>
+	        </div>
+	        <div class="commentReg">
+	        <fmt:formatDate value="${reply.topReg}" pattern="yyyy-MM-dd HH:mm" />
+	        <br />
+	        </div>
 	    </c:forEach>
     </div>
     

@@ -50,7 +50,7 @@
 			
 			<div align="center">
 				<input type="button" onclick="a()" value="목록으로"/>
-				<c:if test="${dto.userId == sid}">
+				<c:if test="${dto.userId == sid || sauth == 1}">
 					<input type="button" onclick="deleteConfirm(${dto.rezNum})" value="삭제"/>
 				</c:if>
 			</div>

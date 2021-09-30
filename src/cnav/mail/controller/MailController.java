@@ -1,19 +1,31 @@
 package cnav.mail.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import cnav.mail.dto.MailDTO;
 import cnav.mail.service.MailServiceImpl;
@@ -103,17 +115,30 @@ public class MailController {
 		model.addAttribute("userList", userList);
 		System.out.println("userList name" + userList);
 		
+		
 		return "mail/writeMailForm";
 	}
 	
 	// 메일 보내기 처리
 	@RequestMapping("writeMailPro.cnav")
-	public String writeMailPro(HttpSession session, MailDTO dto, Model model) throws SQLException {
+	public String writeMailPro(HttpSession session, MailDTO dto, Model model) throws SQLException, IOException {
 		String id = (String)session.getAttribute("sid");
+		System.out.println("보내기가 전혀 안돼?");
+		
 		dto.setUserId(id);
+		// 파일 업로드 처리
+		String fileName=null;
+		MultipartFile uploadFile = dto.getUploadFile();
+		if (!uploadFile.isEmpty()) {
+			String originalFileName = uploadFile.getOriginalFilename();
+			String ext = FilenameUtils.getExtension(originalFileName);	//확장자 구하기
+			// UUID uuid = UUID.randomUUID();	//UUID 구하기
+			fileName=(originalFileName.replace("."+ext, ""))+"."+ext;
+			uploadFile.transferTo(new File("C:\\upload\\" + fileName));
+		}
+		dto.setFileName(fileName);
+		
 		int result = MailService.insertMail(dto);
-		
-		
 		model.addAttribute("result", result);
 		
 		return "mail/writeMailPro";
@@ -167,6 +192,59 @@ public class MailController {
 		return "mail/mail";
 	}
 	
+	// File 다운로드
+	@RequestMapping("mailFileDown.cnav")
+	public void filedown(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		String filename = request.getParameter("fileName");
+		String realFilename = "";
+		System.out.println("realFileName== " + filename);
+		
+		try {
+			String browser = request.getHeader("User-Agent");
+			// 파일 인코딩
+			if(browser.contains("MSIE") || browser.contains("Trident")
+					|| browser.contains("Chrome")) {
+				//filename = URLEncoder.encode(filename, "UTF-8").replaceAll("\\+", "%20");
+				System.out.println("여기파일네임은뭐야?if야" + filename);
+			}else {
+				filename = new String(filename.getBytes("UTF-8"), "ISO-8859-1");
+				System.out.println("여기파일네임은뭐야?else야" + filename);
+			}
+			
+		}catch(UnsupportedEncodingException e) {
+			System.out.println("UnsupportedEncodingException");
+		}
+		realFilename = "C:\\upload\\" + filename;
+		System.out.println("다시!! filename" + filename);
+		System.out.println("다시!! realFilename" + realFilename);
+		File file1 = new File(realFilename);
+		if(!file1.exists()) {
+			return ;
+		}
+		
+		// 파일명 지정
+		response.setContentType("application/octer-stream");
+		response.setHeader("Content-Transfer-Encoding", "binary");
+		response.setHeader("Content-Disposition", "attachment; filename=\"" + filename + "\"");
+		
+		try {
+			OutputStream os = response.getOutputStream();
+			FileInputStream fis = new FileInputStream(realFilename);
+			
+			int ncount = 0;
+			byte[] bytes = new byte[512];
+			
+			while((ncount = fis.read(bytes)) != -1) {
+				os.write(bytes, 0, ncount);
+			}
+			fis.close();
+			os.close();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	
 	

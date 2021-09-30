@@ -56,7 +56,7 @@
 	
 	
 	<h3> 메일 보내기 </h3>
-	<form action="/cnav/mail/writeMailPro.cnav" method="post" style="center;" onsubmit="return check()">
+	<form action="/cnav/mail/writeMailPro.cnav" method="post" enctype="multipart/form-data" onsubmit="return check()">
 		<div class="writeMailDiv">
 			<div>
 				받는 사람 :
@@ -70,6 +70,10 @@
 			<div class="wrIn">
 				제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목 :
 				<input type="text" name="mailSub" id="mailSub"/>
+			</div>
+			<div>
+				첨부파일 :
+				<input type="file" name="uploadFile"/>
 			</div>
 			<div>
 				<textarea rows="18" cols="100" name="mailContent" id="mailContent" placeholder="내용을 작성해 주세요"></textarea>

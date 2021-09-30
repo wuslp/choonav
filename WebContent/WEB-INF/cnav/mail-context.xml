@@ -14,6 +14,12 @@
 	>	
 	<!-- 이곳에  설정할 것들 :member에 관련된 것들,Controller, viewResolver,HandlerMapping 관련된것들 여기에  -->
 	<mvc:annotation-driven/>
+	
+	<!-- 파일 다운로드 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="utf-8" />
+		<property name="maxUploadSize" value="-1" />
+	</bean>
 
 	<!-- viewResolver 세팅 
 	prefix : 접두어

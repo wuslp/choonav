@@ -19,37 +19,40 @@
 <body>
     <div id = "popupGroup">	
 		<div class = "group-head">
-			<h1 class = "zTree-h1"> 예약 하기 </h1>
+			<h2> 예약 하기 </h2>
 		</div>
+		<br />
 		<div class = "group-body">
 		<form action="/cnav/rez/addRez.cnav" method="post" name="rezForm">
 			<div>
-				<h3> 예약일시 </h3>
-				<input type="text" name="sDate" id="start" autocomplete="off"  required />
+				<h4> 예약일시 </h4>
+				<input type="text" name="sDate" id="start" autocomplete="off"  class="text2" required />
 				-
-				<input type="text" name="eDate" id="end" autocomplete="off"  required/>
+				<input type="text" name="eDate" id="end" autocomplete="off"  class="text2" required/>
+			</div><br />
+			<div>
+				<h4> 예약자 </h4>
 			</div>
 			<div>
-				<h3> 예약자 </h3>
+				<h5> ${dto.name} </h5>
+			</div><br />
+			<div>
+				<h4> 예약항목 </h4>
 			</div>
 			<div>
-				${sid}
-			</div>
+				<input type="text" name="category" class="text2" required/>
+			</div><br />
 			<div>
-				<h3> 예약항목 </h3>
-			</div>
-			<div>
-				<input type="text" name="category" required/>
-			</div>
-			<div>
-				<h3> 목적 </h3>
+				<h4> 목적 </h4>
 			</div>
 			<div>
 				<textarea class = "memo" id = "memo" name = "content" rows = "5" cols = "20" placeholder="100글자까지 입력 가능합니다" required></textarea> 
 			</div>
-			<button class = "ok-button" type="submit" >확인</button>
+			<div align="center">
+				<button class = "ok-button" type="submit" >등록</button>
+				<button class = "ok-button" type= "button" onclick="self.close();">취소</button>
+			</div>
 		</form>
-			<button class = "ok-button" type= "button" onclick="self.close();">취소</button>
 		</div>
 	</div>
 </body>

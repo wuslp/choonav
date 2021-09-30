@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cnav.mypage.dto.UserInfoDTO;
 import cnav.reservation.dao.ReservationDAOImpl;
 import cnav.reservation.dto.ReservationDTO;
 
@@ -95,6 +96,12 @@ public class ReservationServiceImpl implements ReservationService{
 		
 		
 		return result;
+	}
+	
+	// 계정정보
+	@Override
+	public UserInfoDTO getUserInfo(String userId, String code) throws SQLException {
+		return rezDAO.getUserInfo(userId, code);
 	}
 
 }
