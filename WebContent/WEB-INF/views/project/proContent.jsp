@@ -70,7 +70,7 @@
 			</c:if>
 		</div> <!-- 수정/삭제 -->
 	
-	
+	<div class="comment">
 	<!-- 댓글작성 -->
 	<div class="proComTop">
 	<form action="/cnav/proComments/create.cnav" method="post">
@@ -103,7 +103,7 @@
 		</c:forEach>
 		
 </div>		
-
+</div>
 	
 	
 	</div> <!-- proCont-All -->

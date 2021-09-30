@@ -33,8 +33,10 @@
 	text-align: left;
 	font-weight: bold;	
 }
-.proConBtn button {
+.proConBtn {
 	text-align-last: right;
+}
+.proConBtn button{	
 	border: solid 1px #767676;
 	color: #000000;
 }
@@ -68,10 +70,10 @@
 }
 
 .projectWrap {
-    width: 70%;
+    width: 90%;
 }
 .proAll {
-    text-align: -webkit-center;
+    
 }
 .proContentCenter table {
     width: 100%;
