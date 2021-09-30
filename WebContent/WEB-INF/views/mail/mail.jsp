@@ -57,6 +57,12 @@
 				</c:if><br/>
 				
 				시간 : ${mail.mailReg}
+				<br/>
+				
+				<c:if test="${mail.fileName ne null}">
+					첨부파일 :
+					<input type="button" value="${mail.fileName}" onclick="window.location='/cnav/mail/mailFileDown.cnav?fileName=${mail.fileName}'"/>
+				</c:if>
 			</div>
 	
 			<br />

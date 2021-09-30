@@ -2,6 +2,8 @@ package cnav.mail.dto;
 
 import java.sql.Timestamp;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class MailDTO {
 	
 	private Integer mailNum;
@@ -9,13 +11,21 @@ public class MailDTO {
 	private String mailRid;
 	private String mailSub;
 	private String mailContent;
-	private String mailFile;
+	private String fileName;
 	private String mailResult;
 	private Timestamp mailReg;
 	private String userName;
 	private String ridName;
+	private MultipartFile uploadFile;
+	
 	
 
+	public MultipartFile getUploadFile() {
+		return uploadFile;
+	}
+	public void setUploadFile(MultipartFile uploadFile) {
+		this.uploadFile = uploadFile;
+	}
 	public String getUserName() {
 		return userName;
 	}
@@ -58,11 +68,12 @@ public class MailDTO {
 	public void setMailContent(String mailContent) {
 		this.mailContent = mailContent;
 	}
-	public String getMailFile() {
-		return mailFile;
+
+	public String getFileName() {
+		return fileName;
 	}
-	public void setMailFile(String mailFile) {
-		this.mailFile = mailFile;
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 	public String getMailResult() {
 		return mailResult;
