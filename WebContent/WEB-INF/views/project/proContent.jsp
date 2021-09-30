@@ -24,7 +24,7 @@
 	<div id="layoutSidenav">
 		<jsp:include page="/include/left_nav_bar.jsp" />
 		<div id="layoutSidenav_content">
-			<div id="wrapAll">
+			<div id="prowrapAll">
 			<h3>프로젝트 상세</h3>
 			
 	<div class="proAll">		
@@ -70,7 +70,7 @@
 			</c:if>
 		</div> <!-- 수정/삭제 -->
 	
-	
+	<div class="comment">
 	<!-- 댓글작성 -->
 	<div class="proComTop">
 	<form action="/cnav/proComments/create.cnav" method="post">
@@ -103,7 +103,7 @@
 		</c:forEach>
 		
 </div>		
-
+</div>
 	
 	
 	</div> <!-- proCont-All -->
