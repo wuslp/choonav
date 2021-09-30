@@ -13,7 +13,7 @@
 	<meta name="author" content="" />
 	<title>proContent</title>
 	<link href="/cnav/resources/css/style.css" rel="stylesheet" type="text/css">
-	<link href="/cnav/resources/css/project.css" rel="stylesheet" type="text/css">
+	<link href="/cnav/resources/css/project.css" rel="stylesheet" type="text/css">	
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="<%=request.getContextPath()%>/resources/startbootstrap/css/styles.css"rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -70,42 +70,41 @@
 			</c:if>
 		</div> <!-- 수정/삭제 -->
 	
-	<div class="comment">
+	
 	<!-- 댓글작성 -->
+	<div class="proComTop">
 	<form action="/cnav/proComments/create.cnav" method="post">
-		 	<input class="proCom-text" type="text" id="proComment" name="proComment">
+		 	<textarea id="proComment" name="proComment" rows="2" cols="80" placeholder="내용을 작성해 주세요"></textarea>
 		 	<input type="hidden" id="userId" name="userId" value="${sessionScope.sid}">
 		 	<input type="hidden" id="proNum" name="proNum" value="${project.proNum}">
 		 	<input type="hidden" id="code" name="code" value="${sessionScope.scode}">	 	
-		  	<input id="subBtn" type="button" value="댓글 작성" onclick="proCom(this.form)"/>
+		  	<input id="subBtn" type="button" value="댓글 달기" onclick="proCom(this.form)"/>
 	</form>
-
+	</div>
 	<!-- 댓글 리스트 -->
-	<table class="commLeft">
-	<c:forEach items="${comment}" var="comment">
-	<tr>
-		<td>		
-		<p>${comment.name}
-		<em class="delComm">
-		<c:if test="${sessionScope.sid==comment.userId}">
-			<input type="button" value="삭제" onclick="window.location='/cnav/proComments/delcom.cnav?proComNum=${comment.proComNum}&proNum=${project.proNum}'"/>		
-		</c:if>	
-		</em>
-		</p>
-		<p>${comment.proComment}</p>
+		<div class="commLeft">
+			<c:forEach items="${comment}" var="comment">
+				<div class="commname">
+				${comment.name}
+					<div class="proBtn">
+						<c:if test="${sessionScope.sid==comment.userId}">
+							<input type="button" value="삭제" onclick="window.location='/cnav/proComments/delcom.cnav?proComNum=${comment.proComNum}&proNum=${project.proNum}'"/>		
+						</c:if>	
+					</div>
+				</div>
+				
+				<div class="PrComm">
+				<pre class="prcommto">${comment.proComment}</pre>
+				</div>
+				<div class="Proreg">
+				<fmt:formatDate value="${comment.proReg}" pattern="yyyy.MM.dd HH:mm" />
+				<br/>
+				</div>
+		</c:forEach>
 		
-		<fmt:formatDate value="${comment.proReg}" pattern="yyyy.MM.dd" />
-		</td>
-	</tr>
+</div>		
+
 	
-		<!-- 댓글작성자=로그인한사람 -->
-		<c:if test="${sessionScope.sid==comment.userId}">
-			<input type="button" value="삭제" onclick="window.location='/cnav/proComments/delcom.cnav?proComNum=${comment.proComNum}&proNum=${project.proNum}'"/>		
-		</c:if>	
-	</c:forEach>
-	</table>
-	</div>
-	</div>
 	
 	</div> <!-- proCont-All -->
 	</div><!-- projectWrap -->

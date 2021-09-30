@@ -38,12 +38,6 @@
 	border: solid 1px #767676;
 	color: #000000;
 }
-.comment{text-align: left;
-	
-}
-.commLeft {
-	text-align: left;
-}
 .comLeft{
 	text-align: left;
 }
@@ -86,4 +80,61 @@
 }
 .proCom-text{
 	width:90%;
+}
+input#subBtn {
+    content-visibility: auto;
+    font-size: smaller;
+    margin: 15px;
+}
+.comment{
+	margin: 30px 10px 0px;
+	
+}
+#proComment {
+   white-space:pre;
+   width: 85%;
+}
+
+.proComTop{
+	margin: 30px 10px 0px;
+}
+.commLeft{
+	margin: 10px 35px 0px 15px;
+}
+.commname{
+	font-size: 13px;
+    font-weight: 700;
+}
+.proBtn button {
+	border: solid 1px #767676;
+    background-color: #efefef;
+    color: #000000;
+    border-radius: 3px;
+}
+.proBtn button:hover {
+	border: solid 1px #767676;
+    background-color: #d2ced2a8;
+    color: #000000;
+    border-radius: 3px;
+}
+.proBtn{
+	float:right;
+	margin-top : 10px;
+	margin-bottom: 10px;
+}
+.PrComm{
+	line-height: 17px;
+	margin: 5px 0px 5px 15px;
+}
+.prcommto{
+	display: block;
+    margin-top: 0;
+    margin-bottom: 0;
+    overflow: auto;
+    font-size: 0.875em;
+}
+.Proreg{
+	font-size: 12px;
+    color: gray;
+    border-bottom: 1px solid #d9d9d9d6;
 }
