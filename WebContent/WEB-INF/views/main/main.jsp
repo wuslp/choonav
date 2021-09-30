@@ -87,16 +87,17 @@
                                 공지사항
                      </div>
                             <div class="card-body">
-                            <table>
-							<c:if test="${count == 0}">
-								등록된 공지사항이 없습니다.
-							</c:if>
-							<c:if test="${count > 0}">
+                             <table>
+								<c:if test="${count == 0}">
+									등록된 공지사항이 없습니다.
+								</c:if>
+								<c:if test="${count > 0}">
 							<tr>
 								<td> No. </td>
 								<td> 제목 </td>
 								<td> 작성일 </td>
 							</tr>
+							
 							<c:forEach var="item" items="${articleList}">
 								<tr>
 									<td onclick="window.location='/cnav/notice/content.cnav?notiNum=${item.notiNum}'">${number}<c:set var="number" value="${number - 1}" /> </td>
