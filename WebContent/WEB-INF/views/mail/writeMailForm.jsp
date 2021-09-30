@@ -68,7 +68,7 @@
 				</select>
 			</div>
 			<div class="wrIn">
-				제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목 :
+				제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목 : 
 				<input type="text" name="mailSub" id="mailSub"/>
 			</div>
 			<div>
