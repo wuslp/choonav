@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -246,6 +247,20 @@ public class MailController {
 		}
 	}
 	
+	// RE 메일 보내기
+	@RequestMapping("redirectMail.cnav")
+	public String reMail(HttpSession session, Model model, @RequestParam("mailRid") String rid, @RequestParam("ridName") String rName) throws SQLException {
+		System.out.println("================" + rid);
+		System.out.println("================" + rName);
+		String code = (String)session.getAttribute("scode");
+		String id = (String)session.getAttribute("sid");
+		
+		model.addAttribute("rid", rid);
+		model.addAttribute("rName", rName);
+		
+		
+		return "mail/redirectMail";
+	}
 	
 	
 	
