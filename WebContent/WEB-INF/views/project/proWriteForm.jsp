@@ -78,13 +78,11 @@
 	<form action="/cnav/project/proWritePro.cnav" method="post" name="inputForm" onsubmit="return check()">
 		<table>
 			<tr>		
-				<td align="center"></td>
-				<td>
+				<td colspan="3">
 					<input type="text" name="proName" placeholder="프로젝트이름"/></td>
 			</tr>
 			<tr>		
-				<td align="center"></td>
-				<td>
+				<td colspan="3">
 					<textarea rows="10" cols="50" name="proContent" placeholder="내용을 작성해주세요"></textarea>
 				</td>			
 			</tr>

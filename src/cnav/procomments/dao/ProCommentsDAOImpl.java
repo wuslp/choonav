@@ -37,4 +37,9 @@ public class ProCommentsDAOImpl implements ProCommentsDAO {
 		sqlSession.delete("proComments.delete", proComNum);
 		
 	}
+	@Override
+	public void delComs(String proNum) throws SQLException {
+		sqlSession.delete("proComments.delComs",proNum);
+		
+	}
 }

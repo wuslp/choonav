@@ -21,6 +21,7 @@ public class ProjectDAOImpl implements ProjectDAO {
 
 	// 전체 프로젝트 수 가져오기 
 	@Override
+	
 	public int getProjectCount(String userId,String code) throws SQLException {
 		sqlSession.update("project.updat3",code); // 진행전(준비중)
 		sqlSession.update("project.updat2",code); //진행중

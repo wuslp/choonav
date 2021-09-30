@@ -25,6 +25,8 @@ public interface ProjectService {
 	// 프로젝트 삭제 처리
 	public void deleteProject(String proNum) throws SQLException;
 	
+
+	
 	
 	
 	
