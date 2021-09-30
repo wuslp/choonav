@@ -119,7 +119,7 @@ public class MainServiceImpl implements MainService{
 	@Override
 	public Map<String, Object> getNoticeList(String scode) throws SQLException {
 		int startRow = 1; // 페이지 시작글 번호 
-		int endRow = 5; // 페이지 마지막 글번호
+		int endRow = 10; // 페이지 마지막 글번호
 		
 		// 프로젝트 게시판 글 가져오기 
 		List articleList = null;  	// 전체(검색된) 게시글들 담아줄 변수
