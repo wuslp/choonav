@@ -145,8 +145,7 @@
 				<div class="resBar">
 					    <div class="zt-span6 last"><!--막대기css  -->
 									<strong>&nbsp;&nbsp; 총 투표수 : ${article.total}</strong> <br/>
-									
-								
+														
 									<div class="cssBar">
 									<i class="fas fa-poll-h"></i> 항목 <br/>
 									1 :&emsp;${article.ans1}<br/>
